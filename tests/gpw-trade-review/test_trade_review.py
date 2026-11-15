@@ -158,3 +158,18 @@ def test_end_to_end_with_real_journal(tmp_path, capsys):
 def test_empty_journal_exit_code(tmp_path, capsys):
     assert tr.main(["--journal-dir", str(tmp_path), "--no-files"]) == 1
     assert "no journal entries" in capsys.readouterr().err
+
+
+def test_paper_trades_never_mixed_with_real_or_pit38():
+    real = closed("real", 100.0, closed_at="2026-05-10")
+    paper = dict(closed("pap", -50.0, closed_at="2026-05-11"), paper=True)
+    rep = tr.build_report([real, paper], year=2026, pit_year=2026)
+    assert [t["id"] for t in rep["trades"]] == ["real"] and rep["other_mode_trades"] == 1
+    assert "pit38" in rep
+    prep = tr.build_report([real, paper], year=2026, pit_year=2026, paper=True)
+    assert [t["id"] for t in prep["trades"]] == ["pap"] and "pit38" not in prep
+    assert "na niby" in tr.render(prep, "pl")
+    fills = [{"date": "2026-01-02", "side": "buy", "shares": 10, "price": 10.0, "fee": 0},
+             {"date": "2026-02-02", "side": "sell", "shares": 10, "price": 50.0, "fee": 0}]
+    th = dict(_thesis_with_fills("p", fills), paper=True)
+    assert tr.pit38([th], 2026)["revenue"] == 0

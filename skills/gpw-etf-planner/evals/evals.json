@@ -1,0 +1,69 @@
+{
+  "skill_name": "gpw-etf-planner",
+  "trigger_evals": {
+    "should_trigger": [
+      "Jakie ETF-y można kupić na GPW?",
+      "Chcę co miesiąc kupować ETF na WIG20 i MSCI World za 1000 zł — ile jednostek?",
+      "Mam 40 jednostek ETFBW20TR i 5 ETFIWDA, wpłacam 1000 zł — co dokupić, żeby wrócić do 30/70?",
+      "Czy kupować ETF-y co miesiąc, czy co kwartał, przy prowizji 5 zł minimum?",
+      "Czy ETFBW20LV nadaje się do trzymania na lata?",
+      "Jak wyglądałoby uśrednianie (DCA) w ETF na S&P 500 przez ostatnie 2 lata?",
+      "Which ETFs are listed on the Warsaw Stock Exchange and how liquid are they?",
+      "Build me a monthly buy plan for ETFBW20TR 30% and ETFSP500 70% with 1500 PLN",
+      "Czy mój portfel ETF wymaga rebalancingu?"
+    ],
+    "should_not_trigger": [
+      "IKE czy IKZE przy 12% PIT?",
+      "Ile akcji CD Projektu kupić przy koncie 20 tys.?",
+      "Które sektory na GPW są w trendzie wzrostowym?",
+      "Jak wygląda szerokość rynku na GPW?",
+      "What is the best US ETF on NYSE for dividends?",
+      "Podsumuj moje transakcje za 2026 rok"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "list-pl",
+      "prompt": "Jakie ETF-y są na GPW?",
+      "command": "python3 scripts/gpw_etf_planner.py list --offline --no-files",
+      "assertions": [
+        "Lists ETFs grouped by category with last close, 20-session median turnover, 1-year return, volatility and max drawdown and the session date",
+        "Marks leveraged/inverse ETFs (LV/ST) with a strong warning that they are not for long-term holding",
+        "TER column says to check the KID (no invented TER values)",
+        "OKI column says 'likely qualified' only for Polish equity/bond/cash ETFs"
+      ]
+    },
+    {
+      "id": "plan-30-70-mbank",
+      "prompt": "1000 zł miesięcznie, 30% ETFBW20TR i 70% ETFIWDA, mBank. Co kupić w tym miesiącu?",
+      "command": "python3 scripts/gpw_etf_planner.py plan --allocation ETFBW20TR=30,ETFIWDA=70 --monthly 1000 --broker mbank --offline --no-files",
+      "assertions": [
+        "Gives a whole-unit buy list with fees (5 zł minimum per order) and the cash left over",
+        "Flags orders whose fee exceeds 0.5% and suggests buying less often or rotating one ETF per month (--max-orders 1)",
+        "Shows equity share 100%, currency exposure and that ~30% is likely OKI-qualified, and points to gpw-account-planner",
+        "Warns that the data history is far too short to judge risk",
+        "Does not present the list as a recommendation"
+      ]
+    },
+    {
+      "id": "backtest-en",
+      "prompt": "Backtest 1000 PLN a month into ETFBW20TR 30 / ETFSP500 70 vs investing it all at once.",
+      "command": "python3 scripts/gpw_etf_planner.py backtest --allocation ETFBW20TR=30,ETFSP500=70 --monthly 1000 --lang en --offline --no-files",
+      "assertions": [
+        "Starts with the caveat that about 2 years is far too short to judge an ETF",
+        "Reports DCA and lump-sum final values, gains and commissions on the same total amount",
+        "Explains why a lump sum usually wins in rising markets and DCA suits saving from a salary",
+        "Answer is in English"
+      ]
+    },
+    {
+      "id": "unknown-etf",
+      "prompt": "Plan na ETFXYZ 100%",
+      "command": "python3 scripts/gpw_etf_planner.py plan --allocation ETFXYZ=100 --monthly 500 --offline --no-files",
+      "assertions": [
+        "Script exits with code 1 and says the ETF short name is unknown",
+        "Claude suggests running list and does not invent a price"
+      ]
+    }
+  ]
+}

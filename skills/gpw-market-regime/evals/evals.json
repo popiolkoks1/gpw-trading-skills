@@ -1,0 +1,74 @@
+{
+  "skill": "gpw-market-regime",
+  "trigger_evals": {
+    "should_trigger": [
+      "Czy rynek w Warszawie jest teraz w korekcie, czy w trendzie wzrostowym?",
+      "Ile było ostatnio dni dystrybucji na WIG?",
+      "Czy po ostatnich spadkach na GPW pojawił się już dzień follow-through?",
+      "WIG robi nowe szczyty — czy to wygląda na szczyt hossy?",
+      "Jaki jest reżim rynku na GPW według metody O'Neila?",
+      "Is the Polish stock market topping? How many distribution days does WIG have?",
+      "Has WIG20 confirmed a new uptrend with a follow-through day?",
+      "Czy sWIG80 jest w bessie, kiedy WIG rośnie?",
+      "Show me the GPW market regime history for the last year."
+    ],
+    "should_not_trigger": [
+      "How many distribution days does the S&P 500 have?",
+      "Ile akcji PKO BP kupić przy koncie 30 tys. i stopie 5%?",
+      "Które sektory na GPW są najmocniejsze?",
+      "Zapisz w dzienniku, że sprzedałem KGHM",
+      "Jaka jest wycena CD Projektu?",
+      "Jaki ETF na WIG20 wybrać na IKE?"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "pl-regime",
+      "prompt": "Czy GPW jest teraz w trendzie wzrostowym, czy w korekcie?",
+      "command": "python3 scripts/gpw_market_regime.py --lang pl --offline --no-files",
+      "assertions": [
+        "scripts/gpw_market_regime.py was executed",
+        "Answer in Polish leads with the WIG regime state, the top-risk score and the distribution-day count with its band",
+        "Answer explains in plain words what a distribution day is",
+        "Answer states the data session date and mentions staleness first if data_provenance.freshness.is_stale",
+        "Answer mentions divergences between WIG/WIG20 and sWIG80 states if they differ",
+        "No buy/sell recommendation for any stock or the index"
+      ]
+    },
+    {
+      "id": "en-ftd",
+      "prompt": "Was there a follow-through day on WIG after the last correction, and is it holding?",
+      "command": "python3 scripts/gpw_market_regime.py --lang en --offline --no-files",
+      "assertions": [
+        "Answer in English gives the last FTD date, its day number in the rally attempt, the gain vs the volatility-scaled threshold and the health status",
+        "If a rally attempt is under way, answer gives its day and the rally low that would invalidate it",
+        "Answer notes the rules were designed for US indices and GPW is thinner"
+      ]
+    },
+    {
+      "id": "history",
+      "prompt": "Jak ten model zachowywał się w ostatnim roku? Ile razy zmieniał zdanie?",
+      "assertions": [
+        "Answer summarises history.transitions (count of changes, main episodes) and the share of time per state",
+        "Answer does not claim the model predicts the future"
+      ]
+    },
+    {
+      "id": "breadth-component",
+      "prompt": "Policz ryzyko szczytu razem z szerokością rynku.",
+      "assertions": [
+        "gpw-market-breadth was run into the same directory and gpw_market_regime.py was run with --input-dir pointing there",
+        "Answer reports the breadth component of top_risk and the breadth file date"
+      ]
+    },
+    {
+      "id": "offline-no-cache",
+      "prompt": "Sprawdź reżim rynku offline na pustym cache.",
+      "command": "python3 scripts/gpw_market_regime.py --offline --cache-dir /tmp/empty-cache --no-files",
+      "assertions": [
+        "Script exits with code 1 and an error on stderr",
+        "Answer reports the data problem and does not invent a regime"
+      ]
+    }
+  ]
+}

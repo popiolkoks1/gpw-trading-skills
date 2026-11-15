@@ -1,0 +1,71 @@
+{
+  "skill": "gpw-exposure-coach",
+  "trigger_evals": {
+    "should_trigger": [
+      "Ile procent kapitału powinienem teraz trzymać w akcjach z GPW?",
+      "Jaką ekspozycję na rynek ustawić na ten tydzień?",
+      "Mam trzy straty z rzędu na GPW — zmniejszyć ryzyko czy robić dalej swoje?",
+      "Czy powinienem zrobić sobie przerwę od tradingu po obsunięciu 9%?",
+      "Ile ryzykować na transakcję w obecnym rynku, mam konto 80 tys. zł?",
+      "How much exposure should I run on the Polish market right now?",
+      "Set my risk budget for GPW this week given my journal and the market regime.",
+      "Is my drawdown big enough that I should pause new trades?"
+    ],
+    "should_not_trigger": [
+      "Ile akcji LPP kupić przy wejściu 15000 i stopie 14200?",
+      "Czy WIG jest w korekcie? Ile dni dystrybucji?",
+      "Which US sectors should I overweight?",
+      "Podsumuj moje transakcje z października i policz PIT-38",
+      "Kup mi 100 akcji PKN Orlen",
+      "Jak działa IKZE i ile mogę wpłacić?"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "pl-full",
+      "prompt": "Ile mam teraz trzymać w akcjach i ile ryzykować na transakcję? Konto 100 tys. zł.",
+      "assertions": [
+        "gpw-market-breadth, gpw-sector-trend and gpw-market-regime were run (or fresh reports reused) into one directory",
+        "scripts/gpw_exposure_coach.py was executed with --input-dir that directory and --account-size 100000",
+        "Answer in Polish leads with the posture and the four limits (ceiling %, risk per trade in % and zł, new positions per week, circuit breaker)",
+        "Answer gives one reason per input and lists every cap in caps_applied",
+        "Answer states the confidence level",
+        "No recommendation to buy or sell any specific stock"
+      ]
+    },
+    {
+      "id": "en-losing-streak",
+      "prompt": "I've lost on my last five GPW trades. Should I keep trading?",
+      "assertions": [
+        "Answer in English reports circuit_breaker = pause with the pause_until date (if the journal shows 5 losses)",
+        "Answer explains the rule (5 losses in a row -> pause, then reduce until a win) and suggests gpw-trade-review",
+        "Answer does not tell the user to sell existing positions"
+      ]
+    },
+    {
+      "id": "regime-cap",
+      "prompt": "Szerokość rynku jest dobra, ale WIG jest w korekcie. Ile mogę mieć w akcjach?",
+      "assertions": [
+        "Answer explains that the regime is a hard cap and quotes the capped ceiling from limits.exposure_ceiling_pct",
+        "Answer names the regime state as the reason in caps_applied"
+      ]
+    },
+    {
+      "id": "no-inputs",
+      "prompt": "Ustal mi limity ekspozycji (nie mam żadnych raportów).",
+      "command": "python3 scripts/gpw_exposure_coach.py --input-dir /tmp/empty --no-journal --no-files",
+      "assertions": [
+        "Script exits with code 1 and explains that no market input was found",
+        "Answer offers to run gpw-market-regime, gpw-market-breadth and gpw-sector-trend first and does not invent a posture"
+      ]
+    },
+    {
+      "id": "stale",
+      "prompt": "Policz ekspozycję na podstawie raportów sprzed dwóch tygodni.",
+      "assertions": [
+        "Answer starts with the stale-input warning and the lower confidence",
+        "Answer suggests refreshing the stale reports"
+      ]
+    }
+  ]
+}

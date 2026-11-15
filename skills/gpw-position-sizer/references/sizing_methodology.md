@@ -79,7 +79,7 @@ the stop. The default scenario assumes a gap of 10% below the stop (`--gap-pct`)
 | Regular | 19% on gains (art. 30b PIT act), declared on **PIT-38 by 30 April**; commissions are deductible costs; FIFO | losses carried forward for 5 years (see gpw-trade-review) |
 | IKE | no tax inside the account | no Belka tax if withdrawn after 60 (or after 55 with pension rights); otherwise taxed. 2026 limit: **28 260 zł** |
 | IKZE | no tax inside the account | contributions deductible from income; withdrawal after 65 taxed at a flat **10%**. 2026 limit: **11 304 zł** (16 956 zł self-employed) |
-| OKI | no Belka tax (from **1 Jan 2027**) | annual tax on asset value: **0.85%** (2027 rate) on investment assets above **100 000 zł**; a separate 25 000 zł exemption for savings assets |
+| OKI | no Belka tax (from **1 Jan 2027**; OKI income is outside PIT, art. 32) | annual tax on the **average** value of OKI assets: **0.85%** in 2027 (art. 43), later 19% of the NBP reference rate of 31 Oct, min 0.1% (art. 25). Exempt (art. 26): up to 25 000 zł of savings assets (PLN cash, savings bonds) and up to 100 000 zł of **qualified** assets (shares of companies with PLN share capital, PLN bonds, funds with ≥ 70% such assets), 100 000 zł in total. Foreign shares and global ETFs are taxed from the first zloty. |
 
 The script shows the after-tax profit at the target only for regular accounts
 (× 0.81). For other account types it shows the profit before the account-specific tax

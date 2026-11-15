@@ -1,0 +1,80 @@
+{
+  "skill": "gpw-trend-screener",
+  "trigger_evals": {
+    "should_trigger": [
+      "Które spółki z GPW spełniają trend template Minerviniego?",
+      "Pokaż mi spółki z formacją VCP blisko wybicia na warszawskiej giełdzie.",
+      "Jakie są teraz liderzy siły relatywnej na GPW?",
+      "Czy PKOBP jest w trendzie wzrostowym według Minerviniego i gdzie ma pivot?",
+      "Zrób skaner spółek w stylu SEPA / CANSLIM dla polskiego rynku.",
+      "Run a Minervini trend template screen on Polish stocks.",
+      "Which WIG stocks are setting up a volatility contraction pattern?",
+      "Show GPW stocks near their pivot with RS rating above 80.",
+      "Czy taki skaner momentum działał historycznie na GPW?"
+    ],
+    "should_not_trigger": [
+      "Run a VCP screen on S&P 500 stocks.",
+      "Jaka jest wartość godziwa akcji KGHM według DCF?",
+      "Ile akcji LPP kupić przy ryzyku 1% kapitału?",
+      "Czy WIG rośnie szeroko, czy tylko dzięki kilku spółkom?",
+      "Które sektory na GPW są najmocniejsze?",
+      "Zapisz, że kupiłem 100 akcji PZU po 50 zł.",
+      "Który ETF na S&P 500 wybrać do IKE?"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "pl-screen",
+      "prompt": "Które spółki na GPW są teraz liderami w trendzie i mają formację VCP?",
+      "assertions": [
+        "scripts/gpw_trend_screener.py was executed (not answered from memory)",
+        "Answer in Polish leads with the counts: liquid universe, Trend Template passers, valid VCPs, actionable names",
+        "A table lists names with RS rating, contraction depths, pivot, execution state and priority band",
+        "Each pre_breakout or breakout name has an invalidation level, risk % from the pivot and a gpw-position-sizer command",
+        "The market-context line recommends checking gpw-market-regime / gpw-market-breadth",
+        "The answer never says to buy any stock; the list is described as a watchlist",
+        "Answer states the data date"
+      ]
+    },
+    {
+      "id": "en-ticker",
+      "prompt": "Break down PKOBP against the Minervini trend template and tell me if there is a VCP.",
+      "assertions": [
+        "scripts/gpw_trend_screener.py --ticker PKOBP --lang en was executed",
+        "All 8 Trend Template criteria are reported with pass/fail and values",
+        "RS rating and RS vs WIG over 3/6/12 months are quoted",
+        "The contractions are listed with dates and depths, plus the pivot and the last contraction low",
+        "The execution state and the invalidation level with risk % are given",
+        "No buy or sell recommendation"
+      ]
+    },
+    {
+      "id": "history",
+      "prompt": "Czy ten skaner działał w przeszłości na GPW?",
+      "assertions": [
+        "scripts/gpw_trend_screener.py --history was executed",
+        "Flagged stocks are compared with all Trend Template passers and the whole liquid universe at 20 and 60 sessions",
+        "Hit rate, mean, median and excess vs WIG are quoted, with medians discussed",
+        "Caveats are stated: small overlapping sample, regime dependence, no costs or stops, survivorship-free archive",
+        "The answer does not present past results as a forecast"
+      ]
+    },
+    {
+      "id": "correction-warning",
+      "prompt": "Pokaż setupy VCP, mam plik z gpw-market-regime, który mówi o korekcie.",
+      "assertions": [
+        "The regime file is passed or auto-discovered and its state and date are reported",
+        "A prominent warning says breakouts fail more often in a correction and suggests watch-only or smaller positions",
+        "If the regime file is older than 3 sessions the answer says so"
+      ]
+    },
+    {
+      "id": "unknown-ticker",
+      "prompt": "Przeanalizuj ORLEN skanerem Minerviniego.",
+      "assertions": [
+        "If the script exits 1 for ORLEN, the answer reports the error and the suggested GPW short names (e.g. PKNORLEN) and reruns with the correct name",
+        "No numbers are invented for a ticker the script did not analyse"
+      ]
+    }
+  ]
+}
