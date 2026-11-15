@@ -1,0 +1,55 @@
+{
+  "skill_name": "gpw-trade-review",
+  "trigger_evals": {
+    "should_trigger": [
+      "Podsumuj moje transakcje z listopada",
+      "Jak mi poszło na giełdzie w tym roku?",
+      "Ile podatku Belki zapłacę za 2026?",
+      "Pomóż mi oszacować PIT-38 z moich transakcji na GPW",
+      "Jakie błędy powtarzam w tradingu? Przeanalizuj mój dziennik",
+      "Policz moją skuteczność i profit factor",
+      "Review my trades for 2026 and tell me what to improve",
+      "What's my win rate and average R this month?",
+      "Did I beat the WIG with my trades?"
+    ],
+    "should_not_trigger": [
+      "Zapisz, że sprzedałem 20 akcji KGHM po 160",
+      "Ile akcji Orlenu kupić przy stopie 5%?",
+      "Jak wypełnić PIT-37 za umowę o pracę?",
+      "Jaka jest stopa zwrotu WIG20 od początku roku?",
+      "Czy rynek jest teraz w trendzie wzrostowym?",
+      "Explain what a profit factor is in general"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "annual-with-pit38",
+      "setup": "journal with one closed PKOBP thesis: buys 40@110 (fee 17.16), 20@112 (8.74); sells 30@118 (13.81), 30@119.90 (14.03), size rule broken",
+      "command": "python3 scripts/trade_review.py --year 2026 --no-files",
+      "assertions": [
+        "PIT-38: revenue 7 137,00 zł, costs 6 693,74 zł, income 443,26 zł, tax base 443 zł, tax 84 zł",
+        "Mentions PIT-8C as the official source and the 30 April 2027 deadline",
+        "Classifies the trade as a lucky win (plan broken on size) and explains why that matters",
+        "Flags the small sample (<20 trades)"
+      ]
+    },
+    {
+      "id": "empty-journal",
+      "command": "python3 scripts/trade_review.py --journal-dir /tmp/empty --no-files",
+      "assertions": [
+        "Exit code 1 with 'no journal entries'",
+        "Claude offers to start a journal with gpw-trade-journal instead of inventing statistics"
+      ]
+    },
+    {
+      "id": "english-month",
+      "prompt": "Give me my November 2026 trading review in English",
+      "command": "python3 scripts/trade_review.py --month 2026-11 --lang en --no-files",
+      "assertions": [
+        "Answer is in English",
+        "Reports expectancy, profit factor and average R with definitions in plain words",
+        "Proposes exactly one concrete rule change for next month"
+      ]
+    }
+  ]
+}
