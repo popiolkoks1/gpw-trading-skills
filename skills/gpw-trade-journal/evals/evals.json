@@ -1,0 +1,54 @@
+{
+  "skill_name": "gpw-trade-journal",
+  "trigger_evals": {
+    "should_trigger": [
+      "Kupiłem dziś 40 akcji PKO BP po 110 zł, zapisz to",
+      "Chcę prowadzić dziennik inwestycyjny dla moich spółek z GPW",
+      "Zapisz moją tezę na KGHM: miedź drożeje, stop 140",
+      "Sprzedałem CD Projekt po 280, zamknij pozycję w dzienniku",
+      "Które moje pozycje wymagają przeglądu?",
+      "Pokaż mój dziennik transakcji",
+      "Log this trade: bought 100 Allegro at 32.50 PLN, fee 12.68",
+      "Track this investment idea for Dino Polska and remind me to review it in a month",
+      "Q3 results for PZU came out above expectations, update my thesis"
+    ],
+    "should_not_trigger": [
+      "Ile akcji PKO kupić przy koncie 20 tys. i stopie 5%?",
+      "Podsumuj moje wyniki za 2026 i policz PIT-38",
+      "Jak wygląda szerokość rynku na GPW?",
+      "Co to jest teza inwestycyjna? Wyjaśnij teoretycznie",
+      "Napisz mi dziennik z wakacji",
+      "What is the best broker in Poland?"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "add-asks-kill-criterion",
+      "prompt": "Zapisz, że kupuję PKO BP, bo banki dobrze zarabiają.",
+      "assertions": [
+        "Claude asks for at least one concrete, falsifiable kill criterion before running add (or proposes options for the user to choose)",
+        "Claude does not invent prices, fees or a kill criterion on its own",
+        "Answer is in Polish"
+      ]
+    },
+    {
+      "id": "lifecycle-close",
+      "setup": "add PKOBP thesis (entry 110, stop 104), buy 40@110 fee 17.16, buy 20@112 fee 8.74, sell 30@118 fee 13.81, update stop to 112",
+      "command": "python3 scripts/journal.py close <id> --price 119.9 --fee 14.03 --date 2026-11-13 --exit-reason target --followed-entry tak --followed-stop tak --followed-size nie --benchmark-return 1.92",
+      "assertions": [
+        "Net P&L is 443.26 zł (gross 497.00, fees 53.74)",
+        "R multiple is 1.11R, measured from the initial stop 104 not the trailed stop",
+        "Excess vs WIG is about +4.75 pp",
+        "Claude points out that size was not according to plan, so the win is partly undeserved"
+      ]
+    },
+    {
+      "id": "oversell-error",
+      "command": "python3 scripts/journal.py fill <id> --side sell --shares 999 --price 120",
+      "assertions": [
+        "Exit code 1 with 'sell exceeds shares held'",
+        "Claude explains that short selling is not supported and asks for the correct share count"
+      ]
+    }
+  ]
+}

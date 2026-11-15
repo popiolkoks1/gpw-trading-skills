@@ -1,0 +1,69 @@
+{
+  "skill_name": "gpw-position-sizer",
+  "trigger_evals": {
+    "should_trigger": [
+      "Mam 20 tys. zł, chcę kupić PKO BP po 118, stop na 112. Ile akcji kupić?",
+      "Ile mogę zaryzykować na jednej transakcji na GPW przy koncie 50 000 zł?",
+      "Policz mi wielkość pozycji dla CD Projektu, wejście 260, stop 245, cel 300",
+      "Gdzie postawić stop loss na KGHM i ile sztuk wziąć, jak mam 30k na XTB?",
+      "kalkulator pozycji: konto 15000, cena 42,5, stop 39,8, mBank",
+      "How many shares of ORLEN should I buy with a 40k PLN account if my stop is 5% below entry?",
+      "Position size for Allegro on GPW, entry 32, stop 30, risking 1% of 25,000 PLN",
+      "Use Kelly to size my next GPW trade: win rate 45%, avg win 3%, avg loss 1.5%, account 60k PLN",
+      "Chcę kupić Dino na IKE za 28 tys., stop 10% niżej — jaka pozycja i ile zarobię po podatku przy celu 520?"
+    ],
+    "should_not_trigger": [
+      "Jak wygląda dziś szerokość rynku na GPW?",
+      "Które sektory na GPW są w trendzie wzrostowym?",
+      "Zapisz w dzienniku, że kupiłem PZU, bo spodziewam się dywidendy",
+      "Ile podatku Belki zapłacę za 2026 rok? Zrób PIT-38",
+      "How many shares does PKO BP have outstanding?",
+      "What is the market cap of CD Projekt?",
+      "Jaki ETF na S&P 500 wybrać na IKE?"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "fixed-fractional-mbank",
+      "prompt": "Konto 20 000 zł, mBank. Kupuję po 50 zł, stop 46, cel 60. Ile akcji?",
+      "command": "python3 scripts/position_sizer.py --account-size 20000 --entry 50 --stop 46 --target 60 --broker mbank --no-files",
+      "assertions": [
+        "Answer states 45 shares (not 50 - commissions are included in the risk)",
+        "Total risk incl. commissions is <= 200 zł (1% of account)",
+        "Mentions R multiple of about 2.2R and after-tax profit with 19% tax",
+        "Mentions that a stop loss is not a guaranteed price (gap scenario)",
+        "Answer is in Polish and ends with or references the educational disclaimer"
+      ]
+    },
+    {
+      "id": "ticker-atr-english",
+      "prompt": "Size a PKOBP trade for a 50,000 PLN account using an ATR stop, target 135.",
+      "command": "python3 scripts/position_sizer.py --account-size 50000 --ticker PKOBP --target 135 --lang en --no-files",
+      "assertions": [
+        "Uses last close and ATR(14) from the GPW archive and states the session date",
+        "Stop equals entry minus 2x ATR",
+        "Reports median daily turnover and the liquidity constraint",
+        "Answer is in English"
+      ]
+    },
+    {
+      "id": "invalid-stop",
+      "prompt": "Kupuję po 40 zł ze stopem 45, ile akcji przy 10 tys.?",
+      "command": "python3 scripts/position_sizer.py --account-size 10000 --entry 40 --stop 45 --no-files",
+      "assertions": [
+        "Script exits with code 1 and an error that the stop must be below entry",
+        "Claude explains that for a long trade the stop must be below the entry and asks for a corrected stop",
+        "No share count is invented"
+      ]
+    },
+    {
+      "id": "kelly-cap",
+      "prompt": "Win rate 55%, avg win 2x avg loss, account 30k PLN, entry 20 stop 19 — size with Kelly",
+      "command": "python3 scripts/position_sizer.py --account-size 30000 --entry 20 --stop 19 --win-rate 0.55 --avg-win 2 --avg-loss 1 --no-files --lang en",
+      "assertions": [
+        "Reports Kelly 32.5% and half-Kelly 16.25%",
+        "States that risk is capped at 2% per trade and explains why"
+      ]
+    }
+  ]
+}

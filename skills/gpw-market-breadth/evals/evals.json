@@ -1,0 +1,67 @@
+{
+  "skill": "gpw-market-breadth",
+  "trigger_evals": {
+    "should_trigger": [
+      "Jak dziś wygląda kondycja GPW? Czy rynek jest zdrowy?",
+      "WIG bije rekordy, ale mam wrażenie, że rośnie tylko kilka banków. Sprawdzisz?",
+      "Ile spółek na warszawskiej giełdzie jest powyżej średniej 200-sesyjnej?",
+      "Czy to dobry moment, żeby zwiększyć udział akcji polskich w portfelu?",
+      "Szerokość rynku GPW — jaki jest teraz wynik?",
+      "Is the Polish stock market rally broad-based right now?",
+      "How healthy is market breadth on the Warsaw Stock Exchange?",
+      "Czy przewaga spadających spółek na GPW się utrzymuje?",
+      "Give me a market health check for GPW as of last Friday.",
+      "Czy małe spółki z sWIG80 też uczestniczą we wzrostach, czy tylko WIG20?"
+    ],
+    "should_not_trigger": [
+      "Is the S&P 500 rally broad-based?",
+      "Ile akcji PKO BP kupić, jeśli mam 20 tys. zł i stop na 110 zł?",
+      "Które sektory na GPW są teraz najmocniejsze?",
+      "Zapisz w dzienniku, że kupiłem CD Projekt po 250 zł.",
+      "Jak rozliczyć PIT-38 za zeszły rok?",
+      "Jaka jest wycena DCF Orlenu?",
+      "What is the current NBP reference rate?"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "pl-basic",
+      "prompt": "Jak wygląda szerokość rynku na GPW?",
+      "assertions": [
+        "The script scripts/gpw_breadth.py was executed (no breadth numbers invented)",
+        "Answer is in Polish",
+        "Answer states the composite score (0-100) and zone name",
+        "Answer states the data date (as_of) and warns if data is stale",
+        "Answer mentions % of stocks above the 200-session average",
+        "Answer does not tell the user to buy or sell a specific security",
+        "Answer contains or links the educational disclaimer"
+      ]
+    },
+    {
+      "id": "en-narrow",
+      "prompt": "WIG20 is up a lot this month. Is it only the big caps?",
+      "assertions": [
+        "Answer is in English and the script ran with --lang en",
+        "Answer compares WIG20 vs mWIG40 vs sWIG80 participation from the report",
+        "Answer reports the WIG-vs-breadth divergence pattern",
+        "Exposure range is described as context, not an instruction"
+      ]
+    },
+    {
+      "id": "past-date",
+      "prompt": "Jaka była kondycja rynku GPW 2026-03-31?",
+      "assertions": [
+        "Script ran with --as-of 2026-03-31",
+        "Answer reports the as_of date returned by the script (last session on or before 2026-03-31)"
+      ]
+    },
+    {
+      "id": "offline-failure",
+      "prompt": "(run with network disabled and empty cache) Jak wygląda rynek?",
+      "assertions": [
+        "Answer explains that data could not be downloaded",
+        "Answer does not provide breadth numbers from memory"
+      ]
+    }
+  ]
+}

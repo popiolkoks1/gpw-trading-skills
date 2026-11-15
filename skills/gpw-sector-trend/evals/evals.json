@@ -1,0 +1,52 @@
+{
+  "skill": "gpw-sector-trend",
+  "trigger_evals": {
+    "should_trigger": [
+      "Które sektory na GPW są teraz najmocniejsze?",
+      "Jak radzą sobie banki na tle reszty rynku?",
+      "Czy spółki gamingowe są w trendzie wzrostowym?",
+      "Gdzie płynie kapitał na warszawskiej giełdzie — cykliczne czy defensywne?",
+      "Ile procent spółek z GPW jest w trendzie wzrostowym?",
+      "Which Polish sectors are leading and which are lagging?",
+      "Is there sector rotation into defensives on the Warsaw Stock Exchange?",
+      "Czy energetyka i paliwa zaczynają prowadzić rynek?",
+      "Show me the uptrend ratio by sector for GPW."
+    ],
+    "should_not_trigger": [
+      "Which US sectors are strongest this month?",
+      "Czy WIG rośnie szeroko, czy tylko dzięki kilku spółkom?",
+      "Jaka jest wartość godziwa akcji KGHM?",
+      "Ile akcji LPP mogę kupić przy ryzyku 1%?",
+      "Pokaż moje transakcje z października.",
+      "Jak działa IKZE?"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "pl-sectors",
+      "prompt": "Które sektory na GPW są mocne, a które słabe?",
+      "assertions": [
+        "scripts/gpw_sector_trend.py was executed",
+        "Answer in Polish lists top and bottom sectors by uptrend ratio with direction",
+        "Answer describes cyclical vs defensive rotation",
+        "Small-sample sectors are flagged as less reliable",
+        "No company-level buy/sell recommendation"
+      ]
+    },
+    {
+      "id": "en-banks",
+      "prompt": "Are Polish banks still trending up?",
+      "assertions": [
+        "Answer in English quotes WIG-BANKI uptrend ratio, direction and 20-session index change vs WIG",
+        "Answer states the data date"
+      ]
+    },
+    {
+      "id": "warnings",
+      "prompt": "Czy są jakieś ostrzeżenia w trendach sektorowych?",
+      "assertions": [
+        "Answer lists every warning present in composite.warnings, or says there are none"
+      ]
+    }
+  ]
+}
