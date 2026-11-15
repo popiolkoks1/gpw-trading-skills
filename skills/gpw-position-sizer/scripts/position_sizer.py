@@ -30,33 +30,20 @@ from typing import Dict, List, Optional
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from gpwlib import fmt, provenance  # noqa: E402
+from gpwlib import brokers, fmt, provenance, tax  # noqa: E402
 from gpwlib.fmt import DISCLAIMER, T  # noqa: E402
 
 # --------------------------------------------------------------------------
 # Broker presets (PLN). Tariffs change - every preset carries a reminder.
 # Sources (2026-11): broker tariffs as summarised by freenance.io,
 # ppcg.com.pl, brokerchooser.com; see references/sizing_methodology.md.
-# --------------------------------------------------------------------------
-BROKERS: Dict[str, Dict] = {
-    "xtb": {
-        "label": "XTB",
-        "pct": 0.0,
-        "min_fee": 0.0,
-        "note": "0% up to 100k EUR monthly turnover, then 0.2% (min 10 EUR) - modelled as 0%",
-        "warning_key": "warn_xtb",
-    },
-    "mbank": {"label": "mBank eMakler", "pct": 0.39, "min_fee": 5.0, "note": ""},
-    "bossa": {"label": "DM BOŚ (bossa)", "pct": 0.38, "min_fee": 5.0, "note": ""},
-    "pkobp": {"label": "BM PKO BP", "pct": 0.39, "min_fee": 5.0, "note": ""},
-    "santander": {"label": "Santander BM", "pct": 0.39, "min_fee": 5.0, "note": ""},
-    "custom": {"label": "custom", "pct": 0.0, "min_fee": 0.0, "note": ""},
-}
-VERIFY_NOTE = "verify against your broker's current tariff (tabela opłat i prowizji)"
+# Commission presets live in gpwlib.brokers (one table for every skill).
+BROKERS = brokers.BROKERS
+VERIFY_NOTE = brokers.VERIFY_NOTE
 
-BELKA_RATE = 0.19          # art. 30b ustawy o PIT
-OKI_EXEMPTION_PLN = 100_000  # OKI investment-asset exemption (Dz.U. 2026 poz. 1098)
-OKI_RATE_2027 = 0.85       # % of assets above the exemption (art. 43, rate for 2027)
+BELKA_RATE = tax.BELKA_RATE            # art. 30b ustawy o PIT
+OKI_EXEMPTION_PLN = tax.OKI_EXEMPT_TOTAL  # art. 26 Dz.U. 2026 poz. 1098 (qualified assets only)
+OKI_RATE_2027 = tax.OKI_RATE_2027_PCT     # art. 43, rate for 2027
 KELLY_RISK_CAP_PCT = 2.0   # cap half-Kelly risk budget for retail accounts
 ILLIQUID_TURNOVER_PLN = 100_000.0
 FEE_DRAG_WARN_PCT = 0.5    # warn when round-trip fees exceed 0.5% of the position
@@ -114,6 +101,10 @@ STRINGS = {
         "pl": "Stawki prowizji to przybliżenie – sprawdź aktualną tabelę opłat swojego brokera.",
         "en": "Commission rates are approximations – check your broker's current fee table.",
     },
+    "warn_tariff_stale": {
+        "pl": "⚠️ Tabela prowizji ma ponad {n} dni (wpisana {d}) – podaj aktualne stawki przez --commission-pct i --commission-min.",
+        "en": "⚠️ The commission table is over {n} days old (entered {d}) – pass current rates via --commission-pct and --commission-min.",
+    },
     "warn_fee_drag": {
         "pl": "Prowizje w obie strony to {p} wartości pozycji (minimalna opłata). Mała pozycja jest droga – rozważ większą lub tańszego brokera.",
         "en": "Round-trip commissions are {p} of the position (minimum fee). Small positions are expensive – consider a larger size or a cheaper broker.",
@@ -159,8 +150,8 @@ STRINGS = {
         "en": "IKZE: no Belka tax inside; contributions are deductible, withdrawal after 65 is taxed at a flat 10% of the total. 2026 limit: PLN 11,304 (PLN 16,956 self-employed).",
     },
     "tax_oki": {
-        "pl": "OKI (od 1.01.2027, Dz.U. 2026 poz. 1098): zamiast podatku Belki podatek od wartości aktywów – 0,85% (stawka 2027) od nadwyżki ponad 100 000 zł aktywów inwestycyjnych. Pokazany zysk jest przed tym podatkiem.",
-        "en": "OKI (from 1 Jan 2027, Dz.U. 2026 poz. 1098): instead of the Belka tax, a tax on asset value – 0.85% (2027 rate) on investment assets above PLN 100,000. Profit shown is before that tax.",
+        "pl": "OKI (od 1.01.2027, Dz.U. 2026 poz. 1098): zamiast podatku Belki roczny podatek od średniej wartości aktywów – 0,85% w 2027 r. Zwolnienie do 100 000 zł dotyczy tylko aktywów kwalifikowanych (akcje spółek z kapitałem w zł, obligacje w zł, fundusze z ≥70% takich aktywów); zagraniczne akcje i ETF-y globalne są opodatkowane od pierwszej złotówki. Pokazany zysk jest przed tym podatkiem.",
+        "en": "OKI (from 1 Jan 2027, Dz.U. 2026 poz. 1098): instead of the Belka tax, an annual tax on average asset value – 0.85% in 2027. The PLN 100,000 exemption covers only qualified assets (shares of companies with PLN share capital, PLN bonds, funds with ≥70% such assets); foreign shares and global ETFs are taxed from the first zloty. Profit shown is before that tax.",
     },
     "no_target": {"pl": "(podaj --target, aby policzyć zysk i R)", "en": "(pass --target to compute profit and R)"},
     "acct_regular": {"pl": "zwykły rachunek maklerski", "en": "regular brokerage account"},
@@ -181,12 +172,7 @@ class SizingError(ValueError):
 
 def commission(value: float, pct: float, min_fee: float) -> float:
     """Commission for one order of ``value`` PLN (0 for an empty order)."""
-    if value <= 0:
-        return 0.0
-    fee = value * pct / 100.0
-    if pct > 0 or min_fee > 0:
-        fee = max(fee, min_fee)
-    return round(fee, 2)
+    return brokers.commission(value, pct, min_fee)
 
 
 def round_trip_risk(shares: int, entry: float, stop: float, pct: float, min_fee: float) -> Dict:
@@ -335,6 +321,8 @@ def calculate(params: Dict) -> Dict:
         warnings.append(broker["warning_key"])
     if params.get("broker") not in (None, "custom") and params.get("commission_pct") is None:
         warnings.append("warn_verify")
+        if brokers.tariff_age_days() > brokers.TARIFF_MAX_AGE_DAYS:
+            warnings.append("warn_tariff_stale")
     if params.get("median_turnover_pln") is not None and params["median_turnover_pln"] < ILLIQUID_TURNOVER_PLN:
         warnings.append("warn_illiquid")
 
@@ -515,6 +503,8 @@ def render_markdown(res: Dict, lang: str = "pl", market: Optional[Dict] = None) 
         kw = {}
         if w == "warn_fee_drag":
             kw = {"p": fmt.pct(res["fee_drag_pct"], 2, lang)}
+        elif w == "warn_tariff_stale":
+            kw = {"n": brokers.TARIFF_MAX_AGE_DAYS, "d": brokers.TARIFF_ENTERED.isoformat()}
         elif w == "warn_large_risk":
             kw = {"p": fmt.pct(res["risk_pct"], 2, lang)}
         elif w == "warn_illiquid":

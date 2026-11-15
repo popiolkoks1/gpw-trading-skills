@@ -82,6 +82,7 @@ python3 scripts/journal.py review-due [--as-of 2026-12-01]
 - **Fills**: whole shares only. `--fee` is the commission in PLN; ask for it or estimate it with the broker's tariff (e.g. 0.39%, min 5 zł) and say it is an estimate. A first buy moves the thesis to ACTIVE.
 - **close**: sells any remaining shares at `--price`. It always asks three process questions: was the entry according to plan, was the stop respected, was the size according to plan. Ask the user honestly; don't assume "yes". `--exit-reason`: `target`, `stop`, `kill_criterion`, `time`, `discretionary`, `other`.
 - **Benchmark**: on close the script downloads WIG from the GPW archive to compare against. Use `--no-benchmark` or `--benchmark-return X` when offline.
+- **Paper mode** (`add ... --paper`): practise without real money. Beginners should start here. Paper theses follow the same rules (kill criteria, fills, FIFO, process questions), are marked 📝, are never included in PIT-38 and are reviewed separately (`gpw-trade-review --paper`).
 - **Trailing stop**: `update --stop` can move the stop above the entry once ACTIVE. The R multiple is still measured against the **initial** stop.
 - Errors exit with code 1 and a clear message (e.g. missing kill criterion, sell larger than the position, backward transition). Relay them in plain words.
 

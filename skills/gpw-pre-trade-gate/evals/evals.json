@@ -1,0 +1,65 @@
+{
+  "skill": "gpw-pre-trade-gate",
+  "trigger_evals": {
+    "should_trigger": [
+      "Chcę kupić 60 akcji PKO BP po 120, stop 113, konto 50 tys. Czy mogę wejść?",
+      "Sprawdź tę transakcję przed zakupem: KGHM wejście 276, stop 260, 15 sztuk",
+      "Mam wynik z kalkulatora pozycji, przepuść go przez checklistę przed wejściem",
+      "Czy to dobry moment, żeby kupić CD Projekt? Mam plan: 265 / stop 248 / cel 310",
+      "Run the pre-trade check on my ORLEN trade: entry 131, stop 124, 40 shares, 30k PLN account",
+      "Go or no-go: buying 100 shares of PZU at 75.6 with a stop at 71",
+      "Zrób checklistę dyscypliny zanim kupię Dino",
+      "Should I take this GPW trade after three losses in a row?"
+    ],
+    "should_not_trigger": [
+      "Ile akcji PKO BP kupić przy ryzyku 1%?",
+      "Sprawdź mój cały portfel pod kątem dywersyfikacji",
+      "Jak wygląda szerokość rynku na GPW?",
+      "Zapisz, że sprzedałem KGHM po 280",
+      "Should I buy Tesla stock?",
+      "Jaka jest wycena LPP?"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "no-thesis-pl",
+      "prompt": "Chcę kupić 60 PKOBP po 120, stop 113, cel 138, konto 50 000 zł.",
+      "command": "python3 scripts/pre_trade_gate.py --ticker PKOBP --entry 120 --stop 113 --shares 60 --target 138 --account-size 50000 --no-files",
+      "assertions": [
+        "Verdict is stated first",
+        "Without a journal thesis the verdict is NO-GO because the written-thesis check FAILs",
+        "Answer shows the gpw-trade-journal add command from the report",
+        "Risk incl. round-trip fees is quoted in PLN and as % of the account",
+        "No 'buy' recommendation; states the gate does not place orders"
+      ]
+    },
+    {
+      "id": "sizer-json-en",
+      "prompt": "Gate my last position-sizer result for thesis th_pkobp.",
+      "command": "python3 scripts/pre_trade_gate.py --sizer-json gpw_position_size_X.json --thesis-id th_pkobp --lang en --no-files",
+      "assertions": [
+        "Uses --sizer-json and --thesis-id",
+        "Lists every FAIL and WARN with number and limit",
+        "SKIP checks (no regime/exposure file) are mentioned as not checked",
+        "Answer is in English"
+      ]
+    },
+    {
+      "id": "bear-override",
+      "prompt": "Rynek jest w bessie, ale i tak chcę wejść – mam powód.",
+      "assertions": [
+        "Explains that bear + top risk >= 80 is a FAIL that only --override with a written reason (>= 15 chars) lifts",
+        "Does not invent the reason; asks the user for it",
+        "Reports the recorded override reason after the re-run"
+      ]
+    },
+    {
+      "id": "losing-streak",
+      "prompt": "Miałem 5 strat z rzędu, czy mogę otworzyć nową pozycję?",
+      "assertions": [
+        "Circuit breaker FAIL ('pause') is reported from journal closed results",
+        "Suggests reviewing trades with gpw-trade-review rather than trading"
+      ]
+    }
+  ]
+}

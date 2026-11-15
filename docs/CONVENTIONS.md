@@ -40,6 +40,14 @@ tests/<skill-name>/test_*.py
    and price thresholds, thin liquidity outside WIG20/mWIG40.
 9. **Exit codes:** 0 ok, 1 runtime/data error (message on stderr), 2 bad
    arguments (argparse).
-10. **Outputs:** `<prefix>_YYYY-MM-DD_HHMMSS.{json,md}` in `--output-dir`
+10. **Shared facts live in one place:** commissions in `gpwlib.brokers`, tax
+    rules and limits in `gpwlib.tax`, risk statistics in `gpwlib.stats`, journal
+    reading in `gpwlib.journal_io`. Skills never copy these constants.
+11. **Skills talk through JSON files**, never through imports of each other's
+    scripts. A consumer takes `--<name>-json PATH` or finds the newest file in
+    `--input-dir`, reports its `as_of`, and still works (with lower confidence)
+    when it is missing. Contracts: `gpw-market-regime` → `regime.state`,
+    `regime.top_risk_score`; `gpw-exposure-coach` → `posture`, `limits.*`.
+12. **Outputs:** `<prefix>_YYYY-MM-DD_HHMMSS.{json,md}` in `--output-dir`
     (default: current dir); state files in `--state-dir` (default
     `~/.gpw-trading-skills/`).
