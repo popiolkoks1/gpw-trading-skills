@@ -1,0 +1,109 @@
+{
+ "skill": "gpw-trend-screener",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "ticker",
+ "result": {
+  "name": "KETY",
+  "date": "2026-11-13",
+  "close": 1337.0,
+  "prefilter": {
+   "ok": true,
+   "reasons": [],
+   "history": 500,
+   "short_history": false,
+   "med_turnover20_k": 25250.13
+  },
+  "rs": {
+   "rating": 70,
+   "raw": 50.82,
+   "quarters": 4,
+   "vs_wig_pp": {
+    "63": 1.95,
+    "126": -1.21,
+    "252": 5.38
+   }
+  },
+  "template": {
+   "available": true,
+   "passed": 8,
+   "total": 8,
+   "sma50": 1257.9,
+   "sma150": 1201.75,
+   "sma200": 1148.83,
+   "sma200_slope_pct": 2.92,
+   "high_52w": 1345.0,
+   "low_52w": 843.39,
+   "window_52w": 252,
+   "pct_from_high": -0.59,
+   "pct_above_low": 58.53,
+   "pct_above_sma50": 6.29
+  },
+  "template_pass": true,
+  "vcp": {
+   "valid": true,
+   "reasons": [],
+   "pivot": 1281.0,
+   "last_low": 1235.0,
+   "base_high": 1317.0,
+   "base_start": "2026-09-22",
+   "base_len": 38,
+   "dryup_ratio": 0.987,
+   "higher_lows": true,
+   "quality": 88.3,
+   "all_contractions": 3,
+   "pivot_date": "2026-10-29",
+   "last_low_date": "2026-11-02"
+  },
+  "execution": {
+   "state": "breakout",
+   "pct_vs_pivot": 4.37,
+   "pct_above_sma50": 6.29,
+   "volume_ratio": 1.54
+  },
+  "score": 71.6,
+  "components": {
+   "trend": 99.5,
+   "rs": 40.0,
+   "contraction": 88.3,
+   "dryup": 32.2,
+   "pivot": 58.4,
+   "liquidity": 100
+  },
+  "band": "good",
+  "band_raw": "good",
+  "band_capped": false,
+  "risk": {
+   "atr14": 33.77,
+   "entry_pivot": 1281.0,
+   "stop_structure": 1228.83,
+   "stop_atr": 1213.46,
+   "risk_pct_structure": 4.07,
+   "risk_pct_atr": 5.27,
+   "wide_structure": false
+  },
+  "labels": [
+   "WIG20"
+  ],
+  "in_universe": true,
+  "sizer_command": "python3 scripts/position_sizer.py --ticker KETY --entry 1281 --stop 1229 --account-size ACCOUNT_PLN --risk-pct 1 --lang pl"
+ },
+ "regime": {
+  "state": "confirmed_uptrend"
+ },
+ "data_provenance": {
+  "as_of": "2026-11-13",
+  "sources": [
+   "GPW — Archiwum notowań (akcje, indeksy): https://www.gpw.pl/archiwum-notowan",
+   "GPW Benchmark — portfele indeksów (etykiety WIG20/mWIG40/sWIG80 i sektorów): https://gpwbenchmark.pl"
+  ],
+  "freshness": {
+   "as_of": "2026-11-13",
+   "sessions_behind": 0,
+   "is_stale": false,
+   "reference_date": null,
+   "historical_run": false,
+   "sessions_behind_today": 0
+  }
+ }
+}

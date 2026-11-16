@@ -1,0 +1,67 @@
+{
+ "skill": "gpw-earnings-reaction",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "ticker",
+ "as_of": "2026-11-13",
+ "reactions": [
+  {
+   "ticker": "PKOBP",
+   "report_date": "2026-11-05",
+   "report_type": "periodic_q",
+   "session_alignment": "pre_open",
+   "car_3d_pct": 0.58,
+   "abnormal_turnover": 1.54,
+   "drift_20s_pct": null,
+   "label": "neutral",
+   "period_label": "Q3 2026",
+   "z": 0.33,
+   "provisional": false
+  },
+  {
+   "ticker": "PKOBP",
+   "report_date": "2026-08-13",
+   "report_type": "periodic_h",
+   "session_alignment": "pre_open",
+   "car_3d_pct": 2.99,
+   "abnormal_turnover": 1.54,
+   "drift_20s_pct": 5.34,
+   "label": "positive",
+   "period_label": "H1/Q2 2026",
+   "z": 1.52,
+   "provisional": false
+  }
+ ],
+ "tickers": {
+  "PKOBP": {
+   "profile": {
+    "events": 2,
+    "mean_car_3d_pct": 1.79,
+    "mean_abs_car_3d_pct": 1.79,
+    "share_positive": 1.0,
+    "mean_abnormal_turnover": 1.54,
+    "mean_drift_20s_pct": 5.34,
+    "labels": {
+     "strong_positive": 0,
+     "positive": 1,
+     "neutral": 1,
+     "negative": 0,
+     "strong_negative": 0
+    },
+    "reaction_drift_same_sign": 1.0
+   },
+   "next_expected": {
+    "period": "2026Q4",
+    "date": "2027-04-30",
+    "date_kind": "statutory_deadline"
+   }
+  }
+ },
+ "data_provenance": {
+  "as_of": "2026-11-13",
+  "sources": [
+   "GPW — Archiwum notowań: https://www.gpw.pl/archiwum-notowan",
+   "GPW — komunikaty ESPI/EBI: https://www.gpw.pl/komunikaty (https://www.gpw.pl/ajaxindex.php, GPWEspiReportUnion)"
+  ]
+ }
+}

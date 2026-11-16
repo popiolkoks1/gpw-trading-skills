@@ -1,0 +1,174 @@
+{
+ "skill": "gpw-risk-lab",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "stress",
+ "as_of": "2026-11-13",
+ "portfolio": {
+  "total_value": 26955.0,
+  "positions": [
+   {
+    "ticker": "PKOBP",
+    "value": 11990.0,
+    "sector": "WIG-BANKI",
+    "beta_wig": 1.2745
+   },
+   {
+    "ticker": "KGHM",
+    "value": 8280.0,
+    "sector": "WIG-GORNIC",
+    "beta_wig": 2.1172
+   },
+   {
+    "ticker": "KETY",
+    "value": 6685.0,
+    "sector": null,
+    "beta_wig": 0.9771
+   }
+  ]
+ },
+ "stress": {
+  "scenarios": [
+   {
+    "id": "chf_2015",
+    "skipped": false,
+    "portfolio_return_pct": -6.05,
+    "positions": [
+     {
+      "ticker": "PKOBP",
+      "return_pct": -7.07,
+      "method": "proxy_sector"
+     },
+     {
+      "ticker": "KGHM",
+      "return_pct": -6.91,
+      "method": "proxy_size"
+     },
+     {
+      "ticker": "KETY",
+      "return_pct": -3.17,
+      "method": "proxy_size"
+     }
+    ]
+   },
+   {
+    "id": "covid_2020",
+    "skipped": false,
+    "portfolio_return_pct": -38.09,
+    "positions": [
+     {
+      "ticker": "PKOBP",
+      "return_pct": -36.49,
+      "method": "actual"
+     },
+     {
+      "ticker": "KGHM",
+      "return_pct": -48.97,
+      "method": "actual"
+     },
+     {
+      "ticker": "KETY",
+      "return_pct": -27.5,
+      "method": "actual"
+     }
+    ]
+   },
+   {
+    "id": "war_inflation_2022",
+    "skipped": false,
+    "portfolio_return_pct": -40.47,
+    "positions": [
+     {
+      "ticker": "PKOBP",
+      "return_pct": -52.27,
+      "method": "actual"
+     },
+     {
+      "ticker": "KGHM",
+      "return_pct": -39.63,
+      "method": "actual"
+     },
+     {
+      "ticker": "KETY",
+      "return_pct": -20.35,
+      "method": "actual"
+     }
+    ]
+   },
+   {
+    "id": "worst_1d",
+    "skipped": false,
+    "portfolio_return_pct": -14.92,
+    "positions": [
+     {
+      "ticker": "PKOBP",
+      "return_pct": -12.96,
+      "method": "actual"
+     },
+     {
+      "ticker": "KGHM",
+      "return_pct": -15.99,
+      "method": "actual"
+     },
+     {
+      "ticker": "KETY",
+      "return_pct": -17.14,
+      "method": "actual"
+     }
+    ]
+   },
+   {
+    "id": "worst_5d",
+    "skipped": false,
+    "portfolio_return_pct": -27.48,
+    "positions": [
+     {
+      "ticker": "PKOBP",
+      "return_pct": -26.74,
+      "method": "actual"
+     },
+     {
+      "ticker": "KGHM",
+      "return_pct": -32.44,
+      "method": "actual"
+     },
+     {
+      "ticker": "KETY",
+      "return_pct": -22.67,
+      "method": "actual"
+     }
+    ]
+   },
+   {
+    "id": "wig_-10",
+    "skipped": false,
+    "portfolio_return_pct": -14.6,
+    "positions": [
+     {
+      "ticker": "KGHM",
+      "return_pct": -21.17,
+      "method": "beta_market"
+     },
+     {
+      "ticker": "PKOBP",
+      "return_pct": -12.74,
+      "method": "beta_market"
+     },
+     {
+      "ticker": "KETY",
+      "return_pct": -9.77,
+      "method": "beta_market"
+     }
+    ]
+   }
+  ],
+  "worst_scenario": "wig_-40"
+ },
+ "data_provenance": {
+  "as_of": "2026-11-13",
+  "sources": [
+   "GPW — Archiwum notowań (akcje, indeksy, ETF, kontrakty terminowe type=35): https://www.gpw.pl/archiwum-notowan",
+   "GPW Benchmark — portfele indeksów (sektory, WIG20/mWIG40/sWIG80): https://gpwbenchmark.pl"
+  ]
+ }
+}

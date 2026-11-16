@@ -1,0 +1,65 @@
+{
+ "skill": "gpw-ownership",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "insiders",
+ "as_of": "2026-11-16",
+ "insiders": {
+  "by_ticker": [
+   {
+    "ticker": "HERKULES",
+    "buys": 1,
+    "sells": 5,
+    "distinct_insiders": 0,
+    "net_value_pln": null,
+    "cluster_buy": false,
+    "cluster_sell": false,
+    "last_date": "2026-10-27"
+   },
+   {
+    "ticker": "MILLENNIUM",
+    "buys": 0,
+    "sells": 2,
+    "distinct_insiders": 0,
+    "net_value_pln": null,
+    "cluster_buy": false,
+    "cluster_sell": false,
+    "last_date": "2026-10-30"
+   },
+   {
+    "ticker": "KOMPAP",
+    "buys": 1,
+    "sells": 0,
+    "distinct_insiders": 0,
+    "net_value_pln": null,
+    "cluster_buy": false,
+    "cluster_sell": false,
+    "last_date": "2026-11-10"
+   },
+   {
+    "ticker": "PROTEKTOR",
+    "buys": 1,
+    "sells": 0,
+    "distinct_insiders": 0,
+    "net_value_pln": null,
+    "cluster_buy": false,
+    "cluster_sell": false,
+    "last_date": "2026-10-26"
+   },
+   {
+    "ticker": "4MASS",
+    "buys": 0,
+    "sells": 0,
+    "distinct_insiders": 0,
+    "net_value_pln": null,
+    "cluster_buy": false,
+    "cluster_sell": false,
+    "last_date": "2026-11-04"
+   }
+  ]
+ },
+ "signals": [],
+ "data_provenance": {
+  "as_of": "2026-11-16"
+ }
+}

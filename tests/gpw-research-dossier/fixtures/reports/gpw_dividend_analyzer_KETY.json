@@ -1,0 +1,123 @@
+{
+ "skill": "gpw-dividend-analyzer",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "ticker",
+ "as_of": "2026-11-13",
+ "companies": [
+  {
+   "ticker": "KETY",
+   "isin": "PLKETY000011",
+   "index": "WIG20",
+   "sector_index": null,
+   "price": 1337.0,
+   "price_date": "2026-11-13",
+   "dps_history": [
+    {
+     "year": 2024,
+     "dps": 55.52,
+     "payments": 1,
+     "complete": true,
+     "sources": [
+      "archive"
+     ],
+     "special": false
+    },
+    {
+     "year": 2025,
+     "dps": 55.53,
+     "payments": 1,
+     "complete": true,
+     "sources": [
+      "archive"
+     ],
+     "special": false
+    },
+    {
+     "year": 2026,
+     "dps": 48.97,
+     "payments": 1,
+     "complete": false,
+     "sources": [
+      "archive+espi"
+     ],
+     "special": false
+    }
+   ],
+   "years_observed": 8,
+   "years_paid": 8,
+   "consecutive_years": 8,
+   "cuts": [
+    {
+     "year": 2024,
+     "from": 62.49,
+     "to": 55.52,
+     "change_pct": -11.2,
+     "kind": "cut"
+    },
+    {
+     "year": 2026,
+     "from": 55.53,
+     "to": 48.97,
+     "change_pct": -11.8,
+     "kind": "cut"
+    }
+   ],
+   "n_cuts": 2,
+   "n_suspensions": 0,
+   "dps_cagr_3y_pct": -7.81,
+   "dps_cagr_5y_pct": 1.7,
+   "dps_ttm": 48.97,
+   "yield_gross_pct": 3.663,
+   "yield_net_regular_pct": 2.967,
+   "yield_ike_pct": 3.663,
+   "yield_ikze_after_exit_tax_pct": 3.297,
+   "forward_dps": null,
+   "forward_yield_gross_pct": null,
+   "payout_ratio": 61.0,
+   "payout_basis": "ytd_annualized_9m",
+   "payout_pe_based": 69.2,
+   "fcf_cover": 1.18,
+   "sector_median_yield_pct": 4.355,
+   "sector_median_basis": "market (WIG20+mWIG40+sWIG80 payers)",
+   "stability_score": 78,
+   "stability_parts": {
+    "consistency": 35.0,
+    "streak": 15.0,
+    "no_cuts": 4,
+    "growth": 8.8,
+    "payout": 14.8
+   },
+   "stability_confidence": "high",
+   "trap_flags": [
+    "recent_cut_or_suspension"
+   ],
+   "is_bank": false,
+   "is_insurer": false,
+   "stale_price": false,
+   "espi_reports": 3
+  }
+ ],
+ "upcoming": [
+  {
+   "ex_date": "2027-08-17",
+   "dps": 48.97,
+   "date_kind": "estimated",
+   "based_on": "2026-08-18",
+   "window_start": "2027-08-03",
+   "window_end": "2027-08-31",
+   "source": "history (last ex-date + 52 weeks)",
+   "record_date": null,
+   "payment_date": null,
+   "stage": "history",
+   "ticker": "KETY"
+  }
+ ],
+ "data_provenance": {
+  "as_of": "2026-11-13",
+  "sources": [
+   "https://www.gpw.pl/archiwum-notowan (GPW quotes archive, cached sessions 2019-01-02 - 2026-11-13, 1970 sessions; ex-dates and DPS from gpwlib.panel reference-price adjustments)",
+   "https://www.gpw.pl/komunikaty (ESPI/EBI list, 250 days 2025-11-16 - 2026-11-16)"
+  ]
+ }
+}

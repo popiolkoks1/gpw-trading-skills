@@ -1,0 +1,76 @@
+{
+  "skill": "gpw-watchlist",
+  "trigger_evals": {
+    "should_trigger": [
+      "Dodaj KETY do obserwowanych z pivotem 1281 i stopem 1229.",
+      "Pokaż moją watchlistę.",
+      "Które spółki z mojej listy obserwacyjnej są blisko pivotu?",
+      "Czy coś z obserwowanych przebiło stop?",
+      "Zaktualizuj listę obserwacyjną wynikami skanera.",
+      "Przenieś PKOBP na etap gotowa.",
+      "Co usunąć z watchlisty?",
+      "Add CDPROJEKT to my GPW watchlist.",
+      "What on my watchlist is near its pivot?",
+      "Clean up my watchlist and show stale names."
+    ],
+    "should_not_trigger": [
+      "Które spółki na GPW są w trendzie wzrostowym według Minerviniego?",
+      "Ile akcji LPP mogę kupić przy ryzyku 1%?",
+      "Zapisz transakcję: kupiłem 10 akcji KGHM po 150 zł.",
+      "Czy mogę teraz wejść w PKN Orlen - sprawdź checklistę.",
+      "Add AAPL and TSLA to my Robinhood watchlist.",
+      "Jak działa IKE?",
+      "What is the market regime on GPW?"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "pl-daily-refresh",
+      "prompt": "Odśwież moją watchlistę i powiedz, co wymaga uwagi.",
+      "assertions": [
+        "scripts/gpw_watchlist.py refresh was executed",
+        "The answer starts with the headline from the report (e.g. how many names are near the pivot or broke the stop)",
+        "Every stop_breached alert is mentioned with the close and stop prices from the report and a question whether to drop the name",
+        "Pivot breakouts state whether turnover confirmed them",
+        "No buy or sell recommendation; ready is described as a complete plan, not advice",
+        "If the report has a staleness warning it is mentioned first"
+      ]
+    },
+    {
+      "id": "pl-add-ready",
+      "prompt": "Dodaj KETY jako gotową, pivot 1281, stop 1229.",
+      "assertions": [
+        "scripts/gpw_watchlist.py add KETY --stage ready --pivot 1281 --stop 1229 (or add then promote) was executed",
+        "If the script warns that no journal thesis exists, the answer suggests writing one in gpw-trade-journal",
+        "The answer does not invent any other price levels"
+      ]
+    },
+    {
+      "id": "en-ingest",
+      "prompt": "Pull the latest screener and ownership reports into my watchlist.",
+      "assertions": [
+        "scripts/gpw_watchlist.py ingest was executed with --input-dir and --lang en",
+        "Answer lists added candidates and items upgraded to watch",
+        "Answer mentions reports skipped as stale, if any",
+        "Answer states that nothing was moved to ready automatically"
+      ]
+    },
+    {
+      "id": "review-confirm",
+      "prompt": "Przejrzyj listę i usuń to, co nieaktualne.",
+      "assertions": [
+        "scripts/gpw_watchlist.py review was executed",
+        "Suggestions are listed with their reasons before any drop is run",
+        "Drop commands are run only for names the user confirms"
+      ]
+    },
+    {
+      "id": "missing-levels",
+      "prompt": "Ustaw PGE na gotową.",
+      "assertions": [
+        "The script error (ready needs pivot and stop) is reported, not hidden",
+        "Claude asks for pivot and stop or points to gpw-trend-screener instead of inventing levels"
+      ]
+    }
+  ]
+}

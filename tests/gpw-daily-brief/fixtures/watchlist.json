@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "skill": "gpw-watchlist",
+  "updated_at": "2026-11-13T17:30:00+00:00",
+  "items": [
+    {"ticker": "KETY", "stage": "ready", "added": "2026-11-02", "source": "gpw-trend-screener", "pivot": 1281.0, "stop": 1229.0, "notes": [],
+     "alerts": [{"code": "in_buy_range", "severity": "medium", "origin": "refresh", "params": {"dist_pct": 4.37}}]},
+    {"ticker": "AUTOPARTN", "stage": "watch", "added": "2026-11-05", "source": "gpw-trend-screener", "pivot": 28.9, "stop": 27.5, "notes": [],
+     "alerts": [{"code": "pivot_breakout", "severity": "medium", "origin": "refresh", "params": {}}]},
+    {"ticker": "DINOPL", "stage": "watch", "added": "2026-10-20", "source": "user", "pivot": 40.5, "stop": 39.5, "notes": [], "alerts": []},
+    {"ticker": "BNPPPL", "stage": "candidate", "added": "2026-11-10", "source": "user", "pivot": 168.4, "stop": 160.0, "notes": [],
+     "alerts": [{"code": "new_52w_high", "severity": "low", "origin": "refresh", "params": {}}]},
+    {"ticker": "PEKAO", "stage": "watch", "added": "2026-11-12", "source": "gpw-trend-screener", "pivot": 271.1, "stop": 249.15, "notes": [], "alerts": []},
+    {"ticker": "LPP", "stage": "dropped", "added": "2026-09-01", "source": "user", "pivot": 18000, "stop": 16500, "notes": [], "alerts": []}
+  ]
+}

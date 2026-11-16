@@ -10,7 +10,14 @@
       "Which Polish sectors are leading and which are lagging?",
       "Is there sector rotation into defensives on the Warsaw Stock Exchange?",
       "Czy energetyka i paliwa zaczynają prowadzić rynek?",
-      "Show me the uptrend ratio by sector for GPW."
+      "Show me the uptrend ratio by sector for GPW.",
+      "Pokaż RRG dla sektorów GPW.",
+      "Zrób relative rotation graph sektorów na warszawskiej giełdzie.",
+      "Rotacja sektorów wykres — gdzie są teraz banki i paliwa?",
+      "Który sektor przechodzi do liderów?",
+      "Show me a relative rotation chart of Polish sector indices vs WIG.",
+      "Which GPW sectors are moving from improving to leading on the RRG?",
+      "RRG dla banków z WIG-BANKI — które banki są najsilniejsze na tle sektora?"
     ],
     "should_not_trigger": [
       "Which US sectors are strongest this month?",
@@ -18,7 +25,9 @@
       "Jaka jest wartość godziwa akcji KGHM?",
       "Ile akcji LPP mogę kupić przy ryzyku 1%?",
       "Pokaż moje transakcje z października.",
-      "Jak działa IKZE?"
+      "Jak działa IKZE?",
+      "Pokaż RRG sektorów S&P 500.",
+      "Czy rynek jest w korekcie po dniach dystrybucji?"
     ]
   },
   "output_evals": [
@@ -46,6 +55,38 @@
       "prompt": "Czy są jakieś ostrzeżenia w trendach sektorowych?",
       "assertions": [
         "Answer lists every warning present in composite.warnings, or says there are none"
+      ]
+    },
+    {
+      "id": "pl-rrg",
+      "prompt": "Pokaż wykres rotacji sektorów (RRG) na GPW.",
+      "assertions": [
+        "scripts/gpw_sector_trend.py was executed with --rrg",
+        "Answer in Polish names the items in each quadrant (liderzy, słabnące, maruderzy, poprawa) as in rrg.items",
+        "Answer quotes the rotation summary (recent quadrant transitions) or says there were none",
+        "Answer explains the axes and the usual clockwise rotation in plain words and states at least one limitation",
+        "Concentrated sector indices (e.g. WIG-ODZIEZ ~ LPP) are flagged as dominated by 1-2 companies",
+        "Answer says RS-Ratio/RS-Momentum are an approximation of the proprietary JdK indicators",
+        "Answer states the data date (rrg.as_of) and mentions a partial week if rrg.partial_week is true",
+        "No buy/sell recommendation"
+      ]
+    },
+    {
+      "id": "en-rrg-leaders",
+      "prompt": "Which Polish sector is moving into the leading quadrant?",
+      "assertions": [
+        "scripts/gpw_sector_trend.py was executed with --rrg and --lang en",
+        "Answer lists the improving -> leading transitions from rrg.rotation_summary, or items approaching leading, or says none",
+        "Answer gives RS-Ratio and RS-Momentum for each named sector exactly as in the JSON"
+      ]
+    },
+    {
+      "id": "pl-rrg-stocks",
+      "prompt": "Które banki są najsilniejsze na tle WIG-BANKI? Pokaż RRG.",
+      "assertions": [
+        "scripts/gpw_sector_trend.py was executed with --rrg --stocks for the banks sector",
+        "Answer compares bank stocks against WIG-BANKI (the benchmark in rrg.benchmark), not against WIG",
+        "Illiquid or too-short-history names listed in rrg.excluded are mentioned as excluded"
       ]
     }
   ]

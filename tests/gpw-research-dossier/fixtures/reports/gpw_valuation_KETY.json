@@ -1,0 +1,66 @@
+{
+ "skill": "gpw-valuation",
+ "version": "1.0.0",
+ "lang": "pl",
+ "as_of": "2026-11-13",
+ "ticker": "KETY",
+ "model": "fcff",
+ "sector": "hutnictwo metali nieżelaznych",
+ "sector_index": null,
+ "price": 1337.0,
+ "price_date": "2026-11-13",
+ "implied_growth_pct": 10.23815538501367,
+ "wacc_pct": 9.819925670727063,
+ "fair_value_range": {
+  "low": 750.8190834661289,
+  "base": 1239.7812922672413,
+  "high": 2063.7051570713165
+ },
+ "range_position": {
+  "position": "within_range",
+  "to_low_pct": -43.84300048869642,
+  "to_base_pct": -7.271406711500283,
+  "to_high_pct": 54.353414889402885
+ },
+ "upside_downside_pct": {
+  "to_low": -43.84300048869642,
+  "to_base": -7.271406711500283,
+  "to_high": 54.353414889402885
+ },
+ "warnings": [
+  "Dane finansowe to narastająco I-III kw. 2026 (9 mies.); przepływy roczne = ×12/9 (brak historii do TTM). Sezonowość może zniekształcić wynik.",
+  "Dług netto (978 mln zł) oszacowano z wyniku finansowego netto (zysk operacyjny − zysk brutto), bo karta GPW nie podaje zadłużenia. To przybliżenie niskiej pewności — podaj --net-debt z bilansu.",
+  "Capex (3,6%) jest niższy niż amortyzacja (3,8%) przy dodatnim wzroście w nieskończoność — to zwykle zawyża wartość.",
+  "Spółka nie należy do żadnego indeksu sektorowego GPW — wycena porównawcza pominięta (podaj --peers)."
+ ],
+ "reverse_dcf": {
+  "enterprise_value_market": 14161147356.175648,
+  "fcf0": 572000000.0,
+  "fcf0_source": "CFO − capex (annual)",
+  "fcf_cash": 572000000.0,
+  "fcf_normalised": 858466666.6666666,
+  "years": 10,
+  "wacc_pct": 9.819925670727063,
+  "terminal_growth_pct": 2.5,
+  "status": "ok",
+  "implied_growth_pct": 10.23815538501367,
+  "implied_fcf_no_growth": 1390614144.4985793,
+  "fcf_yield_pct": 4.039220732708158
+ },
+ "dcf": {
+  "terminal_share": 0.7205601414187566,
+  "value_per_share": 1239.7812922672413
+ },
+ "comps": {
+  "skipped": true,
+  "reason": "no_sector_index",
+  "peers": []
+ },
+ "data_provenance": {
+  "as_of": "2026-11-13",
+  "sources": [
+   "https://www.gpw.pl/spolka?isin=PLKETY000011",
+   "https://www.gpw.pl/ajaxindex.php?start=indicatorsTab&format=html&action=GPWListaSp&lang=PL&gls_isin=PLKETY000011"
+  ]
+ }
+}

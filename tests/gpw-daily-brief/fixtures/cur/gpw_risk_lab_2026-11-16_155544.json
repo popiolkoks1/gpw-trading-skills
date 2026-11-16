@@ -1,0 +1,474 @@
+{
+ "skill": "gpw-risk-lab",
+ "version": "1.0.0",
+ "lang": "pl",
+ "as_of": "2026-11-13",
+ "mode": "stress",
+ "source": {
+  "type": "journal",
+  "path": "/fixture/db_state/journal"
+ },
+ "aliases": [],
+ "stress": {
+  "scenarios": [
+   {
+    "id": "gfc_2008",
+    "label": {
+     "pl": "Kryzys finansowy 2007-2009",
+     "en": "Global financial crisis 2007-2009"
+    },
+    "portfolio_return_pct": null,
+    "pln_loss": null,
+    "skipped": true,
+    "worst_positions": []
+   },
+   {
+    "id": "euro_2011",
+    "label": {
+     "pl": "Kryzys strefy euro 2011",
+     "en": "Euro-area debt crisis 2011"
+    },
+    "portfolio_return_pct": null,
+    "pln_loss": null,
+    "skipped": true,
+    "worst_positions": []
+   },
+   {
+    "id": "ofe_2013",
+    "label": {
+     "pl": "Reforma OFE (zapowiedź 4.09.2013)",
+     "en": "OFE pension reform (announced 4 Sep 2013)"
+    },
+    "portfolio_return_pct": -0.23,
+    "pln_loss": 45.96,
+    "skipped": false,
+    "worst_positions": [
+     {
+      "ticker": "PKOBP",
+      "return_pct": -1.42,
+      "pnl_pln": -67.86,
+      "contribution_pp": -0.343,
+      "method": "proxy_sector"
+     },
+     {
+      "ticker": "KGHM",
+      "return_pct": -0.83,
+      "pnl_pln": -45.71,
+      "contribution_pp": -0.231,
+      "method": "proxy_size"
+     },
+     {
+      "ticker": "PZU",
+      "return_pct": -0.34,
+      "pnl_pln": -12.83,
+      "contribution_pp": -0.065,
+      "method": "proxy_size"
+     }
+    ]
+   },
+   {
+    "id": "chf_2015",
+    "label": {
+     "pl": "Szok frankowy (SNB, 15.01.2015)",
+     "en": "Swiss franc shock (SNB, 15 Jan 2015)"
+    },
+    "portfolio_return_pct": -4.29,
+    "pln_loss": 849.67,
+    "skipped": false,
+    "worst_positions": [
+     {
+      "ticker": "KGHM",
+      "return_pct": -6.91,
+      "pnl_pln": -381.38,
+      "contribution_pp": -1.927,
+      "method": "proxy_size"
+     },
+     {
+      "ticker": "PKOBP",
+      "return_pct": -7.07,
+      "pnl_pln": -339.07,
+      "contribution_pp": -1.713,
+      "method": "proxy_sector"
+     },
+     {
+      "ticker": "PZU",
+      "return_pct": -2.83,
+      "pnl_pln": -107.04,
+      "contribution_pp": -0.541,
+      "method": "proxy_size"
+     }
+    ]
+   },
+   {
+    "id": "covid_2020",
+    "label": {
+     "pl": "Krach COVID-19 2020",
+     "en": "COVID-19 crash 2020"
+    },
+    "portfolio_return_pct": -40.18,
+    "pln_loss": 7954.45,
+    "skipped": false,
+    "worst_positions": [
+     {
+      "ticker": "KGHM",
+      "return_pct": -48.97,
+      "pnl_pln": -2702.98,
+      "contribution_pp": -13.654,
+      "method": "actual"
+     },
+     {
+      "ticker": "TORPOL",
+      "return_pct": -39.32,
+      "pnl_pln": -2241.26,
+      "contribution_pp": -11.322,
+      "method": "actual"
+     },
+     {
+      "ticker": "PKOBP",
+      "return_pct": -36.49,
+      "pnl_pln": -1750.21,
+      "contribution_pp": -8.841,
+      "method": "actual"
+     }
+    ]
+   },
+   {
+    "id": "war_inflation_2022",
+    "label": {
+     "pl": "Wojna i inflacja 2021-2022",
+     "en": "War and inflation 2021-2022"
+    },
+    "portfolio_return_pct": -16.99,
+    "pln_loss": 3363.23,
+    "skipped": false,
+    "worst_positions": [
+     {
+      "ticker": "PKOBP",
+      "return_pct": -52.27,
+      "pnl_pln": -2506.71,
+      "contribution_pp": -12.663,
+      "method": "actual"
+     },
+     {
+      "ticker": "KGHM",
+      "return_pct": -39.63,
+      "pnl_pln": -2187.48,
+      "contribution_pp": -11.05,
+      "method": "actual"
+     },
+     {
+      "ticker": "PZU",
+      "return_pct": -37.46,
+      "pnl_pln": -1416.03,
+      "contribution_pp": -7.153,
+      "method": "actual"
+     }
+    ]
+   },
+   {
+    "id": "worst_1d",
+    "label": {
+     "pl": "Najgorsza sesja WIG w danych",
+     "en": "Worst WIG session in the data"
+    },
+    "portfolio_return_pct": -14.28,
+    "pln_loss": 2826.64,
+    "skipped": false,
+    "worst_positions": [
+     {
+      "ticker": "TORPOL",
+      "return_pct": -15.82,
+      "pnl_pln": -902.02,
+      "contribution_pp": -4.557,
+      "method": "actual"
+     },
+     {
+      "ticker": "KGHM",
+      "return_pct": -15.99,
+      "pnl_pln": -882.45,
+      "contribution_pp": -4.458,
+      "method": "actual"
+     },
+     {
+      "ticker": "PKOBP",
+      "return_pct": -12.96,
+      "pnl_pln": -621.34,
+      "contribution_pp": -3.139,
+      "method": "actual"
+     }
+    ]
+   },
+   {
+    "id": "worst_5d",
+    "label": {
+     "pl": "Najgorsze 5 sesji WIG w danych",
+     "en": "Worst 5 WIG sessions in the data"
+    },
+    "portfolio_return_pct": -29.95,
+    "pln_loss": 5929.66,
+    "skipped": false,
+    "worst_positions": [
+     {
+      "ticker": "TORPOL",
+      "return_pct": -33.33,
+      "pnl_pln": -1900.0,
+      "contribution_pp": -9.598,
+      "method": "actual"
+     },
+     {
+      "ticker": "KGHM",
+      "return_pct": -32.44,
+      "pnl_pln": -1790.68,
+      "contribution_pp": -9.046,
+      "method": "actual"
+     },
+     {
+      "ticker": "PKOBP",
+      "return_pct": -26.74,
+      "pnl_pln": -1282.37,
+      "contribution_pp": -6.478,
+      "method": "actual"
+     }
+    ]
+   },
+   {
+    "id": "wig_-10",
+    "label": {
+     "pl": "WIG -10%",
+     "en": "WIG -10%"
+    },
+    "portfolio_return_pct": -12.58,
+    "pln_loss": 2490.91,
+    "skipped": false,
+    "worst_positions": [
+     {
+      "ticker": "KGHM",
+      "return_pct": -21.17,
+      "pnl_pln": -1168.69,
+      "contribution_pp": -5.904,
+      "method": "beta_market"
+     },
+     {
+      "ticker": "PKOBP",
+      "return_pct": -12.74,
+      "pnl_pln": -611.25,
+      "contribution_pp": -3.088,
+      "method": "beta_market"
+     },
+     {
+      "ticker": "TORPOL",
+      "return_pct": -6.7,
+      "pnl_pln": -382.07,
+      "contribution_pp": -1.93,
+      "method": "beta_market"
+     }
+    ]
+   },
+   {
+    "id": "wig_-20",
+    "label": {
+     "pl": "WIG -20%",
+     "en": "WIG -20%"
+    },
+    "portfolio_return_pct": -25.17,
+    "pln_loss": 4981.83,
+    "skipped": false,
+    "worst_positions": [
+     {
+      "ticker": "KGHM",
+      "return_pct": -42.34,
+      "pnl_pln": -2337.39,
+      "contribution_pp": -11.807,
+      "method": "beta_market"
+     },
+     {
+      "ticker": "PKOBP",
+      "return_pct": -25.49,
+      "pnl_pln": -1222.5,
+      "contribution_pp": -6.175,
+      "method": "beta_market"
+     },
+     {
+      "ticker": "TORPOL",
+      "return_pct": -13.41,
+      "pnl_pln": -764.14,
+      "contribution_pp": -3.86,
+      "method": "beta_market"
+     }
+    ]
+   },
+   {
+    "id": "wig_-30",
+    "label": {
+     "pl": "WIG -30%",
+     "en": "WIG -30%"
+    },
+    "portfolio_return_pct": -37.75,
+    "pln_loss": 7472.74,
+    "skipped": false,
+    "worst_positions": [
+     {
+      "ticker": "KGHM",
+      "return_pct": -63.52,
+      "pnl_pln": -3506.08,
+      "contribution_pp": -17.711,
+      "method": "beta_market"
+     },
+     {
+      "ticker": "PKOBP",
+      "return_pct": -38.23,
+      "pnl_pln": -1833.75,
+      "contribution_pp": -9.263,
+      "method": "beta_market"
+     },
+     {
+      "ticker": "TORPOL",
+      "return_pct": -20.11,
+      "pnl_pln": -1146.21,
+      "contribution_pp": -5.79,
+      "method": "beta_market"
+     }
+    ]
+   },
+   {
+    "id": "wig_-40",
+    "label": {
+     "pl": "WIG -40%",
+     "en": "WIG -40%"
+    },
+    "portfolio_return_pct": -50.33,
+    "pln_loss": 9963.65,
+    "skipped": false,
+    "worst_positions": [
+     {
+      "ticker": "KGHM",
+      "return_pct": -84.69,
+      "pnl_pln": -4674.78,
+      "contribution_pp": -23.615,
+      "method": "beta_market"
+     },
+     {
+      "ticker": "PKOBP",
+      "return_pct": -50.98,
+      "pnl_pln": -2445.0,
+      "contribution_pp": -12.351,
+      "method": "beta_market"
+     },
+     {
+      "ticker": "TORPOL",
+      "return_pct": -26.81,
+      "pnl_pln": -1528.28,
+      "contribution_pp": -7.72,
+      "method": "beta_market"
+     }
+    ]
+   },
+   {
+    "id": "banks_-25",
+    "label": {
+     "pl": "Banki -25% (np. podatek, wyrok TSUE ws. kredytów CHF)",
+     "en": "Banks -25% (e.g. windfall tax, CJEU ruling on CHF loans)"
+    },
+    "portfolio_return_pct": -6.11,
+    "pln_loss": 1209.31,
+    "skipped": false,
+    "worst_positions": [
+     {
+      "ticker": "PKOBP",
+      "return_pct": -25.21,
+      "pnl_pln": -1209.31,
+      "contribution_pp": -6.109,
+      "method": "sector_member"
+     }
+    ]
+   },
+   {
+    "id": "pln_-15",
+    "label": {
+     "pl": "Złoty słabszy o 15% (EURPLN +15%)",
+     "en": "Zloty 15% weaker (EURPLN +15%)"
+    },
+    "portfolio_return_pct": -21.78,
+    "pln_loss": 4311.92,
+    "skipped": false,
+    "worst_positions": [
+     {
+      "ticker": "KGHM",
+      "return_pct": -30.41,
+      "pnl_pln": -1678.8,
+      "contribution_pp": -8.481,
+      "method": "factor_fx"
+     },
+     {
+      "ticker": "PKOBP",
+      "return_pct": -32.26,
+      "pnl_pln": -1547.02,
+      "contribution_pp": -7.815,
+      "method": "factor_fx"
+     },
+     {
+      "ticker": "PZU",
+      "return_pct": -18.27,
+      "pnl_pln": -690.57,
+      "contribution_pp": -3.488,
+      "method": "factor_fx"
+     }
+    ]
+   },
+   {
+    "id": "rates_+200bp",
+    "label": {
+     "pl": "Stopy +200 pb (rentowność 10-letnich obligacji)",
+     "en": "Rates +200 bp (10-year bond yield)"
+    },
+    "portfolio_return_pct": -2.6,
+    "pln_loss": 514.99,
+    "skipped": false,
+    "worst_positions": [
+     {
+      "ticker": "PZU",
+      "return_pct": -4.03,
+      "pnl_pln": -152.44,
+      "contribution_pp": -0.77,
+      "method": "factor_rates"
+     },
+     {
+      "ticker": "TORPOL",
+      "return_pct": -2.26,
+      "pnl_pln": -129.03,
+      "contribution_pp": -0.652,
+      "method": "factor_rates"
+     },
+     {
+      "ticker": "KGHM",
+      "return_pct": -2.14,
+      "pnl_pln": -118.38,
+      "contribution_pp": -0.598,
+      "method": "factor_rates"
+     }
+    ]
+   }
+  ],
+  "tolerance": null
+ },
+ "hedge": null,
+ "runtime_s": 6.9,
+ "data_provenance": {
+  "schema_version": "1.0",
+  "as_of": "2026-11-13",
+  "sources": [
+   "GPW — Archiwum notowań (akcje, indeksy, ETF, kontrakty terminowe type=35): https://www.gpw.pl/archiwum-notowan",
+   "GPW Benchmark — portfele indeksów (sektory, WIG20/mWIG40/sWIG80): https://gpwbenchmark.pl",
+   "NBP — kursy średnie EUR (tabela A): https://api.nbp.pl",
+   "ECB Data Portal — IRS M.PL.L.L40.CI.0000.PLN.N.Z (rentowność 10-letnich obligacji PL, średnia miesięczna): https://data.ecb.europa.eu"
+  ],
+  "freshness": {
+   "as_of": "2026-11-13",
+   "sessions_behind": 0,
+   "is_stale": false,
+   "reference_date": null,
+   "historical_run": false,
+   "sessions_behind_today": 0
+  }
+ }
+}

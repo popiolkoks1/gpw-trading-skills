@@ -1,0 +1,147 @@
+{
+ "skill": "gpw-earnings-reaction",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "ticker",
+ "as_of": "2026-11-13",
+ "reactions": [
+  {
+   "ticker": "MODIVO",
+   "isin": "PLCCC0000016",
+   "company": "MODIVO SPÓŁKA AKCYJNA",
+   "report_date": "2026-11-06",
+   "reaction_date": "2026-11-06",
+   "report_type": "preliminary_results",
+   "period": "2026Q3",
+   "session_alignment": "pre_open",
+   "car_3d_pct": 14.54,
+   "abnormal_turnover": 5.74,
+   "drift_20s_pct": null,
+   "gap_pct": 1.44,
+   "day0_return_pct": 5.25,
+   "label": "strong_positive",
+   "provisional": false,
+   "flags": [],
+   "sessions_since": 4
+  },
+  {
+   "ticker": "MODIVO",
+   "isin": "PLCCC0000016",
+   "company": "MODIVO SPÓŁKA AKCYJNA",
+   "report_date": "2026-08-07",
+   "reaction_date": "2026-08-07",
+   "report_type": "periodic_h",
+   "period": "2026H1",
+   "session_alignment": "pre_open",
+   "car_3d_pct": -6.45,
+   "abnormal_turnover": 3.44,
+   "drift_20s_pct": -6.3,
+   "gap_pct": -6.87,
+   "day0_return_pct": -7.78,
+   "label": "negative",
+   "provisional": false,
+   "flags": [],
+   "sessions_since": 69
+  },
+  {
+   "ticker": "MODIVO",
+   "isin": "PLCCC0000016",
+   "company": "MODIVO SPÓŁKA AKCYJNA",
+   "report_date": "2026-05-20",
+   "reaction_date": "2026-05-20",
+   "report_type": "periodic_q",
+   "period": "2026Q1",
+   "session_alignment": "pre_open",
+   "car_3d_pct": -3.86,
+   "abnormal_turnover": 2.72,
+   "drift_20s_pct": 12.72,
+   "gap_pct": 3.44,
+   "day0_return_pct": -2.84,
+   "label": "neutral",
+   "provisional": false,
+   "flags": [],
+   "sessions_since": 125
+  },
+  {
+   "ticker": "MODIVO",
+   "isin": "PLCCC0000016",
+   "company": "MODIVO SPÓŁKA AKCYJNA",
+   "report_date": "2026-05-20",
+   "reaction_date": "2026-05-20",
+   "report_type": "preliminary_results",
+   "period": "2025Q4",
+   "session_alignment": "pre_open",
+   "car_3d_pct": -3.86,
+   "abnormal_turnover": 2.72,
+   "drift_20s_pct": 12.72,
+   "gap_pct": 3.44,
+   "day0_return_pct": -2.84,
+   "label": "neutral",
+   "provisional": false,
+   "flags": [],
+   "sessions_since": 125
+  },
+  {
+   "ticker": "MODIVO",
+   "isin": "PLCCC0000016",
+   "company": "MODIVO SPÓŁKA AKCYJNA",
+   "report_date": "2025-11-27",
+   "reaction_date": "2025-11-28",
+   "report_type": "periodic_q",
+   "period": "2025Q3",
+   "session_alignment": "after_close",
+   "car_3d_pct": -1.08,
+   "abnormal_turnover": 0.71,
+   "drift_20s_pct": -12.49,
+   "gap_pct": null,
+   "day0_return_pct": 3.8,
+   "label": "neutral",
+   "provisional": false,
+   "flags": [],
+   "sessions_since": 239
+  }
+ ],
+ "tickers": {
+  "MODIVO": {
+   "profile": {
+    "events": 5,
+    "mean_car_3d_pct": -0.14,
+    "mean_abs_car_3d_pct": 5.96,
+    "share_positive": 0.2,
+    "mean_abnormal_turnover": 3.07,
+    "mean_drift_20s_pct": 1.66,
+    "labels": {
+     "strong_positive": 1,
+     "positive": 0,
+     "neutral": 3,
+     "negative": 1,
+     "strong_negative": 0
+    },
+    "reaction_drift_same_sign": 0.5
+   },
+   "next_expected": {
+    "period": "2026Q4",
+    "date": "2027-05-20",
+    "date_kind": "estimated",
+    "basis_kind": "last_year",
+    "base_date": "2026-05-20",
+    "basis": "same period last year published 2026-05-20",
+    "statutory_deadline": "2027-04-30"
+   },
+   "held": false
+  }
+ },
+ "skipped": [],
+ "data_provenance": {
+  "as_of": "2026-11-13",
+  "freshness": {
+   "as_of": "2026-11-13",
+   "sessions_behind": 0,
+   "is_stale": false,
+   "reference_date": null,
+   "historical_run": false,
+   "sessions_behind_today": 0
+  },
+  "note": "trimmed fixture from a real offline run on 2026-11-16"
+ }
+}

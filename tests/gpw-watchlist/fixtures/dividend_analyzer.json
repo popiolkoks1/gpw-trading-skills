@@ -1,0 +1,1236 @@
+{
+ "skill": "gpw-dividend-analyzer",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "screen",
+ "as_of": "2026-11-13",
+ "companies": [
+  {
+   "ticker": "ASSECOSEE",
+   "years_paid": 8,
+   "cuts": [],
+   "yield_gross_pct": 2.712,
+   "yield_net_regular_pct": 2.197,
+   "payout_ratio": 48.7,
+   "stability_score": 100,
+   "trap_flags": []
+  },
+  {
+   "ticker": "NEUCA",
+   "years_paid": 8,
+   "cuts": [],
+   "yield_gross_pct": 2.565,
+   "yield_net_regular_pct": 2.078,
+   "payout_ratio": 38.3,
+   "stability_score": 100,
+   "trap_flags": []
+  },
+  {
+   "ticker": "SYNEKTIK",
+   "years_paid": 7,
+   "cuts": [],
+   "yield_gross_pct": 10.077,
+   "yield_net_regular_pct": 8.162,
+   "payout_ratio": 56.2,
+   "stability_score": 96,
+   "trap_flags": [
+    "yield_above_2x_sector_median",
+    "one_off_special_dividend",
+    "fcf_below_dividend"
+   ]
+  },
+  {
+   "ticker": "GPW",
+   "years_paid": 8,
+   "cuts": [
+    {
+     "year": 2020,
+     "from": 3.2,
+     "to": 2.4,
+     "change_pct": -25.0,
+     "kind": "cut"
+    }
+   ],
+   "yield_gross_pct": 3.434,
+   "yield_net_regular_pct": 2.782,
+   "payout_ratio": 55.6,
+   "stability_score": 89,
+   "trap_flags": [
+    "state_controlled_policy_risk"
+   ]
+  },
+  {
+   "ticker": "AUTOPARTN",
+   "years_paid": 6,
+   "cuts": [],
+   "yield_gross_pct": 0.507,
+   "yield_net_regular_pct": 0.411,
+   "payout_ratio": 6.3,
+   "stability_score": 88,
+   "trap_flags": []
+  },
+  {
+   "ticker": "VERCOM",
+   "years_paid": 4,
+   "cuts": [],
+   "yield_gross_pct": 2.329,
+   "yield_net_regular_pct": 1.886,
+   "payout_ratio": 60.9,
+   "stability_score": 86,
+   "trap_flags": []
+  },
+  {
+   "ticker": "ASSECOPOL",
+   "years_paid": 8,
+   "cuts": [],
+   "yield_gross_pct": 5.579,
+   "yield_net_regular_pct": 4.519,
+   "payout_ratio": 126.1,
+   "stability_score": 85,
+   "trap_flags": [
+    "payout_above_100pct",
+    "one_off_special_dividend",
+    "fcf_below_dividend"
+   ]
+  },
+  {
+   "ticker": "CYBERFLKS",
+   "years_paid": 8,
+   "cuts": [],
+   "yield_gross_pct": 1.305,
+   "yield_net_regular_pct": 1.057,
+   "payout_ratio": 135.2,
+   "stability_score": 85,
+   "trap_flags": [
+    "payout_above_100pct"
+   ]
+  },
+  {
+   "ticker": "TEXT",
+   "years_paid": 7,
+   "cuts": [
+    {
+     "year": 2025,
+     "from": 7.7,
+     "to": 4.4,
+     "change_pct": -42.9,
+     "kind": "cut"
+    }
+   ],
+   "yield_gross_pct": 11.013,
+   "yield_net_regular_pct": 8.921,
+   "payout_ratio": 93.6,
+   "stability_score": 84,
+   "trap_flags": [
+    "yield_above_2x_sector_median",
+    "recent_cut_or_suspension"
+   ]
+  },
+  {
+   "ticker": "DEVELIA",
+   "years_paid": 8,
+   "cuts": [
+    {
+     "year": 2020,
+     "from": 0.27,
+     "to": 0.1,
+     "change_pct": -63.0,
+     "kind": "cut"
+    },
+    {
+     "year": 2023,
+     "from": 0.45,
+     "to": 0.4,
+     "change_pct": -11.1,
+     "kind": "cut"
+    }
+   ],
+   "yield_gross_pct": 8.69,
+   "yield_net_regular_pct": 7.039,
+   "payout_ratio": 53.7,
+   "stability_score": 84,
+   "trap_flags": []
+  },
+  {
+   "ticker": "PKNORLEN",
+   "years_paid": 8,
+   "cuts": [
+    {
+     "year": 2020,
+     "from": 3.5,
+     "to": 1.0,
+     "change_pct": -71.4,
+     "kind": "cut"
+    },
+    {
+     "year": 2024,
+     "from": 5.5,
+     "to": 4.15,
+     "change_pct": -24.5,
+     "kind": "cut"
+    }
+   ],
+   "yield_gross_pct": 6.104,
+   "yield_net_regular_pct": 4.944,
+   "payout_ratio": 32.6,
+   "stability_score": 84,
+   "trap_flags": [
+    "state_controlled_policy_risk"
+   ]
+  },
+  {
+   "ticker": "XTB",
+   "years_paid": 8,
+   "cuts": [
+    {
+     "year": 2022,
+     "from": 1.79,
+     "to": 1.5,
+     "change_pct": -16.2,
+     "kind": "cut"
+    },
+    {
+     "year": 2026,
+     "from": 5.44,
+     "to": 4.07,
+     "change_pct": -25.2,
+     "kind": "cut"
+    }
+   ],
+   "yield_gross_pct": 2.926,
+   "yield_net_regular_pct": 2.37,
+   "payout_ratio": 23.3,
+   "stability_score": 84,
+   "trap_flags": [
+    "recent_cut_or_suspension"
+   ]
+  },
+  {
+   "ticker": "GRUPRACUJ",
+   "years_paid": 5,
+   "cuts": [
+    {
+     "year": 2023,
+     "from": 2.0,
+     "to": 1.5,
+     "change_pct": -25.0,
+     "kind": "cut"
+    }
+   ],
+   "yield_gross_pct": 5.348,
+   "yield_net_regular_pct": 4.332,
+   "payout_ratio": 80.5,
+   "stability_score": 83,
+   "trap_flags": []
+  },
+  {
+   "ticker": "MOBRUK",
+   "years_paid": 7,
+   "cuts": [
+    {
+     "year": 2023,
+     "from": 31.51,
+     "to": 13.01,
+     "change_pct": -58.7,
+     "kind": "cut"
+    }
+   ],
+   "yield_gross_pct": 3.491,
+   "yield_net_regular_pct": 2.828,
+   "payout_ratio": 62.7,
+   "stability_score": 83,
+   "trap_flags": []
+  },
+  {
+   "ticker": "KRUK",
+   "years_paid": 7,
+   "cuts": [
+    {
+     "year": 2020,
+     "from": 5.0,
+     "to": 0.0,
+     "change_pct": -100.0,
+     "kind": "suspension"
+    }
+   ],
+   "yield_gross_pct": 5.942,
+   "yield_net_regular_pct": 4.813,
+   "payout_ratio": 38.9,
+   "stability_score": 81,
+   "trap_flags": []
+  },
+  {
+   "ticker": "ORANGEPL",
+   "years_paid": 5,
+   "cuts": [],
+   "yield_gross_pct": 3.62,
+   "yield_net_regular_pct": 2.932,
+   "payout_ratio": 66.4,
+   "stability_score": 81,
+   "trap_flags": []
+  },
+  {
+   "ticker": "MIRBUD",
+   "years_paid": 7,
+   "cuts": [
+    {
+     "year": 2024,
+     "from": 0.26,
+     "to": 0.22,
+     "change_pct": -15.4,
+     "kind": "cut"
+    },
+    {
+     "year": 2025,
+     "from": 0.22,
+     "to": 0.1,
+     "change_pct": -54.5,
+     "kind": "cut"
+    }
+   ],
+   "yield_gross_pct": 1.762,
+   "yield_net_regular_pct": 1.427,
+   "payout_ratio": 24.5,
+   "stability_score": 80,
+   "trap_flags": [
+    "fcf_below_dividend",
+    "recent_cut_or_suspension"
+   ]
+  },
+  {
+   "ticker": "VOXEL",
+   "years_paid": 8,
+   "cuts": [
+    {
+     "year": 2023,
+     "from": 3.0,
+     "to": 2.2,
+     "change_pct": -26.7,
+     "kind": "cut"
+    },
+    {
+     "year": 2026,
+     "from": 4.8,
+     "to": 2.5,
+     "change_pct": -47.9,
+     "kind": "cut"
+    }
+   ],
+   "yield_gross_pct": 1.625,
+   "yield_net_regular_pct": 1.316,
+   "payout_ratio": 20.4,
+   "stability_score": 80,
+   "trap_flags": [
+    "recent_cut_or_suspension"
+   ]
+  },
+  {
+   "ticker": "KETY",
+   "years_paid": 8,
+   "cuts": [
+    {
+     "year": 2024,
+     "from": 62.49,
+     "to": 55.52,
+     "change_pct": -11.2,
+     "kind": "cut"
+    },
+    {
+     "year": 2026,
+     "from": 55.53,
+     "to": 48.97,
+     "change_pct": -11.8,
+     "kind": "cut"
+    }
+   ],
+   "yield_gross_pct": 3.663,
+   "yield_net_regular_pct": 2.967,
+   "payout_ratio": 61.0,
+   "stability_score": 78,
+   "trap_flags": [
+    "recent_cut_or_suspension"
+   ]
+  },
+  {
+   "ticker": "DIAG",
+   "years_paid": 1,
+   "cuts": [],
+   "yield_gross_pct": 2.821,
+   "yield_net_regular_pct": 2.285,
+   "payout_ratio": 53.1,
+   "stability_score": 77,
+   "trap_flags": []
+  },
+  {
+   "ticker": "ASBIS",
+   "years_paid": 7,
+   "cuts": [
+    {
+     "year": 2022,
+     "from": 1.55,
+     "to": 1.35,
+     "change_pct": -12.9,
+     "kind": "cut"
+    }
+   ],
+   "yield_gross_pct": 2.061,
+   "yield_net_regular_pct": 1.669,
+   "payout_ratio": 106.0,
+   "stability_score": 77,
+   "trap_flags": [
+    "payout_above_100pct",
+    "fcf_below_dividend"
+   ]
+  },
+  {
+   "ticker": "DOMDEV",
+   "years_paid": 7,
+   "cuts": [
+    {
+     "year": 2024,
+     "from": 16.41,
+     "to": 12.4,
+     "change_pct": -24.4,
+     "kind": "cut"
+    }
+   ],
+   "yield_gross_pct": 8.396,
+   "yield_net_regular_pct": 6.801,
+   "payout_ratio": 104.7,
+   "stability_score": 76,
+   "trap_flags": [
+    "payout_above_100pct",
+    "fcf_below_dividend",
+    "recent_cut_or_suspension"
+   ]
+  },
+  {
+   "ticker": "PEKAO",
+   "years_paid": 7,
+   "cuts": [
+    {
+     "year": 2020,
+     "from": 6.6,
+     "to": 0.0,
+     "change_pct": -100.0,
+     "kind": "suspension"
+    }
+   ],
+   "yield_gross_pct": 7.402,
+   "yield_net_regular_pct": 5.996,
+   "payout_ratio": 91.3,
+   "stability_score": 74,
+   "trap_flags": [
+    "state_controlled_policy_risk",
+    "bank_knf_dividend_policy"
+   ]
+  },
+  {
+   "ticker": "HANDLOWY",
+   "years_paid": 6,
+   "cuts": [
+    {
+     "year": 2020,
+     "from": 3.7,
+     "to": 0.0,
+     "change_pct": -100.0,
+     "kind": "suspension"
+    }
+   ],
+   "yield_gross_pct": 7.12,
+   "yield_net_regular_pct": 5.767,
+   "payout_ratio": 88.7,
+   "stability_score": 72,
+   "trap_flags": [
+    "bank_knf_dividend_policy"
+   ]
+  },
+  {
+   "ticker": "ABPL",
+   "years_paid": 6,
+   "cuts": [
+    {
+     "year": 2023,
+     "from": 1.25,
+     "to": 0.0,
+     "change_pct": -100.0,
+     "kind": "suspension"
+    }
+   ],
+   "yield_gross_pct": 4.692,
+   "yield_net_regular_pct": 3.801,
+   "payout_ratio": 40.7,
+   "stability_score": 71,
+   "trap_flags": [
+    "one_off_special_dividend",
+    "fcf_below_dividend"
+   ]
+  },
+  {
+   "ticker": "PZU",
+   "years_paid": 7,
+   "cuts": [
+    {
+     "year": 2020,
+     "from": 2.8,
+     "to": 0.0,
+     "change_pct": -100.0,
+     "kind": "suspension"
+    },
+    {
+     "year": 2022,
+     "from": 3.5,
+     "to": 1.94,
+     "change_pct": -44.6,
+     "kind": "cut"
+    }
+   ],
+   "yield_gross_pct": 6.349,
+   "yield_net_regular_pct": 5.143,
+   "payout_ratio": 68.9,
+   "stability_score": 69,
+   "trap_flags": [
+    "state_controlled_policy_risk"
+   ]
+  },
+  {
+   "ticker": "NEWAG",
+   "years_paid": 7,
+   "cuts": [
+    {
+     "year": 2022,
+     "from": 1.5,
+     "to": 0.2,
+     "change_pct": -86.7,
+     "kind": "cut"
+    },
+    {
+     "year": 2023,
+     "from": 0.2,
+     "to": 0.0,
+     "change_pct": -100.0,
+     "kind": "suspension"
+    }
+   ],
+   "yield_gross_pct": 3.247,
+   "yield_net_regular_pct": 2.63,
+   "payout_ratio": 32.8,
+   "stability_score": 67,
+   "trap_flags": [
+    "fcf_below_dividend"
+   ]
+  },
+  {
+   "ticker": "ERSTEPL",
+   "years_paid": 7,
+   "cuts": [
+    {
+     "year": 2020,
+     "from": 19.8,
+     "to": 0.0,
+     "change_pct": -100.0,
+     "kind": "suspension"
+    }
+   ],
+   "yield_gross_pct": 6.247,
+   "yield_net_regular_pct": 5.06,
+   "payout_ratio": 103.8,
+   "stability_score": 66,
+   "trap_flags": [
+    "payout_above_100pct",
+    "bank_knf_dividend_policy"
+   ]
+  },
+  {
+   "ticker": "BUDIMEX",
+   "years_paid": 7,
+   "cuts": [
+    {
+     "year": 2020,
+     "from": 6.2,
+     "to": 4.5,
+     "change_pct": -27.4,
+     "kind": "cut"
+    },
+    {
+     "year": 2022,
+     "from": 31.49,
+     "to": 23.5,
+     "change_pct": -25.4,
+     "kind": "cut"
+    },
+    {
+     "year": 2023,
+     "from": 23.5,
+     "to": 17.99,
+     "change_pct": -23.4,
+     "kind": "cut"
+    },
+    {
+     "year": 2025,
+     "from": 35.52,
+     "to": 25.38,
+     "change_pct": -28.5,
+     "kind": "cut"
+    }
+   ],
+   "yield_gross_pct": 4.236,
+   "yield_net_regular_pct": 3.431,
+   "payout_ratio": 143.7,
+   "stability_score": 65,
+   "trap_flags": [
+    "payout_above_100pct",
+    "fcf_below_dividend",
+    "recent_cut_or_suspension"
+   ]
+  },
+  {
+   "ticker": "MURAPOL",
+   "years_paid": 2,
+   "cuts": [],
+   "yield_gross_pct": 12.664,
+   "yield_net_regular_pct": 10.258,
+   "payout_ratio": 143.3,
+   "stability_score": 64,
+   "trap_flags": [
+    "payout_above_100pct",
+    "fcf_below_dividend"
+   ]
+  },
+  {
+   "ticker": "WIRTUALNA",
+   "years_paid": 7,
+   "cuts": [
+    {
+     "year": 2020,
+     "from": 1.0,
+     "to": 0.0,
+     "change_pct": -100.0,
+     "kind": "suspension"
+    },
+    {
+     "year": 2022,
+     "from": 1.6,
+     "to": 1.2,
+     "change_pct": -25.0,
+     "kind": "cut"
+    },
+    {
+     "year": 2024,
+     "from": 2.41,
+     "to": 2.0,
+     "change_pct": -17.0,
+     "kind": "cut"
+    },
+    {
+     "year": 2026,
+     "from": 2.2,
+     "to": 1.3,
+     "change_pct": -40.9,
+     "kind": "cut"
+    }
+   ],
+   "yield_gross_pct": 2.364,
+   "yield_net_regular_pct": 1.915,
+   "payout_ratio": 42.3,
+   "stability_score": 63,
+   "trap_flags": [
+    "recent_cut_or_suspension"
+   ]
+  },
+  {
+   "ticker": "ZABKA",
+   "years_paid": 1,
+   "cuts": [],
+   "yield_gross_pct": 1.666,
+   "yield_net_regular_pct": 1.349,
+   "payout_ratio": 51.3,
+   "stability_score": 60,
+   "trap_flags": []
+  },
+  {
+   "ticker": "BNPPPL",
+   "years_paid": 3,
+   "cuts": [],
+   "yield_gross_pct": 5.397,
+   "yield_net_regular_pct": 4.372,
+   "payout_ratio": 68.0,
+   "stability_score": 58,
+   "trap_flags": [
+    "bank_knf_dividend_policy"
+   ]
+  },
+  {
+   "ticker": "ALIOR",
+   "years_paid": 3,
+   "cuts": [],
+   "yield_gross_pct": 6.052,
+   "yield_net_regular_pct": 4.902,
+   "payout_ratio": 70.3,
+   "stability_score": 57,
+   "trap_flags": [
+    "state_controlled_policy_risk",
+    "bank_knf_dividend_policy"
+   ]
+  },
+  {
+   "ticker": "INGBSK",
+   "years_paid": 6,
+   "cuts": [
+    {
+     "year": 2020,
+     "from": 3.39,
+     "to": 0.0,
+     "change_pct": -100.0,
+     "kind": "suspension"
+    },
+    {
+     "year": 2023,
+     "from": 5.49,
+     "to": 0.0,
+     "change_pct": -100.0,
+     "kind": "suspension"
+    },
+    {
+     "year": 2025,
+     "from": 33.5,
+     "to": 24.99,
+     "change_pct": -25.4,
+     "kind": "cut"
+    }
+   ],
+   "yield_gross_pct": 5.555,
+   "yield_net_regular_pct": 4.5,
+   "payout_ratio": 82.8,
+   "stability_score": 57,
+   "trap_flags": [
+    "recent_cut_or_suspension",
+    "bank_knf_dividend_policy"
+   ]
+  },
+  {
+   "ticker": "LPP",
+   "years_paid": 6,
+   "cuts": [
+    {
+     "year": 2020,
+     "from": 60.27,
+     "to": 0.0,
+     "change_pct": -100.0,
+     "kind": "suspension"
+    },
+    {
+     "year": 2022,
+     "from": 449.58,
+     "to": 349.69,
+     "change_pct": -22.2,
+     "kind": "cut"
+    }
+   ],
+   "yield_gross_pct": 4.53,
+   "yield_net_regular_pct": 3.669,
+   "payout_ratio": 161.1,
+   "stability_score": 56,
+   "trap_flags": [
+    "payout_above_100pct",
+    "fcf_below_dividend"
+   ]
+  },
+  {
+   "ticker": "RAINBOW",
+   "years_paid": 4,
+   "cuts": [
+    {
+     "year": 2023,
+     "from": 1.5,
+     "to": 1.3,
+     "change_pct": -13.3,
+     "kind": "cut"
+    },
+    {
+     "year": 2025,
+     "from": 8.8,
+     "to": 7.69,
+     "change_pct": -12.6,
+     "kind": "cut"
+    }
+   ],
+   "yield_gross_pct": 6.964,
+   "yield_net_regular_pct": 5.641,
+   "payout_ratio": 96.3,
+   "stability_score": 53,
+   "trap_flags": [
+    "recent_cut_or_suspension"
+   ]
+  },
+  {
+   "ticker": "ENEA",
+   "years_paid": 2,
+   "cuts": [],
+   "yield_gross_pct": 2.529,
+   "yield_net_regular_pct": 2.048,
+   "payout_ratio": 9.9,
+   "stability_score": 53,
+   "trap_flags": [
+    "fcf_below_dividend",
+    "state_controlled_policy_risk"
+   ]
+  },
+  {
+   "ticker": "BENEFIT",
+   "years_paid": 3,
+   "cuts": [
+    {
+     "year": 2025,
+     "from": 135.03,
+     "to": 0.0,
+     "change_pct": -100.0,
+     "kind": "suspension"
+    }
+   ],
+   "yield_gross_pct": 1.621,
+   "yield_net_regular_pct": 1.313,
+   "payout_ratio": 36.5,
+   "stability_score": 53,
+   "trap_flags": [
+    "recent_cut_or_suspension"
+   ]
+  },
+  {
+   "ticker": "PKOBP",
+   "years_paid": 4,
+   "cuts": [
+    {
+     "year": 2020,
+     "from": 1.33,
+     "to": 0.0,
+     "change_pct": -100.0,
+     "kind": "suspension"
+    },
+    {
+     "year": 2023,
+     "from": 1.83,
+     "to": 0.0,
+     "change_pct": -100.0,
+     "kind": "suspension"
+    }
+   ],
+   "yield_gross_pct": 5.121,
+   "yield_net_regular_pct": 4.148,
+   "payout_ratio": 70.0,
+   "stability_score": 52,
+   "trap_flags": [
+    "state_controlled_policy_risk",
+    "bank_knf_dividend_policy"
+   ]
+  },
+  {
+   "ticker": "AMREST",
+   "years_paid": 2,
+   "cuts": [],
+   "yield_gross_pct": 3.215,
+   "yield_net_regular_pct": 2.604,
+   "payout_ratio": null,
+   "stability_score": 47,
+   "trap_flags": [
+    "net_loss"
+   ]
+  },
+  {
+   "ticker": "TAURONPE",
+   "years_paid": 1,
+   "cuts": [],
+   "yield_gross_pct": 2.151,
+   "yield_net_regular_pct": 1.742,
+   "payout_ratio": 11.2,
+   "stability_score": 47,
+   "trap_flags": [
+    "state_controlled_policy_risk"
+   ]
+  },
+  {
+   "ticker": "INTERCARS",
+   "years_paid": 1,
+   "cuts": [],
+   "yield_gross_pct": 0.132,
+   "yield_net_regular_pct": 0.107,
+   "payout_ratio": 2.1,
+   "stability_score": 47,
+   "trap_flags": []
+  },
+  {
+   "ticker": "KGHM",
+   "years_paid": 5,
+   "cuts": [
+    {
+     "year": 2023,
+     "from": 3.0,
+     "to": 1.0,
+     "change_pct": -66.7,
+     "kind": "cut"
+    },
+    {
+     "year": 2025,
+     "from": 1.5,
+     "to": 0.0,
+     "change_pct": -100.0,
+     "kind": "suspension"
+    }
+   ],
+   "yield_gross_pct": 0.543,
+   "yield_net_regular_pct": 0.44,
+   "payout_ratio": 2.7,
+   "stability_score": 46,
+   "trap_flags": [
+    "fcf_below_dividend",
+    "recent_cut_or_suspension",
+    "state_controlled_policy_risk"
+   ]
+  },
+  {
+   "ticker": "PEPCO",
+   "years_paid": 2,
+   "cuts": [],
+   "yield_gross_pct": 0.805,
+   "yield_net_regular_pct": 0.652,
+   "payout_ratio": 139.8,
+   "stability_score": 43,
+   "trap_flags": [
+    "payout_above_100pct"
+   ]
+  },
+  {
+   "ticker": "TSGAMES",
+   "years_paid": 7,
+   "cuts": [
+    {
+     "year": 2023,
+     "from": 10.0,
+     "to": 7.2,
+     "change_pct": -28.0,
+     "kind": "cut"
+    },
+    {
+     "year": 2024,
+     "from": 7.2,
+     "to": 0.0,
+     "change_pct": -100.0,
+     "kind": "suspension"
+    },
+    {
+     "year": 2026,
+     "from": 15.7,
+     "to": 10.0,
+     "change_pct": -36.3,
+     "kind": "cut"
+    }
+   ],
+   "yield_gross_pct": 11.364,
+   "yield_net_regular_pct": 9.205,
+   "payout_ratio": 145.6,
+   "stability_score": 42,
+   "trap_flags": [
+    "payout_above_100pct",
+    "fcf_below_dividend",
+    "recent_cut_or_suspension"
+   ]
+  },
+  {
+   "ticker": "CYFRPLSAT",
+   "years_paid": 4,
+   "cuts": [
+    {
+     "year": 2023,
+     "from": 1.2,
+     "to": 0.0,
+     "change_pct": -100.0,
+     "kind": "suspension"
+    }
+   ],
+   "yield_gross_pct": 0.0,
+   "yield_net_regular_pct": 0.0,
+   "payout_ratio": null,
+   "stability_score": 40,
+   "trap_flags": []
+  },
+  {
+   "ticker": "CDPROJEKT",
+   "years_paid": 4,
+   "cuts": [
+    {
+     "year": 2022,
+     "from": 5.0,
+     "to": 1.0,
+     "change_pct": -80.0,
+     "kind": "cut"
+    },
+    {
+     "year": 2025,
+     "from": 1.0,
+     "to": 0.0,
+     "change_pct": -100.0,
+     "kind": "suspension"
+    }
+   ],
+   "yield_gross_pct": 0.0,
+   "yield_net_regular_pct": 0.0,
+   "payout_ratio": null,
+   "stability_score": 32,
+   "trap_flags": [
+    "recent_cut_or_suspension"
+   ]
+  },
+  {
+   "ticker": "JSW",
+   "years_paid": 1,
+   "cuts": [
+    {
+     "year": 2020,
+     "from": 1.7,
+     "to": 0.0,
+     "change_pct": -100.0,
+     "kind": "suspension"
+    }
+   ],
+   "yield_gross_pct": 0.0,
+   "yield_net_regular_pct": 0.0,
+   "payout_ratio": null,
+   "stability_score": 26,
+   "trap_flags": [
+    "net_loss",
+    "state_controlled_policy_risk"
+   ]
+  },
+  {
+   "ticker": "PEP",
+   "years_paid": 1,
+   "cuts": [
+    {
+     "year": 2024,
+     "from": 0.7,
+     "to": 0.0,
+     "change_pct": -100.0,
+     "kind": "suspension"
+    }
+   ],
+   "yield_gross_pct": 0.0,
+   "yield_net_regular_pct": 0.0,
+   "payout_ratio": null,
+   "stability_score": 26,
+   "trap_flags": [
+    "recent_cut_or_suspension"
+   ]
+  },
+  {
+   "ticker": "ALLEGRO",
+   "years_paid": 0,
+   "cuts": [],
+   "yield_gross_pct": 0.0,
+   "yield_net_regular_pct": 0.0,
+   "payout_ratio": null,
+   "stability_score": 0,
+   "trap_flags": []
+  },
+  {
+   "ticker": "CREOTECH",
+   "years_paid": 0,
+   "cuts": [],
+   "yield_gross_pct": 0.0,
+   "yield_net_regular_pct": 0.0,
+   "payout_ratio": null,
+   "stability_score": 0,
+   "trap_flags": []
+  },
+  {
+   "ticker": "DINOPL",
+   "years_paid": 0,
+   "cuts": [],
+   "yield_gross_pct": 0.0,
+   "yield_net_regular_pct": 0.0,
+   "payout_ratio": null,
+   "stability_score": 0,
+   "trap_flags": []
+  },
+  {
+   "ticker": "GRUPAAZOTY",
+   "years_paid": 0,
+   "cuts": [],
+   "yield_gross_pct": 0.0,
+   "yield_net_regular_pct": 0.0,
+   "payout_ratio": null,
+   "stability_score": 0,
+   "trap_flags": [
+    "net_loss",
+    "state_controlled_policy_risk"
+   ]
+  },
+  {
+   "ticker": "LUBAWA",
+   "years_paid": 0,
+   "cuts": [],
+   "yield_gross_pct": 0.0,
+   "yield_net_regular_pct": 0.0,
+   "payout_ratio": null,
+   "stability_score": 0,
+   "trap_flags": []
+  },
+  {
+   "ticker": "MBANK",
+   "years_paid": 0,
+   "cuts": [],
+   "yield_gross_pct": 0.0,
+   "yield_net_regular_pct": 0.0,
+   "payout_ratio": null,
+   "stability_score": 0,
+   "trap_flags": [
+    "bank_knf_dividend_policy"
+   ]
+  },
+  {
+   "ticker": "MILLENNIUM",
+   "years_paid": 0,
+   "cuts": [],
+   "yield_gross_pct": 0.0,
+   "yield_net_regular_pct": 0.0,
+   "payout_ratio": null,
+   "stability_score": 0,
+   "trap_flags": [
+    "bank_knf_dividend_policy"
+   ]
+  },
+  {
+   "ticker": "MODIVO",
+   "years_paid": 0,
+   "cuts": [],
+   "yield_gross_pct": 0.0,
+   "yield_net_regular_pct": 0.0,
+   "payout_ratio": null,
+   "stability_score": 0,
+   "trap_flags": []
+  },
+  {
+   "ticker": "PGE",
+   "years_paid": 0,
+   "cuts": [],
+   "yield_gross_pct": 0.0,
+   "yield_net_regular_pct": 0.0,
+   "payout_ratio": null,
+   "stability_score": 0,
+   "trap_flags": [
+    "state_controlled_policy_risk",
+    "board_proposes_no_dividend"
+   ]
+  },
+  {
+   "ticker": "POLIMEXMS",
+   "years_paid": 0,
+   "cuts": [],
+   "yield_gross_pct": 0.0,
+   "yield_net_regular_pct": 0.0,
+   "payout_ratio": null,
+   "stability_score": 0,
+   "trap_flags": []
+  }
+ ],
+ "signals": [
+  {
+   "ticker": "SYNEKTIK",
+   "date": "2026-11-13",
+   "kind": "dividend_cut_risk",
+   "direction": "avoid",
+   "score": 60,
+   "price": 336.8,
+   "tags": {
+    "flags": "yield_above_2x_sector_median,fcf_below_dividend",
+    "yield_pct": 10.077
+   }
+  },
+  {
+   "ticker": "ASSECOPOL",
+   "date": "2026-11-13",
+   "kind": "dividend_cut_risk",
+   "direction": "avoid",
+   "score": 60,
+   "price": 233.9,
+   "tags": {
+    "flags": "payout_above_100pct,fcf_below_dividend",
+    "yield_pct": 5.579
+   }
+  },
+  {
+   "ticker": "ASBIS",
+   "date": "2026-11-13",
+   "kind": "dividend_cut_risk",
+   "direction": "avoid",
+   "score": 60,
+   "price": 164.0,
+   "tags": {
+    "flags": "payout_above_100pct,fcf_below_dividend",
+    "yield_pct": 2.061
+   }
+  },
+  {
+   "ticker": "DOMDEV",
+   "date": "2026-11-13",
+   "kind": "dividend_cut_risk",
+   "direction": "avoid",
+   "score": 60,
+   "price": 250.0,
+   "tags": {
+    "flags": "payout_above_100pct,fcf_below_dividend",
+    "yield_pct": 8.396
+   }
+  },
+  {
+   "ticker": "BUDIMEX",
+   "date": "2026-11-13",
+   "kind": "dividend_cut_risk",
+   "direction": "avoid",
+   "score": 60,
+   "price": 765.4,
+   "tags": {
+    "flags": "payout_above_100pct,fcf_below_dividend",
+    "yield_pct": 4.236
+   }
+  },
+  {
+   "ticker": "MURAPOL",
+   "date": "2026-11-13",
+   "kind": "dividend_cut_risk",
+   "direction": "avoid",
+   "score": 60,
+   "price": 38.85,
+   "tags": {
+    "flags": "payout_above_100pct,fcf_below_dividend",
+    "yield_pct": 12.664
+   }
+  },
+  {
+   "ticker": "LPP",
+   "date": "2026-11-13",
+   "kind": "dividend_cut_risk",
+   "direction": "avoid",
+   "score": 60,
+   "price": 28700.0,
+   "tags": {
+    "flags": "payout_above_100pct,fcf_below_dividend",
+    "yield_pct": 4.53
+   }
+  },
+  {
+   "ticker": "TSGAMES",
+   "date": "2026-11-13",
+   "kind": "dividend_cut_risk",
+   "direction": "avoid",
+   "score": 60,
+   "price": 88.0,
+   "tags": {
+    "flags": "payout_above_100pct,fcf_below_dividend",
+    "yield_pct": 11.364
+   }
+  }
+ ],
+ "data_provenance": {
+  "as_of": "2026-11-13"
+ }
+}

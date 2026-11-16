@@ -1,0 +1,69 @@
+{
+  "skill": "gpw-research-dossier",
+  "trigger_evals": {
+    "should_trigger": [
+      "Zbierz wszystko, co wiemy o KETY, zanim podejmę decyzję.",
+      "Przygotuj dossier PKO BP ze wszystkich analiz.",
+      "Zrób debatę bull vs bear dla CD Projektu.",
+      "Jakie są argumenty za i przeciw Orlenowi? Oprzyj się na danych.",
+      "Chcę pełny research spółki LPP przed zakupem.",
+      "Build a research dossier for KGHM from all the GPW skills.",
+      "Run a bull and bear debate on Dino Polska with citations.",
+      "What is the case for and against PZU, based on the data we have?",
+      "Zapisz argumenty z debaty jako tezę w dzienniku."
+    ],
+    "should_not_trigger": [
+      "Ile jest warta spółka KETY? Policz DCF.",
+      "Które spółki na GPW są blisko wybicia?",
+      "Ile akcji PKO kupić przy ryzyku 1%?",
+      "Jak wygląda szerokość rynku na GPW?",
+      "Build a bull/bear case for Apple stock.",
+      "IKE czy IKZE?",
+      "Kto shortuje KRUK?"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "pl-dossier",
+      "prompt": "Przygotuj dossier KETY przed decyzją.",
+      "assertions": [
+        "scripts/gpw_research_dossier.py build KETY was executed (with --run or after running the producers)",
+        "Stale sections, if any, are mentioned first with their as_of date",
+        "The answer lists the sections found, the number of facts and every missing section with its exact command",
+        "Numbers quoted (implied growth, ROE, short interest, regime state) match the dossier JSON facts",
+        "No buy or sell recommendation"
+      ]
+    },
+    {
+      "id": "pl-debate",
+      "prompt": "Zrób debatę bull vs bear dla PKOBP.",
+      "assertions": [
+        "debate-template PKOBP was run after a build",
+        "The bear case is written and shown before the bull case, each with 3-5 points",
+        "Every bull and bear point cites fact ids from the dossier (e.g. valuation.implied_roe_pct)",
+        "A risk-manager part gives the gpw-position-sizer command, kill criteria and what would change the view",
+        "A pre-mortem and an explicit list of unknowns are included",
+        "validate-debate was run and passed before the result was presented",
+        "verdict_inputs describe the balance of evidence and are explicitly not a recommendation"
+      ]
+    },
+    {
+      "id": "en-run-missing",
+      "prompt": "Build a dossier for PKOBP; I have no reports yet, use the cache only.",
+      "assertions": [
+        "build PKOBP --run --offline was executed",
+        "The answer lists which sibling commands ran and their status (ok / failed / timeout)",
+        "Sections that still failed are listed as missing with their command, not filled with invented numbers"
+      ]
+    },
+    {
+      "id": "to-thesis",
+      "prompt": "Zamień tę debatę na tezę w dzienniku.",
+      "assertions": [
+        "to-thesis was run on a debate that validates",
+        "The gpw-trade-journal add command is shown with --pillar and --kill entries",
+        "The command is not executed by Claude; the user is asked to run it or confirm"
+      ]
+    }
+  ]
+}

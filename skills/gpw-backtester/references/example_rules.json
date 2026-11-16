@@ -1,0 +1,16 @@
+{
+  "name": "pullback_in_trend",
+  "description": "Buy a pullback (RSI14 < 35) while the close is above SMA200; exit on RSI14 > 60, a close below SMA200 or after 30 sessions; stop 2.5 x ATR14.",
+  "entry": {"all": [
+    {"left": {"ind": "close"}, "op": ">", "right": {"ind": "sma", "n": 200}},
+    {"left": {"ind": "rsi", "n": 14}, "op": "<", "right": 35}
+  ]},
+  "exit": {"any": [
+    {"left": {"ind": "rsi", "n": 14}, "op": ">", "right": 60},
+    {"left": {"ind": "close"}, "op": "crosses_below", "right": {"ind": "sma", "n": 200}}
+  ]},
+  "stop": {"atr_mult": 2.5},
+  "max_hold": 30,
+  "rank": {"ind": "roc", "n": 126},
+  "params": {"max_positions": 8, "min_turnover_k": 300}
+}

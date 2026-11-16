@@ -6,7 +6,12 @@ reason key and parameters; the CLI translates them. Verdict:
 
 * NO-GO               - at least one FAIL
 * GO WITH CONDITIONS  - no FAIL, at least one WARN
-* GO                  - everything PASS / SKIP
+* GO                  - everything PASS / SKIP / INFO / UNKNOWN
+
+Since 1.1.0 the caller may pass ``ctx["context"]`` (reports of the v1.2
+skills); then seven context checks from ``pretrade_context_checks`` are
+appended (statuses also INFO and UNKNOWN, which never change the verdict).
+Without that key the 13 core checks run exactly as in 1.0.0.
 
 Thresholds live in ``DEFAULTS`` and are justified in references/gate_rules.md.
 The gate never places orders and never says "buy".
@@ -19,7 +24,11 @@ from typing import Dict, List, Optional, Tuple
 
 from gpwlib import brokers
 
+import pretrade_context_checks as cc
+
 PASS, WARN, FAIL, SKIP = "PASS", "WARN", "FAIL", "SKIP"
+UNKNOWN, INFO = cc.UNKNOWN, cc.INFO
+STATUSES = (PASS, WARN, FAIL, SKIP, UNKNOWN, INFO)
 
 DEFAULTS = {
     "max_risk_pct": 1.0,        # Van Tharp / O'Neil-style fixed-fractional 1% per trade
@@ -359,7 +368,8 @@ def check_freshness(market: Optional[Dict], trade: Dict, inputs: List[Dict], cfg
             if abs(dev) > cfg["entry_deviation_pct"]:
                 issues.append({"code": "entry_far", "dev": round(dev, 1), "last": lc})
     for i in inputs:
-        if i.get("sessions_behind") is not None and i["sessions_behind"] > cfg["max_input_age_sessions"]:
+        lim = i.get("max_sessions_behind", cfg["max_input_age_sessions"])
+        if i.get("sessions_behind") is not None and i["sessions_behind"] > lim:
             issues.append({"code": "input_stale", "skill": i["skill"], "n": i["sessions_behind"], "date": i.get("as_of")})
     if issues:
         return _chk("data_freshness", WARN, "fresh_issues", issues=issues)
@@ -379,6 +389,8 @@ def evaluate(trade: Dict, ctx: Dict, cfg: Optional[Dict] = None) -> Dict:
     open_positions / closed_results: from gpwlib.journal_io; prices: {name: last close}
     regime / exposure: parsed JSON (contract); inputs: [{skill, as_of, sessions_behind}]
     override: written reason; user_max_risk_pct; today
+    context: v1.2 reports and options (see pretrade_context_checks.run_context_checks);
+             when present, the seven context checks are appended
     """
     cfg = dict(DEFAULTS, **(cfg or {}))
     validate_trade(trade)
@@ -407,11 +419,16 @@ def evaluate(trade: Dict, ctx: Dict, cfg: Optional[Dict] = None) -> Dict:
         check_new_positions(ctx.get("exposure"), theses, thesis, today, cfg),
         check_freshness(ctx.get("market"), trade, ctx.get("inputs") or [], cfg),
     ]
+    context = None
+    if ctx.get("context") is not None:
+        extra = cc.run_context_checks(trade, nums, ctx["context"])
+        checks += extra["checks"]
+        context = extra["context"]
     statuses = [c["status"] for c in checks]
-    verdict = "NO-GO" if FAIL in statuses else ("GO WITH CONDITIONS" if WARN in statuses else "GO")
-    return {
+    verdict = verdict_of(statuses)
+    out = {
         "verdict": verdict,
-        "counts": {s: statuses.count(s) for s in (PASS, WARN, FAIL, SKIP)},
+        "counts": {s: statuses.count(s) for s in ((PASS, WARN, FAIL, SKIP) if context is None else STATUSES)},
         "checks": checks,
         "trade": dict(trade),
         "numbers": nums,
@@ -423,3 +440,13 @@ def evaluate(trade: Dict, ctx: Dict, cfg: Optional[Dict] = None) -> Dict:
         "override": ctx.get("override"),
         "thresholds": cfg,
     }
+    if context is not None:
+        out["context"] = context
+    return out
+
+
+def verdict_of(statuses) -> str:
+    """FAIL -> NO-GO; WARN -> GO WITH CONDITIONS; PASS/SKIP/INFO/UNKNOWN only -> GO."""
+    if FAIL in statuses:
+        return "NO-GO"
+    return "GO WITH CONDITIONS" if WARN in statuses else "GO"

@@ -1,0 +1,355 @@
+{
+ "skill": "gpw-earnings-reaction",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "scan",
+ "as_of": "2026-11-13",
+ "reactions": [
+  {
+   "ticker": "TORPOL",
+   "report_date": "2026-11-12",
+   "report_type": "preliminary_results",
+   "session_alignment": "after_close",
+   "car_3d_pct": -7.1,
+   "abnormal_turnover": 5.92,
+   "drift_20s_pct": null,
+   "label": "strong_negative"
+  },
+  {
+   "ticker": "PEPEES",
+   "report_date": "2026-11-13",
+   "report_type": "preliminary_results",
+   "session_alignment": "intraday",
+   "car_3d_pct": 4.05,
+   "abnormal_turnover": 19.27,
+   "drift_20s_pct": null,
+   "label": "strong_positive"
+  },
+  {
+   "ticker": "MUZA",
+   "report_date": "2026-11-13",
+   "report_type": "preliminary_results",
+   "session_alignment": "intraday",
+   "car_3d_pct": 5.86,
+   "abnormal_turnover": 183.8,
+   "drift_20s_pct": null,
+   "label": "strong_positive"
+  },
+  {
+   "ticker": "BOS",
+   "report_date": "2026-11-13",
+   "report_type": "periodic_q",
+   "session_alignment": "pre_open",
+   "car_3d_pct": 4.89,
+   "abnormal_turnover": 8.3,
+   "drift_20s_pct": null,
+   "label": "strong_positive"
+  },
+  {
+   "ticker": "ATLANTAPL",
+   "report_date": "2026-11-12",
+   "report_type": "preliminary_results",
+   "session_alignment": "intraday",
+   "car_3d_pct": -8.34,
+   "abnormal_turnover": 15.19,
+   "drift_20s_pct": null,
+   "label": "strong_negative"
+  },
+  {
+   "ticker": "ALLEGRO",
+   "report_date": "2026-11-12",
+   "report_type": "preliminary_results",
+   "session_alignment": "pre_open",
+   "car_3d_pct": 7.27,
+   "abnormal_turnover": 3.33,
+   "drift_20s_pct": null,
+   "label": "strong_positive"
+  },
+  {
+   "ticker": "TOYA",
+   "report_date": "2026-11-05",
+   "report_type": "periodic_q",
+   "session_alignment": "after_close",
+   "car_3d_pct": 14.71,
+   "abnormal_turnover": 9.37,
+   "drift_20s_pct": null,
+   "label": "strong_positive"
+  },
+  {
+   "ticker": "MODIVO",
+   "report_date": "2026-11-06",
+   "report_type": "preliminary_results",
+   "session_alignment": "pre_open",
+   "car_3d_pct": 14.54,
+   "abnormal_turnover": 5.74,
+   "drift_20s_pct": null,
+   "label": "strong_positive"
+  },
+  {
+   "ticker": "MODIVO",
+   "report_date": "2026-10-02",
+   "report_type": "periodic_h",
+   "session_alignment": "pre_open",
+   "car_3d_pct": 1.56,
+   "abnormal_turnover": 1.17,
+   "drift_20s_pct": 7.55,
+   "label": "neutral"
+  },
+  {
+   "ticker": "MUZA",
+   "report_date": "2026-09-30",
+   "report_type": "periodic_h",
+   "session_alignment": "pre_open",
+   "car_3d_pct": 0.86,
+   "abnormal_turnover": 58.73,
+   "drift_20s_pct": -10.7,
+   "label": "neutral"
+  },
+  {
+   "ticker": "PEPEES",
+   "report_date": "2026-09-18",
+   "report_type": "periodic_h",
+   "session_alignment": "pre_open",
+   "car_3d_pct": -5.38,
+   "abnormal_turnover": 11.18,
+   "drift_20s_pct": 2.55,
+   "label": "negative"
+  },
+  {
+   "ticker": "ALLEGRO",
+   "report_date": "2026-09-17",
+   "report_type": "periodic_h",
+   "session_alignment": "pre_open",
+   "car_3d_pct": 6.4,
+   "abnormal_turnover": 2.16,
+   "drift_20s_pct": 8.9,
+   "label": "strong_positive"
+  },
+  {
+   "ticker": "TEXT",
+   "report_date": "2026-08-28",
+   "report_type": "periodic_q",
+   "session_alignment": "after_close",
+   "car_3d_pct": -16.98,
+   "abnormal_turnover": 10.15,
+   "drift_20s_pct": -2.3,
+   "label": "strong_negative"
+  },
+  {
+   "ticker": "COGNOR",
+   "report_date": "2026-08-28",
+   "report_type": "periodic_h",
+   "session_alignment": "after_close",
+   "car_3d_pct": -12.18,
+   "abnormal_turnover": 10.32,
+   "drift_20s_pct": -2.35,
+   "label": "strong_negative"
+  },
+  {
+   "ticker": "TOYA",
+   "report_date": "2026-08-27",
+   "report_type": "periodic_h",
+   "session_alignment": "after_close",
+   "car_3d_pct": 10.19,
+   "abnormal_turnover": 14.41,
+   "drift_20s_pct": -2.14,
+   "label": "strong_positive"
+  },
+  {
+   "ticker": "TORPOL",
+   "report_date": "2026-08-20",
+   "report_type": "periodic_h",
+   "session_alignment": "after_close",
+   "car_3d_pct": 0.96,
+   "abnormal_turnover": 3.01,
+   "drift_20s_pct": -1.39,
+   "label": "neutral"
+  },
+  {
+   "ticker": "ATLANTAPL",
+   "report_date": "2026-08-20",
+   "report_type": "preliminary_results",
+   "session_alignment": "intraday",
+   "car_3d_pct": -0.54,
+   "abnormal_turnover": 1.71,
+   "drift_20s_pct": -4.58,
+   "label": "neutral"
+  },
+  {
+   "ticker": "BOS",
+   "report_date": "2026-08-18",
+   "report_type": "periodic_h",
+   "session_alignment": "pre_open",
+   "car_3d_pct": -6.25,
+   "abnormal_turnover": 10.8,
+   "drift_20s_pct": -3.67,
+   "label": "strong_negative"
+  }
+ ],
+ "signals": [
+  {
+   "ticker": "BOS",
+   "date": "2026-11-13",
+   "kind": "earnings_strong_positive",
+   "direction": "long",
+   "score": 84.8,
+   "tags": {
+    "car_3d_pct": 4.89,
+    "z": 2.99,
+    "period": "2026Q3",
+    "abnormal_turnover": 8.3,
+    "provisional": true,
+    "held": false
+   },
+   "price": 10.66
+  },
+  {
+   "ticker": "MUZA",
+   "date": "2026-11-13",
+   "kind": "earnings_strong_positive",
+   "direction": "long",
+   "score": 62.0,
+   "tags": {
+    "car_3d_pct": 5.86,
+    "z": 2.08,
+    "period": "2026Q3",
+    "abnormal_turnover": 183.8,
+    "provisional": true,
+    "held": false
+   },
+   "price": 8.7
+  },
+  {
+   "ticker": "PEPEES",
+   "date": "2026-11-13",
+   "kind": "earnings_strong_positive",
+   "direction": "long",
+   "score": 65.8,
+   "tags": {
+    "car_3d_pct": 4.05,
+    "z": 2.23,
+    "period": "2026Q3",
+    "abnormal_turnover": 19.27,
+    "provisional": true,
+    "held": false
+   },
+   "price": 0.73
+  },
+  {
+   "ticker": "TORPOL",
+   "date": "2026-11-13",
+   "kind": "earnings_strong_negative",
+   "direction": "avoid",
+   "score": 100.0,
+   "tags": {
+    "car_3d_pct": -7.1,
+    "z": -3.6,
+    "period": "2026Q3",
+    "abnormal_turnover": 5.92,
+    "provisional": true,
+    "held": false
+   },
+   "price": 57.0
+  },
+  {
+   "ticker": "ALLEGRO",
+   "date": "2026-11-12",
+   "kind": "earnings_strong_positive",
+   "direction": "long",
+   "score": 86.0,
+   "tags": {
+    "car_3d_pct": 7.27,
+    "z": 3.04,
+    "period": "2026Q3",
+    "abnormal_turnover": 3.33,
+    "provisional": true,
+    "held": false
+   },
+   "price": 64.0
+  },
+  {
+   "ticker": "ATLANTAPL",
+   "date": "2026-11-12",
+   "kind": "earnings_strong_negative",
+   "direction": "avoid",
+   "score": 82.8,
+   "tags": {
+    "car_3d_pct": -8.34,
+    "z": -2.91,
+    "period": "2026Q3",
+    "abnormal_turnover": 15.19,
+    "provisional": true,
+    "held": false
+   },
+   "price": 18.8
+  },
+  {
+   "ticker": "MODIVO",
+   "date": "2026-11-06",
+   "kind": "earnings_strong_positive",
+   "direction": "long",
+   "score": 94.5,
+   "tags": {
+    "car_3d_pct": 14.54,
+    "z": 3.38,
+    "period": "2026Q3",
+    "abnormal_turnover": 5.74,
+    "provisional": false,
+    "held": false
+   },
+   "price": 102.3
+  },
+  {
+   "ticker": "TOYA",
+   "date": "2026-11-06",
+   "kind": "earnings_strong_positive",
+   "direction": "long",
+   "score": 100.0,
+   "tags": {
+    "car_3d_pct": 14.71,
+    "z": 4.4,
+    "period": "2026Q3",
+    "abnormal_turnover": 9.37,
+    "provisional": false,
+    "held": false
+   },
+   "price": 12.48
+  },
+  {
+   "ticker": "COGNOR",
+   "date": "2026-08-31",
+   "kind": "earnings_strong_negative",
+   "direction": "avoid",
+   "score": 73.8,
+   "tags": {
+    "car_3d_pct": -12.18,
+    "z": -2.55,
+    "period": "2026H1",
+    "abnormal_turnover": 10.32,
+    "provisional": false,
+    "held": false
+   },
+   "price": 5.75
+  },
+  {
+   "ticker": "TEXT",
+   "date": "2026-08-31",
+   "kind": "earnings_strong_negative",
+   "direction": "avoid",
+   "score": 100.0,
+   "tags": {
+    "car_3d_pct": -16.98,
+    "z": -4.81,
+    "period": "2026H1",
+    "abnormal_turnover": 10.15,
+    "provisional": false,
+    "held": false
+   },
+   "price": 42.76
+  }
+ ],
+ "tickers": {},
+ "data_provenance": {
+  "as_of": "2026-11-13"
+ }
+}

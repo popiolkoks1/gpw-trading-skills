@@ -1,0 +1,21 @@
+﻿"",BBSIS.D.I.ZAR.ZI.EUR.S1311.B.A604.R10XX.R.A.A._Z._Z.A,BBSIS.D.I.ZAR.ZI.EUR.S1311.B.A604.R10XX.R.A.A._Z._Z.A_FLAGS
+"","Yields, derived from the term structure of interest rates, on listed Federal securities with annual coupon payments / residual maturity of 10.0 years / daily data",
+Decimals,2,
+Time format code,P1D,
+category,ZRZS,
+unit,PROZENT,
+unit multiplier,One,
+last update,2026-11-16 12:22:17,
+2023-01-01,.,No value available
+2023-01-02,2.49,
+2023-01-03,2.36,
+2023-01-04,2.32,
+2023-01-05,2.32,
+2023-01-06,2.34,
+2023-01-07,.,No value available
+2023-01-08,.,No value available
+2026-11-12,3.33,
+2026-11-13,3.41,
+2026-11-14,.,No value available
+2026-11-15,.,No value available
+2026-11-16,3.43,

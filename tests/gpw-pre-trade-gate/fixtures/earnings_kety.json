@@ -1,0 +1,109 @@
+{
+ "skill": "gpw-earnings-reaction",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "ticker",
+ "as_of": "2026-11-13",
+ "reactions": [
+  {
+   "ticker": "KETY",
+   "isin": "PLKETY000011",
+   "company": "GRUPA KĘTY SPÓŁKA AKCYJNA",
+   "report_date": "2026-10-26",
+   "reaction_date": "2026-10-26",
+   "report_type": "periodic_q",
+   "period": "2026Q3",
+   "session_alignment": "intraday",
+   "car_3d_pct": 0.36,
+   "abnormal_turnover": 1.38,
+   "drift_20s_pct": null,
+   "gap_pct": 1.37,
+   "day0_return_pct": 0.48,
+   "label": "neutral",
+   "provisional": false,
+   "flags": [],
+   "sessions_since": 13
+  },
+  {
+   "ticker": "KETY",
+   "isin": "PLKETY000011",
+   "company": "GRUPA KĘTY SPÓŁKA AKCYJNA",
+   "report_date": "2026-06-25",
+   "reaction_date": "2026-06-25",
+   "report_type": "periodic_h",
+   "period": "2026H1",
+   "session_alignment": "intraday",
+   "car_3d_pct": 1.45,
+   "abnormal_turnover": 1.7,
+   "drift_20s_pct": 3.84,
+   "gap_pct": 0.17,
+   "day0_return_pct": 0.76,
+   "label": "neutral",
+   "provisional": false,
+   "flags": [],
+   "sessions_since": 100
+  },
+  {
+   "ticker": "KETY",
+   "isin": "PLKETY000011",
+   "company": "GRUPA KĘTY SPÓŁKA AKCYJNA",
+   "report_date": "2026-04-22",
+   "reaction_date": "2026-04-23",
+   "report_type": "periodic_q",
+   "period": "2026Q1",
+   "session_alignment": "after_close",
+   "car_3d_pct": 1.61,
+   "abnormal_turnover": 0.68,
+   "drift_20s_pct": 3.36,
+   "gap_pct": 1.42,
+   "day0_return_pct": 0.71,
+   "label": "neutral",
+   "provisional": false,
+   "flags": [],
+   "sessions_since": 143
+  }
+ ],
+ "tickers": {
+  "KETY": {
+   "profile": {
+    "events": 3,
+    "mean_car_3d_pct": 1.14,
+    "mean_abs_car_3d_pct": 1.14,
+    "share_positive": 1.0,
+    "mean_abnormal_turnover": 1.25,
+    "mean_drift_20s_pct": 3.6,
+    "labels": {
+     "strong_positive": 0,
+     "positive": 0,
+     "neutral": 3,
+     "negative": 0,
+     "strong_negative": 0
+    },
+    "reaction_drift_same_sign": 1.0
+   },
+   "next_expected": {
+    "period": "2026Q4",
+    "date": "2027-04-30",
+    "date_kind": "statutory_deadline",
+    "basis_kind": "statutory",
+    "base_date": null,
+    "basis": "legal deadline (Dz.U. 2025 poz. 755, § 83 (amended Dz.U. 2026 poz. 1205)); annual report - no Q4 quarterly report is required (§ 83 ust. 2)",
+    "statutory_deadline": "2027-04-30"
+   },
+   "held": false
+  }
+ },
+ "skipped": [],
+ "data_provenance": {
+  "as_of": "2026-11-13",
+  "freshness": {
+   "as_of": "2026-11-13",
+   "sessions_behind": 0,
+   "is_stale": false,
+   "reference_date": null,
+   "historical_run": false,
+   "sessions_behind_today": 0
+  },
+  "note": "trimmed fixture from a real offline run on 2026-11-16"
+ }
+}

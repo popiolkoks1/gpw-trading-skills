@@ -252,7 +252,7 @@ def load_data(a):
         sources=[SOURCES[0]], sessions_used=len(sessions), universe_size=len(listed_now),
         notes=["Prices adjusted for distributions/splits via the GPW reference-price change (gpwlib.panel).",
                "ETF catalog compiled {} - descriptions marked 'name' are inferred from the fund name.".format(cat.CATALOG_DATE)],
-        survivorship_free=False)
+        survivorship_free=False, reference_date=end)
     return pnl, listed_now, last_date, prov
 
 

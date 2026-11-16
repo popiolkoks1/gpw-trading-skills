@@ -1,0 +1,77 @@
+{
+ "skill": "gpw-valuation",
+ "trigger_evals": {
+  "should_trigger": [
+   "Ile jest warta spółka KETY?",
+   "Co zakłada obecna cena CD Projektu?",
+   "Policz DCF dla Orlenu przy WACC 9% i wzroście 2%.",
+   "Czy PKO BP jest drogie w stosunku do wartości księgowej i ROE?",
+   "Zrób odwrócony DCF dla LPP.",
+   "Jaka jest wartość godziwa akcji Dino przy moich założeniach?",
+   "What does the current price of PKO BP imply?",
+   "Give me a fair value range for CD Projekt with a sensitivity table.",
+   "Reverse DCF for KGHM on the Warsaw Stock Exchange"
+  ],
+  "should_not_trigger": [
+   "Które spółki z GPW mają najwyższy F-score Piotroskiego?",
+   "Czy WIG20 jest w korekcie?",
+   "Ile akcji KETY kupić przy ryzyku 1% konta?",
+   "Jak bezpieczna jest dywidenda PZU w ostatnich latach?",
+   "What is Apple's intrinsic value?",
+   "IKE czy IKZE na ETF-y?"
+  ]
+ },
+ "output_evals": [
+  {
+   "id": "pl-reverse-dcf-industrial",
+   "prompt": "Ile jest warta KETY i co zakłada obecna cena?",
+   "assertions": [
+    "scripts/gpw_valuation.py was executed for KETY",
+    "Answer in Polish opens with the sentence built from reverse_dcf.implied_growth_pct, the price with its date, WACC and terminal growth from the JSON",
+    "Answer gives fair_value_range low/base/high and describes range_position neutrally (no 'kupuj', 'niedowartościowana - kup')",
+    "Answer explains WACC and terminal value in plain Polish",
+    "Answer mentions the warnings: annualised YTD data and the low-confidence net-debt proxy (suggests --net-debt)",
+    "Answer shows or summarises the WACC x g sensitivity table",
+    "Answer says comps were skipped because KETY is in no GPW sector index (or uses --peers)"
+   ]
+  },
+  {
+   "id": "pl-bank-model",
+   "prompt": "Czy PKO BP jest drogie?",
+   "assertions": [
+    "JSON model == 'bank' and the answer uses the justified P/BV model, not FCFF",
+    "Answer quotes market P/BV, current ROE, cost of equity and reverse_dcf.implied_roe_pct",
+    "Answer quotes the WIG-BANKI comps median P/E and P/BV with the peer count",
+    "Answer states that the result is not a price target or recommendation"
+   ]
+  },
+  {
+   "id": "en-user-assumptions",
+   "prompt": "Value CD Projekt assuming 12% revenue growth, 35% EBIT margin, WACC 10% and 3% terminal growth.",
+   "assertions": [
+    "Script run with --lang en --revenue-growth 12 --margin 35 --wacc 10 --terminal-growth 3",
+    "assumptions in the JSON show source 'user (CLI ...)' for these four keys and the answer says so",
+    "Answer gives the base value per share, the bear/bull scenarios and the implied FCF growth",
+    "Answer compares with WIG-GRY peer multiples and warns about the gaming release-cycle effect on annualised data"
+   ]
+  },
+  {
+   "id": "pl-invalid-growth",
+   "prompt": "Policz DCF dla Orlenu z WACC 4% i wzrostem rezydualnym 5%.",
+   "assertions": [
+    "Script exits with code 1 and the error says terminal growth must be below WACC",
+    "Answer explains in plain Polish why g >= WACC has no finite value (Gordon formula) and proposes valid inputs",
+    "No valuation number is invented"
+   ]
+  },
+  {
+   "id": "pl-orlen-alias",
+   "prompt": "Co zakłada cena Orlenu?",
+   "assertions": [
+    "Ticker ORLEN is resolved to PKNORLEN and the answer mentions it",
+    "Answer mentions fewer than 5 sector peers in WIG-PALIWA and treats comps as weak",
+    "If implied growth is negative, the answer explains what a negative implied FCF growth means without calling it a buy signal"
+   ]
+  }
+ ]
+}

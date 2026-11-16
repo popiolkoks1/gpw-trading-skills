@@ -1,0 +1,179 @@
+{
+ "skill": "gpw-macro-regime",
+ "version": "1.0.0",
+ "lang": "pl",
+ "as_of": "2026-11-16",
+ "macro": {
+  "state": {
+   "monetary": "hold_after_easing",
+   "monetary_simple": "neutral",
+   "real_rate": "negative",
+   "pln": "weak",
+   "spread": "widening",
+   "curve": "normal",
+   "inflation": "rising",
+   "inflation_band": "above",
+   "composite": "headwind",
+   "regime_label": "neutral_x_pln_weak"
+  },
+  "score": -0.475,
+  "confidence": "high",
+  "summary": "Polityka pieniężna: pauza po obniżkach (3,75% 2026-03-05). Inflacja: HICP 4,0% (2026-09), rośnie, powyżej pasma celu NBP. Realna stopa: -0,25 pp (łagodna, stymulująca). Złoty: słaby. Spread PL-DE 10L: 285 pb, rozszerza się (inwestorzy żądają większej premii)."
+ },
+ "indicators": {
+  "nbp_reference_rate": {
+   "value": 3.75,
+   "unit": "%",
+   "as_of": "2026-03-05",
+   "source": "nbp_rates",
+   "trend": "falling",
+   "last_move_bp": -25,
+   "change_12m_bp": -50,
+   "cycle_total_bp": -300
+  },
+  "pl10y": {
+   "value": 6.28,
+   "unit": "%",
+   "as_of": "2026-11-16",
+   "source": "bondspot",
+   "trend": "rising",
+   "bond": "DS0436",
+   "isin": "PL0000119087",
+   "tenor_years": 9.44,
+   "change_3m_bp": 43.0
+  },
+  "hicp_yoy": {
+   "value": 4.0,
+   "unit": "%",
+   "as_of": "2026-09",
+   "source": "eurostat_hicp",
+   "trend": "rising",
+   "change_3m_pp": 1.0,
+   "band": "above"
+  }
+ },
+ "sector_tilts": {
+  "banks": {
+   "tilt": "slightly_negative",
+   "score": -0.25,
+   "drivers": [
+    {
+     "driver": "monetary:hold_after_easing",
+     "contribution": -0.25
+    }
+   ],
+   "indices": [
+    "WIG-BANKI"
+   ],
+   "kind": "historical_tendency",
+   "market_check": {
+    "vs_wig_3m_pp": 2.43,
+    "agrees_with_tilt": false
+   },
+   "rationale": "Polskie banki zarabiają głównie na odsetkach, a większość ich kredytów ma zmienne oprocentowanie (WIBOR/WIRON). Obniżki stóp historycznie zmniejszały wynik odsetkowy banków, podwyżki go zwiększały. Ważne są też podatek bankowy, sprawy frankowe i koszty ryzyka."
+  },
+  "exporters": {
+   "tilt": "positive",
+   "score": 1.0,
+   "drivers": [
+    {
+     "driver": "pln:weak",
+     "contribution": 1.0
+    }
+   ],
+   "indices": [
+    "WIG-INFO",
+    "WIG-GRY",
+    "WIG-GORNIC",
+    "WIG-CHEMIA"
+   ],
+   "kind": "historical_tendency",
+   "market_check": {
+    "vs_wig_3m_pp": -14.03,
+    "agrees_with_tilt": false
+   },
+   "rationale": "Spółki IT, gamingowe (gry sprzedawane za granicą w USD/EUR), górnicze (miedź i srebro w USD) i chemiczne mają przychody w walutach, a dużą część kosztów w złotych. Słaby złoty historycznie podnosił ich wyniki w PLN, mocny — obniżał."
+  },
+  "importers_retail": {
+   "tilt": "negative",
+   "score": -1.0,
+   "drivers": [
+    {
+     "driver": "pln:weak",
+     "contribution": -0.5
+    },
+    {
+     "driver": "inflation:rising",
+     "contribution": -0.5
+    }
+   ],
+   "indices": [
+    "WIG-ODZIEZ",
+    "WIG-SPOZYW"
+   ],
+   "kind": "historical_tendency",
+   "market_check": {
+    "vs_wig_3m_pp": 3.21,
+    "agrees_with_tilt": false
+   },
+   "rationale": "Sieci odzieżowe i handel kupują część towarów za granicą (często w USD), a sprzedają w złotych. Mocny złoty obniża koszty zakupu; spadająca inflacja podnosi realne płace i konsumpcję."
+  },
+  "utilities_energy": {
+   "tilt": "slightly_negative",
+   "score": -0.25,
+   "drivers": [
+    {
+     "driver": "pl10y_3m:rising",
+     "contribution": -0.25
+    }
+   ],
+   "indices": [
+    "WIG-ENERG"
+   ],
+   "kind": "historical_tendency",
+   "market_check": {
+    "vs_wig_3m_pp": 17.72,
+    "agrees_with_tilt": false
+   },
+   "rationale": "Energetyka ma duże inwestycje i długi, więc reaguje trochę jak obligacje: spadek rentowności 10-letnich obligacji pomagał wycenom, wzrost szkodził. W Polsce zwykle ważniejsza jest regulacja (taryfy URE, podatki nadzwyczajne, transformacja węglowa), dlatego wpływ makro ograniczamy najwyżej do „lekko”."
+  },
+  "developers": {
+   "tilt": "positive",
+   "score": 0.5,
+   "drivers": [
+    {
+     "driver": "monetary:hold_after_easing",
+     "contribution": 0.25
+    },
+    {
+     "driver": "real_rate:negative",
+     "contribution": 0.25
+    }
+   ],
+   "indices": [
+    "WIG-NRCHOM"
+   ],
+   "kind": "historical_tendency",
+   "market_check": {
+    "vs_wig_3m_pp": -14.58,
+    "agrees_with_tilt": false
+   },
+   "rationale": "Deweloperzy zależą od kredytów hipotecznych: obniżki stóp poprawiają zdolność kredytową i popyt na mieszkania, podwyżki go hamują. Ujemna realna stopa historycznie skłaniała do lokowania oszczędności w mieszkaniach. Duży wpływ mają też rządowe programy mieszkaniowe."
+  }
+ },
+ "data_provenance": {
+  "as_of": "2026-11-16",
+  "sources": [
+   "BondSpot - fixing obligacji skarbowych (dzienny): https://www.bondspot.pl/fixing_obligacji",
+   "Deutsche Bundesbank - rentowność Bund 10Y (dzienna): https://api.statistiken.bundesbank.de/rest/data/BBSIS/D.I.ZAR.ZI.EUR.S1311.B.A604.R10XX.R.A.A._Z._Z.A"
+  ],
+  "freshness": {
+   "as_of": "2026-11-16",
+   "sessions_behind": 0,
+   "is_stale": false,
+   "reference_date": null,
+   "historical_run": false,
+   "sessions_behind_today": 0
+  }
+ }
+}

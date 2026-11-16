@@ -363,8 +363,13 @@ def _slim(r):
     return r
 
 
-def provenance_block(dates, n_sessions, universe, notes):
-    return provenance.build(
+def _ref(args):
+    """Requested --as-of date (freshness is judged against it, not today)."""
+    return dt.date.fromisoformat(args.as_of) if getattr(args, "as_of", None) else None
+
+
+def provenance_block(dates, n_sessions, universe, notes, reference_date=None):
+    return provenance.build(reference_date=reference_date,
         as_of=dt.date.fromisoformat(dates[-1]),
         sources=["GPW — Archiwum notowań (akcje, indeksy): https://www.gpw.pl/archiwum-notowan",
                  "GPW Benchmark — portfele indeksów (etykiety WIG20/mWIG40/sWIG80 i sektorów): https://gpwbenchmark.pl"],
@@ -392,7 +397,8 @@ def run(args) -> dict:
         wig_ret = wig.ret(bt["first_date"], dates[-1]) if (wig and bt["first_date"]) else None
         res = dict(common, mode="history", history=bt, wig_return_window_pct=wig_ret)
         res["data_provenance"] = provenance_block(dates, n_sess, None, BASE_NOTES + [
-            "Backtest: screen re-run with data up to each date only (RS ranks, SMAs, swings point-in-time)."])
+            "Backtest: screen re-run with data up to each date only (RS ranks, SMAs, swings point-in-time)."],
+            reference_date=_ref(args))
         return res
     sc = eng.screen_at(data, date, wig, cfg)
     if args.ticker:
@@ -413,7 +419,7 @@ def run(args) -> dict:
         r["in_universe"] = name in sc["ratings"]
         r["sizer_command"] = eng.sizer_command(name, r["risk"], args.account_size, args.risk_pct, args.lang)
         res = dict(common, mode="ticker", result=_slim(r), universe=sc["universe"])
-        res["data_provenance"] = provenance_block(dates, n_sess, sc["universe"], BASE_NOTES)
+        res["data_provenance"] = provenance_block(dates, n_sess, sc["universe"], BASE_NOTES, reference_date=_ref(args))
         return res
     cands = sc["candidates"]
     for r in cands:
@@ -428,7 +434,7 @@ def run(args) -> dict:
         watchlist=top, others=[{"name": r["name"], "state": r["execution"]["state"], "rs": r["rs"]["rating"],
                                 "score": r["score"], "vcp_reasons": (r["vcp"] or {}).get("reasons")} for r in rest],
         candidates=cands)
-    res["data_provenance"] = provenance_block(dates, n_sess, sc["universe"], BASE_NOTES)
+    res["data_provenance"] = provenance_block(dates, n_sess, sc["universe"], BASE_NOTES, reference_date=_ref(args))
     return res
 
 

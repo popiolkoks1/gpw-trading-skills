@@ -1,0 +1,49 @@
+{
+ "skill": "gpw-ownership",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "ticker",
+ "as_of": "2026-11-13",
+ "ticker": "PKOBP",
+ "shorts": {
+  "by_issuer": []
+ },
+ "insiders": {
+  "by_ticker": [
+   {
+    "ticker": "PKOBP",
+    "isin": "PLPKO0000016",
+    "company": "POWSZECHNA KASA OSZCZĘDNOŚCI BANK POLSKI SPÓŁKA AKCYJNA",
+    "buys": 0,
+    "sells": 0,
+    "distinct_insiders": 0,
+    "net_value_pln": null,
+    "cluster_buy": false,
+    "cluster_sell": false,
+    "max_distinct_buyers_30d": 0,
+    "max_distinct_sellers_30d": 0,
+    "last_date": "2026-10-30",
+    "notices": 9,
+    "buy_notices": 0,
+    "sell_notices": 0,
+    "notices_identity_unknown": 9,
+    "parsed_transactions": 0,
+    "open_market_transactions": 0,
+    "basis": "notice_hints",
+    "flags": [
+     "details_missing_paste_pdf"
+    ]
+   }
+  ]
+ },
+ "funds": {
+  "by_ticker": []
+ },
+ "data_provenance": {
+  "as_of": "2026-11-13",
+  "sources": [
+   "KNF — rejestr pozycji krótkich netto: https://rss.knf.gov.pl/rss_pub/rss.html (JSON https://rss.knf.gov.pl/rss_pub/JSON)",
+   "KNF — historia: https://rss.knf.gov.pl/rss_pub/rssH.html"
+  ]
+ }
+}

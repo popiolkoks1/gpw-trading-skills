@@ -304,7 +304,8 @@ def run(args) -> dict:
         notes.append("Corporate-action adjustments detected: " + ", ".join(
             "{} ({})".format(k, ", ".join(a["date"] for a in v)) for k, v in sorted(adj.items())))
     prov = provenance.build(as_of=as_of, sources=sources, sessions_used=len(mk["shares_sessions"]),
-                            universe_size=len(res["positions"]), notes=notes, point_in_time_membership=False)
+                            universe_size=len(res["positions"]), notes=notes, point_in_time_membership=False,
+                            reference_date=end)
     return {"skill": "gpw-portfolio-check", "version": VERSION, "lang": args.lang, "source": src,
             "aliases": mk["aliases"], **res, "data_provenance": prov}
 

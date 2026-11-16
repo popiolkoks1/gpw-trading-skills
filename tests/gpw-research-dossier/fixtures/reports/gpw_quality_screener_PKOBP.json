@@ -1,0 +1,90 @@
+{
+ "skill": "gpw-quality-screener",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "ticker",
+ "as_of": "2026-11-13",
+ "companies": [
+  {
+   "ticker": "PKOBP",
+   "isin": "PLPKO0000016",
+   "sector": "banki komercyjne",
+   "sector_type": "bank",
+   "financial_other": false,
+   "classification": "sector:banki komercyjne",
+   "status": "ok",
+   "period": "I-III kw. 2026",
+   "period_end": "2026-09-30",
+   "period_age_days": 44,
+   "stale_period": false,
+   "consolidated": true,
+   "f_score": null,
+   "red_flags": [],
+   "data_checks": [],
+   "metrics": {
+    "annualisation": "ytd_x_12/9",
+    "period": "I-III kw. 2026",
+    "months": 9,
+    "market_cap": 149875000000.0,
+    "pe_gpw": 13.7,
+    "pbv_gpw": 2.62,
+    "dividend_yield_pct": 5.1,
+    "revenue_ann": 40108000000.0,
+    "net_income_ann": 10964000000.0,
+    "ebit_ann": 18581333333.333332,
+    "ebitda_ann": 20336000000.0,
+    "cfo_ann": -6778666666.666666,
+    "net_income_basis": "parent",
+    "equity_basis": "parent",
+    "total_assets": 619866000000.0,
+    "equity": 57149000000.0,
+    "averages_use_prior_year": false,
+    "roe": 0.191849,
+    "roa": 0.017688,
+    "equity_to_assets": 0.092196,
+    "cost_income": null,
+    "cost_income_note": "not_derivable_from_notoria",
+    "pe_calc": 13.669737,
+    "pbv_calc": 2.622531,
+    "earnings_yield": 0.073154,
+    "share_change_pct": null,
+    "share_change_basis": null
+   },
+   "prior_period": {
+    "source": null,
+    "label": null,
+    "ttm": false
+   },
+   "signal_date": "2026-11-13",
+   "signal_price": 119.9,
+   "sector_ranks": {
+    "roe": null,
+    "roic_approx": null,
+    "operating_margin": null,
+    "fcf_margin": null
+   },
+   "pbv_vs_roe": null,
+   "quality_score": 79.3,
+   "f_score_partial": {
+    "applicable": false,
+    "passed": null,
+    "available": 0,
+    "ratio": null,
+    "coverage_pct": null,
+    "lower": null,
+    "upper": null,
+    "band": "not_applicable",
+    "display": "n/a",
+    "source": null,
+    "reason": "financial_bank"
+   }
+  }
+ ],
+ "data_provenance": {
+  "as_of": "2026-11-13",
+  "sources": [
+   "https://www.gpw.pl/spolka?isin=<ISIN> (indicatorsTab, showNotoria / Notoria)",
+   "https://gpwbenchmark.pl (index portfolios)"
+  ]
+ }
+}

@@ -1,7 +1,7 @@
 # GPW Pre-Trade Gate — rules, thresholds and inputs
 
 Contents: 1. Philosophy · 2. Trade arithmetic · 3. Checks · 4. Verdict ·
-5. Input contracts · 6. Limitations
+5. Input contracts · 6. Limitations · 7. Context checks (1.1, v1.2 skills)
 
 ## 1. Philosophy
 
@@ -14,6 +14,9 @@ context that is missing (regime, exposure limits, target) is SKIP – neutral
 but shown, so the user knows what was not checked.
 
 Statuses: PASS · WARN (allowed with conditions) · FAIL (blocking) · SKIP.
+Context checks (section 7) also use INFO (background, never changes the
+verdict) and UNKNOWN (input missing; neutral unless the check is in
+`--require`, then FAIL).
 
 ## 2. Trade arithmetic
 
@@ -52,8 +55,13 @@ drawdown = (peak − today) / peak.
 
 ## 4. Verdict
 
-NO-GO if any FAIL; GO WITH CONDITIONS if any WARN; else GO. SKIPs do not
-change the verdict but lower confidence. The exit code is 0 for every
+NO-GO if any FAIL; GO WITH CONDITIONS if any WARN; else GO. SKIP, INFO and
+UNKNOWN do not change the verdict but SKIP / UNKNOWN lower confidence.
+Sources of NO-GO: the 13 core checks; `event_window` under `--strict-events`;
+a check listed in `--require` whose input is missing. The other context
+checks can at most add conditions (WARN): they are context about the company
+or the market, not personal risk rules, and their evidence is statistical
+(averages over many stocks), so a hard block would overstate it. The exit code is 0 for every
 verdict (the report is the product); 1 only for input/data errors.
 
 ### Override
@@ -75,8 +83,14 @@ risk rules, not market opinions.
 - **gpw-exposure-coach JSON**: `skill`, `posture`, `limits.exposure_ceiling_pct`,
   `limits.max_risk_per_trade_pct`, `limits.max_new_positions_per_week`,
   `limits.circuit_breaker` (ok | reduce | pause), `as_of`.
-- Auto-discovery: newest `gpw_*.json` (by mtime) in `--input-dir` whose
-  `skill` matches; an explicit path with the wrong `skill` is an error.
+- Discovery (1.1): `gpwlib.reports.find_report` - an explicit `--<name>-json`
+  path, else the report of that skill in `--input-dir` with the newest
+  `as_of` (then mtime); reports dated after `--as-of` are ignored. For
+  per-company inputs (events, ownership, earnings, quality, dividend) the
+  newest report that covers the ticker is used when the newest one is about
+  another company. An explicit path that is missing, corrupt or of another
+  skill is an error (exit 1). Each input is listed in `inputs[]` with
+  `as_of`, `sessions_behind`, its limit and `stale`.
 - **Journal**: `gpwlib.journal_io` (read-only) – theses, ACTIVE positions
   (FIFO lots, plan stop), closed results (net P&L).
 
@@ -87,3 +101,61 @@ risk rules, not market opinions.
 - Current prices for heat come from the last session close.
 - Broker tariffs are approximations entered on the date in `gpwlib.brokers`.
 - Sector membership is the current GPW Benchmark portfolio.
+
+## 7. Context checks (1.1) fed by the v1.2 skills
+
+Engine: `scripts/pretrade_context_checks.py` (pure). Each check has `id`,
+`status`, `reason`, `params` and `source {skill, file, as_of,
+sessions_behind, stale}`; UNKNOWN adds `command` (the exact command that
+produces the missing report). Matching is by ticker, issuer short name or
+ISIN (ISIN from `gpwlib.fundamentals.resolve_isin` and from the reports
+themselves): the KNF register and ESPI may still list a renamed company under
+its old name (MODIVO = ISIN PLCCC0000016, formerly CCC).
+
+### 7.1 Holding window
+
+- Starts at the next session after the last data session (or the reference
+  day itself if its session is not in the data yet); `--holding-days`
+  sessions long (default **20** ≈ one month, the gpw-event-calendar window
+  default and a typical swing holding period) plus a buffer of
+  `--event-buffer-sessions` (default **5** = one trading week: exits slip and
+  winners are held longer than planned). Sessions follow the Polish exchange
+  calendar (`gpwlib.plcal`); an event on a non-session day counts as the
+  session before it.
+
+### 7.2 Thresholds and evidence
+
+| Check | Rule | Justification |
+|---|---|---|
+| `event_window` | earnings (periodic report: confirmed date, estimate or statutory deadline) in the window or buffer → WARN; ex-dividend, record / payment date, AGM, MPC, GPW index revision, MSCI review, GUS release → INFO; nothing → PASS; calendar missing or not covering the ticker → UNKNOWN (a WARN is still raised if the earnings-reaction fallback date falls inside) | Results are the largest scheduled source of single-stock gaps; a stop is not executed at its price when the stock opens below it (GPW static limit ±10% only pauses trading). A statutory deadline (Dz.U. 2025 poz. 755 § 83) means "not later than", so it counts as inside the window when the deadline is. Ex-date: the reference price is cut by the DPS (KDPW T+2: ex-date = record date − 1 session), a mechanical drop that can trigger a stop placed closer than the DPS; index revisions and MSCI reviews move closing-auction volume (rebalancing flows). |
+| `event_window` strict | `--strict-events` and the report in sessions 1-**2**: FAIL if the stock's typical earnings gap > stop distance, or if no gap history exists; WARN if the gap ≤ stop distance | Within 2 sessions the gap arrives before the plan can adapt. Typical gap = median \|opening gap\| on reaction days of reports published outside the session (pre-open / after close / non-session), from gpw-earnings-reaction `reactions[]` (duplicate reaction days counted once); intraday reports are used only when there are no others, because the stop can still fill near its price during the session. Median, not mean: few events per stock, one outlier would dominate. If the typical gap exceeds the stop distance, the planned 1R loss is likely exceeded, so risk (check 2) is understated. Unknown gap under strict mode fails closed (the user asked for strictness). |
+| `crowded_short` | gpw-ownership `crowded` (total disclosed net short ≥ 2% or ≥ 3 holders) → WARN with total %, holders, 20-session change, days to cover | Heavily shorted stocks underperform on average (Desai et al. 2002; Boehmer, Jones & Zhang 2008; EU disclosures: Jones, Reed & Waller 2016 "Revealing Shorts"), but high days to cover means squeeze risk on good news. Both directions raise volatility around the entry, so it is a condition (size, stop), not a block. The register is a lower bound (positions ≥ 0.5% only). |
+| `insider_selling` | `cluster_sell` (≥ 3 distinct insiders within 30 days, per gpw-ownership) with the last sell ≤ **60** days ago → WARN; older → PASS with note; `cluster_buy` → PASS with a positive note | Insider purchases are informative, sales much less so (Lakonishok & Lee 2001; Jeng, Metrick & Zeckhauser 2003; opportunistic vs routine trades: Cohen, Malloy & Pomorski 2012) - hence WARN, not FAIL. 60 days ≈ the horizon over which the abnormal returns of insider trades are concentrated in these studies; older clusters are known to the market. Counts with `basis: notice_hints` come from notice titles (details are in PDFs), which the report says. |
+| `earnings_reaction` | latest reaction label `strong_negative` within **20** sessions → WARN; `strong_positive` → PASS with "do not assume continuation"; others / older → PASS | On the WSE post-earnings drift appears mainly after negative surprises (Jagliński 2020, https://journals.ue.wroc.pl/fins/article/view/233); drift accrues over roughly the first 20-60 sessions (Bernard & Thomas 1989), and gpw-earnings-reaction measures `drift_20s`. Costs eat much of the drift in illiquid names (Chordia et al. 2009), so it is used as an avoid / caution flag only. |
+| `quality_red_flags` | any `red_flags[]` → WARN listing codes; `negative_equity` → WARN marked `prominent` (shown first, bold); data checks and stale periods are mentioned | Red flags (Sloan 1996 accruals; CFO < 0 < NI; leverage; dilution - Pontiff & Woodgate 2008) say "read the report", not "the stock will fall"; negative equity raises dilution / restructuring risk but some restructurings recover, so it stays a WARN. |
+| `macro_context` | always INFO: composite (supportive / mixed / headwind) and the historical sector tilt whose `indices` contain the ticker's sector index | Macro is slow context over weeks to months (gpw-macro-regime), not a timing tool; sector tilts are historical tendencies. It never warns or blocks. |
+| `stress_test` | gpw-risk-lab `stress.tolerance.ok == false` → WARN (portfolio already breaches the user's loss tolerance; the trade adds equity exposure); ok → PASS; no tolerance → INFO with the worst scenario | The user's stated maximum loss is a personal limit, like heat; the stress scenarios are the existing portfolio, so this is a condition, not a block. Optional input (tolerated when absent). |
+
+### 7.3 Input age limits (`stale`)
+
+| Input | Limit (sessions) | Why |
+|---|---|---|
+| gpw-market-regime, gpw-exposure-coach, gpw-event-calendar | 3 | cross-skill rule (CONVENTIONS); dates can be announced any day |
+| gpw-ownership, gpw-earnings-reaction, gpw-risk-lab | 5 | weekly cadence in the ROADMAP workflow (one trading week) |
+| gpw-macro-regime | 10 | weekly run + one week slack; slow context |
+| gpw-dividend-analyzer | 22 | monthly run; ex-dates change with AGM resolutions |
+| gpw-quality-screener | 65 | data change only with a new quarterly report (~65 sessions) |
+
+A stale input keeps its check status but is marked in the check (`source.stale`)
+and raises a `data_freshness` WARN, as in 1.0 for regime / exposure.
+
+### 7.4 Limitations
+
+- The calendar is only as good as ESPI: a company may publish before a
+  statutory deadline or move a confirmed date.
+- The typical gap comes from at most ~2 years of reports (≤ 8 events), often
+  fewer: `earnings_gap.n` is shown.
+- Insider clusters from notice titles are hints; values need the PDF text
+  pasted into gpw-ownership.
+- Stress results describe the portfolio as the risk-lab run saw it, without
+  this trade.

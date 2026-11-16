@@ -1,0 +1,58 @@
+{
+ "skill": "gpw-market-breadth",
+ "version": "1.0.0",
+ "lang": "pl",
+ "composite": {
+  "score": 35.5,
+  "zone": "weakening",
+  "exposure": "40–60%",
+  "data_quality": "complete",
+  "components_available": 6,
+  "effective_weights": {
+   "breadth_level_trend": 0.25,
+   "ma_crossover": 0.2,
+   "advance_decline": 0.15,
+   "new_highs_lows": 0.15,
+   "size_participation": 0.1,
+   "index_divergence": 0.15
+  },
+  "caution": false,
+  "strongest": "size_participation",
+  "weakest": "index_divergence"
+ },
+ "latest": {
+  "date": "2026-11-13",
+  "eligible": 188,
+  "pct_above_200": 0.5053191489361702,
+  "pct_above_50": 0.3829787234042553,
+  "pct_above_20": 0.4574468085106383,
+  "advancers": 82,
+  "decliners": 94,
+  "new_highs": 8,
+  "new_lows": 11,
+  "breadth_fast": 0.48456501638076344,
+  "breadth_slow": 0.5670943619562662,
+  "mcclellan": 20.34616682347811,
+  "ad_line": -2404
+ },
+ "history": {
+  "previous": null,
+  "delta": null
+ },
+ "data_provenance": {
+  "schema_version": "1.0",
+  "as_of": "2026-11-13",
+  "sources": [
+   "GPW — Archiwum notowań (akcje, indeksy): https://www.gpw.pl/archiwum-notowan",
+   "GPW Benchmark — portfele indeksów WIG20/mWIG40/sWIG80: https://gpwbenchmark.pl"
+  ],
+  "freshness": {
+   "as_of": "2026-11-13",
+   "sessions_behind": 0,
+   "is_stale": false,
+   "reference_date": null,
+   "historical_run": false,
+   "sessions_behind_today": 0
+  }
+ }
+}

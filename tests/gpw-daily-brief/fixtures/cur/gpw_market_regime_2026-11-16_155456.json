@@ -1,0 +1,33 @@
+{
+ "skill": "gpw-market-regime",
+ "version": "1.0.0",
+ "lang": "pl",
+ "regime": {
+  "state": "confirmed_uptrend",
+  "top_risk_score": 36.3,
+  "distribution_days": 4,
+  "as_of": "2026-11-13",
+  "index": "WIG",
+  "top_risk_band": "moderate",
+  "distribution_band": "CAUTION",
+  "state_reasons": [],
+  "rally_attempt": null,
+  "indices_in_uptrend": 3,
+  "indices_analysed": 4
+ },
+ "data_provenance": {
+  "schema_version": "1.0",
+  "as_of": "2026-11-13",
+  "sources": [
+   "GPW — Archiwum notowań (indeksy): https://www.gpw.pl/archiwum-notowan"
+  ],
+  "freshness": {
+   "as_of": "2026-11-13",
+   "sessions_behind": 0,
+   "is_stale": false,
+   "reference_date": null,
+   "historical_run": false,
+   "sessions_behind_today": 0
+  }
+ }
+}
