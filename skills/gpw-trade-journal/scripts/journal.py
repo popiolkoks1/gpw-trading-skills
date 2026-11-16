@@ -139,6 +139,8 @@ def validate(th: Dict) -> None:
         raise JournalError("unknown status {}".format(th["status"]))
     if th["account_type"] not in ACCOUNT_TYPES:
         raise JournalError("account_type must be one of {}".format(ACCOUNT_TYPES))
+    if not isinstance(th.get("paper", False), bool):
+        raise JournalError("paper must be true or false")
     if th["conviction"] not in CONVICTION:
         raise JournalError("conviction must be H, M or L")
     if th.get("setup") and th["setup"] not in SETUPS:
@@ -193,7 +195,8 @@ def new_thesis(*, ticker: str, thesis: str, pillars: List[str], kill_criteria: L
                entry=None, stop=None, target=None, shares_planned=None, risk_pct=None,
                account_type: str = "regular", setup: str = "other", horizon: str = "swing",
                conviction: str = "M", review_date: Optional[str] = None,
-               today: Optional[dt.date] = None, source: Optional[Dict] = None) -> Dict:
+               today: Optional[dt.date] = None, source: Optional[Dict] = None,
+               paper: bool = False) -> Dict:
     today = today or dt.date.today()
     th = {
         "schema_version": SCHEMA_VERSION,
@@ -211,6 +214,7 @@ def new_thesis(*, ticker: str, thesis: str, pillars: List[str], kill_criteria: L
         "plan": {"entry": entry, "stop": stop, "target": target,
                  "shares_planned": shares_planned, "risk_pct": risk_pct},
         "account_type": account_type,
+        "paper": bool(paper),
         "conviction": conviction,
         "review_date": review_date or (today + dt.timedelta(days=DEFAULT_REVIEW_DAYS)).isoformat(),
         "status": "IDEA",
@@ -492,6 +496,10 @@ STRINGS = {
     "acct_ike": {"pl": "IKE", "en": "IKE"},
     "acct_ikze": {"pl": "IKZE", "en": "IKZE"},
     "acct_oki": {"pl": "OKI", "en": "OKI"},
+    "paper_badge": {
+        "pl": "📝 **Transakcja na niby (paper trading)** – bez prawdziwych pieniędzy. Nie trafia do PIT-38; w podsumowaniach liczona osobno.",
+        "en": "📝 **Paper trade** – no real money. Excluded from PIT-38 and reported separately in reviews.",
+    },
     "tax_note": {
         "pl": "Na zwykłym rachunku od zysku należy się 19% podatku (PIT-38, FIFO). Zestawienie roczne: skill gpw-trade-review.",
         "en": "On a regular account the gain is subject to 19% tax (PIT-38, FIFO). Annual summary: gpw-trade-review skill.",
@@ -504,6 +512,8 @@ def render_thesis(th: Dict, lang: str = "pl") -> str:
     P = lambda x: fmt.pln(x, 2, lang)  # noqa: E731
     yn = lambda b: t("yes") if b else t("no")  # noqa: E731
     L = ["# {} – {}".format(th["ticker"], th["id"]), ""]
+    if th.get("paper"):
+        L += ["> " + t("paper_badge"), ""]
     L.append("**{}:** {} · **{}:** {} · **{}:** {} · **{}:** {}".format(
         t("status"), th["status"], t("conviction"), th["conviction"],
         t("account"), t("acct_" + th["account_type"]), t("review"), th.get("review_date") or "—"))
@@ -554,7 +564,7 @@ def render_thesis(th: Dict, lang: str = "pl") -> str:
         L.append("| {} | {} / {} / {} |".format(t("process"), yn(pr["entry"]), yn(pr["stop"]), yn(pr["size"])))
         if o.get("lessons"):
             L += ["", "**{}:** {}".format(t("lessons"), o["lessons"])]
-        if th["account_type"] == "regular":
+        if th["account_type"] == "regular" and not th.get("paper"):
             L += ["", "_" + t("tax_note") + "_"]
     L += ["", "---", "_" + DISCLAIMER[lang] + "_"]
     return "\n".join(L) + "\n"
@@ -568,7 +578,8 @@ def render_list(theses: List[Dict], lang: str = "pl", title_key: str = "list_tit
     L += ["| {} | {} | {} | {} | {} |".format(t("id"), t("ticker"), t("status"), t("conviction"), t("review")),
           "|---|---|---|---|---|"]
     for th in theses:
-        L.append("| {} | {} | {} | {} | {} |".format(th["id"], th["ticker"], th["status"], th["conviction"], th.get("review_date") or "—"))
+        L.append("| {} | {}{} | {} | {} | {} |".format(th["id"], th["ticker"], " 📝" if th.get("paper") else "",
+                                                     th["status"], th["conviction"], th.get("review_date") or "—"))
     return "\n".join(L) + "\n"
 
 
@@ -636,6 +647,8 @@ def build_parser() -> argparse.ArgumentParser:
     a.add_argument("--risk-pct", type=_pos_float)
     a.add_argument("--sizer-json", type=Path, help="Import entry/stop/target/shares from a gpw-position-sizer JSON report")
     a.add_argument("--account-type", choices=ACCOUNT_TYPES, default="regular")
+    a.add_argument("--paper", action="store_true",
+                   help="Paper trade: practise without real money (excluded from PIT-38, reviewed separately)")
     a.add_argument("--setup", choices=SETUPS, default="other")
     a.add_argument("--horizon", choices=HORIZONS, default="swing")
     a.add_argument("--conviction", choices=CONVICTION, default="M")
@@ -713,7 +726,7 @@ def main(argv=None) -> int:
                             risk_pct=args.risk_pct, account_type=args.account_type, setup=args.setup,
                             horizon=args.horizon, conviction=args.conviction,
                             review_date=args.review_date.isoformat() if args.review_date else None,
-                            today=args.date or today, source=source)
+                            today=args.date or today, source=source, paper=args.paper)
             if args.status == "READY":
                 transition(th, "READY", args.date or today, "ready at creation")
         else:

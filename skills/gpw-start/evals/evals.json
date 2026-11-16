@@ -1,0 +1,55 @@
+{
+  "skill_name": "gpw-start",
+  "trigger_evals": {
+    "should_trigger": [
+      "Nie znam się na inwestowaniu, od czego zacząć?",
+      "Mam 20 tys. oszczędności, co z nimi zrobić?",
+      "Czy w ogóle powinienem inwestować, skoro mam kredyt na kartę?",
+      "Jak zacząć na giełdzie, jestem totalnie zielony",
+      "Ile procent oszczędności włożyć w akcje?",
+      "Co to jest ETF i czy to dla mnie?",
+      "I'm a complete beginner, how do I start investing in Poland?",
+      "Should I invest or build savings first?"
+    ],
+    "should_not_trigger": [
+      "Ile akcji PKOBP kupić przy stopie 104?",
+      "Które sektory na GPW są teraz najmocniejsze?",
+      "Zapisz, że kupiłem 30 akcji KGHM",
+      "Policz mój PIT-38 za 2026",
+      "Pokaż spółki spełniające trend template Minerviniego",
+      "What is the McClellan oscillator for GPW today?"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "stage1-with-card-debt",
+      "command": "python3 scripts/start_check.py --income 6500 --expenses 4800 --savings 9000 --debt karta:4000:19.9 --horizon 25 --age 29 --tolerance 30 --no-files",
+      "assertions": [
+        "Stage 1 (emergency fund) is stated first, in one sentence",
+        "Emergency-fund target 14 400 zł, gap 5 400 zł, about 4 months at a 1 700 zł surplus",
+        "Card debt at 19,9% is flagged as expensive and its repayment comes before investing",
+        "Equity range 25-50% with the tolerance / 55% explanation",
+        "Contains the KNF scam warning and the leveraged-ETF warning",
+        "Does not name any stock or ETF to buy"
+      ]
+    },
+    {
+      "id": "short-horizon",
+      "command": "python3 scripts/start_check.py --income 8000 --expenses 5000 --savings 30000 --horizon 2 --tolerance 20 --no-files",
+      "assertions": [
+        "Says shares are not suitable for money needed within 3 years",
+        "Equity range is 0-0%",
+        "Suggests safe instruments (treasury bonds, deposits) for this money"
+      ]
+    },
+    {
+      "id": "negative-budget",
+      "command": "python3 scripts/start_check.py --income 4000 --expenses 4500 --horizon 10 --tolerance 20 --no-files",
+      "assertions": [
+        "Stage 0: budget first",
+        "Investable amount is 0 zł",
+        "Warns that spending exceeds income"
+      ]
+    }
+  ]
+}

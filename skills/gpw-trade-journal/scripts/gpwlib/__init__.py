@@ -6,4 +6,4 @@ uploaded on its own. Run ``python3 scripts/sync_shared.py`` after editing and
 ``python3 scripts/sync_shared.py --check`` in CI to detect drift.
 """
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"

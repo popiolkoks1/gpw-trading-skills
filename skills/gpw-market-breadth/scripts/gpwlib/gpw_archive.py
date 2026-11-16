@@ -6,7 +6,8 @@ session. No API key is needed.
 
     https://www.gpw.pl/archiwum-notowan?fetch=0&type=10&instrument=&date=DD-MM-YYYY
 
-``type=10`` - shares (Główny Rynek), ``type=1`` - indices.
+``type=10`` - shares (Główny Rynek), ``type=1`` - indices, ``type=241`` - ETFs
+(the instrument-type ids come from the archive page's own drop-down).
 
 Design rules
 ------------
@@ -40,7 +41,8 @@ from . import plcal
 BASE_URL = "https://www.gpw.pl/archiwum-notowan"
 TYPE_SHARES = 10
 TYPE_INDICES = 1
-TYPE_NAMES = {TYPE_SHARES: "shares", TYPE_INDICES: "indices"}
+TYPE_ETF = 241
+TYPE_NAMES = {TYPE_SHARES: "shares", TYPE_INDICES: "indices", TYPE_ETF: "etf"}
 USER_AGENT = "gpw-trading-skills/1.0 (educational market-analysis skills)"
 MIN_INTERVAL_S = 0.6
 CACHE_SCHEMA = 1

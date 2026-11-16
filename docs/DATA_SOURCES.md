@@ -4,9 +4,12 @@ All sources are free and need no API key. Verified November 2026.
 
 | Source | Used for | Access | Notes |
 |---|---|---|---|
-| **GPW — Archiwum notowań** `https://www.gpw.pl/archiwum-notowan?fetch=0&type=10&date=DD-MM-YYYY` | daily OHLC, % change, turnover of every share (`type=10`) and index (`type=1`) | HTML table, one request per session | Main source. Polish number format. Empty table = no session. |
+| **GPW — Archiwum notowań** `https://www.gpw.pl/archiwum-notowan?fetch=0&type=10&date=DD-MM-YYYY` | daily OHLC, % change, turnover of every share (`type=10`), index (`type=1`) and ETF (`type=241`) | HTML table, one request per session | Main source. Polish number format. Empty table = no session. Type ids come from the page's own instrument drop-down. A trimmed real page is kept in `tests/shared/fixtures/` so CI detects layout changes. |
 | **GPW Benchmark** `https://gpwbenchmark.pl/ajaxindex.php?action=GPWIndexes&start=ajaxPortfolio&format=html&lang=PL&isin=<ISIN>` | current portfolios of WIG20/mWIG40/sWIG80 and 14 sector indices | HTML table | Current membership only (not point-in-time). Cached 7 days. |
-| **NBP API** `https://api.nbp.pl/api/exchangerates/rates/a/<ccy>/<date>/?format=json` | FX rates (foreign dividends / trades, PIT-38) | JSON | Documented for users; not called by v1 scripts. 404 = no fixing that day → use the previous business day. |
+| **NBP API** `https://api.nbp.pl/api/exchangerates/rates/a/<ccy>/<date>/?format=json` | FX rates (foreign dividends / trades, PIT-38) | JSON | Documented for users; not called by the scripts yet. 404 = no fixing that day → use the previous business day. |
+
+| **Legal texts** (Dz.U., M.P.) | IKE/IKZE limits, OKI rules, Belka tax | constants in `shared/gpwlib/tax.py` | Each constant cites its article. OKI verified against the official text of Dz.U. 2026 poz. 1098 (art. 25, 26, 32, 43). Limits change every year and must be updated by hand. |
+| **Broker tariffs** | commission presets | constants in `shared/gpwlib/brokers.py` | Entered on `TARIFF_ENTERED`; reports warn after 180 days. Users can always override the rates. |
 
 ## Not used, and why
 
