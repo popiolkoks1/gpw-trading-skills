@@ -219,7 +219,7 @@ def _run(patched, *argv):
     extra = [] if "--history-dir" in argv else ["--history-dir", str(patched / "hist")]
     code = cli.main(list(argv) + ["--output-dir", str(out), "--cache-dir", str(patched / "cache")] + extra)
     files = sorted(out.glob("gpw_quality_screener_*.json")) if out.exists() else []
-    return code, (json.loads(files[-1].read_text()) if files else None), out
+    return code, (json.loads(files[-1].read_text(encoding="utf-8")) if files else None), out
 
 
 def test_cli_screen_contract(patched, capsys):
@@ -244,7 +244,7 @@ def test_cli_screen_contract(patched, capsys):
         assert s["date"] <= data["as_of"] and re.fullmatch(r"[a-z0-9_]{1,40}", s["kind"])
         assert s["date"] == "2026-11-13" and s["price"] == 100.0
     assert "CCC" in {s["ticker"] for s in data["signals"] if s["kind"] == "quality_red_flags"}
-    md = next(out.glob("*.md")).read_text()
+    md = next(out.glob("*.md")).read_text(encoding="utf-8")
     assert "Sources" in md and "Educational material" in md
     assert "unknown" in md  # the thin-history note
     # second run: same periods -> unchanged history, identical signal keys (dedup-friendly)

@@ -67,7 +67,7 @@ def test_fetch_session_uses_cache_offline(tmp_path):
     assert gpw_archive.fetch_session(day, cache_dir=tmp_path, offline=True) is None
     path = tmp_path / "archive" / "shares" / "2026-11-13.json"
     path.parent.mkdir(parents=True)
-    path.write_text('{"schema": 1, "date": "2026-11-13", "session": true, "rows": [{"name": "X", "close": 1}]}')
+    path.write_text('{"schema": 1, "date": "2026-11-13", "session": true, "rows": [{"name": "X", "close": 1}]}', encoding="utf-8")
     got = gpw_archive.fetch_session(day, cache_dir=tmp_path, offline=True)
     assert got["rows"][0]["name"] == "X"
 

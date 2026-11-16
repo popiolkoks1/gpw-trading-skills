@@ -110,7 +110,7 @@ def test_cli_writes_files(tmp_path, capsys):
     assert rc == 0
     files = sorted(p.name for p in tmp_path.iterdir())
     assert len(files) == 2 and files[0].startswith("gpw_start_")
-    data = json.loads((tmp_path / files[0]).read_text())
+    data = json.loads((tmp_path / files[0]).read_text(encoding="utf-8"))
     assert data["skill"] == "gpw-start" and data["lang"] == "en"
 
 

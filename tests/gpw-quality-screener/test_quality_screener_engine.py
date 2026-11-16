@@ -473,7 +473,7 @@ def test_bank_signal_needs_no_fscore():
 # --------------------------------------------------------------------------
 
 def test_ifrs_pair_from_xbrl_fixture():
-    facts = fundamentals.extract_ifrs_facts(json.loads((FIXTURES / "xbrl_arcticpaper_2023_trimmed.json").read_text()))
+    facts = fundamentals.extract_ifrs_facts(json.loads((FIXTURES / "xbrl_arcticpaper_2023_trimmed.json").read_text(encoding="utf-8")))
     cur, prior = qe.ifrs_fy_pair(facts, "xbrl")
     assert cur["year"] == 2023 and prior["year"] == 2022 and cur["months"] == 12
     assert cur["capex"] == pytest.approx(-200172000.0)

@@ -22,7 +22,7 @@ def _raiser(*a, **k):
 # --------------------------------------------------------------- Damodaran
 
 def test_parse_ctryprem_poland_row():
-    row = vd.parse_ctryprem((FIXTURES / "ctryprem_2026-01.html").read_text())
+    row = vd.parse_ctryprem((FIXTURES / "ctryprem_2026-01.html").read_text(encoding="utf-8"))
     assert row["rating"] == "A2"
     assert row["default_spread"] == pytest.approx(0.0072)
     assert row["crp"] == pytest.approx(0.0110)
@@ -33,7 +33,7 @@ def test_parse_ctryprem_poland_row():
 
 
 def test_parse_ctryprem_other_country_and_missing():
-    html = (FIXTURES / "ctryprem_2026-01.html").read_text()
+    html = (FIXTURES / "ctryprem_2026-01.html").read_text(encoding="utf-8")
     us = vd.parse_ctryprem(html, "United States")
     assert us["mature_erp"] == pytest.approx(0.0423)  # Damodaran: mature ERP identical across rows
     assert vd.parse_ctryprem(html, "Atlantis") is None
@@ -41,7 +41,7 @@ def test_parse_ctryprem_other_country_and_missing():
 
 
 def test_parse_ratings_table():
-    rows = vd.parse_ratings((FIXTURES / "ratings_2026-01.html").read_text())
+    rows = vd.parse_ratings((FIXTURES / "ratings_2026-01.html").read_text(encoding="utf-8"))
     assert len(rows) == 15
     assert rows[0]["rating"] == "D2/D" and rows[0]["spread"] == pytest.approx(0.19)
     assert rows[-1]["rating"] == "Aaa/AAA" and rows[-1]["spread"] == pytest.approx(0.004)
@@ -52,7 +52,7 @@ def test_parse_ratings_table():
 
 
 def test_damodaran_live_then_embedded_fallback_and_age():
-    html = (FIXTURES / "ctryprem_2026-01.html").read_text()
+    html = (FIXTURES / "ctryprem_2026-01.html").read_text(encoding="utf-8")
     live = vd.damodaran_poland(dt.date(2026, 11, 16), getter=lambda *a, **k: FakeResp(html))
     assert live["source"] == "live" and not live["stale"] and live["age_days"] == 315
     emb = vd.damodaran_poland(dt.date(2026, 11, 16), getter=_raiser)
@@ -63,14 +63,14 @@ def test_damodaran_live_then_embedded_fallback_and_age():
 
 def test_damodaran_ratings_fallback():
     assert vd.damodaran_ratings(getter=_raiser)["source"] == "embedded"
-    html = (FIXTURES / "ratings_2026-01.html").read_text()
+    html = (FIXTURES / "ratings_2026-01.html").read_text(encoding="utf-8")
     assert vd.damodaran_ratings(getter=lambda *a, **k: FakeResp(html, True))["source"] == "live_cache"
 
 
 # --------------------------------------------------------------- PL 10Y
 
 def test_bondspot_parse_and_pick_10y():
-    p = vd.parse_bondspot_fixing((FIXTURES / "bondspot_2026-11-16.html").read_text())
+    p = vd.parse_bondspot_fixing((FIXTURES / "bondspot_2026-11-16.html").read_text(encoding="utf-8"))
     assert p["date"] == dt.date(2026, 11, 16)
     b = vd.pick_10y(p["bonds"], p["date"])
     assert b["name"] == "DS0436" and b["yield"] == pytest.approx(6.28) and b["tenor_years"] == pytest.approx(9.44)
@@ -80,7 +80,7 @@ def test_bondspot_parse_and_pick_10y():
 
 
 def test_rf_live_bondspot_then_ecb():
-    bs = (FIXTURES / "bondspot_2026-11-16.html").read_text()
+    bs = (FIXTURES / "bondspot_2026-11-16.html").read_text(encoding="utf-8")
     calls = []
 
     def getter(url, params, **kw):

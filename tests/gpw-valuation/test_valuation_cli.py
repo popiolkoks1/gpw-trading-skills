@@ -123,14 +123,14 @@ def test_bank_g_above_coe_is_error(env, capsys):
 
 def test_assumptions_json_validation(env, tmp_path, capsys):
     bad = tmp_path / "a.json"
-    bad.write_text(json.dumps({"growth": 5}))
+    bad.write_text(json.dumps({"growth": 5}), encoding="utf-8")
     assert gv.main(["TESTCO", "--no-files", "--assumptions", str(bad)]) == 1
     assert "unknown keys" in capsys.readouterr().err
-    bad.write_text(json.dumps({"wacc": 90}))
+    bad.write_text(json.dumps({"wacc": 90}), encoding="utf-8")
     assert gv.main(["TESTCO", "--no-files", "--assumptions", str(bad)]) == 1
-    bad.write_text("{not json")
+    bad.write_text("{not json", encoding="utf-8")
     assert gv.main(["TESTCO", "--no-files", "--assumptions", str(bad)]) == 1
-    bad.write_text(json.dumps({"scenarios": {"worst": {}}}))
+    bad.write_text(json.dumps({"scenarios": {"worst": {}}}), encoding="utf-8")
     assert gv.main(["TESTCO", "--no-files", "--assumptions", str(bad)]) == 1
 
 
@@ -151,7 +151,7 @@ def _run(env, argv, tmp_path):
     js = list(tmp_path.glob("gpw_valuation_*.json"))
     md = list(tmp_path.glob("gpw_valuation_*.md"))
     assert len(js) == 1 and len(md) == 1
-    return json.loads(js[0].read_text()), md[0].read_text()
+    return json.loads(js[0].read_text(encoding="utf-8")), md[0].read_text(encoding="utf-8")
 
 
 def test_fcff_run_contract_and_numbers(env, tmp_path):
@@ -190,7 +190,7 @@ def test_fcff_run_contract_and_numbers(env, tmp_path):
 
 def test_user_overrides_are_used_and_labelled(env, tmp_path):
     a = tmp_path / "assume.json"
-    a.write_text(json.dumps({"margin": 20, "net_debt": 100, "scenarios": {"bear": {"growth_pp": -5}}}))
+    a.write_text(json.dumps({"margin": 20, "net_debt": 100, "scenarios": {"bear": {"growth_pp": -5}}}), encoding="utf-8")
     r, _ = _run(env, ["TESTCO", "--revenue-growth", "8", "--wacc", "9", "--terminal-growth", "2",
                       "--assumptions", str(a), "--lang", "en"], tmp_path)
     A = r["assumptions"]

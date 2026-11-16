@@ -8,6 +8,7 @@ producer skills for KETY and PKOBP (data as of 2026-11-13, macro/events
 import copy
 import datetime as dt
 import json
+import os
 import shlex
 import shutil
 import subprocess
@@ -164,7 +165,9 @@ def test_empty_dir_lists_every_gap_with_exact_command(tmp_path):
     assert set(req) == {s["skill"] for s in de.SPECS if not s.get("optional")}
     v = req["gpw-valuation"]["command"]
     assert "gpw-valuation" in v and "scripts/gpw_valuation.py PKOBP" in v and "--offline" in v
-    assert "--input-dir {}".format(empty) in v or "--input-dir {}".format(empty.resolve()) in v
+    variants = {str(empty), str(empty.resolve())}
+    variants |= {shlex.quote(x) for x in list(variants)} | {"'{}'".format(x) for x in list(variants)}
+    assert any("--input-dir {}".format(x) in v for x in variants)   # paths may be quoted (Windows)
     assert "--offline" not in req["gpw-exposure-coach"]["command"]     # coach has no --offline flag
     assert "ticker PKOBP" in req["gpw-quality-screener"]["command"]
     pairs = next(m for m in d["missing"] if m["skill"] == "gpw-pair-trading")
@@ -586,7 +589,8 @@ def test_thesis_command_is_accepted_by_the_real_journal(dossier, tmp_path):
     jdir = REPO / "skills" / "gpw-trade-journal"
     out = dd.thesis_command(filled(dossier), dossier, str(jdir))
     argv = [sys.executable] + out["argv"][1:] + ["--state-dir", str(tmp_path / "jstate")]
-    cp = subprocess.run(argv, cwd=str(jdir), capture_output=True, text=True, timeout=60)
+    cp = subprocess.run(argv, cwd=str(jdir), capture_output=True, text=True, encoding="utf-8", timeout=60,
+                        env=dict(os.environ, PYTHONIOENCODING="utf-8"))
     assert cp.returncode == 0, cp.stderr
     saved = list((tmp_path / "jstate" / "theses").glob("*.json"))
     assert len(saved) == 1

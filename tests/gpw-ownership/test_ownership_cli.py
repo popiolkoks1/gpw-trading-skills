@@ -47,7 +47,7 @@ def test_parse_stores_and_dedupes(tmp_path, capsys):
     assert rep["skill"] == "gpw-ownership" and rep["mode"] == "parse" and rep["as_of"] == "2026-11-05"
     assert rep["parse"]["store"]["new"] == 1
     assert cli.main(argv) == 0
-    store = json.loads((tmp_path / "state" / "insiders" / "transactions.json").read_text())
+    store = json.loads((tmp_path / "state" / "insiders" / "transactions.json").read_text(encoding="utf-8"))
     assert len(store["transactions"]) == 1 and store["transactions"][0]["ticker"] == "PRZYK"
     assert list((tmp_path / "out").glob("gpw_ownership_parse_*.json"))
 
@@ -82,8 +82,8 @@ class _Resp:
 
 
 def test_shorts_with_fixture_register(tmp_path, monkeypatch, capsys):
-    cur = json.loads((FIXTURES / "knf_current.json").read_text())
-    hist = json.loads((FIXTURES / "knf_history.json").read_text())
+    cur = json.loads((FIXTURES / "knf_current.json").read_text(encoding="utf-8"))
+    hist = json.loads((FIXTURES / "knf_history.json").read_text(encoding="utf-8"))
 
     def fake_post(url, form, **kw):
         return _Resp(cur if json.loads(form["request"])["method"] == "Default" else hist)
@@ -121,8 +121,8 @@ def test_build_signals_contract():
 
 def test_shorts_emit_current_ticker_not_pre_rename_alias(tmp_path, monkeypatch, capsys):
     from gpwlib import fundamentals
-    cur = json.loads((FIXTURES / "knf_current.json").read_text())
-    hist = json.loads((FIXTURES / "knf_history.json").read_text())
+    cur = json.loads((FIXTURES / "knf_current.json").read_text(encoding="utf-8"))
+    hist = json.loads((FIXTURES / "knf_history.json").read_text(encoding="utf-8"))
 
     def fake_post(url, form, **kw):
         return _Resp(cur if json.loads(form["request"])["method"] == "Default" else hist)

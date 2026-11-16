@@ -469,10 +469,10 @@ def _write_cache(tmp_path, n=200):
         rows = [{"name": "ALFA", "currency": "PLN", "open": prev, "high": hi[i], "low": lo[i], "close": c[i],
                  "change_pct": round((c[i] / prev - 1) * 100, 2), "turnover_k": tv[i]}]
         (tmp_path / "archive" / "shares" / "{}.json".format(d)).write_text(json.dumps(
-            {"schema": 1, "date": d, "type": "shares", "session": True, "rows": rows}))
+            {"schema": 1, "date": d, "type": "shares", "session": True, "rows": rows}), encoding="utf-8")
         (tmp_path / "archive" / "indices" / "{}.json".format(d)).write_text(json.dumps(
             {"schema": 1, "date": d, "type": "indices", "session": True,
-             "rows": [{"name": "WIG", "open": mk[d], "high": mk[d], "low": mk[d], "close": mk[d], "change_pct": 0, "turnover_k": 1}]}))
+             "rows": [{"name": "WIG", "open": mk[d], "high": mk[d], "low": mk[d], "close": mk[d], "change_pct": 0, "turnover_k": 1}]}), encoding="utf-8")
     return dates
 
 
@@ -504,7 +504,7 @@ def test_cli_end_to_end_offline(tmp_path, monkeypatch, capsys):
     rc = cli.main(["ticker", "ALFA", "--offline", "--cache-dir", str(tmp_path), "--as-of", dates[-1],
                    "--output-dir", str(out), "--lang", "en", "--state-dir", str(tmp_path / "nojournal")])
     assert rc == 0
-    js = json.loads(next(out.glob("gpw_earnings_reaction_*.json")).read_text())
+    js = json.loads(next(out.glob("gpw_earnings_reaction_*.json")).read_text(encoding="utf-8"))
     assert js["skill"] == "gpw-earnings-reaction" and js["version"] == "1.0.0" and js["lang"] == "en"
     assert {"reactions", "season", "signals", "data_provenance", "as_of"} <= set(js)
     assert len(js["reactions"]) == 1
@@ -519,7 +519,7 @@ def test_cli_end_to_end_offline(tmp_path, monkeypatch, capsys):
     assert js["signals"][0]["direction"] == "avoid" and js["signals"][0]["kind"] == "earnings_strong_negative"
     assert js["tickers"]["ALFA"]["next_expected"]["date_kind"] == "statutory_deadline"
     assert js["data_provenance"]["freshness"]["historical_run"] is True
-    md = next(out.glob("gpw_earnings_reaction_*.md")).read_text()
+    md = next(out.glob("gpw_earnings_reaction_*.md")).read_text(encoding="utf-8")
     assert "strong negative" in md and "Educational material" in md
 
 

@@ -16,7 +16,7 @@ FAKE_OK = textwrap.dedent('''
     skill = "{skill}"
     data = {{"skill": skill, "version": "1.0.0", "lang": "pl", "as_of": "2026-11-13", "argv": a}}
     data.update({extra})
-    (out / "{prefix}_2026-11-13_170500.json").write_text(json.dumps(data))
+    (out / "{prefix}_2026-11-13_170500.json").write_text(json.dumps(data), encoding="utf-8")
     print("ok", skill)
 ''')
 FAKE_FAIL = "import sys\nprint('boom: no cached sessions', file=sys.stderr)\nsys.exit(1)\n"
@@ -91,9 +91,9 @@ def test_run_continues_after_failure_and_timeout(tmp_path, fake_root):
     assert st["shorts"]["status"] == "not_installed"
     assert len(logged) == 5 and "timeout" in logged[3]
     # every step got the shared output dir and --offline
-    argv = json.loads((tmp_path / "out" / "gpw_breadth_2026-11-13_170500.json").read_text())["argv"]
+    argv = json.loads((tmp_path / "out" / "gpw_breadth_2026-11-13_170500.json").read_text(encoding="utf-8"))["argv"]
     assert "--offline" in argv and argv[argv.index("--output-dir") + 1] == str(tmp_path / "out")
-    reg = json.loads((tmp_path / "out" / "gpw_market_regime_2026-11-13_170500.json").read_text())["argv"]
+    reg = json.loads((tmp_path / "out" / "gpw_market_regime_2026-11-13_170500.json").read_text(encoding="utf-8"))["argv"]
     assert reg[reg.index("--input-dir") + 1] == str(tmp_path / "out")
 
 
@@ -134,10 +134,10 @@ def test_cli_run_with_fake_skills_writes_log_and_brief(tmp_path, fake_root, caps
     assert "[ 2/3] sector" in text and "failed" in text
     logs = list(out.glob("gpw_daily_brief_run_*.json"))
     assert len(logs) == 1
-    log = json.loads(logs[0].read_text())
+    log = json.loads(logs[0].read_text(encoding="utf-8"))
     assert log["mode"] == "run" and log["counts"]["ok"] == 2 and log["counts"]["failed"] == 1
     assert log["brief"]["json"].endswith(".json")
-    brief = json.loads(Path(log["brief"]["json"]).read_text())
+    brief = json.loads(Path(log["brief"]["json"]).read_text(encoding="utf-8"))
     assert brief["snapshot"]["regime_state"] == "rally_attempt"
     rows = {r["input"]: r["status"] for r in brief["inputs"]}
     assert rows["sector"] == "missing" and rows["regime"] == "ok"

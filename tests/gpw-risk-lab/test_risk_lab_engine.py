@@ -289,7 +289,7 @@ def test_last_trading_day_third_friday_and_holiday_shift():
 
 
 def test_futures_symbol_parsing_integration_and_chain():
-    rows = json.loads((FIX / "fw20_rows.json").read_text())
+    rows = json.loads((FIX / "fw20_rows.json").read_text(encoding="utf-8"))
     fw20 = gpw_archive.futures_rows(rows, "WIG20")
     assert [r["name"] for r in fw20] == ["FW20Z2620", "FW20H2720", "FW20M2720", "FW20U2720"]
     assert all(r["multiplier"] == 20 for r in fw20)
