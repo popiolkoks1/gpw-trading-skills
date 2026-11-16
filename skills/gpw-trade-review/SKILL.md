@@ -36,6 +36,7 @@ It never modifies the journal.
 python3 scripts/trade_review.py --month 2026-11 --lang pl
 python3 scripts/trade_review.py --year 2026 --lang pl          # stats + PIT-38 estimate
 python3 scripts/trade_review.py --year 2026 --loss-deduction 1200 # prior-year loss the user deducts
+python3 scripts/trade_review.py --all --paper                    # paper trades only (never mixed with real ones, no PIT-38)
 python3 scripts/trade_review.py --all --lang en --no-files
 ```
 

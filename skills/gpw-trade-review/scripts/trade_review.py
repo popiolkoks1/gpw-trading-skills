@@ -89,11 +89,15 @@ def in_period(date_str: str, start: dt.date, end: dt.date) -> bool:
 # Statistics on closed theses
 # --------------------------------------------------------------------------
 
-def closed_trades(theses: List[Dict], start: dt.date, end: dt.date) -> List[Dict]:
+def closed_trades(theses: List[Dict], start: dt.date, end: dt.date, paper: bool = False) -> List[Dict]:
+    """Closed trades in the period. Real and paper trades are never mixed:
+    ``paper=False`` returns real trades only, ``paper=True`` paper trades only."""
     rows = []
     for th in theses:
         o = th.get("outcome")
         if th.get("status") != "CLOSED" or not o:
+            continue
+        if bool(th.get("paper")) != paper:
             continue
         if not in_period(o["closed_at"], start, end):
             continue
@@ -293,6 +297,8 @@ def pit38(theses: List[Dict], year: int, loss_deduction: float = 0.0) -> Dict:
     sales = []
     excluded = []
     for th in theses:
+        if th.get("paper"):
+            continue  # paper trades are not real transactions
         if th.get("account_type", "regular") != "regular":
             if any(f["side"] == "sell" and f["date"].startswith(str(year)) for f in th.get("fills", [])):
                 excluded.append({"id": th["id"], "account_type": th["account_type"]})
@@ -339,6 +345,10 @@ def pit38(theses: List[Dict], year: int, loss_deduction: float = 0.0) -> Dict:
 
 STRINGS = {
     "title": {"pl": "Przegląd transakcji – {p}", "en": "Trade review – {p}"},
+    "paper_mode": {"pl": "📝 Tylko transakcje na niby (paper trading) – bez PIT-38.",
+                   "en": "📝 Paper trades only – no PIT-38."},
+    "paper_hidden": {"pl": "Pominięto {n} transakcji na niby – zobacz je osobno z --paper.",
+                     "en": "{n} paper trade(s) excluded – review them separately with --paper."},
     "summary": {"pl": "Podsumowanie", "en": "Summary"},
     "trades": {"pl": "Zamknięte transakcje", "en": "Closed trades"},
     "win_rate": {"pl": "Skuteczność (zyskowne)", "en": "Win rate"},
@@ -434,6 +444,10 @@ def render(report: Dict, lang: str = "pl") -> str:
     P = lambda x: fmt.pln(x, 2, lang)  # noqa: E731
     st, pm = report["stats"], report["process"]
     L = ["# " + t("title", p=report["period"]), ""]
+    if report.get("paper"):
+        L += ["> " + t("paper_mode"), ""]
+    elif report.get("other_mode_trades"):
+        L += ["_" + t("paper_hidden", n=report["other_mode_trades"]) + "_", ""]
     if not st["trades"]:
         L += [t("no_trades"), ""]
     else:
@@ -508,9 +522,11 @@ def render(report: Dict, lang: str = "pl") -> str:
     return "\n".join(L) + "\n"
 
 
-def build_report(theses: List[Dict], month=None, year=None, pit_year=None, loss_deduction=0.0, journal_dir="") -> Dict:
+def build_report(theses: List[Dict], month=None, year=None, pit_year=None, loss_deduction=0.0, journal_dir="",
+                 paper: bool = False) -> Dict:
     start, end, label = period_bounds(month, year)
-    rows = closed_trades(theses, start, end)
+    rows = closed_trades(theses, start, end, paper=paper)
+    other = len(closed_trades(theses, start, end, paper=not paper))
     st = stats(rows)
     pm = process_matrix(rows)
     rep = {
@@ -521,6 +537,8 @@ def build_report(theses: List[Dict], month=None, year=None, pit_year=None, loss_
         "period_end": end.isoformat() if label != "all" else None,
         "generated_at": dt.datetime.now().replace(microsecond=0).isoformat(),
         "journal_dir": str(journal_dir),
+        "paper": bool(paper),
+        "other_mode_trades": other,
         "stats": st,
         "process": pm,
         "patterns": patterns(rows),
@@ -528,7 +546,7 @@ def build_report(theses: List[Dict], month=None, year=None, pit_year=None, loss_
         "lessons": top_lessons(rows),
         "trades": rows,
     }
-    if pit_year:
+    if pit_year and not paper:
         rep["pit38"] = pit38(theses, pit_year, loss_deduction)
     return rep
 
@@ -540,6 +558,7 @@ def build_parser():
     g.add_argument("--year", type=int, help="YYYY (also produces the PIT-38 estimate)")
     g.add_argument("--all", action="store_true", help="All closed trades (default)")
     p.add_argument("--no-pit38", action="store_true", help="Skip the PIT-38 estimate for --year")
+    p.add_argument("--paper", action="store_true", help="Review paper trades only (never mixed with real ones)")
     p.add_argument("--loss-deduction", type=float, default=0.0, help="Prior-year loss to deduct (PLN), user-supplied")
     p.add_argument("--journal-dir", type=Path, default=None, help="gpw-trade-journal state dir (default ~/.gpw-trading-skills/journal)")
     p.add_argument("--lang", choices=["pl", "en"], default="pl")
@@ -564,7 +583,7 @@ def main(argv=None) -> int:
             return 1
         rep = build_report(theses, month=args.month, year=args.year,
                            pit_year=args.year if args.year and not args.no_pit38 else None,
-                           loss_deduction=args.loss_deduction, journal_dir=jd)
+                           loss_deduction=args.loss_deduction, journal_dir=jd, paper=args.paper)
     except (ReviewError, KeyError, ValueError) as exc:
         print("error: {}".format(exc), file=sys.stderr)
         return 1

@@ -155,3 +155,14 @@ def test_cli_rejects_missing_kill(tmp_path, capsys):
     rc = j.main(["--state-dir", str(tmp_path), "add", "--ticker", "PZU", "--thesis", "x", "--pillar", "y"])
     assert rc == 1
     assert "kill criterion" in capsys.readouterr().err
+
+
+def test_paper_flag_stored_and_validated():
+    th = mk(paper=True)
+    assert th["paper"] is True
+    assert mk()["paper"] is False
+    th["paper"] = "yes"
+    with pytest.raises(j.JournalError, match="paper"):
+        j.validate(th)
+    md = j.render_thesis(mk(paper=True), "pl")
+    assert "na niby" in md

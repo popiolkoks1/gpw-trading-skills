@@ -1,0 +1,69 @@
+{
+  "skill_name": "gpw-account-planner",
+  "trigger_evals": {
+    "should_trigger": [
+      "Mam 30 lat i mogę odkładać 1000 zł miesięcznie. IKE czy IKZE?",
+      "Czy OKI od 2027 roku się opłaca, jeśli kupuję ETF na cały świat?",
+      "Gdzie najlepiej odkładać pieniądze na emeryturę: IKE, IKZE czy zwykłe konto maklerskie?",
+      "Ile będę mieć za 25 lat, jeśli wpłacam 500 zł miesięcznie na IKE?",
+      "Jestem na skali 32%, opłaca mi się IKZE? Ile dostanę zwrotu podatku?",
+      "Jak podzielić 3000 zł miesięcznie między IKE, IKZE i OKI?",
+      "Should I use IKE or IKZE in Poland if I pay 12% income tax?",
+      "Is the new Polish OKI account better than a regular brokerage account for 20 years?",
+      "Mam działalność na liniowym, jaki mam limit IKZE w 2027 i czy warto?"
+    ],
+    "should_not_trigger": [
+      "Jakie ETF-y są notowane na GPW?",
+      "Ile jednostek ETFBW20TR kupić za 1000 zł?",
+      "Ile akcji PKO BP kupić przy stopie 112?",
+      "Zrób mi PIT-38 za 2026 rok z moich transakcji",
+      "Jak wygląda dziś szerokość rynku na GPW?",
+      "What is the US Roth IRA contribution limit?",
+      "Zapisz w dzienniku, że kupiłem ETF na S&P 500 na IKE"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "beginner-30y-scale12",
+      "prompt": "Mam 30 lat, zarabiam na etacie (12% PIT). Chcę odkładać 1000 zł miesięcznie przez 25 lat. Gdzie?",
+      "command": "python3 scripts/gpw_account_planner.py --monthly 1000 --years 25 --age 30 --pit scale12 --no-files",
+      "assertions": [
+        "Leads with a plain-Polish short answer naming the computed order and the net amount in the 6% scenario",
+        "States that at age 55 IKE and IKZE are not yet tax-free and shows the hold-to-65 result where IKE comes out ahead of the regular account",
+        "Explains IKE, IKZE, OKI, TER, podatek Belki and procent składany in simple words",
+        "Shows real (inflation-adjusted) values next to nominal ones",
+        "Warns that global ETFs on OKI are taxed from the first zloty and that the OKI rate after 2027 is assumed",
+        "Does not phrase the result as advice; ends with the disclaimer"
+      ]
+    },
+    {
+      "id": "scale32-ikze-first",
+      "prompt": "Zarabiam powyżej progu (32%), mam 40 lat, 2500 zł miesięcznie przez 25 lat.",
+      "command": "python3 scripts/gpw_account_planner.py --monthly 2500 --years 25 --age 40 --pit scale32 --no-files",
+      "assertions": [
+        "The computed order starts with IKZE then IKE (IKZE refund at 32%)",
+        "Shows the monthly split: about 1003 zł to IKZE and about 1497 zł to IKE in 2027",
+        "Mentions that the IKZE refund (32% of contributions) is reinvested and that IKZE is taxed 10% at withdrawal after 65"
+      ]
+    },
+    {
+      "id": "oki-polish-assets",
+      "prompt": "Will OKI beat a regular account if I only hold Polish ETFs? 2000 PLN a month, 15 years, age 35.",
+      "command": "python3 scripts/gpw_account_planner.py --monthly 2000 --years 15 --age 35 --oki-qualified-pct 100 --lang en --no-files",
+      "assertions": [
+        "Answer is in English",
+        "OKI with 100% qualified assets shows low yearly OKI tax while the balance is under the 100,000 PLN exemption",
+        "Explains the exemption (100,000 PLN qualified, 25,000 PLN savings) and the 0.85% rate in 2027 with the legal source Dz.U. 2026 poz. 1098"
+      ]
+    },
+    {
+      "id": "bad-input",
+      "prompt": "Policz IKE dla wpłaty -100 zł",
+      "command": "python3 scripts/gpw_account_planner.py --monthly -100 --years 10 --age 30 --no-files",
+      "assertions": [
+        "Script exits with code 2 and says the contribution must be > 0",
+        "Claude asks for a positive amount and does not invent results"
+      ]
+    }
+  ]
+}

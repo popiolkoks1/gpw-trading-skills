@@ -1,0 +1,66 @@
+{
+  "skill": "gpw-portfolio-check",
+  "trigger_evals": {
+    "should_trigger": [
+      "Sprawdź mój portfel: PKOBP 150 szt. po 58,20, PZU 200 po 52,10, KGHM 40 po 160,50",
+      "Czy mój portfel na GPW jest dobrze zdywersyfikowany? Załączam eksport z mBanku (CSV).",
+      "Mam za dużo banków w portfelu?",
+      "Ile mogę stracić w złej sesji na moich akcjach z GPW?",
+      "Przeanalizuj ryzyko mojego portfela z dziennika",
+      "Check my Polish stock portfolio for concentration and correlation risk",
+      "How does my GPW portfolio compare with the WIG over the last year?",
+      "Jaka jest beta i VaR mojego portfela? Mam CDPROJEKT, ORLEN, DINO i ETF na WIG20",
+      "Am I too concentrated? Here are my Warsaw holdings: ..."
+    ],
+    "should_not_trigger": [
+      "Które sektory na GPW są teraz najmocniejsze?",
+      "Ile akcji PKO BP kupić przy koncie 20 tys. i stopie 112?",
+      "Jaki ETF na S&P 500 wybrać na IKE?",
+      "Zapisz w dzienniku, że kupiłem PZU",
+      "Analyze my US portfolio of Apple and Microsoft",
+      "Ile podatku Belki zapłacę za 2026?"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "pl-csv-beginner",
+      "prompt": "Sprawdź mój portfel (plik holdings.csv), mam też 5000 zł gotówki.",
+      "command": "python3 scripts/portfolio_check.py --csv holdings.csv --cash 5000 --lang pl --no-files",
+      "assertions": [
+        "scripts/portfolio_check.py was executed with --cash 5000",
+        "Answer starts with the plain-Polish summary (3-5 sentences) before tables",
+        "Every flag from the report is mentioned with its number and threshold",
+        "REVIEW positions are explained as items to check, never as sell recommendations",
+        "Jargon (HHI / efektywna liczba pozycji, VaR, beta) is explained in plain Polish",
+        "States the data session date"
+      ]
+    },
+    {
+      "id": "en-journal",
+      "prompt": "Give me a risk overview of my open journal positions.",
+      "command": "python3 scripts/portfolio_check.py --from-journal --lang en --no-files",
+      "assertions": [
+        "Uses --from-journal",
+        "Reports portfolio heat (open risk to stops) and names positions without a stop",
+        "Mentions that average price comes from FIFO lots",
+        "Answer is in English"
+      ]
+    },
+    {
+      "id": "unknown-ticker",
+      "prompt": "Mój portfel: ORLENX 10 szt. po 60 zł",
+      "assertions": [
+        "The script exits with an error listing close matches",
+        "Claude asks which ticker was meant instead of guessing prices"
+      ]
+    },
+    {
+      "id": "caveats",
+      "prompt": "Czy ten VaR to maksymalna strata?",
+      "assertions": [
+        "Explains VaR 95% is a historical 1-in-20 bad-day loss, not a maximum",
+        "Mentions the sqrt-time caveat for the 20-session figure"
+      ]
+    }
+  ]
+}
