@@ -1,0 +1,240 @@
+{
+ "skill": "gpw-event-calendar",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "upcoming",
+ "as_of": "2026-11-12",
+ "reference_date": "2026-11-12",
+ "horizon": {
+  "start": "2026-11-12",
+  "end": "2026-11-25",
+  "sessions": 10,
+  "company_end": "2026-11-25"
+ },
+ "tickers": [],
+ "events": [
+  {
+   "id": "534604703e25",
+   "ticker": "ALLEGRO",
+   "isin": "LU2237380790",
+   "company": "ALLEGRO.EU S.A.",
+   "type": "periodic_report",
+   "subtype": "preliminary",
+   "date": "2026-11-12",
+   "time": "00:04",
+   "date_kind": "confirmed",
+   "importance": "medium",
+   "title": "Wybrane skonsolidowane dane finansowe za okresy trzech i dziewięciu miesięcy zakończonych 30 września 2026 r.",
+   "source": "ESPI 60/2026 2026-11-12",
+   "source_url": "https://www.gpw.pl/komunikat?geru_id=500381",
+   "details": {
+    "published": true
+   }
+  },
+  {
+   "id": "837b9c08f392",
+   "ticker": "TAURONPE",
+   "isin": "PLTAURN00011",
+   "company": "TAURON POLSKA ENERGIA SPÓŁKA AKCYJNA",
+   "type": "periodic_report",
+   "subtype": "scheduled",
+   "date": "2026-11-18",
+   "time": null,
+   "date_kind": "confirmed",
+   "importance": "high",
+   "title": "Raport za III kw. 2026",
+   "source": "ESPI 1/2026 2026-01-19",
+   "source_url": "https://www.gpw.pl/komunikat?geru_id=480363",
+   "details": {
+    "period": "Q3",
+    "fiscal_year": 2026,
+    "schedule_report": "2026-01-19",
+    "from_body": true
+   }
+  },
+  {
+   "id": "8deba4ac70bb",
+   "ticker": "PEKAO",
+   "isin": "PLPEKAO00016",
+   "company": "BANK POLSKA KASA OPIEKI SPÓŁKA AKCYJNA",
+   "type": "agm",
+   "subtype": "extraordinary",
+   "date": "2026-11-19",
+   "time": "10:00",
+   "date_kind": "confirmed",
+   "importance": "medium",
+   "title": "Ogłoszenie o zwołaniu Nadzwyczajnego Walnego Zgromadzenia Banku Polska Kasa Opieki Spółka Akcyjna",
+   "source": "ESPI 30/2026 2026-10-23",
+   "source_url": "https://www.gpw.pl/komunikat?geru_id=499346",
+   "details": {
+    "announced": "2026-10-23",
+    "kind": "extraordinary",
+    "from_body": true
+   }
+  },
+  {
+   "id": "8ed5a1582788",
+   "ticker": "PZU",
+   "isin": "PLPZU0000011",
+   "company": "POWSZECHNY ZAKŁAD UBEZPIECZEŃ SPÓŁKA AKCYJNA",
+   "type": "periodic_report",
+   "subtype": "scheduled",
+   "date": "2026-11-19",
+   "time": null,
+   "date_kind": "confirmed",
+   "importance": "high",
+   "title": "Raport za III kw. 2026",
+   "source": "ESPI 2/2026 2026-01-13",
+   "source_url": "https://www.gpw.pl/komunikat?geru_id=480023",
+   "details": {
+    "period": "Q3",
+    "fiscal_year": 2026,
+    "schedule_report": "2026-01-13",
+    "from_body": true
+   }
+  },
+  {
+   "id": "0cb091e3d4a6",
+   "ticker": null,
+   "isin": null,
+   "company": null,
+   "type": "index_revision",
+   "subtype": "ranking",
+   "date": "2026-11-20",
+   "time": null,
+   "date_kind": "confirmed",
+   "importance": "medium",
+   "title": "ranking indeksów WIG20, WIG20TR, mWIG40, mWIG40TR, sWIG80, sWIG80TR, WIG30, WIG30TR",
+   "source": "GPW Benchmark, kalendarium indeksów",
+   "source_url": "https://gpwbenchmark.pl/kalendarium-indeksow",
+   "details": {
+    "category": "ranking",
+    "family": "size"
+   }
+  },
+  {
+   "id": "386d0cfe366a",
+   "ticker": "ALIOR",
+   "isin": "PLALIOR00045",
+   "company": "ALIOR BANK SPÓŁKA AKCYJNA",
+   "type": "agm",
+   "subtype": "extraordinary",
+   "date": "2026-11-24",
+   "time": "10:00",
+   "date_kind": "confirmed",
+   "importance": "medium",
+   "title": "Zwołanie Nadzwyczajnego Walnego Zgromadzenia Alior Banku S.A. na wniosek Akcjonariusza Banku",
+   "source": "ESPI 28/2026 2026-10-27",
+   "source_url": "https://www.gpw.pl/komunikat?geru_id=499466",
+   "details": {
+    "announced": "2026-10-27",
+    "kind": "extraordinary",
+    "from_body": true
+   }
+  },
+  {
+   "id": "285313e03674",
+   "ticker": "PZU",
+   "isin": "PLPZU0000011",
+   "company": "POWSZECHNY ZAKŁAD UBEZPIECZEŃ SPÓŁKA AKCYJNA",
+   "type": "agm",
+   "subtype": "extraordinary",
+   "date": "2026-11-24",
+   "time": "12:00",
+   "date_kind": "confirmed",
+   "importance": "medium",
+   "title": "Ogłoszenie o zwołaniu Nadzwyczajnego Walnego Zgromadzenia PZU SA oraz projekty uchwał",
+   "source": "ESPI 27/2026 2026-10-23",
+   "source_url": "https://www.gpw.pl/komunikat?geru_id=499333",
+   "details": {
+    "announced": "2026-10-23",
+    "kind": "extraordinary",
+    "from_body": true
+   }
+  },
+  {
+   "id": "657ce82090c6",
+   "ticker": "CDPROJEKT",
+   "isin": "PLOPTTC00011",
+   "company": "CD PROJEKT RED SPÓŁKA AKCYJNA",
+   "type": "periodic_report",
+   "subtype": "scheduled",
+   "date": "2026-11-24",
+   "time": null,
+   "date_kind": "confirmed",
+   "importance": "high",
+   "title": "Raport za III kw. 2026",
+   "source": "ESPI 1/2026 2026-01-19",
+   "source_url": "https://www.gpw.pl/komunikat?geru_id=480391",
+   "details": {
+    "period": "Q3",
+    "fiscal_year": 2026,
+    "schedule_report": "2026-01-19",
+    "from_body": true
+   }
+  },
+  {
+   "id": "23f117ee95c8",
+   "ticker": "PGE",
+   "isin": "PLPGER000010",
+   "company": "PGE POLSKA GRUPA ENERGETYCZNA SPÓŁKA AKCYJNA",
+   "type": "periodic_report",
+   "subtype": "scheduled",
+   "date": "2026-11-24",
+   "time": null,
+   "date_kind": "confirmed",
+   "importance": "high",
+   "title": "Raport za III kw. 2026",
+   "source": "ESPI 1/2026 2026-01-09",
+   "source_url": "https://www.gpw.pl/komunikat?geru_id=479881",
+   "details": {
+    "period": "Q3",
+    "fiscal_year": 2026,
+    "schedule_report": "2026-01-09",
+    "from_body": true
+   }
+  }
+ ],
+ "summary": {
+  "n_events": 9,
+  "by_type": {
+   "periodic_report": 5,
+   "agm": 3,
+   "index_revision": 1
+  },
+  "by_date_kind": {
+   "confirmed": 9,
+   "estimated": 0,
+   "statutory_deadline": 0
+  },
+  "n_company": 8,
+  "n_market": 1,
+  "min_importance": "medium"
+ },
+ "holding_window_check": null,
+ "warnings": [],
+ "data_provenance": {
+  "schema_version": "1.0",
+  "as_of": "2026-11-12",
+  "sources": [
+   "https://www.gpw.pl/komunikaty (ESPI/EBI list, POST ajaxindex.php GPWEspiReportUnion), 125 days",
+   "https://www.gpw.pl/komunikat?geru_id=N (report pages), 31 read",
+   "https://www.gpw.pl/archiwum-notowan (cached shares archive, 500 sessions to 2026-11-12), ex-dates from gpwlib.panel price adjustments",
+   "https://gpwbenchmark.pl/kalendarium-indeksow?year=2026 (91 items, retrieved 2026-11-16T13:30:58+00:00)",
+   "NBP MPC schedule 2026 (embedded, as of 2026-11-16; relay https://ksiegowosc.infor.pl/obrot-gospodarczy/finanse-i-inwestycje/7451398,harmonogram-posiedzen-rady-polityki-pienieznej-w-2026-roku.html)",
+   "MSCI index review dates (embedded): https://www.msci.com/downloads/documents/press-releases/media-room/MSCI_Nov_2026_IR_Pre-Ann_PR_Doc.pdf",
+   "GPW FW20 standard: https://www.gpw.pl/pub/GPW/files/PDF/standardy_pl/WATS/Standard_kontrakty_WIG20_WATS_06.2026.pdf",
+   "GUS calendar rule check: https://stat.gov.pl/kalendarium/",
+   "Dz.U. 2025 poz. 755 (§ 83-84): https://api.sejm.gov.pl/eli/acts/DU/2025/755/text.pdf",
+   "KSH (Dz.U. 2024 poz. 18) art. 348, 395: https://api.sejm.gov.pl/eli/acts/DU/2024/18/text.pdf"
+  ],
+  "freshness": {
+   "as_of": "2026-11-12",
+   "sessions_behind": 0,
+   "is_stale": false,
+   "reference_date": "2026-11-12",
+   "historical_run": true,
+   "sessions_behind_today": 1
+  }
+ }
+}

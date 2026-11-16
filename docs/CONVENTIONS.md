@@ -51,3 +51,16 @@ tests/<skill-name>/test_*.py
 12. **Outputs:** `<prefix>_YYYY-MM-DD_HHMMSS.{json,md}` in `--output-dir`
     (default: current dir); state files in `--state-dir` (default
     `~/.gpw-trading-skills/`).
+13. **Discovery and signals are shared:** find other skills' reports only with
+    `gpwlib.reports` (`find_report`, `iter_reports`; RRG vs classic
+    sector-trend reports are told apart by `mode`). A skill that produces
+    trade ideas or warnings also emits the generic `signals[]` array
+    (`skills/gpw-signal-postmortem/references/signal-contract.md`), so the
+    post-mortem can measure it. All v1.2 contracts: `docs/ROADMAP_v1.2.md` §4.
+14. **Network access goes through `gpwlib.http`** (identifying User-Agent,
+    >= 1 s per host, cache, `--offline`). Never spoof a browser, never get
+    around a WAF, login or robots.txt; if a source blocks scripts, the skill
+    asks the user to paste or download the data instead.
+15. **Unknown is a value.** When data is missing, the output says unknown (with
+    the reason and the command or file that would fill it); it never
+    substitutes 0, a guess or a default that looks like data.

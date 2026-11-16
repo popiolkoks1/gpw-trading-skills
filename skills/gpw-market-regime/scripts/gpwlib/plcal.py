@@ -58,6 +58,34 @@ def exchange_holidays(year: int) -> set:
     return days
 
 
+def public_holidays(year: int) -> set:
+    """Polish statutory public holidays (ustawa o dniach wolnych od pracy) on
+    weekdays that matter for legal deadlines: :func:`exchange_holidays`
+    minus the two exchange-only days (Good Friday, 31 December); 24 December
+    is a public holiday from 2025 (amendment of 2024), before that it was an
+    exchange-only holiday. Sundays (Easter, Pentecost) are never working
+    days anyway."""
+    days = set(exchange_holidays(year))
+    days.discard(easter_sunday(year) - dt.timedelta(days=2))
+    days.discard(dt.date(year, 12, 31))
+    if year < 2025:
+        days.discard(dt.date(year, 12, 24))
+    return days
+
+
+def is_working_day(day: dt.date) -> bool:
+    """Mon-Fri and not a public holiday (for statutory deadlines, not sessions)."""
+    return day.weekday() < 5 and day not in public_holidays(day.year)
+
+
+def roll_to_working_day(day: dt.date) -> dt.date:
+    """A deadline on a Saturday, Sunday or public holiday moves to the next
+    working day (e.g. Dz.U. 2025 poz. 755 § 83 ust. 11; KC art. 115)."""
+    while not is_working_day(day):
+        day += dt.timedelta(days=1)
+    return day
+
+
 def is_probable_session(day: dt.date) -> bool:
     if day.weekday() >= 5:
         return False

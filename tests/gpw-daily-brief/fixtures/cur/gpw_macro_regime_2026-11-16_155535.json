@@ -1,0 +1,374 @@
+{
+ "skill": "gpw-macro-regime",
+ "version": "1.0.0",
+ "lang": "pl",
+ "as_of": "2026-11-16",
+ "analysis_date": "2026-11-16",
+ "macro": {
+  "state": {
+   "monetary": "hold_after_easing",
+   "monetary_simple": "neutral",
+   "real_rate": "negative",
+   "pln": "weak",
+   "spread": "widening",
+   "curve": "normal",
+   "inflation": "rising",
+   "inflation_band": "above",
+   "composite": "headwind",
+   "regime_label": "neutral_x_pln_weak"
+  },
+  "score": -0.475,
+  "confidence": "high",
+  "component_scores": {
+   "monetary": 0.75,
+   "inflation": -1.0,
+   "spread": -1.0,
+   "pln": -1.0
+  },
+  "components_used": [
+   "inflation",
+   "monetary",
+   "pln",
+   "spread"
+  ],
+  "missing_components": [],
+  "failed_sources": [],
+  "stale_sources": [],
+  "curve_penalty": 0.0,
+  "details": {
+   "monetary": {
+    "state": "hold_after_easing",
+    "simple": "neutral",
+    "rate": 3.75,
+    "last_change_date": "2026-03-05",
+    "last_move_bp": -25,
+    "previous_move_bp": -25,
+    "previous_move_date": "2025-12-04",
+    "last_two_moves": [
+     "cut",
+     "cut"
+    ],
+    "turn": false,
+    "days_since_last_change": 256,
+    "cycle_start": "2023-09-07",
+    "cycle_moves": 9,
+    "cycle_total_bp": -300,
+    "change_12m_bp": -50,
+    "trend": "falling"
+   },
+   "inflation": {
+    "value": 4.0,
+    "period": "2026-09",
+    "change_3m_pp": 1.0,
+    "trend": "rising",
+    "band": "above",
+    "target": 2.5,
+    "band_pp": 1.0,
+    "max_12m": 4.0,
+    "history_12m": [
+     {
+      "period": "2025-10",
+      "value": 2.8
+     },
+     {
+      "period": "2025-11",
+      "value": 2.6
+     },
+     {
+      "period": "2025-12",
+      "value": 2.6
+     },
+     {
+      "period": "2026-01",
+      "value": 2.5
+     },
+     {
+      "period": "2026-02",
+      "value": 2.5
+     },
+     {
+      "period": "2026-03",
+      "value": 3.2
+     },
+     {
+      "period": "2026-04",
+      "value": 3.4
+     },
+     {
+      "period": "2026-05",
+      "value": 3.3
+     },
+     {
+      "period": "2026-06",
+      "value": 3.0
+     },
+     {
+      "period": "2026-07",
+      "value": 3.1
+     },
+     {
+      "period": "2026-08",
+      "value": 3.5
+     },
+     {
+      "period": "2026-09",
+      "value": 4.0
+     }
+    ]
+   },
+   "real_rate": {
+    "value": -0.25,
+    "sign": "negative",
+    "stance": "accommodative"
+   },
+   "pln": {
+    "regime": "weak",
+    "score": 1.0,
+    "pairs_used": [
+     "EUR",
+     "USD"
+    ],
+    "vol_elevated": false
+   },
+   "spread": {
+    "value_bp": 285.0,
+    "as_of": "2026-11-16",
+    "previous_bp": 262.0,
+    "previous_as_of": "2026-08-17",
+    "change_3m_bp": 23.0,
+    "trend": "widening",
+    "basis": "daily"
+   },
+   "curve": {
+    "value_bp": 137.0,
+    "as_of": "2026-11-16",
+    "shape": "normal",
+    "y2": 4.91,
+    "y2_bond": "OK0129",
+    "y10": 6.28,
+    "y10_bond": "DS0436",
+    "change_3m_bp": -11.0,
+    "trend": "stable",
+    "previous_bp": 148.0,
+    "previous_as_of": "2026-08-17"
+   }
+  },
+  "summary": "Polityka pieniężna: pauza po obniżkach (3,75% 2026-03-05). Inflacja: HICP 4,0% (2026-09), rośnie, powyżej pasma celu NBP. Realna stopa: -0,25 pp (łagodna, stymulująca). Złoty: słaby. Spread PL-DE 10L: 285 pb, rozszerza się (inwestorzy żądają większej premii)."
+ },
+ "indicators": {
+  "nbp_reference_rate": {
+   "value": 3.75,
+   "unit": "%",
+   "as_of": "2026-03-05",
+   "source": "nbp_rates",
+   "trend": "falling",
+   "last_move_bp": -25,
+   "change_12m_bp": -50,
+   "cycle_total_bp": -300
+  },
+  "eurpln": {
+   "value": 4.4048,
+   "unit": "PLN",
+   "as_of": "2026-11-16",
+   "source": "nbp_fx",
+   "trend": "rising",
+   "sma200": 4.2965,
+   "dev_sma200_pct": 2.52,
+   "change_3m_pct": 2.26,
+   "change_6m_pct": 3.8,
+   "change_12m_pct": 4.2,
+   "vol_3m_ann_pct": 3.74,
+   "vol_1y_ann_pct": 3.42,
+   "pln_signal": "weak"
+  },
+  "usdpln": {
+   "value": 4.0007,
+   "unit": "PLN",
+   "as_of": "2026-11-16",
+   "source": "nbp_fx",
+   "trend": "rising",
+   "sma200": 3.7286,
+   "dev_sma200_pct": 7.3,
+   "change_3m_pct": 7.73,
+   "change_6m_pct": 9.76,
+   "change_12m_pct": 9.98,
+   "vol_3m_ann_pct": 7.72,
+   "vol_1y_ann_pct": 7.71,
+   "pln_signal": "weak"
+  },
+  "chfpln": {
+   "value": 4.7607,
+   "unit": "PLN",
+   "as_of": "2026-11-16",
+   "source": "nbp_fx",
+   "trend": "rising",
+   "sma200": 4.6518,
+   "dev_sma200_pct": 2.34,
+   "change_3m_pct": 3.71,
+   "change_6m_pct": 2.52,
+   "change_12m_pct": 3.68,
+   "vol_3m_ann_pct": 6.01,
+   "vol_1y_ann_pct": 5.08,
+   "pln_signal": "weak"
+  },
+  "hicp_yoy": {
+   "value": 4.0,
+   "unit": "%",
+   "as_of": "2026-09",
+   "source": "eurostat_hicp",
+   "trend": "rising",
+   "change_3m_pp": 1.0,
+   "band": "above"
+  },
+  "real_rate": {
+   "value": -0.25,
+   "unit": "pp",
+   "as_of": "2026-09",
+   "source": "nbp_rates+eurostat_hicp",
+   "trend": null,
+   "stance": "accommodative"
+  },
+  "pl10y": {
+   "value": 6.28,
+   "unit": "%",
+   "as_of": "2026-11-16",
+   "source": "bondspot",
+   "trend": "rising",
+   "bond": "DS0436",
+   "isin": "PL0000119087",
+   "tenor_years": 9.44,
+   "change_3m_bp": 43.0
+  },
+  "pl10y_monthly_ecb": {
+   "value": 6.32,
+   "unit": "%",
+   "as_of": "2026-10",
+   "source": "ecb_pl10y",
+   "trend": null
+  },
+  "pl2y": {
+   "value": 4.91,
+   "unit": "%",
+   "as_of": "2026-11-16",
+   "source": "bondspot",
+   "trend": null,
+   "bond": "OK0129",
+   "isin": "PL0000119178",
+   "tenor_years": 2.19
+  },
+  "bund10y": {
+   "value": 3.43,
+   "unit": "%",
+   "as_of": "2026-11-16",
+   "source": "bundesbank",
+   "trend": "stable",
+   "change_3m_bp": 20.0
+  },
+  "pl_de_spread_10y": {
+   "value": 285.0,
+   "unit": "bp",
+   "as_of": "2026-11-16",
+   "source": "bondspot+bundesbank",
+   "trend": "widening",
+   "change_3m_bp": 23.0,
+   "basis": "daily"
+  },
+  "curve_2s10s": {
+   "value": 137.0,
+   "unit": "bp",
+   "as_of": "2026-11-16",
+   "source": "bondspot",
+   "trend": "stable",
+   "shape": "normal",
+   "change_3m_bp": -11.0
+  },
+  "wig_usd": {
+   "value": 40606.42,
+   "unit": "USD pts",
+   "as_of": "2026-11-13",
+   "source": "gpw_indices+nbp_fx",
+   "trend": "falling",
+   "change_3m_pct": -1.16,
+   "change_6m_pct": 12.89,
+   "change_12m_pct": 32.25,
+   "dev_sma200_pct": 7.72
+  },
+  "banks_vs_wig": {
+   "value": 2.43,
+   "unit": "pp",
+   "as_of": "2026-11-13",
+   "source": "gpw_indices",
+   "trend": "outperforming",
+   "vs_wig_6m_pp": 8.25
+  },
+  "swig80_vs_wig20": {
+   "value": -13.96,
+   "unit": "pp",
+   "as_of": "2026-11-13",
+   "source": "gpw_indices",
+   "trend": "large_caps_lead"
+  }
+ },
+ "sector_tilts": {
+  "banks": {
+   "tilt": "slightly_negative",
+   "score": -0.25
+  },
+  "exporters": {
+   "tilt": "positive",
+   "score": 1.0
+  },
+  "importers_retail": {
+   "tilt": "negative",
+   "score": -1.0
+  },
+  "utilities_energy": {
+   "tilt": "slightly_negative",
+   "score": -0.25
+  },
+  "developers": {
+   "tilt": "positive",
+   "score": 0.5
+  }
+ },
+ "changes_since_previous": null,
+ "watch": [
+  {
+   "id": "hawkish_risk",
+   "cpi": 4.0,
+   "rate": 3.75,
+   "text": "Inflacja 4,0% przy stopie 3,75% i pauzie/obniżkach: rośnie ryzyko, że RPP wstrzyma łagodzenie lub zacznie mówić o podwyżkach. Obserwuj decyzje i komunikaty RPP (gpw-event-calendar) oraz szybki szacunek CPI GUS."
+  },
+  {
+   "id": "negative_real_rate",
+   "value": -0.25,
+   "text": "Realna stopa jest ujemna (-0,25 pp): oszczędzanie na lokatach traci na wartości, co historycznie wspierało ryzykowne aktywa i nieruchomości, ale też grozi utrwaleniem inflacji."
+  },
+  {
+   "id": "next_cpi",
+   "period": "2026-10",
+   "text": "Następny odczyt inflacji HICP do sprawdzenia: za 2026-10 (Eurostat publikuje ok. połowy kolejnego miesiąca; GUS podaje szybki szacunek CPI na koniec miesiąca)."
+  }
+ ],
+ "data_provenance": {
+  "schema_version": "1.0",
+  "as_of": "2026-11-16",
+  "sources": [
+   "BondSpot - fixing obligacji skarbowych (dzienny): https://www.bondspot.pl/fixing_obligacji",
+   "Deutsche Bundesbank - rentowność Bund 10Y (dzienna): https://api.statistiken.bundesbank.de/rest/data/BBSIS/D.I.ZAR.ZI.EUR.S1311.B.A604.R10XX.R.A.A._Z._Z.A",
+   "ECB - PL 10Y long-term interest rate (convergence), miesięczna: https://data-api.ecb.europa.eu/service/data/IRS/M.PL.L.L40.CI.0000.PLN.N.Z",
+   "Eurostat - HICP Polska (prc_hicp_minr), miesięczna: https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_hicp_minr",
+   "GPW - archiwum notowań (indeksy): https://www.gpw.pl/archiwum-notowan",
+   "NBP - stopy procentowe (archiwum + bieżące): https://static.nbp.pl/dane/stopy/stopy_procentowe.xml",
+   "NBP API - kursy średnie, tabela A: https://api.nbp.pl/api/exchangerates/rates/a/{eur,usd,chf}/"
+  ],
+  "freshness": {
+   "as_of": "2026-11-16",
+   "sessions_behind": 0,
+   "is_stale": false,
+   "reference_date": null,
+   "historical_run": false,
+   "sessions_behind_today": 0
+  }
+ }
+}

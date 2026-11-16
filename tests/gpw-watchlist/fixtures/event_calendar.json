@@ -1,0 +1,174 @@
+{
+ "skill": "gpw-event-calendar",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "upcoming",
+ "as_of": "2026-11-16",
+ "reference_date": "2026-11-16",
+ "horizon": {
+  "start": "2026-11-16",
+  "end": "2026-12-04",
+  "sessions": 15,
+  "company_end": "2026-12-04"
+ },
+ "tickers": [],
+ "events": [
+  {
+   "id": "837b9c08f392",
+   "ticker": "TAURONPE",
+   "isin": "PLTAURN00011",
+   "type": "periodic_report",
+   "date": "2026-11-18",
+   "date_kind": "confirmed",
+   "title": "Raport za III kw. 2026",
+   "source": "ESPI 1/2026 2026-01-19",
+   "importance": "high"
+  },
+  {
+   "id": "8deba4ac70bb",
+   "ticker": "PEKAO",
+   "isin": "PLPEKAO00016",
+   "type": "agm",
+   "date": "2026-11-19",
+   "date_kind": "confirmed",
+   "title": "Ogłoszenie o zwołaniu Nadzwyczajnego Walnego Zgromadzenia Banku Polska Kasa Opieki Spółka Akcyjna",
+   "source": "ESPI 30/2026 2026-10-23",
+   "importance": "medium"
+  },
+  {
+   "id": "8ed5a1582788",
+   "ticker": "PZU",
+   "isin": "PLPZU0000011",
+   "type": "periodic_report",
+   "date": "2026-11-19",
+   "date_kind": "confirmed",
+   "title": "Raport za III kw. 2026",
+   "source": "ESPI 2/2026 2026-01-13",
+   "importance": "high"
+  },
+  {
+   "id": "0cb091e3d4a6",
+   "ticker": null,
+   "isin": null,
+   "type": "index_revision",
+   "date": "2026-11-20",
+   "date_kind": "confirmed",
+   "title": "ranking indeksów WIG20, WIG20TR, mWIG40, mWIG40TR, sWIG80, sWIG80TR, WIG30, WIG30TR",
+   "source": "GPW Benchmark, kalendarium indeksów",
+   "importance": "medium"
+  },
+  {
+   "id": "386d0cfe366a",
+   "ticker": "ALIOR",
+   "isin": "PLALIOR00045",
+   "type": "agm",
+   "date": "2026-11-24",
+   "date_kind": "confirmed",
+   "title": "Zwołanie Nadzwyczajnego Walnego Zgromadzenia Alior Banku S.A. na wniosek Akcjonariusza Banku",
+   "source": "ESPI 28/2026 2026-10-27",
+   "importance": "medium"
+  },
+  {
+   "id": "285313e03674",
+   "ticker": "PZU",
+   "isin": "PLPZU0000011",
+   "type": "agm",
+   "date": "2026-11-24",
+   "date_kind": "confirmed",
+   "title": "Ogłoszenie o zwołaniu Nadzwyczajnego Walnego Zgromadzenia PZU SA oraz projekty uchwał",
+   "source": "ESPI 27/2026 2026-10-23",
+   "importance": "medium"
+  },
+  {
+   "id": "657ce82090c6",
+   "ticker": "CDPROJEKT",
+   "isin": "PLOPTTC00011",
+   "type": "periodic_report",
+   "date": "2026-11-24",
+   "date_kind": "confirmed",
+   "title": "Raport za III kw. 2026",
+   "source": "ESPI 1/2026 2026-01-19",
+   "importance": "high"
+  },
+  {
+   "id": "23f117ee95c8",
+   "ticker": "PGE",
+   "isin": "PLPGER000010",
+   "type": "periodic_report",
+   "date": "2026-11-24",
+   "date_kind": "confirmed",
+   "title": "Raport za III kw. 2026",
+   "source": "ESPI 1/2026 2026-01-09",
+   "importance": "high"
+  },
+  {
+   "id": "acb1fdc07f81",
+   "ticker": "MODIVO",
+   "isin": "PLCCC0000016",
+   "type": "periodic_report",
+   "date": "2026-11-27",
+   "date_kind": "confirmed",
+   "title": "Raport za III kw. 2026",
+   "source": "ESPI 6/2026 2026-01-16",
+   "importance": "high"
+  },
+  {
+   "id": "fbf997c75b06",
+   "ticker": null,
+   "isin": null,
+   "type": "macro_release",
+   "date": "2026-11-30",
+   "date_kind": "estimated",
+   "title": "GUS: szybki szacunek CPI za 2026-11",
+   "source": "GUS (rule: last working day of the month)",
+   "importance": "medium"
+  },
+  {
+   "id": "ac3239c506dd",
+   "ticker": null,
+   "isin": null,
+   "type": "msci_review",
+   "date": "2026-11-30",
+   "date_kind": "confirmed",
+   "title": "MSCI: zmiany w indeksach na zamknięciu (przegląd 2026-11)",
+   "source": "https://www.msci.com/downloads/documents/press-releases/media-room/MSCI_Nov_2026_IR_Pre-Ann_PR_Doc.pdf",
+   "importance": "high"
+  },
+  {
+   "id": "92e057c5283d",
+   "ticker": null,
+   "isin": null,
+   "type": "periodic_report",
+   "date": "2026-11-30",
+   "date_kind": "statutory_deadline",
+   "title": "Ostatni dzień na raporty za III kw. 2026 (rynek główny)",
+   "source": "Rozporządzenie MF z 6.06.2025 (Dz.U. 2025 poz. 755) § 83 ust. 1 (+ ust. 11)",
+   "importance": "medium"
+  },
+  {
+   "id": "5faf18d84a09",
+   "ticker": null,
+   "isin": null,
+   "type": "mpc_meeting",
+   "date": "2026-12-02",
+   "date_kind": "confirmed",
+   "title": "Posiedzenie RPP - decyzja o stopach",
+   "source": "NBP, harmonogram posiedzeń RPP 2026 (as of 2026-11-16)",
+   "importance": "high"
+  },
+  {
+   "id": "c4ac58349c95",
+   "ticker": null,
+   "isin": null,
+   "type": "index_revision",
+   "date": "2026-12-03",
+   "date_kind": "confirmed",
+   "title": "ogłoszenie zmian w portfelach indeksów WIG20, WIG20TR, mWIG40, mWIG40TR, sWIG80, sWIG80TR, WIG30, WIG30TR",
+   "source": "GPW Benchmark, kalendarium indeksów",
+   "importance": "high"
+  }
+ ],
+ "data_provenance": {
+  "as_of": "2026-11-16"
+ }
+}

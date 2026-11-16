@@ -1,0 +1,70 @@
+{
+ "skill": "gpw-dividend-analyzer",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "screen",
+ "as_of": "2026-11-13",
+ "upcoming": [
+  {
+   "ex_date": "2026-11-30",
+   "record_date": null,
+   "payment_date": null,
+   "dps": 7.35,
+   "date_kind": "proposed_date_estimated",
+   "stage": "interim",
+   "source": "https://www.gpw.pl/komunikat?geru_id=498519",
+   "ticker": "DOMDEV"
+  },
+  {
+   "ex_date": "2026-12-15",
+   "record_date": null,
+   "payment_date": null,
+   "dps": 2.94,
+   "date_kind": "proposed_date_estimated",
+   "stage": "interim",
+   "source": "https://www.gpw.pl/komunikat?geru_id=499429",
+   "ticker": "MURAPOL"
+  }
+ ],
+ "companies": [
+  {
+   "ticker": "KETY",
+   "years_paid": 8,
+   "yield_gross_pct": 3.663,
+   "trap_flags": [
+    "recent_cut_or_suspension"
+   ]
+  },
+  {
+   "ticker": "DOMDEV",
+   "years_paid": 7,
+   "yield_gross_pct": 8.396,
+   "trap_flags": [
+    "payout_above_100pct",
+    "fcf_below_dividend",
+    "recent_cut_or_suspension"
+   ]
+  },
+  {
+   "ticker": "MURAPOL",
+   "years_paid": 2,
+   "yield_gross_pct": 12.664,
+   "trap_flags": [
+    "payout_above_100pct",
+    "fcf_below_dividend"
+   ]
+  }
+ ],
+ "data_provenance": {
+  "as_of": "2026-11-13",
+  "freshness": {
+   "as_of": "2026-11-13",
+   "sessions_behind": 0,
+   "is_stale": false,
+   "reference_date": null,
+   "historical_run": false,
+   "sessions_behind_today": 0
+  },
+  "note": "trimmed fixture from a real offline run on 2026-11-16"
+ }
+}

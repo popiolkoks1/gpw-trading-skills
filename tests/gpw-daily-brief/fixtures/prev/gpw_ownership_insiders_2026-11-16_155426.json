@@ -1,0 +1,176 @@
+{
+ "skill": "gpw-ownership",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "insiders",
+ "insiders": {
+  "by_ticker": [
+   {
+    "ticker": "KOMPAP",
+    "isin": "PLKOMPP00017",
+    "company": "PRZEDSIĘBIORSTWO PRODUKCYJNO HANDLOWE KOMPAP SPÓŁKA AKCYJNA",
+    "buys": 1,
+    "sells": 0,
+    "distinct_insiders": 0,
+    "net_value_pln": null,
+    "cluster_buy": false,
+    "cluster_sell": false,
+    "max_distinct_buyers_30d": 0,
+    "max_distinct_sellers_30d": 0,
+    "last_date": "2026-11-10",
+    "notices": 1,
+    "buy_notices": 1,
+    "sell_notices": 0,
+    "notices_identity_unknown": 1,
+    "parsed_transactions": 0,
+    "open_market_transactions": 0,
+    "basis": "notice_hints",
+    "flags": [
+     "details_missing_paste_pdf"
+    ]
+   },
+   {
+    "ticker": "ASSECOSEE",
+    "isin": "PLASSEE00014",
+    "company": "ASSECO SOUTH EASTERN EUROPE SPÓŁKA AKCYJNA",
+    "buys": 0,
+    "sells": 0,
+    "distinct_insiders": 0,
+    "net_value_pln": null,
+    "cluster_buy": false,
+    "cluster_sell": false,
+    "max_distinct_buyers_30d": 0,
+    "max_distinct_sellers_30d": 0,
+    "last_date": "2026-11-10",
+    "notices": 1,
+    "buy_notices": 0,
+    "sell_notices": 0,
+    "notices_identity_unknown": 1,
+    "parsed_transactions": 0,
+    "open_market_transactions": 0,
+    "basis": "notice_hints",
+    "flags": [
+     "details_missing_paste_pdf"
+    ]
+   },
+   {
+    "ticker": "MOL",
+    "isin": "HU0000153937",
+    "company": "MOL MAGYAR OLAJ - ES GAZIPARI NYILVANOSAN MUKODO RESZVENYTARSASAG",
+    "buys": 0,
+    "sells": 0,
+    "distinct_insiders": 0,
+    "net_value_pln": null,
+    "cluster_buy": false,
+    "cluster_sell": false,
+    "max_distinct_buyers_30d": 0,
+    "max_distinct_sellers_30d": 0,
+    "last_date": "2026-11-12",
+    "notices": 1,
+    "buy_notices": 0,
+    "sell_notices": 0,
+    "notices_identity_unknown": 1,
+    "parsed_transactions": 0,
+    "open_market_transactions": 0,
+    "basis": "notice_hints",
+    "flags": [
+     "details_missing_paste_pdf"
+    ]
+   },
+   {
+    "ticker": "PGE",
+    "isin": "PLPGER000010",
+    "company": "PGE POLSKA GRUPA ENERGETYCZNA SPÓŁKA AKCYJNA",
+    "buys": 0,
+    "sells": 0,
+    "distinct_insiders": 0,
+    "net_value_pln": null,
+    "cluster_buy": false,
+    "cluster_sell": false,
+    "max_distinct_buyers_30d": 0,
+    "max_distinct_sellers_30d": 0,
+    "last_date": "2026-11-12",
+    "notices": 2,
+    "buy_notices": 0,
+    "sell_notices": 0,
+    "notices_identity_unknown": 2,
+    "parsed_transactions": 0,
+    "open_market_transactions": 0,
+    "basis": "notice_hints",
+    "flags": [
+     "details_missing_paste_pdf"
+    ]
+   },
+   {
+    "ticker": "POLIMEXMS",
+    "isin": "PLMSTSD00019",
+    "company": "POLIMEX MOSTOSTAL SPÓŁKA AKCYJNA",
+    "buys": 0,
+    "sells": 0,
+    "distinct_insiders": 0,
+    "net_value_pln": null,
+    "cluster_buy": false,
+    "cluster_sell": false,
+    "max_distinct_buyers_30d": 0,
+    "max_distinct_sellers_30d": 0,
+    "last_date": "2026-11-12",
+    "notices": 1,
+    "buy_notices": 0,
+    "sell_notices": 0,
+    "notices_identity_unknown": 1,
+    "parsed_transactions": 0,
+    "open_market_transactions": 0,
+    "basis": "notice_hints",
+    "flags": [
+     "details_missing_paste_pdf"
+    ]
+   },
+   {
+    "ticker": "ZREMB",
+    "isin": "PLZBMZC00019",
+    "company": "ZAKŁAD BUDOWY MASZYN ZREMB-CHOJNICE SPÓŁKA AKCYJNA",
+    "buys": 0,
+    "sells": 0,
+    "distinct_insiders": 0,
+    "net_value_pln": null,
+    "cluster_buy": false,
+    "cluster_sell": false,
+    "max_distinct_buyers_30d": 0,
+    "max_distinct_sellers_30d": 0,
+    "last_date": "2026-11-12",
+    "notices": 1,
+    "buy_notices": 0,
+    "sell_notices": 0,
+    "notices_identity_unknown": 1,
+    "parsed_transactions": 0,
+    "open_market_transactions": 0,
+    "basis": "notice_hints",
+    "flags": [
+     "details_missing_paste_pdf"
+    ]
+   }
+  ],
+  "start": "2026-11-10",
+  "end": "2026-11-12"
+ },
+ "as_of": "2026-11-12",
+ "signals": [],
+ "warnings": [],
+ "data_provenance": {
+  "schema_version": "1.0",
+  "as_of": "2026-11-12",
+  "sources": [
+   "GPW — komunikaty ESPI/EBI: https://www.gpw.pl/komunikaty (POST ajaxindex.php action=GPWEspiReportUnion)",
+   "GPW — raport: https://www.gpw.pl/komunikat?geru_id=<N> (metadane ESAP TRANSD)",
+   "MAR art. 19 — Rozporządzenie (UE) 596/2014; próg 20 000 EUR: Rozporządzenie (UE) 2024/2809 (Listing Act); ESMA70-154-1020 (19.01.2026)"
+  ],
+  "freshness": {
+   "as_of": "2026-11-12",
+   "sessions_behind": 0,
+   "is_stale": false,
+   "reference_date": "2026-11-12",
+   "historical_run": true,
+   "sessions_behind_today": 1
+  }
+ }
+}

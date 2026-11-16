@@ -23,14 +23,15 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from gpwlib import brokers, constituents, gpw_archive, journal_io, panel, provenance  # noqa: E402
+from gpwlib import brokers, constituents, fundamentals, gpw_archive, journal_io, panel, plcal, provenance, reports  # noqa: E402
 from gpwlib.constituents import SECTOR_INDICES  # noqa: E402
 from gpwlib.fmt import DISCLAIMER, T, num, pct, pln  # noqa: E402
 from gpwlib.indicators import median  # noqa: E402
 
+import pretrade_context_checks as cc  # noqa: E402
 import pretrade_gate_engine as ge  # noqa: E402
 
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 PREFIX = "gpw_pre_trade_gate"
 MIN_OVERRIDE_CHARS = 15  # a real sentence, not "ok" / "yes"
 
@@ -158,6 +159,112 @@ STRINGS = {
     "journal_note": {"pl": "Heat, sektor i ekspozycja liczone z aktywnych pozycji w dzienniku ({d}); pozycji spoza dziennika bramka nie widzi.",
                      "en": "Heat, sector and exposure use ACTIVE journal positions ({d}); positions outside the journal are invisible to the gate."},
     "sources": {"pl": "Źródła", "en": "Sources"},
+    # ---- v1.1: context checks fed by the v1.2 skills ----
+    "n_event_window": {"pl": "Zdarzenia w okresie trzymania", "en": "Events in the holding window"},
+    "n_crowded_short": {"pl": "Zatłoczony short (KNF)", "en": "Crowded short (KNF)"},
+    "n_insider_selling": {"pl": "Transakcje insiderów", "en": "Insider transactions"},
+    "n_earnings_reaction": {"pl": "Reakcja na wyniki", "en": "Earnings reaction"},
+    "n_quality_red_flags": {"pl": "Czerwone flagi w finansach", "en": "Quality red flags"},
+    "n_macro_context": {"pl": "Tło makro", "en": "Macro context"},
+    "n_stress_test": {"pl": "Test warunków skrajnych portfela", "en": "Portfolio stress test"},
+    "infos": {"pl": "Informacje (INFO – nie zmieniają werdyktu)", "en": "Information (INFO – does not change the verdict)"},
+    "unknowns": {"pl": "Nie sprawdzono (UNKNOWN) – jak uzupełnić", "en": "Not checked (UNKNOWN) – how to fill the gap"},
+    "unknown_note": {"pl": "UNKNOWN nie blokuje (chyba że check jest w --require), ale obniża pewność werdyktu.",
+                     "en": "UNKNOWN does not block (unless the check is in --require) but lowers confidence in the verdict."},
+    "context": {"pl": "Kontekst transakcji", "en": "Trade context"},
+    "window_line": {"pl": "Okres trzymania: {start} – {end} ({n} sesji) + bufor {buf} sesji do {bend}.",
+                    "en": "Holding window: {start} – {end} ({n} sessions) + {buf}-session buffer to {bend}."},
+    "gap_line": {"pl": "Typowa luka cenowa na otwarciu po wynikach: mediana |luki| {gap} (maks. {mx}, n = {n}{alln}) vs odległość stopu {stop}.",
+                 "en": "Typical opening gap after reports: median |gap| {gap} (max {mx}, n = {n}{alln}) vs stop distance {stop}."},
+    "gap_alln": {"pl": ", w tym raporty w trakcie sesji", "en": ", incl. intraday reports"},
+    "ev_table": {"pl": "| Sesja | Data | Zdarzenie | Rodzaj daty | Źródło |", "en": "| Session | Date | Event | Date kind | Source |"},
+    "dk_confirmed": {"pl": "potwierdzona", "en": "confirmed"},
+    "dk_statutory_deadline": {"pl": "termin ustawowy (może być wcześniej)", "en": "statutory deadline (may come earlier)"},
+    "dk_estimated": {"pl": "szacunek", "en": "estimated"},
+    "dk_proposed_date_estimated": {"pl": "proponowana (szacunek)", "en": "proposed (estimated)"},
+    "k_earnings": {"pl": "wyniki (raport okresowy)", "en": "earnings (periodic report)"},
+    "k_ex_dividend": {"pl": "dzień odcięcia dywidendy", "en": "ex-dividend date"},
+    "k_agm": {"pl": "walne zgromadzenie", "en": "general meeting"},
+    "k_dividend_record": {"pl": "dzień dywidendy", "en": "dividend record date"},
+    "k_dividend_payment": {"pl": "wypłata dywidendy", "en": "dividend payment"},
+    "k_mpc_meeting": {"pl": "posiedzenie RPP", "en": "MPC (RPP) meeting"},
+    "k_index_revision": {"pl": "rewizja indeksów GPW", "en": "GPW index revision"},
+    "k_msci_review": {"pl": "przegląd MSCI", "en": "MSCI review"},
+    "k_macro_release": {"pl": "dane makro (GUS)", "en": "macro release (GUS)"},
+    "k_other": {"pl": "inne (rynek)", "en": "other (market)"},
+    "k_company_other": {"pl": "inne (spółka)", "en": "other (company)"},
+    "also": {"pl": " W oknie także: {items}.", "en": " Also in the window: {items}."},
+    "exdiv_note": {"pl": "{kind} {date} (DPS {dps} = {dpsp} wejścia – kurs spada o ok. dywidendę, stop bliżej niż to może zadziałać od samego odcięcia)",
+                   "en": "{kind} {date} (DPS {dps} = {dpsp} of entry – the price drops by about the dividend; a stop closer than that can trigger on the cut alone)"},
+    "event_earnings_in_window": {"pl": "Wyniki {date} ({dk}) – sesja {session} z {n} planowanych. Reakcja na raport może przeskoczyć stop (luka). Rozważ mniejszą pozycję albo wejście po publikacji.{gapx}",
+                                 "en": "Earnings {date} ({dk}) – session {session} of the planned {n}. The reaction can gap through the stop. Consider a smaller size or entering after the report.{gapx}"},
+    "event_earnings_near_window": {"pl": "Wyniki {date} ({dk}) – sesja {session}, tuż po planowanym oknie {n} sesji (bufor {buf}). Jeśli pozycja potrwa dłużej, raport wypadnie w trakcie.{gapx}",
+                                   "en": "Earnings {date} ({dk}) – session {session}, just after the planned {n}-session window (buffer {buf}). If the trade runs longer, the report falls inside.{gapx}"},
+    "gapx": {"pl": " Typowa luka po wynikach {gap} {cmp} odległość stopu {stop}.", "en": " Typical post-report gap {gap} {cmp} stop distance {stop}."},
+    "cmp_gt": {"pl": ">", "en": ">"}, "cmp_le": {"pl": "≤", "en": "≤"},
+    "event_strict_gap_exceeds": {"pl": "--strict-events: wyniki {date} już w sesji {session} (≤ {limit}), a typowa luka po wynikach {gap} > odległość stopu {stop} – stop nie ochroni przed luką. Poczekaj na raport.",
+                                 "en": "--strict-events: earnings {date} in session {session} (≤ {limit}) and the typical post-report gap {gap} > stop distance {stop} – the stop cannot protect against the gap. Wait for the report."},
+    "event_strict_gap_unknown": {"pl": "--strict-events: wyniki {date} już w sesji {session} (≤ {limit}), a historii luk po wynikach brak (uruchom gpw-earnings-reaction ticker --history) – tryb ścisły blokuje.",
+                                 "en": "--strict-events: earnings {date} in session {session} (≤ {limit}) and no post-report gap history (run gpw-earnings-reaction ticker --history) – strict mode blocks."},
+    "event_strict_gap_ok": {"pl": "--strict-events: wyniki {date} w sesji {session}, ale typowa luka {gap} ≤ odległość stopu {stop} – dopuszczalne z zastrzeżeniem.",
+                            "en": "--strict-events: earnings {date} in session {session}, but the typical gap {gap} ≤ stop distance {stop} – allowed with a caveat."},
+    "event_no_calendar": {"pl": "Brak kalendarza zdarzeń dla tego waloru – nie wiadomo, czy w okresie trzymania są wyniki.",
+                          "en": "No event calendar for this ticker – unknown whether earnings fall inside the holding window."},
+    "event_partial_coverage": {"pl": "Kalendarz obejmuje spółkę tylko do {cov} – reszta okna niesprawdzona.",
+                               "en": "The calendar covers the company only to {cov} – the rest of the window is unchecked."},
+    "event_info_only": {"pl": "Brak wyników w oknie {n} sesji (+{buf}).", "en": "No earnings in the {n}-session window (+{buf})."},
+    "event_clear": {"pl": "Brak wyników, dywidend i ważnych zdarzeń w oknie {n} sesji (+{buf}).", "en": "No earnings, dividends or key events in the {n}-session window (+{buf})."},
+    "short_missing": {"pl": "Brak raportu gpw-ownership obejmującego ten walor (rejestr krótkiej sprzedaży KNF).", "en": "No gpw-ownership report covering this ticker (KNF short register)."},
+    "short_none": {"pl": "Walor nie figuruje w rejestrze KNF (brak ujawnionych pozycji krótkich ≥ 0,5%; rejestr to dolna granica).",
+                   "en": "Not in the KNF register (no disclosed net shorts ≥ 0.5%; the register is a lower bound)."},
+    "short_crowded": {"pl": "Zatłoczony short: {total} akcji ujawnione krótko przez {holders} podm., zmiana 20 sesji {chg}, dni pokrycia {dtc}. Dwie strony: średnio takie spółki zachowują się słabiej (ujemny dryf), ale dobra wiadomość może wywołać gwałtowny short squeeze – oczekuj większej zmienności, ustaw stop świadomie.",
+                      "en": "Crowded short: {total} of shares disclosed short by {holders} holder(s), 20-session change {chg}, days to cover {dtc}. Both ways: such stocks underperform on average (negative drift), yet good news can trigger a sharp short squeeze – expect higher volatility and set the stop deliberately."},
+    "short_present": {"pl": "W rejestrze KNF: {total} akcji, {holders} podm., dni pokrycia {dtc} – poniżej progu zatłoczenia.",
+                      "en": "In the KNF register: {total} of shares, {holders} holder(s), days to cover {dtc} – below the crowding threshold."},
+    "insider_short_coverage": {"pl": "Raport insiderów obejmuje tylko {covered_days} dni ({start} – {end}); do oceny klastra potrzeba co najmniej {min_days} dni. Uruchom gpw-ownership insiders --days 60.", "en": "The insider report covers only {covered_days} days ({start} – {end}); a cluster check needs at least {min_days} days. Run gpw-ownership insiders --days 60."},
+    "insider_missing": {"pl": "Brak raportu gpw-ownership z transakcjami insiderów (MAR art. 19) dla tego waloru.", "en": "No gpw-ownership report with insider transactions (MAR art. 19) for this ticker."},
+    "insider_none": {"pl": "Brak powiadomień insiderów w okresie {start} – {end}.", "en": "No insider notices in {start} – {end}."},
+    "insider_cluster_sell": {"pl": "Klaster sprzedaży insiderów (≥ 3 osoby w 30 dni), ostatnio {last} ({age} dni temu, ≤ {win}) – sprzedaż ma słabszą wartość informacyjną niż kupno, ale grupowa sprzedaż przed Twoim wejściem to sygnał do sprawdzenia tezy.{basis}",
+                             "en": "Insider selling cluster (≥ 3 people in 30 days), last on {last} ({age} days ago, ≤ {win}) – sells carry less information than buys, but group selling right before your entry is a reason to re-check the thesis.{basis}"},
+    "insider_cluster_buy": {"pl": "Pozytywnie: klaster zakupów insiderów (≥ 3 osoby w 30 dni), ostatnio {last}. Zakupy insiderów historycznie niosą informację (Lakonishok i Lee 2001) – to kontekst, nie sygnał kupna.{basis}",
+                            "en": "Positive: insider buying cluster (≥ 3 people in 30 days), last on {last}. Insider buys have historically been informative (Lakonishok & Lee 2001) – context, not a buy signal.{basis}"},
+    "insider_cluster_sell_old": {"pl": "Klaster sprzedaży insiderów, ale ostatnio {last} ({age} dni temu > {win}).", "en": "Insider selling cluster, but last on {last} ({age} days ago > {win})."},
+    "insider_no_cluster": {"pl": "Powiadomienia insiderów: kupno {buys}, sprzedaż {sells} – bez klastra.{basis}", "en": "Insider notices: {buys} buy(s), {sells} sell(s) – no cluster.{basis}"},
+    "basis_hints": {"pl": " (liczone z tytułów komunikatów – szczegóły w PDF, wklej do gpw-ownership parse)", "en": " (counted from notice titles – details are in the PDF; paste it into gpw-ownership parse)"},
+    "reaction_missing": {"pl": "Brak raportu gpw-earnings-reaction obejmującego ten walor.", "en": "No gpw-earnings-reaction report covering this ticker."},
+    "reaction_none": {"pl": "Brak reakcji na raporty okresowe w danych.", "en": "No reactions to periodic reports in the data."},
+    "reaction_old": {"pl": "Ostatnia reakcja na wyniki ({rdate}, {label}) była {n} sesji temu (> {win}).", "en": "The latest earnings reaction ({rdate}, {label}) was {n} sessions ago (> {win})."},
+    "reaction_strong_negative": {"pl": "Silnie negatywna reakcja na wyniki {rdate} ({n} sesji temu): CAR 3 dni {car} vs WIG{prov}. Na GPW dryf po wynikach występuje głównie po negatywnych niespodziankach (Jagliński 2020) – kurs często dalej słabnie; wejście wbrew temu wymaga mocnej tezy.",
+                                 "en": "Strongly negative earnings reaction on {rdate} ({n} sessions ago): 3-day CAR {car} vs WIG{prov}. On the WSE post-earnings drift appears mainly after negative surprises (Jagliński 2020) – the price often keeps weakening; entering against it needs a strong thesis."},
+    "reaction_strong_positive": {"pl": "Silnie pozytywna reakcja na wyniki {rdate} ({n} sesji temu), CAR 3 dni {car}{prov}. Na GPW dryf po pozytywnych niespodziankach jest słaby – nie zakładaj kontynuacji.",
+                                 "en": "Strongly positive earnings reaction on {rdate} ({n} sessions ago), 3-day CAR {car}{prov}. On the WSE drift after positive surprises is weak – do not assume continuation."},
+    "reaction_recent": {"pl": "Ostatnia reakcja na wyniki {rdate} ({n} sesji temu): {label}, CAR 3 dni {car}{prov}.", "en": "Latest earnings reaction {rdate} ({n} sessions ago): {label}, 3-day CAR {car}{prov}."},
+    "provisional": {"pl": " (okno 3 dni jeszcze niepełne)", "en": " (3-day window not complete yet)"},
+    "quality_missing": {"pl": "Brak raportu gpw-quality-screener obejmującego ten walor.", "en": "No gpw-quality-screener report covering this ticker."},
+    "quality_negative_equity": {"pl": "⚠️ UJEMNY KAPITAŁ WŁASNY – zobowiązania przewyższają majątek. Flagi: {flags}. To nie blokuje automatycznie, ale wymaga przeczytania raportu (ryzyko rozwodnienia / restrukturyzacji).{extra}",
+                                "en": "⚠️ NEGATIVE EQUITY – liabilities exceed assets. Flags: {flags}. Not an automatic block, but read the report first (dilution / restructuring risk).{extra}"},
+    "quality_flags": {"pl": "Czerwone flagi w finansach: {flags} – przeczytaj raport, zanim wejdziesz.{extra}", "en": "Red flags in the accounts: {flags} – read the report before entering.{extra}"},
+    "quality_ok": {"pl": "Bez czerwonych flag (wynik jakości {qs}, F-score {fs}).{extra}", "en": "No red flags (quality score {qs}, F-score {fs}).{extra}"},
+    "q_stale_period": {"pl": " Dane za {period} są nieaktualne (nowszy raport już powinien być).", "en": " Data for {period} are stale (a newer report should exist)."},
+    "q_checks": {"pl": " Kontrole danych: {checks}.", "en": " Data checks: {checks}."},
+    "macro_missing": {"pl": "Brak raportu gpw-macro-regime.", "en": "No gpw-macro-regime report."},
+    "macro_headwind_negative_tilt": {"pl": "Makro: {composite} ({label}), a historyczna tendencja dla sektora ({group}) jest {tilt} – tło wolne, tylko informacja; nie blokuje.",
+                                     "en": "Macro: {composite} ({label}) and the historical tendency for the sector ({group}) is {tilt} – slow background, information only; never blocks."},
+    "macro_with_tilt": {"pl": "Makro: {composite} ({label}); tendencja dla sektora ({group}): {tilt}. Tło wolne, tylko informacja.",
+                        "en": "Macro: {composite} ({label}); sector tendency ({group}): {tilt}. Slow background, information only."},
+    "macro_no_tilt": {"pl": "Makro: {composite} ({label}); brak przypisanej tendencji sektorowej dla tego waloru.", "en": "Macro: {composite} ({label}); no sector tendency mapped for this ticker."},
+    "stress_missing": {"pl": "Brak raportu gpw-risk-lab (stress test portfela) – opcjonalne.", "en": "No gpw-risk-lab report (portfolio stress test) – optional."},
+    "stress_empty": {"pl": "Raport gpw-risk-lab bez policzonych scenariuszy.", "en": "gpw-risk-lab report without computed scenarios."},
+    "stress_no_tolerance": {"pl": "Najgorszy scenariusz obecnego portfela: {worst} – strata {loss} ({pln}); nie podano tolerancji straty.",
+                            "en": "Worst scenario for the current portfolio: {worst} – loss {loss} ({pln}); no loss tolerance given."},
+    "stress_breach": {"pl": "Portfel już teraz przekracza Twoją tolerancję straty {tol} w {n} scenariuszach (najgorszy: {worst}, strata {loss}). Ta transakcja dokłada ekspozycję na akcje.",
+                      "en": "The portfolio already exceeds your loss tolerance {tol} in {n} scenario(s) (worst: {worst}, loss {loss}). This trade adds equity exposure."},
+    "stress_ok": {"pl": "Najgorszy scenariusz {worst}: strata {loss} ≤ tolerancja {tol}.", "en": "Worst scenario {worst}: loss {loss} ≤ tolerance {tol}."},
+    "required_unknown": {"pl": "Check wymagany (--require), a danych brak – fail-closed. {orig}", "en": "Required check (--require) without data – fail-closed. {orig}"},
+    "stale_src": {"pl": " ⚠️ raport {file} sprzed {n} sesji (limit {max}).", "en": " ⚠️ report {file} is {n} sessions old (limit {max})."},
+    "next_event": {"pl": "Wyniki w oknie: rozważ wejście po publikacji albo mniejszą pozycję (gpw-position-sizer, scenariusz luki).",
+                   "en": "Earnings in the window: consider entering after the report or a smaller size (gpw-position-sizer, gap scenario)."},
+    "inp_stale": {"pl": " – NIEAKTUALNY", "en": " – STALE"},
 }
 
 ORDER_HINT = ("stop", "risk", "position", "liquidity", "heat", "sector", "thesis", "reward_risk",
@@ -183,35 +290,81 @@ def read_sizer_json(path: Path) -> dict:
             "broker": b.get("key")}
 
 
-def _as_of_of(d: dict):
-    a = d.get("as_of") or (d.get("regime") or {}).get("as_of") or (d.get("data_provenance") or {}).get("as_of")
-    try:
-        return dt.date.fromisoformat(str(a)[:10]) if a else None
-    except ValueError:
-        return None
+# input key -> (skill, CLI attribute of the explicit path)
+INPUTS = {
+    "regime": ("gpw-market-regime", "regime_json"),
+    "exposure": ("gpw-exposure-coach", "exposure_json"),
+    "events": ("gpw-event-calendar", "events_json"),
+    "ownership": ("gpw-ownership", "ownership_json"),
+    "earnings": ("gpw-earnings-reaction", "earnings_json"),
+    "quality": ("gpw-quality-screener", "quality_json"),
+    "macro": ("gpw-macro-regime", "macro_json"),
+    "dividend": ("gpw-dividend-analyzer", "dividend_json"),
+    "risk_lab": ("gpw-risk-lab", "risk_lab_json"),
+}
+TICKER_INPUTS = ("events", "ownership", "earnings", "quality", "dividend")
 
 
-def find_input(explicit, input_dir: Path, skill: str):
-    """Explicit path or newest JSON in input_dir whose "skill" matches. Returns (data, path) or (None, None)."""
-    if explicit:
-        p = Path(explicit).expanduser()
-        try:
-            d = json.loads(p.read_text(encoding="utf-8"))
-        except (OSError, ValueError) as exc:
-            raise ge.GateError("cannot read {}: {}".format(p, exc))
-        if d.get("skill") != skill:
-            raise ge.GateError("{} is not a {} report (skill={!r})".format(p, skill, d.get("skill")))
-        return d, p
-    if not input_dir.is_dir():
-        return None, None
-    for p in sorted(input_dir.glob("gpw_*.json"), key=lambda x: x.stat().st_mtime, reverse=True):
-        try:
-            d = json.loads(p.read_text(encoding="utf-8"))
-        except (OSError, ValueError):
+def load_input(key, explicit, input_dir: Path, reference, lang, ids=None):
+    """One input report via gpwlib.reports (explicit path or newest in input_dir).
+
+    For per-company inputs, when the newest report does not cover the ticker
+    (e.g. an ownership report for another company), the newest report that
+    does cover it is used instead. Returns the find_report dict or None.
+    An explicit path that is missing, corrupt or of another skill raises
+    reports.ReportError (exit 1).
+    """
+    skill = INPUTS[key][0]
+    max_age = cc.CONTEXT_DEFAULTS["max_age"].get(key, ge.DEFAULTS["max_input_age_sessions"])
+    rep = reports.find_report(skill, input_dir, explicit_path=explicit, reference=reference,
+                              max_sessions_behind=max_age, lang=lang)
+    if explicit or ids is None or key not in TICKER_INPUTS or (rep and cc.covers(key, rep, ids)):
+        return rep
+    for r in reports.iter_reports(input_dir, skill=skill, reference=reference, newest_first=True):
+        cand = {"data": r["data"]}
+        if cc.covers(key, cand, ids):
+            return reports.describe(Path(r["path"]), r["data"], skill, reference, max_age, lang)
+    return rep
+
+
+def load_ownership_parts(base, explicit, input_dir: Path, reference, lang, ids) -> dict:
+    """gpw-ownership writes one report per mode: the newest report may be the
+    insiders run while the KNF shorts sit in an older shorts run (both from
+    the same daily pipeline). Pick, for each block (``shorts``, ``insiders``),
+    the newest report that carries it and covers the ticker. An explicit
+    ``--ownership-json`` is used as given."""
+    out = {}
+    skill = INPUTS["ownership"][0]
+    max_age = cc.CONTEXT_DEFAULTS["max_age"].get("ownership", ge.DEFAULTS["max_input_age_sessions"])
+    for block in ("shorts", "insiders"):
+        if base and isinstance((base.get("data") or {}).get(block), dict) and (explicit or cc.covers("ownership", base, ids)):
+            out[block] = base
             continue
-        if isinstance(d, dict) and d.get("skill") == skill:
-            return d, p
-    return None, None
+        if explicit:
+            out[block] = base
+            continue
+        for r in reports.iter_reports(input_dir, skill=skill, reference=reference, newest_first=True):
+            if isinstance(r["data"].get(block), dict) and cc.covers("ownership", {"data": r["data"]}, ids):
+                out[block] = reports.describe(Path(r["path"]), r["data"], skill, reference, max_age, lang)
+                break
+        else:
+            out[block] = base
+    return out
+
+
+def input_row(key: str, rep: dict) -> dict:
+    return {"skill": INPUTS[key][0], "input": key, "path": rep["path"], "file": rep["file"], "as_of": rep["as_of"],
+            "sessions_behind": rep["sessions_behind"], "max_sessions_behind": rep["max_sessions_behind"],
+            "stale": rep["stale"], "warning": rep.get("warning")}
+
+
+def resolve_isins(ticker, cache_dir, offline):
+    """ISIN of the ticker from gpwlib.fundamentals (cached GPW listing); [] if unknown."""
+    try:
+        r = fundamentals.resolve_isin(ticker, cache_dir=cache_dir, offline=offline)
+        return [r["isin"]] if r and r.get("isin") else []
+    except Exception:  # noqa: BLE001 - optional enrichment; matching falls back to ticker names
+        return []
 
 
 def load_market(ticker, journal_tickers, end, cache_dir, offline, window):
@@ -247,7 +400,7 @@ def load_market(ticker, journal_tickers, end, cache_dir, offline, window):
     s = pnl[name]
     turn = [v * 1000.0 for v in s.turnover_k[-window:]]
     last_date = dt.date.fromisoformat(s.dates[-1])
-    fr = provenance.freshness(dt.date.fromisoformat(sessions[-1]["date"]))
+    fr = provenance.freshness(dt.date.fromisoformat(sessions[-1]["date"]), reference=end)
     market = {"ticker": name, "kind": kind, "last_close": s.close[-1], "last_date": s.dates[-1],
               "median_turnover_pln": median(turn), "is_stale": fr["is_stale"], "sessions_behind": fr["sessions_behind"],
               "archive_date": sessions[-1]["date"]}
@@ -293,19 +446,28 @@ def run(args) -> dict:
     sector = sector_map.get(trade["ticker"]) if not market or market["kind"] == "share" else None
 
     input_dir = Path(args.input_dir).expanduser()
-    regime, rp = find_input(args.regime_json, input_dir, "gpw-market-regime")
-    exposure, ep = find_input(args.exposure_json, input_dir, "gpw-exposure-coach")
-    inputs = []
-    for d, p, sk in ((regime, rp, "gpw-market-regime"), (exposure, ep, "gpw-exposure-coach")):
-        if d is None:
-            continue
-        a = _as_of_of(d)
-        inputs.append({"skill": sk, "path": str(p), "as_of": a.isoformat() if a else None,
-                       "sessions_behind": provenance.sessions_behind(a) if a else None})
+    isins = resolve_isins(trade["ticker"], cache_dir, args.offline)
+    ids = cc.identity(trade["ticker"], isins)
+    reps = {k: load_input(k, getattr(args, INPUTS[k][1], None), input_dir, end, args.lang, ids) for k in INPUTS}
+    inputs = [input_row(k, reps[k]) for k in INPUTS if reps[k]]
+    own = load_ownership_parts(reps["ownership"], getattr(args, "ownership_json", None), input_dir, end, args.lang, ids)
+    for part in own.values():
+        if part and part is not reps["ownership"] and part["path"] not in {i["path"] for i in inputs}:
+            inputs.append(input_row("ownership", part))
+    reference = end or plcal.today_warsaw()
+    # entry session: the reference day if its session is not in the data yet, else the next session
+    after_close = bool(market and market["last_date"] >= reference.isoformat())
+    context = {"reports": dict({k: reps[k] for k in cc.INPUT_SKILLS},
+                               ownership_shorts=own.get("shorts"), ownership_insiders=own.get("insiders")),
+               "reference_date": reference,
+               "after_close": after_close, "sector": sector, "isins": isins, "strict_events": args.strict_events,
+               "require": args.require or [], "out_dir": str(input_dir),
+               "cfg": {"holding_days": args.holding_days, "event_buffer_sessions": args.event_buffer_sessions}}
     ctx = {"market": market, "sector": sector, "sector_map": sector_map, "theses": theses, "journal_ok": journal_ok,
-           "open_positions": opens, "closed_results": closed, "prices": prices, "regime": regime,
-           "exposure": exposure, "inputs": inputs, "override": args.override, "user_max_risk_pct": args.max_risk_pct,
-           "today": end or dt.date.today()}
+           "open_positions": opens, "closed_results": closed, "prices": prices,
+           "regime": (reps["regime"] or {}).get("data"), "exposure": (reps["exposure"] or {}).get("data"),
+           "inputs": inputs, "override": args.override, "user_max_risk_pct": args.max_risk_pct,
+           "today": end or dt.date.today(), "context": context}
     cfg = {}
     for k in ("max_position_pct", "max_adv_pct", "max_heat_pct", "max_sector_pct", "min_rr"):
         if getattr(args, k) is not None:
@@ -316,11 +478,13 @@ def run(args) -> dict:
     if market:
         prov = provenance.build(as_of=dt.date.fromisoformat(market["archive_date"]), sources=srcs,
                                 sessions_used=len(sessions), universe_size=None,
-                                notes=["Sector membership = current GPW Benchmark portfolio (not point-in-time)."])
+                                notes=["Sector membership = current GPW Benchmark portfolio (not point-in-time)."],
+                                reference_date=end)
     else:
         prov = {"schema_version": provenance.SCHEMA_VERSION, "as_of": None, "sources": srcs, "sessions_used": 0,
                 "freshness": {"as_of": None, "sessions_behind": None, "is_stale": True},
                 "notes": ["No market data available (offline cache empty?) - liquidity and freshness unverified."]}
+    prov["input_reports"] = [{"skill": i["skill"], "file": i["file"], "as_of": i["as_of"], "stale": i["stale"]} for i in inputs]
     prov["broker_tariff"] = {"broker": broker_key, "pct": fee_pct, "min_fee": fee_min,
                              "notes": brokers.tariff_notes(args.lang, overridden=b["overridden"])}
     return {"skill": "gpw-pre-trade-gate", "version": VERSION, "lang": args.lang,
@@ -366,8 +530,124 @@ def _fmt_params(c: dict, lang: str, t) -> dict:
     return p
 
 
+LABELS = {
+    "pl": {"supportive": "sprzyjające", "mixed": "mieszane", "headwind": "niesprzyjające (headwind)",
+           "positive": "pozytywna", "slightly_positive": "lekko pozytywna", "neutral": "neutralna",
+           "slightly_negative": "lekko negatywna", "negative": "negatywna",
+           "strong_positive": "silnie pozytywna", "strong_negative": "silnie negatywna"},
+    "en": {},
+}
+
+
+def _lbl(v, lang):
+    return LABELS.get(lang, {}).get(v, str(v).replace("_", " ")) if v is not None else "—"
+
+
+def _d(x, lang):
+    """ISO date -> 16.11.2026 (pl) / 2026-11-16 (en)."""
+    if not x:
+        return "—"
+    x = str(x)[:10]
+    return "{}.{}.{}".format(x[8:10], x[5:7], x[0:4]) if lang == "pl" else x
+
+
+def _pp(v, lang, digits=2, signed=False):
+    if not isinstance(v, (int, float)):
+        return "—"
+    txt = pct(v, digits, lang)
+    return ("+" + txt) if signed and v > 0 else txt
+
+
+def event_items(c: dict, lang: str, t) -> str:
+    items = []
+    for e in c["params"].get("events") or []:
+        if e["kind"] == "earnings":
+            continue
+        kind = t("k_" + e["kind"]) if ("k_" + e["kind"]) in STRINGS else e["kind"]
+        if e["kind"] == "ex_dividend" and e.get("dps") is not None and e.get("dps_pct_of_entry") is not None:
+            items.append(t("exdiv_note", kind=kind, date=_d(e["date"], lang), dps=pln(e["dps"], 2, lang),
+                           dpsp=pct(e["dps_pct_of_entry"], 2, lang)))
+        else:
+            items.append("{} {}".format(kind, _d(e["date"], lang)))
+    seen, uniq = set(), []
+    for i in items:
+        if i not in seen:
+            seen.add(i)
+            uniq.append(i)
+    return t("also", items="; ".join(uniq)) if uniq else ""
+
+
+def ctx_text(c: dict, lang: str) -> str:
+    """Translate a context check (v1.1) into one sentence."""
+    t = T(STRINGS, lang)
+    p, r = c["params"], c["reason"]
+    if r == "required_unknown":
+        orig = dict(c, reason=p.get("original_reason"), status=cc.UNKNOWN)
+        return t("required_unknown", orig=ctx_text(orig, lang))
+    cid = c["id"]
+    if cid == "event_window":
+        w = p.get("window") or {}
+        gap = p.get("earnings_gap") or {}
+        q = dict(date=_d(p.get("date"), lang), dk=t("dk_" + p["date_kind"]) if ("dk_" + str(p.get("date_kind"))) in STRINGS else (p.get("date_kind") or "—"),
+                 session=p.get("session"), n=w.get("sessions"), buf=w.get("buffer_sessions"), limit=p.get("limit"),
+                 gap=_pp(gap.get("median_abs_gap_pct"), lang), stop=_pp(p.get("stop_distance_pct"), lang),
+                 cov=_d(p.get("coverage_end"), lang))
+        q["gapx"] = (t("gapx", gap=q["gap"], stop=q["stop"], cmp=t("cmp_gt" if p.get("gap_exceeds_stop") else "cmp_le"))
+                     if gap and p.get("stop_distance_pct") is not None else "")
+        txt = t(r, **q)
+        return txt + (event_items(c, lang, t) if r not in ("event_clear", "event_no_calendar") else "")
+    if cid == "crowded_short":
+        q = dict(total=_pp(p.get("total_pct"), lang), holders=p.get("holders", "—"),
+                 chg=(num(p["change_20s_pp"], 2, lang) + " pp") if isinstance(p.get("change_20s_pp"), (int, float)) else "—",
+                 dtc=num(p["days_to_cover"], 1, lang) if isinstance(p.get("days_to_cover"), (int, float)) else "—")
+        return t(r, **q)
+    if cid == "insider_selling":
+        q = dict(start=_d(p.get("period_start"), lang), end=_d(p.get("period_end"), lang), last=_d(p.get("last_date"), lang),
+                 age=p.get("age_days", "—"), win=p.get("window_days"), buys=p.get("buys", 0), sells=p.get("sells", 0),
+                 basis=t("basis_hints") if p.get("basis") == "notice_hints" else "",
+                 covered_days=p.get("covered_days", "—"), min_days=p.get("min_days", "—"))
+        return t(r, **q)
+    if cid == "earnings_reaction":
+        q = dict(rdate=_d(p.get("reaction_date"), lang), n=p.get("sessions_since"), win=p.get("window"),
+                 label=_lbl(p.get("label"), lang), car=_pp(p.get("car"), lang, signed=True),
+                 prov=t("provisional") if p.get("provisional") else "")
+        return t(r, **q)
+    if cid == "quality_red_flags":
+        extra = ""
+        if p.get("stale_period"):
+            extra += t("q_stale_period", period=p.get("period"))
+        if p.get("data_checks"):
+            extra += t("q_checks", checks=", ".join(p["data_checks"]))
+        q = dict(flags=", ".join(p.get("flags") or []) or "—", extra=extra,
+                 qs=num(p["quality_score"], 1, lang) if isinstance(p.get("quality_score"), (int, float)) else "—",
+                 fs=p.get("f_score") if p.get("f_score") is not None else (p.get("f_display") or "—"))
+        return t(r, **q)
+    if cid == "macro_context":
+        tl = p.get("tilt") or {}
+        q = dict(composite=_lbl(p.get("composite"), lang), label=p.get("regime_label") or "—",
+                 group=tl.get("group", "—"), tilt=_lbl(tl.get("tilt"), lang))
+        return t(r, **q)
+    if cid == "stress_test":
+        wl = p.get("worst_label")
+        worst = (wl.get(lang) or wl.get("en")) if isinstance(wl, dict) else (wl or p.get("worst_id") or "—")
+        q = dict(worst=worst, loss=_pp(p.get("worst_loss_pct"), lang), tol=_pp(p.get("max_loss_pct"), lang, 0),
+                 n=p.get("breaches", 0), pln=pln(p["worst_pln_loss"], 0, lang) if isinstance(p.get("worst_pln_loss"), (int, float)) else "—")
+        return t(r, **q)
+    return r
+
+
+def source_suffix(c: dict, lang: str) -> str:
+    src = c.get("source") or {}
+    if src.get("stale") and src.get("sessions_behind") is not None:
+        mx = cc.CONTEXT_DEFAULTS["max_age"].get(next((k for k, v in cc.INPUT_SKILLS.items() if v == src.get("skill")), ""), 3)
+        return T(STRINGS, lang)("stale_src", file=src.get("file"), n=src["sessions_behind"], max=mx)
+    return ""
+
+
 def reason_text(c: dict, lang: str) -> str:
     t = T(STRINGS, lang)
+    if c["id"] in cc.CONTEXT_CHECKS:
+        return ctx_text(c, lang) + source_suffix(c, lang)
     if c["reason"] == "fresh_issues":
         parts = []
         for i in c["params"]["issues"]:
@@ -379,6 +659,34 @@ def reason_text(c: dict, lang: str) -> str:
             parts.append(t("i_" + i["code"], **{k: v for k, v in q.items() if k != "code"}))
         return "; ".join(parts) + "."
     return t(c["reason"], **_fmt_params(c, lang, t))
+
+
+def context_section(r: dict, lang: str) -> list:
+    cx = r.get("context")
+    if not cx:
+        return []
+    t = T(STRINGS, lang)
+    w = cx.get("holding_window") or {}
+    L = ["## " + t("context"), ""]
+    if w:
+        L += [t("window_line", start=_d(w["start"], lang), end=_d(w["end"], lang), n=w["sessions"],
+                buf=w["buffer_sessions"], bend=_d(w["buffer_end"], lang)), ""]
+    g = cx.get("earnings_gap")
+    if g:
+        stop = r["numbers"].get("stop_distance_pct")
+        L += [t("gap_line", gap=_pp(g["median_abs_gap_pct"], lang), mx=_pp(g["max_abs_gap_pct"], lang), n=g["n"],
+                alln=t("gap_alln") if g.get("all_alignments") else "", stop=_pp(stop, lang)), ""]
+    evs = cx.get("events_in_window") or []
+    if evs:
+        L += [t("ev_table"), "|---|---|---|---|---|"]
+        for e in evs:
+            kind = t("k_" + e["kind"]) if ("k_" + e["kind"]) in STRINGS else e["kind"]
+            title = (e.get("title") or "")[:70]
+            dk = t("dk_" + e["date_kind"]) if ("dk_" + str(e.get("date_kind"))) in STRINGS else (e.get("date_kind") or "—")
+            L.append("| {}{} | {} | {}{} | {} | {} |".format(e["session"], "" if e["in_window"] else " (+)", _d(e["date"], lang),
+                                                       kind, (": " + title) if title else "", dk, e["origin"]))
+        L.append("")
+    return L
 
 
 def journal_command(r: dict) -> str:
@@ -409,7 +717,19 @@ def render_markdown(r: dict, lang: str) -> str:
     if fails:
         L += ["### " + t("blockers"), ""] + ["- **{}** – {}".format(t("n_" + c["id"]), reason_text(c, lang)) for c in fails] + [""]
     if warns:
+        warns = sorted(warns, key=lambda c: not c["params"].get("prominent"))
         L += ["### " + t("conditions"), ""] + ["- **{}** – {}".format(t("n_" + c["id"]), reason_text(c, lang)) for c in warns] + [""]
+    infos = [c for c in r["checks"] if c["status"] == ge.INFO]
+    if infos:
+        L += ["### " + t("infos"), ""] + ["- **{}** – {}".format(t("n_" + c["id"]), reason_text(c, lang)) for c in infos] + [""]
+    unknowns = [c for c in r["checks"] if c["status"] == ge.UNKNOWN]
+    if unknowns:
+        L += ["### " + t("unknowns"), "", "_" + t("unknown_note") + "_", ""]
+        for c in unknowns:
+            L.append("- **{}** – {}".format(t("n_" + c["id"]), reason_text(c, lang)))
+            if c.get("command"):
+                L.append("  `{}`".format(c["command"]))
+        L.append("")
     L += ["## " + t("trade"), "", "| | |", "|---|---|",
           "| {} | {} |".format(t("k_ticker"), tr["ticker"]),
           "| {} | {} |".format(t("k_entry"), num(tr["entry"], 2, lang)),
@@ -430,8 +750,10 @@ def render_markdown(r: dict, lang: str) -> str:
     for i, c in enumerate(r["checks"], 1):
         L.append("| {} | {} | **{}** | {} |".format(i, t("n_" + c["id"]), c["status"], reason_text(c, lang)))
     L.append("")
-    L += ["**{}:** ".format(t("inputs")) + ("; ".join(t("inp_line", skill=i["skill"], path=i["path"], as_of=i["as_of"] or "—",
+    L += context_section(r, lang)
+    L += ["**{}:** ".format(t("inputs")) + ("; ".join(t("inp_line", skill=i["skill"], path=i.get("file") or i["path"], as_of=i["as_of"] or "—",
                                                        n=i["sessions_behind"] if i["sessions_behind"] is not None else "—")
+                                                 + (t("inp_stale") if i.get("stale") else "")
                                                  for i in r["inputs"]) or t("inp_none")), ""]
     if r.get("override"):
         used = any(c["reason"] == "regime_overridden" for c in r["checks"])
@@ -442,6 +764,8 @@ def render_markdown(r: dict, lang: str) -> str:
         L += ["- " + t("next_journal"), "", "```bash", journal_command(r), "```", ""]
     if any(c["id"] in ("risk", "position", "liquidity", "heat", "sector") and c["status"] == ge.FAIL for c in r["checks"]):
         L.append("- " + t("next_sizer"))
+    if any(c["id"] == "event_window" and c["status"] in (ge.WARN, ge.FAIL) for c in r["checks"]):
+        L.append("- " + t("next_event"))
     if r["verdict"] != "NO-GO":
         L.append("- " + t("next_go"))
     L += [""] + ["- " + n for n in prov["broker_tariff"]["notes"]]
@@ -492,6 +816,35 @@ def _date(text: str) -> str:
     return text
 
 
+def _require(text: str) -> list:
+    items = [x.strip() for x in text.split(",") if x.strip()]
+    bad = [x for x in items if x not in cc.CONTEXT_CHECKS]
+    if bad or not items:
+        raise argparse.ArgumentTypeError("unknown check(s) {}; choose from {}".format(
+            ", ".join(bad) or "(empty)", ", ".join(cc.CONTEXT_CHECKS)))
+    return items
+
+
+def _sessions(text: str) -> int:
+    try:
+        v = int(text)
+    except ValueError:
+        raise argparse.ArgumentTypeError("must be a whole number of sessions")
+    if v < 1 or v > 250:
+        raise argparse.ArgumentTypeError("must be between 1 and 250 sessions")
+    return v
+
+
+def _nonneg_int(text: str) -> int:
+    try:
+        v = int(text)
+    except ValueError:
+        raise argparse.ArgumentTypeError("must be a whole number")
+    if v < 0 or v > 60:
+        raise argparse.ArgumentTypeError("must be between 0 and 60")
+    return v
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="Fail-closed pre-trade checklist for GPW long entries (PL/EN). Never places orders.")
     p.add_argument("--ticker", help="GPW short name, e.g. PKOBP")
@@ -506,7 +859,22 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--state-dir", help="Journal directory (default ~/.gpw-trading-skills/journal or $GPW_JOURNAL_DIR)")
     p.add_argument("--regime-json", help="gpw-market-regime JSON (default: newest in --input-dir)")
     p.add_argument("--exposure-json", help="gpw-exposure-coach JSON (default: newest in --input-dir)")
+    p.add_argument("--events-json", help="gpw-event-calendar JSON (window mode is best; default: newest in --input-dir)")
+    p.add_argument("--ownership-json", help="gpw-ownership JSON (ticker / shorts / insiders mode)")
+    p.add_argument("--earnings-json", help="gpw-earnings-reaction JSON (ticker --history gives the gap history)")
+    p.add_argument("--quality-json", help="gpw-quality-screener JSON (screen or ticker mode)")
+    p.add_argument("--macro-json", help="gpw-macro-regime JSON")
+    p.add_argument("--dividend-json", help="gpw-dividend-analyzer JSON (upcoming ex-dates)")
+    p.add_argument("--risk-lab-json", help="gpw-risk-lab JSON (stress mode; optional)")
     p.add_argument("--input-dir", default=".", help="Where to auto-discover other skills' JSON (default .)")
+    p.add_argument("--holding-days", type=_sessions, default=cc.CONTEXT_DEFAULTS["holding_days"],
+                   help="Planned holding window in sessions (default 20)")
+    p.add_argument("--event-buffer-sessions", type=_nonneg_int, default=cc.CONTEXT_DEFAULTS["event_buffer_sessions"],
+                   help="Earnings this many sessions after the window still warn (default 5)")
+    p.add_argument("--strict-events", action="store_true",
+                   help="NO-GO when a report falls within 2 sessions and its typical gap exceeds the stop distance")
+    p.add_argument("--require", type=_require, default=[],
+                   help="Comma list of context checks whose UNKNOWN status must fail (e.g. event_window,quality_red_flags)")
     p.add_argument("--override", help="Written reason to proceed despite a bear market with top risk >= 80 (recorded)")
     p.add_argument("--broker", choices=sorted(brokers.BROKERS), help="Commission preset (default mbank, or the sizer's)")
     p.add_argument("--commission-pct", type=_nonneg)

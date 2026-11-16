@@ -1,0 +1,24 @@
+Notification of transactions by persons discharging managerial responsibilities
+
+1 Details of the person discharging managerial responsibilities / person closely associated
+a) Name: Anna Nowak
+2 Reason for the notification
+a) Position/status: Member of the Supervisory Board
+b) Initial notification/Amendment: Initial notification
+3 Details of the issuer, emission allowance market participant, auction platform, auctioneer or auction monitor
+a) Name: Example Holding S.A.
+b) LEI: 2594001234567890AB12
+4 Details of the transaction(s)
+a) Description of the financial instrument, type of instrument: ordinary shares
+Identification code: PLEXMPL00012
+b) Nature of the transaction: Sale of shares
+c) Price(s) and volume(s)
+Price(s) Volume(s)
+12.10 1,200
+12.05 800
+11.98 2,000
+d) Aggregated information
+- Aggregated volume: 4,000
+- Price: 12.03
+e) Date of the transaction: 2026-11-06; 10:15 UTC
+f) Place of the transaction: Warsaw Stock Exchange (XWAR)

@@ -1,0 +1,128 @@
+{
+ "skill": "gpw-ownership",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "shorts",
+ "as_of": "2026-11-13",
+ "shorts": {
+  "by_issuer": [
+   {
+    "ticker": "CCC",
+    "isin": "PLCCC0000016",
+    "total_pct": 4.12,
+    "holders": 3,
+    "change_20s_pp": -0.72,
+    "crowded": true
+   },
+   {
+    "ticker": "KRUK",
+    "isin": "PLKRK0000010",
+    "total_pct": 2.67,
+    "holders": 4,
+    "change_20s_pp": 0.13,
+    "crowded": true
+   },
+   {
+    "ticker": "GRUPAAZOTY",
+    "isin": "PLZATRM00012",
+    "total_pct": 1.99,
+    "holders": 3,
+    "change_20s_pp": -0.25,
+    "crowded": true
+   },
+   {
+    "ticker": "DINOPL",
+    "isin": "PLDINPL00011",
+    "total_pct": 1.88,
+    "holders": 2,
+    "change_20s_pp": 0.08,
+    "crowded": false
+   },
+   {
+    "ticker": "JSW",
+    "isin": "PLJSW0000015",
+    "total_pct": 1.8,
+    "holders": 2,
+    "change_20s_pp": 0.64,
+    "crowded": false
+   },
+   {
+    "ticker": "CRQUANTUM",
+    "isin": "PLCTHQM00018",
+    "total_pct": 1.79,
+    "holders": 2,
+    "change_20s_pp": -0.1,
+    "crowded": false
+   }
+  ]
+ },
+ "signals": [
+  {
+   "ticker": "CCC",
+   "date": "2026-11-13",
+   "kind": "short_crowded",
+   "direction": "avoid",
+   "score": 100.0,
+   "source": "gpw-ownership"
+  },
+  {
+   "ticker": "KRUK",
+   "date": "2026-11-13",
+   "kind": "short_crowded",
+   "direction": "avoid",
+   "score": 66.8,
+   "source": "gpw-ownership"
+  },
+  {
+   "ticker": "GRUPAAZOTY",
+   "date": "2026-11-13",
+   "kind": "short_crowded",
+   "direction": "avoid",
+   "score": 49.8,
+   "source": "gpw-ownership"
+  },
+  {
+   "ticker": "ASBIS",
+   "date": "2026-11-13",
+   "kind": "short_new",
+   "direction": "avoid",
+   "score": 12.8,
+   "source": "gpw-ownership"
+  },
+  {
+   "ticker": "KRUK",
+   "date": "2026-11-09",
+   "kind": "short_new",
+   "direction": "avoid",
+   "score": 12.8,
+   "source": "gpw-ownership"
+  },
+  {
+   "ticker": "CRQUANTUM",
+   "date": "2026-11-02",
+   "kind": "short_new",
+   "direction": "avoid",
+   "score": 15.0,
+   "source": "gpw-ownership"
+  },
+  {
+   "ticker": "KETY",
+   "date": "2026-10-30",
+   "kind": "short_new",
+   "direction": "avoid",
+   "score": 15.2,
+   "source": "gpw-ownership"
+  },
+  {
+   "ticker": "JSW",
+   "date": "2026-10-30",
+   "kind": "short_new",
+   "direction": "avoid",
+   "score": 17.8,
+   "source": "gpw-ownership"
+  }
+ ],
+ "data_provenance": {
+  "as_of": "2026-11-13"
+ }
+}

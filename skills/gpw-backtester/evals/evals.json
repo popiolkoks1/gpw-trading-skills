@@ -1,0 +1,67 @@
+{
+  "skill": "gpw-backtester",
+  "trigger_evals": {
+    "should_trigger": [
+      "Przetestuj strategię trend template Minerviniego na GPW od 2019 roku z prowizjami mBanku.",
+      "Czy rotacja momentum 12-1 działała na warszawskiej giełdzie po kosztach i podatku?",
+      "Zrób backtest: kupuję, gdy kurs przebija SMA200, sprzedaję, gdy spada pod SMA200.",
+      "Czy moja strategia wybicia z 52-tygodniowego szczytu nie jest przeuczona? Zrób walk-forward.",
+      "Ile podatek Belki i prowizje zabierają z tej strategii na GPW w porównaniu z WIG?",
+      "Backtest a golden cross strategy on Polish stocks with realistic costs.",
+      "Run a walk-forward and PBO test of momentum rotation on WSE shares.",
+      "Test my trading rules on GPW stocks: RSI below 30 in an uptrend, exit when RSI above 60.",
+      "Czy na IKE ta strategia wypadłaby lepiej niż na zwykłym rachunku?"
+    ],
+    "should_not_trigger": [
+      "Backtest an S&P 500 moving-average strategy on US stocks.",
+      "Ile akcji PKO BP mogę kupić przy ryzyku 1%?",
+      "Które spółki na GPW są teraz liderami według Minerviniego?",
+      "Podsumuj moje transakcje z października i policz PIT-38.",
+      "IKE czy IKZE — gdzie odkładać 1000 zł miesięcznie?",
+      "Czy rynek jest teraz w korekcie?",
+      "Jaka będzie cena CD Projektu za rok?"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "pl-trend-template",
+      "prompt": "Przetestuj trend template na GPW od 2019 z kapitałem 50 tys. zł w mBanku na zwykłym rachunku.",
+      "assertions": [
+        "scripts/gpw_backtester.py run --strategy trend_template was executed with --broker mbank --capital 50000 --account regular",
+        "The answer in Polish starts with the verdict (robustness.verdict) and lists its reasons",
+        "The cost drag and the tax drag are stated next to the net CAGR",
+        "Net CAGR and max drawdown are compared with WIG and with the equal-weight universe",
+        "The answer says this is a historical test, not a forecast, and never promises a return",
+        "If metrics.concentration shows that the top trades made most of the profit, this is mentioned",
+        "No instruction to buy or sell any stock"
+      ]
+    },
+    {
+      "id": "en-walkforward",
+      "prompt": "Is momentum rotation on WSE overfitted? Run a walk-forward.",
+      "assertions": [
+        "scripts/gpw_backtester.py walkforward (or grid) --strategy momentum_rotation was executed",
+        "The answer reports the OOS/IS Sharpe ratio, PBO and the Deflated Sharpe with the number of trials, explained in plain words",
+        "The answer reports the plateau result and the 2x cost stress",
+        "The answer mentions the Zaremba & Konieczka finding that WSE premiums shrink after costs, or the cost drag from the report"
+      ]
+    },
+    {
+      "id": "pl-custom-rules",
+      "prompt": "Sprawdź strategię: kupuję, gdy kurs jest nad SMA200, a RSI(14) spada poniżej 35; sprzedaję, gdy RSI > 60 albo po 30 sesjach; stop 2,5 ATR.",
+      "assertions": [
+        "A rules JSON with entry (close > sma 200 and rsi 14 < 35), exit (rsi > 60), max_hold 30 and stop atr_mult 2.5 was written and shown to the user",
+        "scripts/gpw_backtester.py run --rules <file> was executed",
+        "If the script exits 1 with a rule error, the error is reported and the JSON fixed, no numbers invented"
+      ]
+    },
+    {
+      "id": "not-evaluable",
+      "prompt": "Backtest DCA w WIG po 1000 zł miesięcznie.",
+      "assertions": [
+        "scripts/gpw_backtester.py run --strategy dca_buy_hold --param monthly=1000 was executed",
+        "The answer explains that DCA is a benchmark (NOT_EVALUABLE as a trading strategy) and reports contributions, final value and tax"
+      ]
+    }
+  ]
+}

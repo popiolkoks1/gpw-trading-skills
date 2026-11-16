@@ -1,0 +1,71 @@
+{
+  "skill": "gpw-macro-regime",
+  "trigger_evals": {
+    "should_trigger": [
+      "Jak wygląda teraz sytuacja makro dla polskiej giełdy?",
+      "Czy obniżki stóp NBP są dobre dla banków na GPW?",
+      "Czy słaby złoty pomaga eksporterom takim jak CD Projekt czy KGHM?",
+      "Rośnie spread polskich obligacji do niemieckich — co to znaczy dla akcji?",
+      "Inflacja znowu rośnie, czy to szkodzi giełdzie?",
+      "Czy RPP jest w cyklu obniżek, czy już zrobiła pauzę?",
+      "What is the current macro regime for Polish equities?",
+      "How do NBP rates and the zloty affect Warsaw-listed sectors right now?",
+      "Is the Polish yield curve inverted?"
+    ],
+    "should_not_trigger": [
+      "What will the Fed do at its next meeting?",
+      "Czy WIG20 jest w korekcie według dni dystrybucji?",
+      "Ile akcji PKO BP kupić przy ryzyku 1%?",
+      "Jaka jest wartość godziwa akcji LPP?",
+      "Które sektory na GPW mają najwięcej spółek w trendzie wzrostowym?",
+      "Jak rozliczyć PIT-38?"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "pl-macro-overview",
+      "prompt": "Jak wygląda otoczenie makro dla polskich akcji?",
+      "assertions": [
+        "scripts/gpw_macro_regime.py was executed",
+        "Answer in Polish leads with macro.state.composite (wspierające/mieszane/niekorzystne), the score and the confidence",
+        "Answer quotes the NBP reference rate and the last change date, HICP y/y with its period vs the 2.5% ±1 pp target, the real rate, the PLN regime and the PL-DE spread trend, using numbers from the JSON",
+        "Answer says the regime is slow context for weeks to months, not a timing or buy/sell signal",
+        "Any failed or stale source from data_provenance.per_source is mentioned first"
+      ]
+    },
+    {
+      "id": "pl-banks-rates",
+      "prompt": "Czy obniżki stóp szkodzą bankom na GPW?",
+      "assertions": [
+        "Answer quotes sector_tilts.banks.tilt and explains net interest income sensitivity to rate cuts in plain Polish",
+        "Answer calls it a historical tendency, not a forecast, and mentions market_check vs WIG",
+        "No recommendation to buy or sell any bank"
+      ]
+    },
+    {
+      "id": "en-pln-exporters",
+      "prompt": "Does the weak zloty help Polish exporters now?",
+      "assertions": [
+        "Answer in English quotes EURPLN and USDPLN vs their 200-fixing averages and the PLN regime",
+        "Answer quotes sector_tilts.exporters and lists the indices used (WIG-INFO, WIG-GRY, WIG-GORNIC, WIG-CHEMIA)",
+        "Answer states the data dates (as_of per indicator)"
+      ]
+    },
+    {
+      "id": "changes",
+      "prompt": "Co się zmieniło w makro od ostatniego raportu?",
+      "assertions": [
+        "Answer lists every entry of changes_since_previous.changes or says there were none, or that no previous report exists",
+        "Answer names the previous report file and its as_of"
+      ]
+    },
+    {
+      "id": "degraded",
+      "prompt": "Pokaż reżim makro (gdy EBC nie odpowiada)",
+      "assertions": [
+        "If a source failed, the answer names it and says the confidence is lower",
+        "If the script exited with code 1, the answer reports the failed sources and does not invent a regime"
+      ]
+    }
+  ]
+}

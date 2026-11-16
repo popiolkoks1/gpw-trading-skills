@@ -1,0 +1,8 @@
+[
+ {"name": "FW20H2720", "currency": "PLN", "open": 4339.0, "high": 4380.0, "low": 4327.0, "close": 4359.0, "settlement": 4359.0, "change_pct": 0.44, "turnover_k": 36007.92},
+ {"name": "FW20M2720", "currency": "PLN", "open": 4312.0, "high": 4346.0, "low": 4306.0, "close": 4321.0, "settlement": 4321.0, "change_pct": 0.23, "turnover_k": 3376.7},
+ {"name": "FW20U2720", "currency": "PLN", "open": 4300.0, "high": 4342.0, "low": 4290.0, "close": 4313.0, "settlement": 4313.0, "change_pct": 0.33, "turnover_k": 8888.9},
+ {"name": "FW20Z2620", "currency": "PLN", "open": 4299.0, "high": 4341.0, "low": 4283.0, "close": 4311.0, "settlement": 4311.0, "change_pct": 0.28, "turnover_k": 2368797.14},
+ {"name": "FW40Z26", "currency": "PLN", "open": 10965.0, "high": 10999.0, "low": 10905.0, "close": 10960.0, "settlement": 10960.0, "change_pct": 0.1, "turnover_k": 10627.97},
+ {"name": "FPKOZ26", "currency": "PLN", "open": 60.0, "high": 61.0, "low": 59.0, "close": 60.5, "settlement": 60.5, "change_pct": 0.1, "turnover_k": 100.0}
+]

@@ -1,0 +1,64 @@
+{
+  "skill": "gpw-signal-postmortem",
+  "trigger_evals": {
+    "should_trigger": [
+      "Czy sygnały VCP ze skanera Minerviniego w ogóle działały na GPW?",
+      "Sprawdź skuteczność moich sygnałów z ostatnich 6 miesięcy względem WIG.",
+      "Czy wyższy priorytet na liście obserwacyjnej daje lepsze wyniki?",
+      "Zrób post-mortem sygnałów z gpw-trend-screener.",
+      "Które spółki odrzucone przez skaner potem urosły - co przegapiłem?",
+      "Czy sygnały kupna w korekcie rynku są gorsze niż w trendzie wzrostowym?",
+      "Did my GPW screener signals beat WIG after 20 sessions?",
+      "Run a signal post-mortem on my Polish stock watchlist history.",
+      "What is the hit rate of the follow-through day signals on WIG?"
+    ],
+    "should_not_trigger": [
+      "Podsumuj moje zamknięte transakcje za październik i policz PIT-38.",
+      "Przetestuj strategię wybicia z 52-tygodniowego maksimum na GPW od 2015 roku.",
+      "Które spółki są teraz blisko wybicia z formacji VCP?",
+      "Ile akcji PKOBP kupić przy ryzyku 1%?",
+      "Did my S&P 500 momentum signals work last year?",
+      "Jak działa IKE?"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "pl-vcp-postmortem",
+      "prompt": "Czy moje sygnały VCP z ostatnich miesięcy działały?",
+      "assertions": [
+        "scripts/gpw_signal_postmortem.py record and evaluate were executed (no numbers invented)",
+        "Answer in Polish leads with hit rate, mean excess vs WIG in pp, horizon and n from headline[]",
+        "Pending signals are reported as pending with next_maturity, not judged",
+        "Buckets with status insufficient are described as too few to conclude",
+        "No buy/sell recommendation"
+      ]
+    },
+    {
+      "id": "en-priority",
+      "prompt": "Does a higher watchlist priority actually mean better results?",
+      "assertions": [
+        "Answer quotes the priority suggestion verdict and its evidence (n per group, difference in pp, t)",
+        "If the verdict is not supported/contradicted, the answer says there is no evidence to change the threshold",
+        "Answer states that no setting of another skill was changed"
+      ]
+    },
+    {
+      "id": "demo-label",
+      "prompt": "Nie mam jeszcze historii sygnałów - pokaż, jak działa post-mortem.",
+      "assertions": [
+        "evaluate --demo was executed",
+        "Answer says explicitly that demo signals are synthetic (52-week-high rule) and are NOT the track record of any skill",
+        "Answer does not phrase demo numbers as 'your signals'"
+      ]
+    },
+    {
+      "id": "caveats",
+      "prompt": "How reliable are these post-mortem numbers?",
+      "assertions": [
+        "Answer mentions overlapping windows / autocorrelation and the date-clustered t-stat",
+        "Answer mentions regime concentration when regime_mix is dominated by one state",
+        "Answer mentions that results exclude commissions and tax"
+      ]
+    }
+  ]
+}

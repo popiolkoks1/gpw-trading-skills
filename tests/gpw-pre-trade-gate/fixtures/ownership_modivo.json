@@ -1,0 +1,108 @@
+{
+ "skill": "gpw-ownership",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "ticker",
+ "ticker": "MODIVO",
+ "isin": "PLCCC0000016",
+ "as_of": "2026-11-13",
+ "signals": [
+  {
+   "ticker": "CCC",
+   "date": "2026-11-13",
+   "kind": "short_crowded",
+   "direction": "avoid",
+   "score": 100.0,
+   "source": "gpw-ownership"
+  }
+ ],
+ "warnings": [],
+ "shorts": {
+  "by_issuer": [
+   {
+    "ticker": "CCC",
+    "isin": "PLCCC0000016",
+    "issuer": "MODIVO",
+    "total_pct": 4.12,
+    "holders": 3,
+    "change_20s_pp": -0.72,
+    "total_20s_ago_pct": 4.84,
+    "window_start": "2026-10-15",
+    "change_since_pp": null,
+    "largest_holder": "KINTBURY CAPITAL LLP",
+    "largest_pct": 2.08,
+    "first_disclosed": "2025-08-06",
+    "days_in_register": 464,
+    "price_change_since_first_pct": null,
+    "price_change_20s_pct": null,
+    "shares_outstanding": 77025894,
+    "short_shares_est": 3173467,
+    "median_volume_20s_est": null,
+    "days_to_cover": null,
+    "high_days_to_cover": false,
+    "crowded": true,
+    "crowded_reasons": [
+     "total_pct>=2.0",
+     "holders>=3"
+    ]
+   }
+  ],
+  "crowded_rule": {
+   "total_pct_min": 2.0,
+   "holders_min": 3,
+   "public_threshold_pct": 0.5,
+   "high_dtc_days": 5.0
+  },
+  "window_start": "2026-10-15"
+ },
+ "insiders": {
+  "start": "2026-08-19",
+  "end": "2026-11-16",
+  "notices_total": 1,
+  "rules": {
+   "cluster_min_insiders": 3,
+   "cluster_window_days": 30,
+   "closed_period_days": 30,
+   "mar_threshold_eur": 20000
+  },
+  "by_ticker": [
+   {
+    "ticker": "CCC",
+    "isin": "PLCCC0000016",
+    "company": "MODIVO SPÓŁKA AKCYJNA",
+    "buys": 0,
+    "sells": 0,
+    "distinct_insiders": 0,
+    "net_value_pln": null,
+    "cluster_buy": false,
+    "cluster_sell": false,
+    "max_distinct_buyers_30d": 0,
+    "max_distinct_sellers_30d": 0,
+    "last_date": "2026-09-25",
+    "notices": 1,
+    "buy_notices": 0,
+    "sell_notices": 0,
+    "notices_identity_unknown": 1,
+    "parsed_transactions": 0,
+    "open_market_transactions": 0,
+    "basis": "notice_hints",
+    "flags": [
+     "details_missing_paste_pdf"
+    ],
+    "transactions": []
+   }
+  ]
+ },
+ "data_provenance": {
+  "as_of": "2026-11-13",
+  "freshness": {
+   "as_of": "2026-11-13",
+   "sessions_behind": 0,
+   "is_stale": false,
+   "reference_date": null,
+   "historical_run": false,
+   "sessions_behind_today": 0
+  },
+  "note": "trimmed fixture from a real offline run on 2026-11-16"
+ }
+}

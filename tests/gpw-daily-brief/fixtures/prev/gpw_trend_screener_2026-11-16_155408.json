@@ -1,0 +1,302 @@
+{
+ "skill": "gpw-trend-screener",
+ "version": "1.0.0",
+ "lang": "pl",
+ "regime": {
+  "state": "confirmed_uptrend",
+  "as_of": "2026-11-12",
+  "top_risk_score": 39.6,
+  "distribution_days": 5,
+  "warning_level": "none",
+  "file": "/fixture/db_smoke/gpw_market_regime_2026-11-16_155402.json",
+  "sessions_older": 0,
+  "stale": false
+ },
+ "account_size": null,
+ "risk_pct": 1.0,
+ "mode": "screen",
+ "summary": {
+  "date": "2026-11-12",
+  "universe": 119,
+  "traded": 402,
+  "template_passed": 24,
+  "valid_vcp": 3,
+  "actionable": 2,
+  "states": {
+   "pre_breakout": 2,
+   "extended": 2,
+   "invalid": 20
+  }
+ },
+ "watchlist": [
+  {
+   "name": "PKOBP",
+   "date": "2026-11-12",
+   "close": 117.9,
+   "score": 74.6,
+   "band": "good",
+   "execution": {
+    "state": "pre_breakout",
+    "pct_vs_pivot": -0.61,
+    "pct_above_sma50": 0.07,
+    "volume_ratio": 1.84
+   },
+   "vcp": {
+    "valid": true,
+    "pivot": 118.62
+   },
+   "rs": {
+    "rating": 77
+   }
+  },
+  {
+   "name": "PEKAO",
+   "date": "2026-11-12",
+   "close": 268.5,
+   "score": 71.0,
+   "band": "good",
+   "execution": {
+    "state": "pre_breakout",
+    "pct_vs_pivot": -0.96,
+    "pct_above_sma50": 0.36,
+    "volume_ratio": 1.36
+   },
+   "vcp": {
+    "valid": true,
+    "pivot": 271.1
+   },
+   "rs": {
+    "rating": 70
+   }
+  },
+  {
+   "name": "BNPPPL",
+   "date": "2026-11-12",
+   "close": 186.4,
+   "score": 74.3,
+   "band": "watchlist",
+   "execution": {
+    "state": "extended",
+    "pct_vs_pivot": 10.69,
+    "pct_above_sma50": 13.45,
+    "volume_ratio": 0.97
+   },
+   "vcp": {
+    "valid": true,
+    "pivot": 168.4
+   },
+   "rs": {
+    "rating": 85
+   }
+  }
+ ],
+ "others": [
+  {
+   "name": "PGE",
+   "state": "invalid",
+   "rs": 91,
+   "score": 62.9,
+   "vcp_reasons": [
+    "too_few_contractions",
+    "last_too_loose"
+   ]
+  },
+  {
+   "name": "ALLEGRO",
+   "state": "invalid",
+   "rs": 95,
+   "score": 59.6,
+   "vcp_reasons": [
+    "too_few_contractions"
+   ]
+  },
+  {
+   "name": "AGORA",
+   "state": "invalid",
+   "rs": 90,
+   "score": 58.3,
+   "vcp_reasons": [
+    "too_few_contractions",
+    "base_too_short"
+   ]
+  }
+ ],
+ "candidates": [
+  {
+   "name": "PKOBP",
+   "date": "2026-11-12",
+   "close": 117.9,
+   "score": 74.6,
+   "band": "good",
+   "execution": {
+    "state": "pre_breakout",
+    "pct_vs_pivot": -0.61,
+    "pct_above_sma50": 0.07,
+    "volume_ratio": 1.84
+   },
+   "vcp": {
+    "valid": true,
+    "pivot": 118.62
+   },
+   "rs": {
+    "rating": 77
+   }
+  },
+  {
+   "name": "PEKAO",
+   "date": "2026-11-12",
+   "close": 268.5,
+   "score": 71.0,
+   "band": "good",
+   "execution": {
+    "state": "pre_breakout",
+    "pct_vs_pivot": -0.96,
+    "pct_above_sma50": 0.36,
+    "volume_ratio": 1.36
+   },
+   "vcp": {
+    "valid": true,
+    "pivot": 271.1
+   },
+   "rs": {
+    "rating": 70
+   }
+  },
+  {
+   "name": "BNPPPL",
+   "date": "2026-11-12",
+   "close": 186.4,
+   "score": 74.3,
+   "band": "watchlist",
+   "execution": {
+    "state": "extended",
+    "pct_vs_pivot": 10.69,
+    "pct_above_sma50": 13.45,
+    "volume_ratio": 0.97
+   },
+   "vcp": {
+    "valid": true,
+    "pivot": 168.4
+   },
+   "rs": {
+    "rating": 85
+   }
+  },
+  {
+   "name": "PGE",
+   "date": "2026-11-12",
+   "close": 16.3,
+   "score": 62.9,
+   "band": "skip",
+   "execution": {
+    "state": "invalid",
+    "pct_vs_pivot": -7.12,
+    "pct_above_sma50": 7.24,
+    "volume_ratio": 1.11
+   },
+   "vcp": {
+    "valid": false,
+    "pivot": 17.55
+   },
+   "rs": {
+    "rating": 91
+   }
+  },
+  {
+   "name": "ALLEGRO",
+   "date": "2026-11-12",
+   "close": 64.0,
+   "score": 59.6,
+   "band": "skip",
+   "execution": {
+    "state": "invalid",
+    "pct_vs_pivot": 7.64,
+    "pct_above_sma50": 20.95,
+    "volume_ratio": 2.93
+   },
+   "vcp": {
+    "valid": false,
+    "pivot": 59.46
+   },
+   "rs": {
+    "rating": 95
+   }
+  },
+  {
+   "name": "AGORA",
+   "date": "2026-11-12",
+   "close": 13.1,
+   "score": 58.3,
+   "band": "skip",
+   "execution": {
+    "state": "invalid",
+    "pct_vs_pivot": -1.13,
+    "pct_above_sma50": 14.98,
+    "volume_ratio": 0.88
+   },
+   "vcp": {
+    "valid": false,
+    "pivot": 13.25
+   },
+   "rs": {
+    "rating": 90
+   }
+  },
+  {
+   "name": "LPP",
+   "date": "2026-11-12",
+   "close": 28740.0,
+   "score": 58.3,
+   "band": "skip",
+   "execution": {
+    "state": "invalid",
+    "pct_vs_pivot": 5.51,
+    "pct_above_sma50": 15.9,
+    "volume_ratio": 1.43
+   },
+   "vcp": {
+    "valid": false,
+    "pivot": 27240.0
+   },
+   "rs": {
+    "rating": 89
+   }
+  },
+  {
+   "name": "BENEFIT",
+   "date": "2026-11-12",
+   "close": 6220.0,
+   "score": 56.7,
+   "band": "skip",
+   "execution": {
+    "state": "invalid",
+    "pct_vs_pivot": -1.03,
+    "pct_above_sma50": 13.46,
+    "volume_ratio": 1.82
+   },
+   "vcp": {
+    "valid": false,
+    "pivot": 6285.0
+   },
+   "rs": {
+    "rating": 89
+   }
+  }
+ ],
+ "data_provenance": {
+  "schema_version": "1.0",
+  "as_of": "2026-11-12",
+  "sources": [
+   "GPW — Archiwum notowań (akcje, indeksy): https://www.gpw.pl/archiwum-notowan",
+   "GPW Benchmark — portfele indeksów (etykiety WIG20/mWIG40/sWIG80 i sektorów): https://gpwbenchmark.pl"
+  ],
+  "freshness": {
+   "as_of": "2026-11-12",
+   "sessions_behind": 0,
+   "is_stale": false,
+   "reference_date": "2026-11-12",
+   "historical_run": true,
+   "sessions_behind_today": 1
+  }
+ }
+}

@@ -326,7 +326,7 @@ def run(args) -> dict:
     ]
     prov = provenance.build(as_of=as_of, sources=sources, sessions_used=len(shares),
                             universe_size=rows[-1]["eligible"], notes=notes,
-                            point_in_time_membership=False)
+                            point_in_time_membership=False, reference_date=end)
     hist = update_history(Path(args.state_dir).expanduser(), as_of.isoformat(), comp) if not args.as_of else {"previous": None, "delta": None}
     last = {k: v for k, v in rows[-1].items() if k != "size"}
     return {

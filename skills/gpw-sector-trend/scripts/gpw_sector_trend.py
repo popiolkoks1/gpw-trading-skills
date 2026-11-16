@@ -6,6 +6,8 @@ of the 14 GPW Benchmark sector indices), scores the environment 0-100 and
 writes JSON + Markdown reports (PL or EN).
 
     python3 scripts/gpw_sector_trend.py --lang pl
+    python3 scripts/gpw_sector_trend.py --rrg --lang pl            # Relative Rotation Graph
+    python3 scripts/gpw_sector_trend.py --rrg --stocks WIG-BANKI   # stocks of one sector vs its index
 """
 
 from __future__ import annotations
@@ -24,6 +26,9 @@ from gpwlib.fmt import DISCLAIMER, T, num, pct  # noqa: E402
 from gpwlib.universe import DEFAULTS, build_views, session_dates  # noqa: E402
 
 import sector_engine as se  # noqa: E402
+import sector_rrg  # noqa: E402
+
+VERSION = "1.1.0"
 
 STRINGS = {
     "title": {"pl": "Trendy sektorowe GPW — raport", "en": "GPW Sector Trend Report"},
@@ -120,9 +125,11 @@ def parse_args(argv=None):
     p.add_argument("--offline", action="store_true")
     p.add_argument("--min-price", type=float, default=DEFAULTS["min_price"])
     p.add_argument("--min-turnover-k", type=float, default=DEFAULTS["min_turnover_k"])
+    sector_rrg.add_arguments(p)
     a = p.parse_args(argv)
     if a.sessions < 330:
         p.error("--sessions must be >= 330")
+    sector_rrg.validate_args(p, a)
     return a
 
 
@@ -166,9 +173,9 @@ def run(args) -> dict:
                  "GPW Benchmark — portfele indeksów sektorowych: https://gpwbenchmark.pl"],
         sessions_used=len(shares), universe_size=all_rows[-1]["total"],
         notes=["Sector membership is the current GPW Benchmark portfolio (not point-in-time)."],
-        point_in_time_membership=False)
+        point_in_time_membership=False, reference_date=end)
     return {
-        "skill": "gpw-sector-trend", "version": "1.0.0", "lang": args.lang,
+        "skill": "gpw-sector-trend", "version": VERSION, "lang": args.lang,
         "composite": comp, "components": comps, "sectors": snap,
         "wig_20s_pct": rets.get("WIG"),
         "overall_tail": [{k: (round(v, 5) if isinstance(v, float) else v) for k, v in r.items()} for r in all_rows[-30:]],
@@ -223,11 +230,16 @@ def render_markdown(r: dict, lang: str) -> str:
 
 def main(argv=None) -> int:
     args = parse_args(argv)
+    if args.rrg:
+        return sector_rrg.main_rrg(args, VERSION)
     try:
         result = run(args)
     except gpw_archive.GPWFetchError as exc:
         print("ERROR: {}".format(exc), file=sys.stderr)
         return 1
+    if args.no_files:
+        print(render_markdown(result, args.lang))
+        return 0
     out = Path(args.output_dir).expanduser()
     out.mkdir(parents=True, exist_ok=True)
     stamp = dt.datetime.now().strftime("%Y-%m-%d_%H%M%S")

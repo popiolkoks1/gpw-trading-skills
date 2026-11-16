@@ -311,7 +311,7 @@ def test_cli_no_thesis_is_no_go_with_journal_command(env, capsys):
     out = capsys.readouterr().out
     assert "NO-GO" in out and "journal.py add --ticker BANKA" in out and "--kill" in out
     js = _latest_json(env)
-    assert js["skill"] == "gpw-pre-trade-gate" and js["version"] == "1.0.0" and js["verdict"] == "NO-GO"
+    assert js["skill"] == "gpw-pre-trade-gate" and js["version"] == "1.1.0" and js["verdict"] == "NO-GO"
     assert js["data_provenance"]["as_of"] == "2026-11-13"
     assert js["sector"] == "WIG-BANKI"
 

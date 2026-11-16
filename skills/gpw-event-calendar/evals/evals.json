@@ -1,0 +1,67 @@
+{
+  "skill": "gpw-event-calendar",
+  "trigger_evals": {
+    "should_trigger": [
+      "Kiedy PKO BP publikuje wyniki za trzeci kwartał?",
+      "Kiedy jest dzień odcięcia dywidendy PZU?",
+      "Co się dzieje na GPW w najbliższych trzech tygodniach?",
+      "Czy w ciągu najbliższego miesiąca moje spółki mają wyniki albo walne?",
+      "Chcę trzymać KGHM przez 20 sesji - czy po drodze są wyniki albo RPP?",
+      "Kiedy następne posiedzenie RPP i rewizja WIG20?",
+      "When does CD Projekt report earnings and when is the next ex-dividend date?",
+      "Show me the GPW event calendar for my portfolio and export it to my calendar.",
+      "Is there an earnings report inside my holding window for PZU?"
+    ],
+    "should_not_trigger": [
+      "Ile akcji PKO mogę kupić przy ryzyku 1%?",
+      "Jaka jest stopa dywidendy netto PZU po podatku Belki?",
+      "Jak zareagował kurs CD Projektu na ostatnie wyniki?",
+      "When is the next FOMC meeting and Apple earnings date?",
+      "Czy rynek jest w korekcie?",
+      "IKE czy IKZE?"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "pl-upcoming",
+      "prompt": "Co ważnego dzieje się na GPW w najbliższych 15 sesjach?",
+      "assertions": [
+        "scripts/gpw_event_calendar.py upcoming was executed",
+        "Answer in Polish starts with a one-sentence summary of the key events",
+        "Each date is labelled potwierdzona, termin ustawowy or szacunek",
+        "Mentions MPC meeting and GPW Benchmark index dates when they fall inside the horizon",
+        "No buy/sell recommendation"
+      ]
+    },
+    {
+      "id": "pl-ticker-dividend",
+      "prompt": "Kiedy PKO BP będzie miało następny dzień odcięcia dywidendy?",
+      "assertions": [
+        "scripts/gpw_event_calendar.py ticker PKOBP was executed",
+        "If no dividend resolution is published, the date is presented as an estimate based on last year's ex-date (archive), with the window",
+        "Explains ex-date = record date minus 1 session under T+2",
+        "Does not present an estimated date as confirmed"
+      ]
+    },
+    {
+      "id": "en-window",
+      "prompt": "I plan to hold PZU for about 20 sessions starting today. Any events in that window?",
+      "assertions": [
+        "scripts/gpw_event_calendar.py window --ticker PZU --days 20 was executed",
+        "Answer in English reports the verdict (event_risk / caution / clear) from holding_window_check",
+        "Lists which events fall inside the window with their dates and date kinds",
+        "Frames events as risks to plan for, not as trade signals"
+      ]
+    },
+    {
+      "id": "pl-portfolio-ics",
+      "prompt": "Pokaż kalendarz moich spółek PKOBP, KETY, CDPROJEKT, PZU i zapisz do kalendarza.",
+      "assertions": [
+        "portfolio mode run with --tickers PKOBP,KETY,CDPROJEKT,PZU and --ics",
+        "Gives the path of the .ics file",
+        "Summarises next results, ex-dividend and AGM per company",
+        "States that statutory deadlines are the latest possible day, not the actual date"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+POWIADOMIENIE O TRANSAKCJI
+1 Dane osoby pełniącej obowiązki zarządcze / osoby blisko związanej
+a) Imię i nazwisko / Nazwa
+Rodzinna Fundacja Kowalskich
+2 Powód powiadomienia
+a) Stanowisko/status
+Osoba blisko związana z Prezesem Zarządu Panem Janem Kowalskim
+b) Pierwotne powiadomienie/zmiana
+Pierwotne powiadomienie
+3 Dane dotyczące emitenta
+a) Nazwa
+Przykładowa Spółka S.A.
+b) LEI
+259400ABCDEF12345678
+4 Szczegółowe informacje dotyczące transakcji
+a) Opis instrumentu finansowego, rodzaj instrumentu
+Akcje PLPRZYK00010
+b) Rodzaj transakcji
+Nabycie akcji w transakcji pakietowej poza rynkiem
+c) Cena i wolumen
+50,00 zł 100 000
+d) Informacje zbiorcze
+100 000 akcji, cena 50,00 zł
+e) Data transakcji
+4 listopada 2026
+f) Miejsce transakcji
+Poza systemem obrotu
+1 Dane osoby pełniącej obowiązki zarządcze / osoby blisko związanej
+a) Imię i nazwisko
+Piotr Wiśniewski
+2 Powód powiadomienia
+a) Stanowisko/status
+Członek Zarządu
+b) Pierwotne powiadomienie/zmiana
+Pierwotne powiadomienie
+3 Dane dotyczące emitenta
+a) Nazwa
+Przykładowa Spółka S.A.
+4 Szczegółowe informacje dotyczące transakcji
+a) Opis instrumentu finansowego, rodzaj instrumentu
+Warranty subskrypcyjne / akcje serii F
+b) Rodzaj transakcji
+Wykonanie opcji w ramach programu motywacyjnego - objęcie akcji serii F
+c) Cena i wolumen
+Cena: 10,00 PLN Wolumen: 20 000
+d) Informacje zbiorcze
+Łączny wolumen 20 000, cena 10,00 PLN
+e) Data transakcji
+03.11.2026
+f) Miejsce transakcji
+Poza systemem obrotu

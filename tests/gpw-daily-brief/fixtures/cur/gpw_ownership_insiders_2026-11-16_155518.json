@@ -1,0 +1,56 @@
+{
+ "skill": "gpw-ownership",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "insiders",
+ "insiders": {
+  "by_ticker": [
+   {
+    "ticker": "PGE",
+    "isin": "PLPGER000010",
+    "company": "PGE POLSKA GRUPA ENERGETYCZNA SPÓŁKA AKCYJNA",
+    "buys": 0,
+    "sells": 0,
+    "distinct_insiders": 0,
+    "net_value_pln": null,
+    "cluster_buy": false,
+    "cluster_sell": false,
+    "max_distinct_buyers_30d": 0,
+    "max_distinct_sellers_30d": 0,
+    "last_date": "2026-11-16",
+    "notices": 1,
+    "buy_notices": 0,
+    "sell_notices": 0,
+    "notices_identity_unknown": 1,
+    "parsed_transactions": 0,
+    "open_market_transactions": 0,
+    "basis": "notice_hints",
+    "flags": [
+     "details_missing_paste_pdf"
+    ]
+   }
+  ],
+  "start": "2026-11-14",
+  "end": "2026-11-16"
+ },
+ "as_of": "2026-11-16",
+ "signals": [],
+ "warnings": [],
+ "data_provenance": {
+  "schema_version": "1.0",
+  "as_of": "2026-11-16",
+  "sources": [
+   "GPW — komunikaty ESPI/EBI: https://www.gpw.pl/komunikaty (POST ajaxindex.php action=GPWEspiReportUnion)",
+   "GPW — raport: https://www.gpw.pl/komunikat?geru_id=<N> (metadane ESAP TRANSD)",
+   "MAR art. 19 — Rozporządzenie (UE) 596/2014; próg 20 000 EUR: Rozporządzenie (UE) 2024/2809 (Listing Act); ESMA70-154-1020 (19.01.2026)"
+  ],
+  "freshness": {
+   "as_of": "2026-11-16",
+   "sessions_behind": 0,
+   "is_stale": false,
+   "reference_date": null,
+   "historical_run": false,
+   "sessions_behind_today": 0
+  }
+ }
+}

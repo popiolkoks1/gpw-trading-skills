@@ -1,0 +1,141 @@
+{
+ "skill": "gpw-dividend-analyzer",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "portfolio",
+ "as_of": "2026-11-13",
+ "reference_date": "2026-11-16",
+ "companies": [
+  {
+   "ticker": "KGHM",
+   "yield_gross_pct": 0.543,
+   "yield_net_regular_pct": 0.44,
+   "stability_score": 46,
+   "trap_flags": [
+    "fcf_below_dividend",
+    "recent_cut_or_suspension",
+    "state_controlled_policy_risk"
+   ]
+  },
+  {
+   "ticker": "PKOBP",
+   "yield_gross_pct": 5.121,
+   "yield_net_regular_pct": 4.148,
+   "stability_score": 52,
+   "trap_flags": [
+    "state_controlled_policy_risk",
+    "bank_knf_dividend_policy"
+   ]
+  },
+  {
+   "ticker": "PZU",
+   "yield_gross_pct": 6.349,
+   "yield_net_regular_pct": 5.143,
+   "stability_score": 69,
+   "trap_flags": [
+    "state_controlled_policy_risk"
+   ]
+  },
+  {
+   "ticker": "TORPOL",
+   "yield_gross_pct": 5.965,
+   "yield_net_regular_pct": 4.832,
+   "stability_score": 60,
+   "trap_flags": [
+    "recent_cut_or_suspension"
+   ]
+  }
+ ],
+ "upcoming": [
+  {
+   "ex_date": "2027-06-23",
+   "dps": 1.5,
+   "date_kind": "estimated",
+   "based_on": "2026-06-24",
+   "window_start": "2027-06-09",
+   "window_end": "2027-07-07",
+   "source": "history (last ex-date + 52 weeks)",
+   "record_date": null,
+   "payment_date": null,
+   "stage": "history",
+   "ticker": "KGHM"
+  },
+  {
+   "ex_date": "2027-07-01",
+   "dps": 3.4,
+   "date_kind": "estimated",
+   "based_on": "2026-07-02",
+   "window_start": "2027-06-17",
+   "window_end": "2027-07-15",
+   "source": "history (last ex-date + 52 weeks)",
+   "record_date": null,
+   "payment_date": null,
+   "stage": "history",
+   "ticker": "TORPOL"
+  },
+  {
+   "ex_date": "2027-08-03",
+   "dps": 6.14,
+   "date_kind": "estimated",
+   "based_on": "2026-08-04",
+   "window_start": "2027-07-20",
+   "window_end": "2027-08-17",
+   "source": "history (last ex-date + 52 weeks)",
+   "record_date": null,
+   "payment_date": null,
+   "stage": "history",
+   "ticker": "PKOBP"
+  },
+  {
+   "ex_date": "2027-09-15",
+   "dps": 4.8,
+   "date_kind": "estimated",
+   "based_on": "2026-09-16",
+   "window_start": "2027-09-01",
+   "window_end": "2027-09-29",
+   "source": "history (last ex-date + 52 weeks)",
+   "record_date": null,
+   "payment_date": null,
+   "stage": "history",
+   "ticker": "PZU"
+  }
+ ],
+ "signals": [],
+ "warnings": [
+  {
+   "pl": "3 raportów dywidendowych bez treści (limit/offline) - odczytano tylko tytuły.",
+   "en": "3 dividend reports without body (cap/offline) - titles only."
+  },
+  {
+   "pl": "Brak danych finansowych z gpw.pl dla: TORPOL - wskaźnik wypłaty nieznany.",
+   "en": "No gpw.pl financials for: TORPOL - payout ratio unknown."
+  },
+  {
+   "pl": "Stawki prowizji wpisano 2026-11-15 i nie są aktualizowane automatycznie – sprawdź aktualną tabelę opłat swojego brokera.",
+   "en": "Stawki prowizji wpisano 2026-11-15 i nie są aktualizowane automatycznie – sprawdź aktualną tabelę opłat swojego brokera."
+  }
+ ],
+ "data_provenance": {
+  "schema_version": "1.0",
+  "as_of": "2026-11-13",
+  "sources": [
+   "https://www.gpw.pl/archiwum-notowan (GPW quotes archive, cached sessions 2019-01-02 - 2026-11-13, 1970 sessions; ex-dates and DPS from gpwlib.panel reference-price adjustments)",
+   "https://www.gpw.pl/komunikaty (ESPI/EBI list, 250 days 2025-11-16 - 2026-11-16)",
+   "https://www.gpw.pl/komunikat?geru_id=N (dividend report pages, 8 read)",
+   "https://www.gpw.pl/spolka?isin=... (indicators tab: shares, P/E; Notoria tab: net profit, cash flows - latest period, year-to-date) for 3 companies",
+   "Belka 19%: art. 30a ust. 1 pkt 4, art. 41 ust. 4 ustawy o PIT; rounding art. 63 § 1 Ordynacji podatkowej; IKE/IKZE: ustawa z 20.04.2004 (Dz.U. 2026 poz. 91), IKZE exit 10% art. 30 ust. 1 pkt 10a PIT (gpwlib.tax)",
+   "KSH art. 348 § 4 (record date) and KDPW T+2 (ex-date = record date - 1 session)",
+   "KNF dividend policy stance 2026: https://www.knf.gov.pl/knf/pl/komponenty/img/Stanowisko_KNF_ws_polityki_dywidendowej_w_2026_roku_96591.pdf",
+   "State holdings: company IR pages (2026-11 (company IR pages as known at build time; verify))",
+   "Broker tariff: gpwlib.brokers (mBank eMakler, entered 2026-11-15)"
+  ],
+  "freshness": {
+   "as_of": "2026-11-13",
+   "sessions_behind": 0,
+   "is_stale": false,
+   "reference_date": null,
+   "historical_run": false,
+   "sessions_behind_today": 0
+  }
+ }
+}
