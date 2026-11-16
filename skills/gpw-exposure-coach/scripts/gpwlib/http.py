@@ -50,6 +50,7 @@ import json
 import os
 import re
 import time
+import importlib
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -57,6 +58,8 @@ from pathlib import Path
 from typing import Callable, Dict, Iterable, List, Optional, Sequence, Tuple, Union
 
 from . import __version__
+
+_HTTPException = importlib.import_module("http.client").HTTPException  # e.g. IncompleteRead
 
 USER_AGENT = "gpw-trading-skills/{} (educational market-analysis skills)".format(__version__)
 MIN_INTERVAL_FLOOR_S = 1.0
@@ -345,7 +348,7 @@ def _fetch(method: str, url: str, body: Optional[bytes], headers: Dict[str, str]
             last_err, last_status = exc, exc.code
             if exc.code not in RETRY_STATUSES:
                 raise HTTPFetchError("HTTP {} for {}".format(exc.code, url), url, exc.code)
-        except (urllib.error.URLError, ConnectionError, TimeoutError, OSError) as exc:
+        except (urllib.error.URLError, ConnectionError, TimeoutError, OSError, _HTTPException) as exc:
             last_err, last_status = exc, None
     raise HTTPFetchError("{} unreachable after {} attempt(s): {}".format(url, max(1, retries), last_err),
                          url, last_status)

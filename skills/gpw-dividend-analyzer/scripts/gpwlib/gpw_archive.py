@@ -38,6 +38,7 @@ import os
 import re
 import sys
 import time
+import http.client
 import urllib.error
 import urllib.request
 from html.parser import HTMLParser
@@ -45,6 +46,8 @@ from pathlib import Path
 from typing import Dict, Iterable, Iterator, List, Optional
 
 from . import __version__, plcal
+
+_HTTPException = http.client.HTTPException  # e.g. IncompleteRead on a dropped connection
 
 BASE_URL = "https://www.gpw.pl/archiwum-notowan"
 TYPE_SHARES = 10
@@ -306,7 +309,7 @@ def _http_get(url: str, retries: int = 3, timeout: int = 30) -> str:
             with urllib.request.urlopen(req, timeout=timeout) as resp:
                 raw = resp.read()
             return raw.decode("utf-8", errors="replace")
-        except (urllib.error.URLError, ConnectionError, TimeoutError, OSError) as exc:
+        except (urllib.error.URLError, ConnectionError, TimeoutError, OSError, _HTTPException) as exc:
             last_err = exc
             time.sleep(2 ** attempt * 1.5)
     raise GPWFetchError("GPW archive unreachable ({}): {}".format(url, last_err))

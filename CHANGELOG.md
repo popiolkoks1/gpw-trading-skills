@@ -81,6 +81,10 @@ Advanced skills and one connected workflow: 14 new skills, 2 extended skills
 
 ### Fixed
 
+- A dropped connection (`http.client.IncompleteRead`) is now a typed fetch
+  error in `gpw_archive` and `gpwlib.http` instead of a crash.
+- Tests: a suite-wide guard (`tests/conftest.py`) blocks all network access;
+  the one test that silently reached gpw.pl now uses the cache only.
 - Windows: importing `gpwlib` switches non-UTF-8 stdout/stderr (cp1252
   pipes, as used when Claude runs a script) to UTF-8, so Polish output no
   longer raises `UnicodeEncodeError` (affected every skill, incl. 1.1).

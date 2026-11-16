@@ -183,8 +183,18 @@ def _portfolio(cache, isin, members):
                              "source_url": "x"}), encoding="utf-8")
 
 
+def _cache_only_portfolios(monkeypatch):
+    """GPW Benchmark portfolios come from the test cache only (never the network)."""
+    real = fu.constituents.fetch_portfolio
+
+    def fake(isin, cache_dir=None, offline=False, *a, **kw):
+        return real(isin, cache_dir, True, *a, **kw)
+    monkeypatch.setattr(fu.constituents, "fetch_portfolio", fake)
+
+
 def test_isin_map_all_listed_plus_fallbacks(tmp_path, monkeypatch):
     _listing_http(monkeypatch)
+    _cache_only_portfolios(monkeypatch)
     _portfolio(tmp_path, fu.WIG_ISIN, [{"name": "KETY", "isin": "PLKETY000011", "weight_pct": 1.0},
                                        {"name": "DEBICA", "isin": "PLXXXXXXXXX0", "weight_pct": 0.1}])
     m = fu.isin_map(tmp_path)
@@ -364,3 +374,23 @@ def test_working_day_roll():
     assert plcal.is_working_day(dt.date(2026, 12, 31))
     assert not plcal.is_working_day(dt.date(2026, 12, 24))                             # public holiday from 2025
     assert plcal.is_working_day(dt.date(2024, 12, 24))
+
+
+def test_dropped_connection_becomes_typed_error(monkeypatch):
+    """IncompleteRead (http.client.HTTPException, not OSError) must not escape as a crash."""
+    import http.client as hc
+    import urllib.request as ur
+    from gpwlib import gpw_archive as ga
+    from gpwlib import http as gh
+
+    def boom(*a, **k):
+        raise hc.IncompleteRead(b"partial", 100)
+    monkeypatch.setattr(ur, "urlopen", boom)
+    monkeypatch.setattr(ga.time, "sleep", lambda s: None)
+    with pytest.raises(ga.GPWFetchError):
+        ga._http_get("https://example.invalid/x", retries=2)
+    monkeypatch.setattr(gh, "_urlopen", boom)
+    monkeypatch.setattr(gh, "_sleep", lambda s: None)
+    monkeypatch.setattr(gh.LIMITER, "wait", lambda host: None)
+    with pytest.raises(gh.HTTPFetchError):
+        gh.get("https://example.invalid/y", None, cache_dir=None, use_cache=False, retries=2)
