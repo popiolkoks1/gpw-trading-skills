@@ -1,0 +1,74 @@
+{
+ "skill": "gpw-ownership",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "ticker",
+ "as_of": "2026-11-13",
+ "ticker": "KETY",
+ "shorts": {
+  "by_issuer": [
+   {
+    "ticker": "KETY",
+    "isin": "PLKETY000011",
+    "issuer": "KETY",
+    "total_pct": 1.5,
+    "holders": 2,
+    "change_20s_pp": -0.07,
+    "total_20s_ago_pct": 1.57,
+    "window_start": "2026-10-15",
+    "change_since_pp": null,
+    "largest_holder": "QUBE RESEARCH & TECHNOLOGIES LIMITED",
+    "largest_pct": 0.89,
+    "first_disclosed": "2026-06-19",
+    "days_in_register": 147,
+    "price_change_since_first_pct": 10.08,
+    "price_change_20s_pct": 6.62,
+    "shares_outstanding": 9860212,
+    "short_shares_est": 147903,
+    "median_volume_20s_est": 19995,
+    "days_to_cover": 7.4,
+    "high_days_to_cover": true,
+    "crowded": false,
+    "crowded_reasons": []
+   }
+  ]
+ },
+ "insiders": {
+  "by_ticker": [
+   {
+    "ticker": "KETY",
+    "isin": "PLKETY000011",
+    "company": "GRUPA KĘTY SPÓŁKA AKCYJNA",
+    "buys": 1,
+    "sells": 0,
+    "distinct_insiders": 0,
+    "net_value_pln": null,
+    "cluster_buy": false,
+    "cluster_sell": false,
+    "max_distinct_buyers_30d": 0,
+    "max_distinct_sellers_30d": 0,
+    "last_date": "2026-09-24",
+    "notices": 5,
+    "buy_notices": 1,
+    "sell_notices": 0,
+    "notices_identity_unknown": 5,
+    "parsed_transactions": 0,
+    "open_market_transactions": 0,
+    "basis": "notice_hints",
+    "flags": [
+     "details_missing_paste_pdf"
+    ]
+   }
+  ]
+ },
+ "funds": {
+  "by_ticker": []
+ },
+ "data_provenance": {
+  "as_of": "2026-11-13",
+  "sources": [
+   "KNF — rejestr pozycji krótkich netto: https://rss.knf.gov.pl/rss_pub/rss.html (JSON https://rss.knf.gov.pl/rss_pub/JSON)",
+   "KNF — historia: https://rss.knf.gov.pl/rss_pub/rssH.html"
+  ]
+ }
+}
