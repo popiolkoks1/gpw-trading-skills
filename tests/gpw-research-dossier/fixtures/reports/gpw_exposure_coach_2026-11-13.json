@@ -1,0 +1,33 @@
+{
+ "skill": "gpw-exposure-coach",
+ "version": "1.0.0",
+ "lang": "pl",
+ "as_of": "2026-11-13",
+ "posture": "normal",
+ "limits": {
+  "exposure_ceiling_pct": 60.0,
+  "max_risk_per_trade_pct": 0.75,
+  "max_new_positions_per_week": 3,
+  "circuit_breaker": "ok"
+ },
+ "score": 51.6,
+ "confidence": {
+  "score": 1.0,
+  "level": "high"
+ },
+ "data_provenance": {
+  "as_of": "2026-11-13",
+  "sources": [
+   "gpw-market-regime: ./gpw_market_regime_2026-11-16_153848.json",
+   "gpw-market-breadth: ./gpw_breadth_2026-11-16_153848.json"
+  ],
+  "freshness": {
+   "as_of": "2026-11-13",
+   "sessions_behind": 0,
+   "is_stale": false,
+   "reference_date": null,
+   "historical_run": false,
+   "sessions_behind_today": 0
+  }
+ }
+}

@@ -1,0 +1,124 @@
+{
+ "skill": "gpw-dividend-analyzer",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "ticker",
+ "as_of": "2026-11-13",
+ "companies": [
+  {
+   "ticker": "PKOBP",
+   "isin": "PLPKO0000016",
+   "index": "WIG20",
+   "sector_index": "WIG-BANKI",
+   "price": 119.9,
+   "price_date": "2026-11-13",
+   "dps_history": [
+    {
+     "year": 2024,
+     "dps": 3.86,
+     "payments": 2,
+     "complete": true,
+     "sources": [
+      "archive"
+     ],
+     "special": false
+    },
+    {
+     "year": 2025,
+     "dps": 5.48,
+     "payments": 1,
+     "complete": true,
+     "sources": [
+      "archive"
+     ],
+     "special": false
+    },
+    {
+     "year": 2026,
+     "dps": 6.14,
+     "payments": 1,
+     "complete": false,
+     "sources": [
+      "archive+espi"
+     ],
+     "special": false
+    }
+   ],
+   "years_observed": 7,
+   "years_paid": 4,
+   "consecutive_years": 2,
+   "cuts": [
+    {
+     "year": 2020,
+     "from": 1.33,
+     "to": 0.0,
+     "change_pct": -100.0,
+     "kind": "suspension"
+    },
+    {
+     "year": 2023,
+     "from": 1.83,
+     "to": 0.0,
+     "change_pct": -100.0,
+     "kind": "suspension"
+    }
+   ],
+   "n_cuts": 0,
+   "n_suspensions": 2,
+   "dps_cagr_3y_pct": 44.14,
+   "dps_cagr_5y_pct": null,
+   "dps_ttm": 6.14,
+   "yield_gross_pct": 5.121,
+   "yield_net_regular_pct": 4.148,
+   "yield_ike_pct": 5.121,
+   "yield_ikze_after_exit_tax_pct": 4.609,
+   "forward_dps": null,
+   "forward_yield_gross_pct": null,
+   "payout_ratio": 70.0,
+   "payout_basis": "ytd_annualized_9m",
+   "payout_pe_based": 70.2,
+   "fcf_cover": null,
+   "sector_median_yield_pct": 5.578,
+   "sector_median_basis": "WIG-BANKI",
+   "stability_score": 52,
+   "stability_parts": {
+    "consistency": 20.0,
+    "streak": 4.3,
+    "no_cuts": 0.0,
+    "growth": 15,
+    "payout": 12.5
+   },
+   "stability_confidence": "high",
+   "trap_flags": [
+    "state_controlled_policy_risk",
+    "bank_knf_dividend_policy"
+   ],
+   "is_bank": true,
+   "is_insurer": false,
+   "stale_price": false,
+   "espi_reports": 3
+  }
+ ],
+ "upcoming": [
+  {
+   "ex_date": "2027-08-03",
+   "dps": 6.14,
+   "date_kind": "estimated",
+   "based_on": "2026-08-04",
+   "window_start": "2027-07-20",
+   "window_end": "2027-08-17",
+   "source": "history (last ex-date + 52 weeks)",
+   "record_date": null,
+   "payment_date": null,
+   "stage": "history",
+   "ticker": "PKOBP"
+  }
+ ],
+ "data_provenance": {
+  "as_of": "2026-11-13",
+  "sources": [
+   "https://www.gpw.pl/archiwum-notowan (GPW quotes archive, cached sessions 2019-01-02 - 2026-11-13, 1970 sessions; ex-dates and DPS from gpwlib.panel reference-price adjustments)",
+   "https://www.gpw.pl/komunikaty (ESPI/EBI list, 250 days 2025-11-16 - 2026-11-16)"
+  ]
+ }
+}

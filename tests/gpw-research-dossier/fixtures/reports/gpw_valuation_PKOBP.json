@@ -1,0 +1,117 @@
+{
+ "skill": "gpw-valuation",
+ "version": "1.0.0",
+ "lang": "pl",
+ "as_of": "2026-11-13",
+ "ticker": "PKOBP",
+ "model": "bank",
+ "sector": "banki komercyjne",
+ "sector_index": "WIG-BANKI",
+ "price": 119.9,
+ "price_date": "2026-11-13",
+ "implied_growth_pct": 9.217916422478043,
+ "wacc_pct": 13.018452164741944,
+ "fair_value_range": {
+  "low": 53.96069236790317,
+  "base": 72.52226735003788,
+  "high": 92.18885733523096
+ },
+ "range_position": {
+  "position": "above_range",
+  "to_low_pct": -54.995252403750484,
+  "to_base_pct": -39.514372518734056,
+  "to_high_pct": -23.111878786296113
+ },
+ "upside_downside_pct": {
+  "to_low": -54.995252403750484,
+  "to_base": -39.514372518734056,
+  "to_high": -23.111878786296113
+ },
+ "warnings": [
+  "Dane finansowe to narastająco I-III kw. 2026 (9 mies.); przepływy roczne = ×12/9 (brak historii do TTM). Sezonowość może zniekształcić wynik.",
+  "ROE liczone na kapitale udziałowców jednostki dominującej na koniec okresu (brak średniego kapitału)."
+ ],
+ "reverse_dcf": {
+  "model": "justified_pbv",
+  "market_pbv": 2.622530577962869,
+  "implied_roe_pct": 30.084962434875486,
+  "implied_growth_pct": 9.217916422478043,
+  "current_roe_pct": 19.184937619205936,
+  "coe_pct": 13.018452164741944,
+  "terminal_growth_pct": 2.5,
+  "note": "implied_growth_pct = g that makes (ROE − g)/(COE − g) equal the market P/BV at the current ROE"
+ },
+ "comps": {
+  "skipped": false,
+  "reason": null,
+  "peers": [
+   {
+    "ticker": "PEKAO",
+    "pe": 11.5,
+    "pbv": 2.09
+   },
+   {
+    "ticker": "ERSTEPL",
+    "pe": 14.8,
+    "pbv": 2.48
+   },
+   {
+    "ticker": "MBANK",
+    "pe": 17.8,
+    "pbv": 2.9
+   },
+   {
+    "ticker": "INGBSK",
+    "pe": 13.8,
+    "pbv": 3.29
+   },
+   {
+    "ticker": "MILLENNIUM",
+    "pe": 20.0,
+    "pbv": 2.57
+   },
+   {
+    "ticker": "ALIOR",
+    "pe": 10.0,
+    "pbv": 1.52
+   },
+   {
+    "ticker": "BNPPPL",
+    "pe": 11.0,
+    "pbv": 1.58
+   },
+   {
+    "ticker": "HANDLOWY",
+    "pe": 10.4,
+    "pbv": 1.79
+   },
+   {
+    "ticker": "UNICREDIT",
+    "pe": 10.7,
+    "pbv": 1.7
+   },
+   {
+    "ticker": "BOS",
+    "pe": 7.7,
+    "pbv": 0.41
+   },
+   {
+    "ticker": "SANTANDER",
+    "pe": 9.8,
+    "pbv": 1.42
+   },
+   {
+    "ticker": "GETIN",
+    "pe": null,
+    "pbv": 0.99
+   }
+  ]
+ },
+ "data_provenance": {
+  "as_of": "2026-11-13",
+  "sources": [
+   "https://www.gpw.pl/spolka?isin=PLPKO0000016",
+   "https://www.gpw.pl/ajaxindex.php?start=indicatorsTab&format=html&action=GPWListaSp&lang=PL&gls_isin=PLPKO0000016"
+  ]
+ }
+}
