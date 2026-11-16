@@ -112,7 +112,7 @@ def test_cli_input_errors_exit_1(tmp_path, capsys):
     assert cli.main(["stress", "--positions", "PKOBP", "--offline", "--cache-dir", str(tmp_path)]) == 1
     assert "TICKER:SHARES" in capsys.readouterr().err
     bad = tmp_path / "s.json"
-    bad.write_text("{not json")
+    bad.write_text("{not json", encoding="utf-8")
     assert cli.main(["stress", "--positions", "PKOBP:1", "--scenarios", str(bad), "--offline",
                      "--cache-dir", str(tmp_path)]) == 1
     assert cli.main(["stress", "--positions", "PKOBP:1", "--only", "nope", "--offline",
@@ -129,7 +129,7 @@ def _write(cache, kind, day, rows):
     p = cache / "archive" / kind / "{}.json".format(day)
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps({"schema": 1, "date": day, "type": kind, "session": True, "rows": rows,
-                             "source_url": "synthetic", "retrieved_at": "2026-11-14T00:00:00+00:00"}))
+                             "source_url": "synthetic", "retrieved_at": "2026-11-14T00:00:00+00:00"}), encoding="utf-8")
 
 
 @pytest.fixture()
@@ -174,7 +174,7 @@ def test_offline_end_to_end_all_modes(synth_cache, tmp_path, capsys):
                    "--offline", "--cache-dir", str(synth_cache), "--lookback", "60", "--output-dir", str(out),
                    "--lang", "en"])
     assert rc == 0
-    js = json.loads(next(out.glob("gpw_risk_lab_*.json")).read_text())
+    js = json.loads(next(out.glob("gpw_risk_lab_*.json")).read_text(encoding="utf-8"))
     assert js["skill"] == "gpw-risk-lab" and js["as_of"] == "2026-11-13"
     sc = {s["id"]: s for s in js["stress"]["scenarios"]}
     assert sc["gfc_2008"]["skipped"] and sc["gfc_2008"]["reason"] == "no_index_data"

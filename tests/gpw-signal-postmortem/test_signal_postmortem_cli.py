@@ -79,10 +79,10 @@ def test_record_is_idempotent(tmp_path, capsys):
     state = tmp_path / "state"
     code, out, _ = run(["record", "--input-dir", str(inp), "--state-dir", str(state)], capsys)
     assert code == 0 and "skipped 2" in out
-    n1 = len(json.loads((state / "ledger.json").read_text())["signals"])
+    n1 = len(json.loads((state / "ledger.json").read_text(encoding="utf-8"))["signals"])
     code, out, _ = run(["record", "--input-dir", str(inp), "--state-dir", str(state)], capsys)
     assert code == 0 and "new signals: 0" in out
-    assert len(json.loads((state / "ledger.json").read_text())["signals"]) == n1
+    assert len(json.loads((state / "ledger.json").read_text(encoding="utf-8"))["signals"]) == n1
     code, out, _ = run(["record", "--input-dir", str(inp), "--latest", "--state-dir", str(state), "--dry-run"], capsys)
     assert code == 0 and "DRY RUN" in out
 
@@ -118,7 +118,7 @@ def test_evaluate_end_to_end(tmp_path, capsys, patched):
     code, md, _ = run(["evaluate", "--state-dir", str(state), "--output-dir", str(out_dir), "--input-dir", str(tmp_path),
                        "--write-feedback", "--lang", "en"], capsys)
     assert code == 0
-    rep = json.loads(next(out_dir.glob("gpw_signal_postmortem_*.json")).read_text())
+    rep = json.loads(next(out_dir.glob("gpw_signal_postmortem_*.json")).read_text(encoding="utf-8"))
     for k in ("skill", "version", "lang", "as_of", "data_provenance", "buckets", "feedback", "signals_evaluated", "pending"):
         assert k in rep
     assert rep["skill"] == "gpw-signal-postmortem" and rep["demo"] is False
@@ -127,10 +127,10 @@ def test_evaluate_end_to_end(tmp_path, capsys, patched):
     # screener signals dated on the last-but-one synthetic session cannot have matured
     kety = next(r for r in rep["results"] if r["ticker"] == "KETY")
     assert kety["status"] in ("pending", "evaluated")
-    md_file = next(out_dir.glob("gpw_signal_postmortem_*.md")).read_text()
+    md_file = next(out_dir.glob("gpw_signal_postmortem_*.md")).read_text(encoding="utf-8")
     assert "## Answer" in md_file and "Caveats" in md_file and md_file.strip().endswith("_")
     assert md_file.index("## Answer") < md_file.index("## Caveats")
-    fb = json.loads(next(out_dir.glob("gpw_signal_feedback_*.json")).read_text())
+    fb = json.loads(next(out_dir.glob("gpw_signal_feedback_*.json")).read_text(encoding="utf-8"))
     assert fb["report_type"] == "feedback" and "feedback" in fb
     # feedback subcommand finds the evaluation report (not its own feedback file)
     code, _, _ = run(["feedback", "--input-dir", str(out_dir), "--output-dir", str(out_dir)], capsys)
@@ -151,7 +151,7 @@ def test_demo_is_labelled_and_never_writes_feedback(tmp_path, capsys, patched):
     code, md, err = run(["evaluate", "--demo", "--state-dir", str(tmp_path), "--output-dir", str(out_dir),
                          "--input-dir", str(tmp_path), "--write-feedback"], capsys)
     assert code == 0 and "TRYB DEMO" in md and "feedback file not written" in err
-    rep = json.loads(next(out_dir.glob("gpw_signal_postmortem_*.json")).read_text())
+    rep = json.loads(next(out_dir.glob("gpw_signal_postmortem_*.json")).read_text(encoding="utf-8"))
     assert rep["demo"] is True and rep["mode"] == "demo" and rep["feedback"]["demo"] is True
     assert not list(out_dir.glob("gpw_signal_feedback_*.json"))
     code, _, err = run(["feedback", "--input-dir", str(out_dir), "--output-dir", str(out_dir)], capsys)

@@ -76,7 +76,10 @@ def stdev(xs: Sequence[float]) -> Optional[float]:
 def t_stat(xs: Sequence[float]) -> Optional[float]:
     """One-sample t of the mean against 0."""
     sd = stdev(xs)
-    if not sd:  # undefined for n < 2 or zero dispersion (kept out of JSON as null)
+    # Undefined for n < 2 or (numerically) zero dispersion - kept out of JSON as null.
+    # The relative tolerance makes this deterministic across Python versions
+    # (3.12's compensated sum() gives exact 0 where 3.9 leaves ~1e-16 noise).
+    if not sd or sd <= 1e-9 * max(1.0, abs(mean(xs))):
         return None
     return mean(xs) / (sd / math.sqrt(len(xs)))
 
@@ -87,7 +90,7 @@ def welch_t(a: Sequence[float], b: Sequence[float]) -> Optional[float]:
         return None
     va, vb = stdev(a) ** 2, stdev(b) ** 2
     se = math.sqrt(va / len(a) + vb / len(b))
-    if se == 0:
+    if se <= 1e-9 * max(1.0, abs(mean(a)), abs(mean(b))):
         return None
     return (mean(a) - mean(b)) / se
 
@@ -636,12 +639,17 @@ def _single(results, h, min_n, name, target, parameter, pred, label) -> Dict:
     hits = sum(1 for x in xs if x > 0)
     lo, hi = wilson(hits, n)
     t = t_stat(xs)
+    # Zero dispersion with every edge on one side: the evidence is as strong as it gets,
+    # so judge it on the Wilson interval alone instead of an undefined t.
+    t_eff = t
+    if t is None and n >= 2 and xs and mean(xs) != 0:
+        t_eff = math.copysign(float("inf"), mean(xs))
     if n < min_n:
         v = "insufficient"
-    elif lo is not None and lo > 0.5 and t is not None and t >= T_SUGGESTIVE:
-        v = "supported" if t >= T_SUPPORTED else "suggestive"
-    elif hi is not None and hi < 0.5 and t is not None and t <= -T_SUGGESTIVE:
-        v = "contradicted" if t <= -T_SUPPORTED else "suggestive_against"
+    elif lo is not None and lo > 0.5 and t_eff is not None and t_eff >= T_SUGGESTIVE:
+        v = "supported" if t_eff >= T_SUPPORTED else "suggestive"
+    elif hi is not None and hi < 0.5 and t_eff is not None and t_eff <= -T_SUGGESTIVE:
+        v = "contradicted" if t_eff <= -T_SUPPORTED else "suggestive_against"
     else:
         v = "not_supported"
     def fmt(lang):

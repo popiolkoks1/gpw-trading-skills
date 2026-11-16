@@ -209,7 +209,7 @@ def test_newer_schema_refused(tmp_path):
 
 def test_stale_lock_is_broken(tmp_path):
     lock = tmp_path / ws.LOCK_FILE
-    lock.write_text("123")
+    lock.write_text("123", encoding="utf-8")
     old = lock.stat().st_mtime - ws.LOCK_STALE_SECONDS - 5
     os.utime(str(lock), (old, old))
     assert ws.save_state(ws.empty_state(), tmp_path)["written"]

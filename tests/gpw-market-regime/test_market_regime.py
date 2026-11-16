@@ -526,7 +526,7 @@ def test_breadth_input_wrong_skill(tmp_path):
 
 def test_find_input_newest(tmp_path):
     for s in ("2026-11-01_100000", "2026-11-13_090000", "2026-11-05_120000"):
-        (tmp_path / "gpw_breadth_{}.json".format(s)).write_text("{}")
+        (tmp_path / "gpw_breadth_{}.json".format(s)).write_text("{}", encoding="utf-8")
     assert cli.find_input(None, str(tmp_path), "gpw_breadth_*.json").name == "gpw_breadth_2026-11-13_090000.json"
     assert cli.find_input(None, str(tmp_path / "nope"), "gpw_breadth_*.json") is None
     with pytest.raises(cli.gpw_archive.GPWFetchError):

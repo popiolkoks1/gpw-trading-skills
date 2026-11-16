@@ -150,7 +150,7 @@ def test_end_to_end_with_real_journal(tmp_path, capsys):
     assert rc == 0
     md = capsys.readouterr().out
     assert "bad-luck loss" in md and "PIT-38" in md and tr.DISCLAIMER["en"] in md
-    rep = json.loads(next(out.glob("*.json")).read_text())
+    rep = json.loads(next(out.glob("*.json")).read_text(encoding="utf-8"))
     assert rep["process"]["counts"]["bad_luck_loss"] == 1
     assert rep["pit38"]["loss"] == pytest.approx(111.31)
 

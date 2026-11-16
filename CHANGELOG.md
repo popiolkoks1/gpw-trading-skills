@@ -81,6 +81,13 @@ Advanced skills and one connected workflow: 14 new skills, 2 extended skills
 
 ### Fixed
 
+- Windows: importing `gpwlib` switches non-UTF-8 stdout/stderr (cp1252
+  pipes, as used when Claude runs a script) to UTF-8, so Polish output no
+  longer raises `UnicodeEncodeError` (affected every skill, incl. 1.1).
+  Tests read and write files as UTF-8 explicitly.
+- `gpw-signal-postmortem`: t-statistics treat numerically zero dispersion
+  deterministically (Python 3.12's compensated `sum()` vs 3.9 noise), and a
+  zero-dispersion one-sided sample is judged on the Wilson interval.
 - `gpw-pre-trade-gate`: `insider_selling` is UNKNOWN (not PASS) when the
   insider report covers fewer than 30 days.
 - `--as-of` historical runs are no longer marked stale:

@@ -12,7 +12,7 @@ def _write(cache, kind, day, rows):
     p = cache / "archive" / kind / "{}.json".format(day.isoformat())
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps({"schema": 1, "date": day.isoformat(), "type": kind, "session": True, "rows": rows,
-                             "source_url": "synthetic", "retrieved_at": "2026-01-01T00:00:00+00:00"}))
+                             "source_url": "synthetic", "retrieved_at": "2026-01-01T00:00:00+00:00"}), encoding="utf-8")
 
 
 @pytest.fixture(scope="module")
@@ -68,7 +68,7 @@ def test_cli_grid_markdown_and_files(cache, capsys, tmp_path):
     assert "## Verdict:" in out and "Parameter grid (4 variants)" in out
     files = sorted(p.name for p in tmp_path.iterdir())
     assert any(f.startswith("gpw_backtest_sma_cross_") and f.endswith(".json") for f in files)
-    r = json.loads(next(p for p in tmp_path.iterdir() if p.suffix == ".json").read_text())
+    r = json.loads(next(p for p in tmp_path.iterdir() if p.suffix == ".json").read_text(encoding="utf-8"))
     assert r["robustness"]["trials"] == 4 and r["robustness"]["pbo"]["available"]
     assert r["robustness"]["walk_forward"]["anchored"]["available"]
 
@@ -78,7 +78,7 @@ def test_cli_rules_file(cache, capsys, tmp_path):
     rules.write_text(json.dumps({"name": "above_sma", "entry": {"left": {"ind": "close"}, "op": "crosses_above",
                                                                 "right": {"ind": "sma", "n": 50}},
                                  "exit": {"left": {"ind": "close"}, "op": "<", "right": {"ind": "sma", "n": 50}},
-                                 "stop": {"pct": 8}, "params": {"min_turnover_k": 0}}))
+                                 "stop": {"pct": 8}, "params": {"min_turnover_k": 0}}), encoding="utf-8")
     rc, out, _ = run(["run", "--rules", str(rules), "--cache-dir", str(cache)] + BASE, capsys)
     assert rc == 0 and "rules:above_sma" in out and "Werdykt" in out
 
@@ -97,7 +97,7 @@ def test_cli_errors(cache, capsys, tmp_path):
     rc, _, err = run(["run", "--rules", str(tmp_path / "missing.json"), "--cache-dir", str(cache)] + BASE, capsys)
     assert rc == 1 and "not found" in err
     bad = tmp_path / "bad.json"
-    bad.write_text('{"entry": {"left": {"ind": "eval"}, "op": ">", "right": 1}, "stop": {"pct": 5}}')
+    bad.write_text('{"entry": {"left": {"ind": "eval"}, "op": ">", "right": 1}, "stop": {"pct": 5}}', encoding="utf-8")
     rc, _, err = run(["run", "--rules", str(bad), "--cache-dir", str(cache)] + BASE, capsys)
     assert rc == 1 and "unknown indicator" in err
     rc, _, err = run(["grid", "--strategy", "trend_template", "--max-trials", "3", "--cache-dir", str(cache)] + BASE, capsys)

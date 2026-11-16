@@ -99,7 +99,7 @@ def test_upcoming_mode_market_view(offline_sources):
 
 def test_portfolio_mode_reads_watchlist(offline_sources, tmp_path):
     wl = tmp_path / "wl.json"
-    wl.write_text(json.dumps({"items": [{"ticker": "pzu", "stage": "watch"}, {"ticker": "XYZ", "stage": "dropped"}]}))
+    wl.write_text(json.dumps({"items": [{"ticker": "pzu", "stage": "watch"}, {"ticker": "XYZ", "stage": "dropped"}]}), encoding="utf-8")
     r = _run(["portfolio", "--watchlist", str(wl)], offline_sources)
     assert r["tickers"] == ["PZU"] and r["by_ticker"]["PZU"]["sources"] == ["watchlist"]
     assert r["by_ticker"]["PZU"]["next_earnings"]["date"] == "2026-11-19"
