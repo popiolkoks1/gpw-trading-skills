@@ -1,0 +1,75 @@
+{
+  "skill": "gpw-daily-brief",
+  "trigger_evals": {
+    "should_trigger": [
+      "Co dziś działo się na GPW i co wymaga mojej uwagi?",
+      "Zrób mi dzienny brief po sesji",
+      "Podsumuj sesję: reżim, ekspozycja, moje pozycje i watchlista",
+      "Przegląd tygodnia na GPW - makro, ryzyko portfela, wyniki sygnałów",
+      "Chcę mieć codzienny raport po 17:05 - jak to zautomatyzować?",
+      "What changed on the Warsaw Stock Exchange today for my positions?",
+      "Give me my GPW daily brief",
+      "Run the evening GPW routine and tell me what needs attention"
+    ],
+    "should_not_trigger": [
+      "Ile akcji KGHM kupić przy stopie 250 zł?",
+      "Czy mogę teraz kupić PKO BP? Sprawdź przed zakupem",
+      "Policz mi PIT-38 za 2026",
+      "Jak działa IKE i IKZE?",
+      "Give me a daily brief of the S&P 500",
+      "Zrób pełną analizę fundamentalną CD Projekt"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "pl-daily-run",
+      "prompt": "Zrób mi dzienny brief po dzisiejszej sesji.",
+      "command": "python3 scripts/gpw_daily_brief.py run --output-dir ~/gpw-reports --lang pl",
+      "assertions": [
+        "scripts/gpw_daily_brief.py run (or brief on fresh reports) was executed; no numbers were typed from memory",
+        "The answer starts with the stale/missing-input warning if the brief has one, otherwise with the 1-2 items of 'Wymaga uwagi' (or says nothing is urgent)",
+        "The three headline facts (regime state, exposure ceiling and risk per trade, breadth score) are quoted with their source skill",
+        "Every item mentioned keeps its source skill attribution",
+        "No sentence tells the user to buy, sell or exit a stock"
+      ]
+    },
+    {
+      "id": "below-stop",
+      "prompt": "Brief na dziś - mam TORPOL w dzienniku ze stopem 58 zł.",
+      "assertions": [
+        "The answer leads with TORPOL closing at or below the 58 zł stop and frames it as a check against the user's own plan in the journal",
+        "The answer does not say 'sell TORPOL'",
+        "If the earnings reaction is strong negative, it is mentioned with CAR and the source gpw-earnings-reaction"
+      ]
+    },
+    {
+      "id": "missing-inputs",
+      "prompt": "Zrób brief z folderu, w którym jest tylko raport reżimu.",
+      "command": "python3 scripts/gpw_daily_brief.py brief --input-dir DIR --no-journal",
+      "assertions": [
+        "The answer says which inputs are missing (breadth, exposure coach, ...) before the content",
+        "The answer gives the commands from the freshness table or offers `run`",
+        "No missing value is invented"
+      ]
+    },
+    {
+      "id": "en-weekly",
+      "prompt": "Weekly review of my GPW setup please.",
+      "command": "python3 scripts/gpw_daily_brief.py run --weekly --output-dir ~/gpw-reports --lang en",
+      "assertions": [
+        "Answer in English includes the macro composite, portfolio VaR or worst stress scenario (if positions exist) and post-mortem hit rates with n",
+        "Small post-mortem samples are called too small to conclude",
+        "The answer points to gpw-trade-review for the monthly review"
+      ]
+    },
+    {
+      "id": "automation",
+      "prompt": "Jak ustawić, żeby brief robił się sam codziennie po sesji?",
+      "assertions": [
+        "The answer suggests a cron or launchd line or the Claude Code /schedule command, at or after 18:00 Warsaw time",
+        "The answer does not install anything without the user's confirmation",
+        "The answer mentions that a cloud /schedule routine does not see the local journal and watchlist"
+      ]
+    }
+  ]
+}

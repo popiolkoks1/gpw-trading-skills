@@ -1,0 +1,66 @@
+{
+  "skill": "gpw-ownership",
+  "trigger_evals": {
+    "should_trigger": [
+      "Kto shortuje akcje KRUK-a?",
+      "Pokaż rejestr krótkiej sprzedaży KNF.",
+      "Które spółki z GPW są najbardziej shortowane?",
+      "Czy zarząd PGE kupował ostatnio akcje?",
+      "Transakcje insiderów na GPW w tym miesiącu",
+      "Wklejam powiadomienie z art. 19 MAR, odczytaj transakcję.",
+      "W co inwestują OFE? Mam plik z roczną strukturą aktywów NN OFE.",
+      "Which Polish stocks have the largest disclosed short positions?",
+      "Is there insider buying at MODIVO?",
+      "Show OFE holdings changes year over year for Polish stocks."
+    ],
+    "should_not_trigger": [
+      "Who is shorting Tesla?",
+      "Ile akcji KRUK mogę kupić przy ryzyku 1%?",
+      "Jaka jest wycena DCF dla KGHM?",
+      "Czy rynek jest w korekcie?",
+      "IKE czy IKZE?",
+      "Zapisz w dzienniku, że kupiłem 100 akcji PKO."
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "pl-shorts",
+      "prompt": "Które spółki na GPW mają największe pozycje krótkie?",
+      "assertions": [
+        "scripts/gpw_ownership.py shorts was executed",
+        "Answer in Polish lists companies with total disclosed %, number of holders and 20-session change",
+        "Answer says the register shows only positions of at least 0.5% so totals are a lower bound",
+        "Crowded companies are named with the rule (>= 2% or >= 3 holders)",
+        "No buy/sell recommendation"
+      ]
+    },
+    {
+      "id": "en-ticker",
+      "prompt": "Give me the ownership picture for KRUK before I buy.",
+      "assertions": [
+        "scripts/gpw_ownership.py ticker KRUK was executed",
+        "Answer in English covers shorts (total %, holders, days to cover), insider notices and stored fund data",
+        "Insider counts based on notice hints are described as hints and the user is told how to paste the PDF for details",
+        "Answer states the data date and any warnings"
+      ]
+    },
+    {
+      "id": "pl-parse",
+      "prompt": "Oto tekst powiadomienia: [formularz art. 19 MAR z ceną 45,20 zł i wolumenem 1 000 akcji]",
+      "assertions": [
+        "scripts/gpw_ownership.py parse was executed on the pasted text",
+        "Volume, average price and value come from the script output, none are typed by Claude",
+        "Excluded transactions (option exercise, pledge, gift) are explained as not counted"
+      ]
+    },
+    {
+      "id": "pl-funds",
+      "prompt": "Mam pliki NN OFE za 2024 i 2025 — co OFE kupowały?",
+      "assertions": [
+        "scripts/gpw_ownership.py funds was executed with both files",
+        "Approximate shares and flows are labelled as approximations",
+        "Answer mentions that following OFE has no proven edge"
+      ]
+    }
+  ]
+}

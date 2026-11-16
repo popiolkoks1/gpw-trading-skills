@@ -9,7 +9,9 @@
       "Run the pre-trade check on my ORLEN trade: entry 131, stop 124, 40 shares, 30k PLN account",
       "Go or no-go: buying 100 shares of PZU at 75.6 with a stop at 71",
       "Zrób checklistę dyscypliny zanim kupię Dino",
-      "Should I take this GPW trade after three losses in a row?"
+      "Should I take this GPW trade after three losses in a row?",
+      "Chcę kupić MODIVO na miesiąc – czy po drodze są wyniki i czy spółka nie jest mocno shortowana?",
+      "Before I buy KETY for ~4 weeks: any earnings, ex-dividend or insider selling I should know about?"
     ],
     "should_not_trigger": [
       "Ile akcji PKO BP kupić przy ryzyku 1%?",
@@ -17,7 +19,9 @@
       "Jak wygląda szerokość rynku na GPW?",
       "Zapisz, że sprzedałem KGHM po 280",
       "Should I buy Tesla stock?",
-      "Jaka jest wycena LPP?"
+      "Jaka jest wycena LPP?",
+      "Pokaż kalendarz wydarzeń GPW na ten tydzień",
+      "Who is short CCC in the KNF register?"
     ]
   },
   "output_evals": [
@@ -59,6 +63,37 @@
       "assertions": [
         "Circuit breaker FAIL ('pause') is reported from journal closed results",
         "Suggests reviewing trades with gpw-trade-review rather than trading"
+      ]
+    },
+    {
+      "id": "event-window-crowded-short-en",
+      "prompt": "Gate my MODIVO trade: entry 112.5, stop 104, 30 shares, target 135, account 100k, I plan to hold ~20 sessions. Reports are in ./reports.",
+      "command": "python3 scripts/pre_trade_gate.py --ticker MODIVO --entry 112.5 --stop 104 --shares 30 --target 135 --account-size 100000 --input-dir ./reports --holding-days 20 --lang en --no-files",
+      "assertions": [
+        "Verdict first; event_window is a WARN naming the earnings date 2026-11-30 as a statutory deadline (not later than), session 11 of 20",
+        "Quotes the typical earnings gap vs the stop distance from the report",
+        "crowded_short WARN quotes total % short (4.12%) and holders (3) and explains both short squeeze and negative drift",
+        "Macro context is presented as information only, never as a reason to block",
+        "UNKNOWN context checks are listed with the command from the report; nothing is invented",
+        "No 'buy' recommendation"
+      ]
+    },
+    {
+      "id": "strict-events-pl",
+      "prompt": "Wyniki są jutro, a mój stop jest 2% pod wejściem. Sprawdź w trybie ścisłym.",
+      "command": "python3 scripts/pre_trade_gate.py --ticker X --entry 100 --stop 98 --shares 10 --account-size 50000 --strict-events --input-dir ./reports --no-files",
+      "assertions": [
+        "Explains that --strict-events gives NO-GO when the report is within 2 sessions and the typical gap exceeds the stop distance",
+        "If no gap history exists, says strict mode blocks and suggests gpw-earnings-reaction ticker --history",
+        "Answer in Polish"
+      ]
+    },
+    {
+      "id": "missing-context-require",
+      "prompt": "Nie mam raportu z kalendarza, ale chcę, żeby bramka wymagała sprawdzenia zdarzeń.",
+      "assertions": [
+        "Uses --require event_window so a missing calendar becomes FAIL (NO-GO)",
+        "Shows the gpw-event-calendar window command the report lists"
       ]
     }
   ]

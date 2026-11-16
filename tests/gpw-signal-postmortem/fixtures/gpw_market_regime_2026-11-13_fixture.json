@@ -1,0 +1,724 @@
+{
+ "skill": "gpw-market-regime",
+ "version": "1.0.0",
+ "lang": "pl",
+ "regime": {
+  "state": "confirmed_uptrend",
+  "top_risk_score": 36.3,
+  "distribution_days": 4,
+  "as_of": "2026-11-13",
+  "index": "WIG"
+ },
+ "history": {
+  "index": "WIG",
+  "sessions": 250,
+  "from": "2025-11-14",
+  "state_before": "confirmed_uptrend",
+  "transitions": [
+   {
+    "date": "2025-11-21",
+    "from": "confirmed_uptrend",
+    "to": "uptrend_under_pressure",
+    "event": null,
+    "why": [
+     "distribution_high"
+    ],
+    "close": 108942.98,
+    "dd_count": 6,
+    "drawdown_pct": 3.98
+   },
+   {
+    "date": "2025-12-15",
+    "from": "uptrend_under_pressure",
+    "to": "confirmed_uptrend",
+    "event": null,
+    "why": [],
+    "close": 115368.66,
+    "dd_count": 3,
+    "drawdown_pct": 0.0
+   },
+   {
+    "date": "2026-03-06",
+    "from": "confirmed_uptrend",
+    "to": "uptrend_under_pressure",
+    "event": null,
+    "why": [
+     "below_sma50"
+    ],
+    "close": 120677.13,
+    "dd_count": 5,
+    "drawdown_pct": 5.53
+   },
+   {
+    "date": "2026-03-09",
+    "from": "uptrend_under_pressure",
+    "to": "correction",
+    "event": "distribution_below_sma50",
+    "why": [
+     "no_rally_attempt"
+    ],
+    "close": 120329.35,
+    "dd_count": 6,
+    "drawdown_pct": 5.8
+   },
+   {
+    "date": "2026-03-10",
+    "from": "correction",
+    "to": "rally_attempt",
+    "event": "rally_attempt_started",
+    "why": [
+     "rally_day_1"
+    ],
+    "close": 122601.68,
+    "dd_count": 6,
+    "drawdown_pct": 4.02
+   },
+   {
+    "date": "2026-03-17",
+    "from": "rally_attempt",
+    "to": "uptrend_under_pressure",
+    "event": "follow_through_day",
+    "why": [
+     "distribution_high",
+     "below_sma50"
+    ],
+    "close": 123591.03,
+    "dd_count": 8,
+    "drawdown_pct": 3.25
+   },
+   {
+    "date": "2026-04-08",
+    "from": "uptrend_under_pressure",
+    "to": "confirmed_uptrend",
+    "event": null,
+    "why": [],
+    "close": 129200.67,
+    "dd_count": 1,
+    "drawdown_pct": 0.0
+   },
+   {
+    "date": "2026-05-15",
+    "from": "confirmed_uptrend",
+    "to": "uptrend_under_pressure",
+    "event": null,
+    "why": [
+     "distribution_high"
+    ],
+    "close": 131378.47,
+    "dd_count": 6,
+    "drawdown_pct": 2.82
+   },
+   {
+    "date": "2026-05-25",
+    "from": "uptrend_under_pressure",
+    "to": "confirmed_uptrend",
+    "event": null,
+    "why": [],
+    "close": 137858.16,
+    "dd_count": 4,
+    "drawdown_pct": 0.0
+   },
+   {
+    "date": "2026-05-27",
+    "from": "confirmed_uptrend",
+    "to": "uptrend_under_pressure",
+    "event": null,
+    "why": [
+     "distribution_high"
+    ],
+    "close": 136056.35,
+    "dd_count": 6,
+    "drawdown_pct": 1.31
+   },
+   {
+    "date": "2026-05-29",
+    "from": "uptrend_under_pressure",
+    "to": "confirmed_uptrend",
+    "event": null,
+    "why": [],
+    "close": 137007.44,
+    "dd_count": 4,
+    "drawdown_pct": 0.62
+   },
+   {
+    "date": "2026-06-10",
+    "from": "confirmed_uptrend",
+    "to": "uptrend_under_pressure",
+    "event": null,
+    "why": [
+     "distribution_high"
+    ],
+    "close": 134260.22,
+    "dd_count": 6,
+    "drawdown_pct": 2.61
+   },
+   {
+    "date": "2026-06-12",
+    "from": "uptrend_under_pressure",
+    "to": "confirmed_uptrend",
+    "event": null,
+    "why": [],
+    "close": 138732.27,
+    "dd_count": 4,
+    "drawdown_pct": 0.0
+   },
+   {
+    "date": "2026-06-23",
+    "from": "confirmed_uptrend",
+    "to": "uptrend_under_pressure",
+    "event": null,
+    "why": [
+     "distribution_high"
+    ],
+    "close": 137468.46,
+    "dd_count": 6,
+    "drawdown_pct": 2.05
+   },
+   {
+    "date": "2026-07-10",
+    "from": "uptrend_under_pressure",
+    "to": "confirmed_uptrend",
+    "event": null,
+    "why": [],
+    "close": 142198.75,
+    "dd_count": 3,
+    "drawdown_pct": 0.0
+   },
+   {
+    "date": "2026-09-15",
+    "from": "confirmed_uptrend",
+    "to": "uptrend_under_pressure",
+    "event": null,
+    "why": [
+     "distribution_high"
+    ],
+    "close": 153698.41,
+    "dd_count": 6,
+    "drawdown_pct": 1.91
+   },
+   {
+    "date": "2026-09-21",
+    "from": "uptrend_under_pressure",
+    "to": "confirmed_uptrend",
+    "event": null,
+    "why": [],
+    "close": 158381.53,
+    "dd_count": 4,
+    "drawdown_pct": 0.0
+   },
+   {
+    "date": "2026-10-08",
+    "from": "confirmed_uptrend",
+    "to": "uptrend_under_pressure",
+    "event": null,
+    "why": [
+     "distribution_high"
+    ],
+    "close": 155764.56,
+    "dd_count": 6,
+    "drawdown_pct": 2.04
+   },
+   {
+    "date": "2026-10-15",
+    "from": "uptrend_under_pressure",
+    "to": "confirmed_uptrend",
+    "event": null,
+    "why": [],
+    "close": 158581.36,
+    "dd_count": 4,
+    "drawdown_pct": 0.46
+   }
+  ]
+ },
+ "indices": {
+  "WIG": {
+   "name": "WIG",
+   "as_of": "2026-11-13",
+   "state": "confirmed_uptrend",
+   "transitions": [
+    {
+     "date": "2025-11-21",
+     "from": "confirmed_uptrend",
+     "to": "uptrend_under_pressure",
+     "event": null,
+     "why": [
+      "distribution_high"
+     ],
+     "close": 108942.98,
+     "dd_count": 6,
+     "drawdown_pct": 3.98
+    },
+    {
+     "date": "2025-12-15",
+     "from": "uptrend_under_pressure",
+     "to": "confirmed_uptrend",
+     "event": null,
+     "why": [],
+     "close": 115368.66,
+     "dd_count": 3,
+     "drawdown_pct": 0.0
+    },
+    {
+     "date": "2026-03-06",
+     "from": "confirmed_uptrend",
+     "to": "uptrend_under_pressure",
+     "event": null,
+     "why": [
+      "below_sma50"
+     ],
+     "close": 120677.13,
+     "dd_count": 5,
+     "drawdown_pct": 5.53
+    },
+    {
+     "date": "2026-03-09",
+     "from": "uptrend_under_pressure",
+     "to": "correction",
+     "event": "distribution_below_sma50",
+     "why": [
+      "no_rally_attempt"
+     ],
+     "close": 120329.35,
+     "dd_count": 6,
+     "drawdown_pct": 5.8
+    },
+    {
+     "date": "2026-03-10",
+     "from": "correction",
+     "to": "rally_attempt",
+     "event": "rally_attempt_started",
+     "why": [
+      "rally_day_1"
+     ],
+     "close": 122601.68,
+     "dd_count": 6,
+     "drawdown_pct": 4.02
+    },
+    {
+     "date": "2026-03-17",
+     "from": "rally_attempt",
+     "to": "uptrend_under_pressure",
+     "event": "follow_through_day",
+     "why": [
+      "distribution_high",
+      "below_sma50"
+     ],
+     "close": 123591.03,
+     "dd_count": 8,
+     "drawdown_pct": 3.25
+    },
+    {
+     "date": "2026-04-08",
+     "from": "uptrend_under_pressure",
+     "to": "confirmed_uptrend",
+     "event": null,
+     "why": [],
+     "close": 129200.67,
+     "dd_count": 1,
+     "drawdown_pct": 0.0
+    },
+    {
+     "date": "2026-05-15",
+     "from": "confirmed_uptrend",
+     "to": "uptrend_under_pressure",
+     "event": null,
+     "why": [
+      "distribution_high"
+     ],
+     "close": 131378.47,
+     "dd_count": 6,
+     "drawdown_pct": 2.82
+    },
+    {
+     "date": "2026-05-25",
+     "from": "uptrend_under_pressure",
+     "to": "confirmed_uptrend",
+     "event": null,
+     "why": [],
+     "close": 137858.16,
+     "dd_count": 4,
+     "drawdown_pct": 0.0
+    },
+    {
+     "date": "2026-05-27",
+     "from": "confirmed_uptrend",
+     "to": "uptrend_under_pressure",
+     "event": null,
+     "why": [
+      "distribution_high"
+     ],
+     "close": 136056.35,
+     "dd_count": 6,
+     "drawdown_pct": 1.31
+    },
+    {
+     "date": "2026-05-29",
+     "from": "uptrend_under_pressure",
+     "to": "confirmed_uptrend",
+     "event": null,
+     "why": [],
+     "close": 137007.44,
+     "dd_count": 4,
+     "drawdown_pct": 0.62
+    },
+    {
+     "date": "2026-06-10",
+     "from": "confirmed_uptrend",
+     "to": "uptrend_under_pressure",
+     "event": null,
+     "why": [
+      "distribution_high"
+     ],
+     "close": 134260.22,
+     "dd_count": 6,
+     "drawdown_pct": 2.61
+    },
+    {
+     "date": "2026-06-12",
+     "from": "uptrend_under_pressure",
+     "to": "confirmed_uptrend",
+     "event": null,
+     "why": [],
+     "close": 138732.27,
+     "dd_count": 4,
+     "drawdown_pct": 0.0
+    },
+    {
+     "date": "2026-06-23",
+     "from": "confirmed_uptrend",
+     "to": "uptrend_under_pressure",
+     "event": null,
+     "why": [
+      "distribution_high"
+     ],
+     "close": 137468.46,
+     "dd_count": 6,
+     "drawdown_pct": 2.05
+    },
+    {
+     "date": "2026-07-10",
+     "from": "uptrend_under_pressure",
+     "to": "confirmed_uptrend",
+     "event": null,
+     "why": [],
+     "close": 142198.75,
+     "dd_count": 3,
+     "drawdown_pct": 0.0
+    },
+    {
+     "date": "2026-09-15",
+     "from": "confirmed_uptrend",
+     "to": "uptrend_under_pressure",
+     "event": null,
+     "why": [
+      "distribution_high"
+     ],
+     "close": 153698.41,
+     "dd_count": 6,
+     "drawdown_pct": 1.91
+    },
+    {
+     "date": "2026-09-21",
+     "from": "uptrend_under_pressure",
+     "to": "confirmed_uptrend",
+     "event": null,
+     "why": [],
+     "close": 158381.53,
+     "dd_count": 4,
+     "drawdown_pct": 0.0
+    },
+    {
+     "date": "2026-10-08",
+     "from": "confirmed_uptrend",
+     "to": "uptrend_under_pressure",
+     "event": null,
+     "why": [
+      "distribution_high"
+     ],
+     "close": 155764.56,
+     "dd_count": 6,
+     "drawdown_pct": 2.04
+    },
+    {
+     "date": "2026-10-15",
+     "from": "uptrend_under_pressure",
+     "to": "confirmed_uptrend",
+     "event": null,
+     "why": [],
+     "close": 158581.36,
+     "dd_count": 4,
+     "drawdown_pct": 0.46
+    }
+   ]
+  },
+  "SWIG80": {
+   "name": "SWIG80",
+   "as_of": "2026-11-13",
+   "state": "bear",
+   "transitions": [
+    {
+     "date": "2025-11-17",
+     "from": "uptrend_under_pressure",
+     "to": "correction",
+     "event": "distribution_below_sma50",
+     "why": [
+      "no_rally_attempt"
+     ],
+     "close": 29445.3,
+     "dd_count": 6,
+     "drawdown_pct": 3.2
+    },
+    {
+     "date": "2025-11-19",
+     "from": "correction",
+     "to": "rally_attempt",
+     "event": "rally_attempt_started",
+     "why": [
+      "rally_day_1"
+     ],
+     "close": 29092.69,
+     "dd_count": 5,
+     "drawdown_pct": 4.36
+    },
+    {
+     "date": "2025-11-21",
+     "from": "rally_attempt",
+     "to": "correction",
+     "event": "rally_attempt_failed",
+     "why": [
+      "no_rally_attempt"
+     ],
+     "close": 28732.36,
+     "dd_count": 6,
+     "drawdown_pct": 5.55
+    },
+    {
+     "date": "2025-11-24",
+     "from": "correction",
+     "to": "rally_attempt",
+     "event": "rally_attempt_started",
+     "why": [
+      "rally_day_1"
+     ],
+     "close": 28785.54,
+     "dd_count": 5,
+     "drawdown_pct": 5.37
+    },
+    {
+     "date": "2025-12-30",
+     "from": "rally_attempt",
+     "to": "confirmed_uptrend",
+     "event": "follow_through_day",
+     "why": [],
+     "close": 29590.15,
+     "dd_count": 3,
+     "drawdown_pct": 2.73
+    },
+    {
+     "date": "2026-03-02",
+     "from": "confirmed_uptrend",
+     "to": "uptrend_under_pressure",
+     "event": null,
+     "why": [
+      "distribution_high"
+     ],
+     "close": 30985.99,
+     "dd_count": 6,
+     "drawdown_pct": 2.64
+    },
+    {
+     "date": "2026-03-03",
+     "from": "uptrend_under_pressure",
+     "to": "correction",
+     "event": "drawdown",
+     "why": [
+      "no_rally_attempt"
+     ],
+     "close": 29888.77,
+     "dd_count": 7,
+     "drawdown_pct": 6.09
+    },
+    {
+     "date": "2026-03-04",
+     "from": "correction",
+     "to": "rally_attempt",
+     "event": "rally_attempt_started",
+     "why": [
+      "rally_day_1"
+     ],
+     "close": 30593.72,
+     "dd_count": 7,
+     "drawdown_pct": 3.87
+    },
+    {
+     "date": "2026-03-19",
+     "from": "rally_attempt",
+     "to": "correction",
+     "event": "rally_attempt_failed",
+     "why": [
+      "no_rally_attempt"
+     ],
+     "close": 29835.38,
+     "dd_count": 6,
+     "drawdown_pct": 6.26
+    },
+    {
+     "date": "2026-03-25",
+     "from": "correction",
+     "to": "rally_attempt",
+     "event": "rally_attempt_started",
+     "why": [
+      "rally_day_1"
+     ],
+     "close": 29515.4,
+     "dd_count": 6,
+     "drawdown_pct": 7.26
+    },
+    {
+     "date": "2026-04-01",
+     "from": "rally_attempt",
+     "to": "uptrend_under_pressure",
+     "event": "follow_through_day",
+     "why": [
+      "distribution_high",
+      "below_sma50"
+     ],
+     "close": 29908.97,
+     "dd_count": 7,
+     "drawdown_pct": 6.02
+    },
+    {
+     "date": "2026-04-15",
+     "from": "uptrend_under_pressure",
+     "to": "confirmed_uptrend",
+     "event": null,
+     "why": [],
+     "close": 30832.47,
+     "dd_count": 4,
+     "drawdown_pct": 3.12
+    },
+    {
+     "date": "2026-06-23",
+     "from": "confirmed_uptrend",
+     "to": "uptrend_under_pressure",
+     "event": null,
+     "why": [
+      "below_sma50"
+     ],
+     "close": 31052.49,
+     "dd_count": 1,
+     "drawdown_pct": 4.1
+    },
+    {
+     "date": "2026-07-17",
+     "from": "uptrend_under_pressure",
+     "to": "correction",
+     "event": "drawdown",
+     "why": [
+      "no_rally_attempt"
+     ],
+     "close": 30421.33,
+     "dd_count": 4,
+     "drawdown_pct": 6.05
+    },
+    {
+     "date": "2026-07-20",
+     "from": "correction",
+     "to": "rally_attempt",
+     "event": "rally_attempt_started",
+     "why": [
+      "rally_day_1"
+     ],
+     "close": 30527.86,
+     "dd_count": 4,
+     "drawdown_pct": 5.72
+    },
+    {
+     "date": "2026-08-04",
+     "from": "rally_attempt",
+     "to": "confirmed_uptrend",
+     "event": "follow_through_day",
+     "why": [],
+     "close": 31369.01,
+     "dd_count": 4,
+     "drawdown_pct": 3.12
+    },
+    {
+     "date": "2026-09-15",
+     "from": "confirmed_uptrend",
+     "to": "correction",
+     "event": "distribution_below_sma50",
+     "why": [
+      "no_rally_attempt"
+     ],
+     "close": 30462.47,
+     "dd_count": 6,
+     "drawdown_pct": 5.92
+    },
+    {
+     "date": "2026-09-16",
+     "from": "correction",
+     "to": "rally_attempt",
+     "event": "rally_attempt_started",
+     "why": [
+      "rally_day_1"
+     ],
+     "close": 30646.3,
+     "dd_count": 6,
+     "drawdown_pct": 5.36
+    },
+    {
+     "date": "2026-10-22",
+     "from": "rally_attempt",
+     "to": "correction",
+     "event": "rally_attempt_failed",
+     "why": [
+      "no_rally_attempt"
+     ],
+     "close": 30274.93,
+     "dd_count": 7,
+     "drawdown_pct": 6.5
+    },
+    {
+     "date": "2026-10-26",
+     "from": "correction",
+     "to": "rally_attempt",
+     "event": "rally_attempt_started",
+     "why": [
+      "rally_day_1"
+     ],
+     "close": 30395.61,
+     "dd_count": 6,
+     "drawdown_pct": 6.13
+    },
+    {
+     "date": "2026-10-30",
+     "from": "rally_attempt",
+     "to": "correction",
+     "event": "rally_attempt_failed",
+     "why": [
+      "no_rally_attempt"
+     ],
+     "close": 29608.69,
+     "dd_count": 8,
+     "drawdown_pct": 8.56
+    },
+    {
+     "date": "2026-11-03",
+     "from": "correction",
+     "to": "bear",
+     "event": "rally_attempt_started",
+     "why": [
+      "bear_structure"
+     ],
+     "close": 29346.54,
+     "dd_count": 8,
+     "drawdown_pct": 9.37
+    }
+   ]
+  }
+ },
+ "data_provenance": {
+  "as_of": "2026-11-13"
+ }
+}

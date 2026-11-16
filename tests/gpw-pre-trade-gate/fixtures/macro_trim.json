@@ -1,0 +1,138 @@
+{
+ "skill": "gpw-macro-regime",
+ "version": "1.0.0",
+ "lang": "pl",
+ "as_of": "2026-11-16",
+ "macro": {
+  "state": {
+   "monetary": "hold_after_easing",
+   "monetary_simple": "neutral",
+   "real_rate": "negative",
+   "pln": "weak",
+   "spread": "widening",
+   "curve": "normal",
+   "inflation": "rising",
+   "inflation_band": "above",
+   "composite": "headwind",
+   "regime_label": "neutral_x_pln_weak"
+  },
+  "score": -0.475,
+  "confidence": "high"
+ },
+ "sector_tilts": {
+  "banks": {
+   "tilt": "slightly_negative",
+   "score": -0.25,
+   "drivers": [
+    {
+     "driver": "monetary:hold_after_easing",
+     "contribution": -0.25
+    }
+   ],
+   "indices": [
+    "WIG-BANKI"
+   ],
+   "kind": "historical_tendency",
+   "market_check": {
+    "vs_wig_3m_pp": 2.43,
+    "agrees_with_tilt": false
+   }
+  },
+  "exporters": {
+   "tilt": "positive",
+   "score": 1.0,
+   "drivers": [
+    {
+     "driver": "pln:weak",
+     "contribution": 1.0
+    }
+   ],
+   "indices": [
+    "WIG-INFO",
+    "WIG-GRY",
+    "WIG-GORNIC",
+    "WIG-CHEMIA"
+   ],
+   "kind": "historical_tendency",
+   "market_check": {
+    "vs_wig_3m_pp": -14.03,
+    "agrees_with_tilt": false
+   }
+  },
+  "importers_retail": {
+   "tilt": "negative",
+   "score": -1.0,
+   "drivers": [
+    {
+     "driver": "pln:weak",
+     "contribution": -0.5
+    },
+    {
+     "driver": "inflation:rising",
+     "contribution": -0.5
+    }
+   ],
+   "indices": [
+    "WIG-ODZIEZ",
+    "WIG-SPOZYW"
+   ],
+   "kind": "historical_tendency",
+   "market_check": {
+    "vs_wig_3m_pp": 3.21,
+    "agrees_with_tilt": false
+   }
+  },
+  "utilities_energy": {
+   "tilt": "slightly_negative",
+   "score": -0.25,
+   "drivers": [
+    {
+     "driver": "pl10y_3m:rising",
+     "contribution": -0.25
+    }
+   ],
+   "indices": [
+    "WIG-ENERG"
+   ],
+   "kind": "historical_tendency",
+   "market_check": {
+    "vs_wig_3m_pp": 17.72,
+    "agrees_with_tilt": false
+   }
+  },
+  "developers": {
+   "tilt": "positive",
+   "score": 0.5,
+   "drivers": [
+    {
+     "driver": "monetary:hold_after_easing",
+     "contribution": 0.25
+    },
+    {
+     "driver": "real_rate:negative",
+     "contribution": 0.25
+    }
+   ],
+   "indices": [
+    "WIG-NRCHOM"
+   ],
+   "kind": "historical_tendency",
+   "market_check": {
+    "vs_wig_3m_pp": -14.58,
+    "agrees_with_tilt": false
+   }
+  }
+ },
+ "data_provenance": {
+  "as_of": "2026-11-16",
+  "freshness": {
+   "as_of": "2026-11-16",
+   "sessions_behind": 0,
+   "is_stale": false,
+   "reference_date": null,
+   "historical_run": false,
+   "sessions_behind_today": 0
+  },
+  "note": "trimmed fixture from a real offline run on 2026-11-16"
+ }
+}

@@ -1,0 +1,67 @@
+{
+  "skill": "gpw-quality-screener",
+  "trigger_evals": {
+    "should_trigger": [
+      "Które spółki z WIG20 mają najlepsze fundamenty?",
+      "Policz F-score Piotroskiego dla Kęt.",
+      "Czy Newag ma jakieś czerwone flagi w sprawozdaniach?",
+      "Które banki na GPW mają najwyższe ROE i czy są drogie względem rentowności?",
+      "Zrób skaner jakości spółek z mWIG40 z C/Z poniżej 15.",
+      "Wytłumacz mi prosto, czy KGHM to zdrowa firma finansowo.",
+      "Screen Polish stocks for quality: high ROIC, low accruals, no red flags.",
+      "What is the Piotroski F-score of Dino Polska?",
+      "Which GPW companies have profits not backed by cash flow?"
+    ],
+    "should_not_trigger": [
+      "Jaka jest wartość godziwa akcji LPP według DCF?",
+      "Które spółki z GPW są blisko wybicia z formacji VCP?",
+      "Czy dywidenda PZU jest bezpieczna i ile dostanę netto na IKE?",
+      "What is Apple's Piotroski F-score?",
+      "Ile akcji PKO BP kupić przy ryzyku 1%?",
+      "Czy WIG jest w korekcie?"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "pl-screen",
+      "prompt": "Które spółki z WIG20 i mWIG40 mają najlepszą jakość fundamentów, a które mają czerwone flagi?",
+      "assertions": [
+        "scripts/gpw_quality_screener.py screen was executed",
+        "Answer in Polish leads with the top companies by quality score and quotes ROE or ROIC and F as passed/known",
+        "Banks are discussed separately from non-financial companies, without an F-score",
+        "Companies with red flags are listed with the flag names",
+        "Answer states the F-score coverage (e.g. only 3 of 9 criteria known) and does not present 3/3 as a high F-score",
+        "No buy or sell recommendation"
+      ]
+    },
+    {
+      "id": "pl-ticker-beginner",
+      "prompt": "Nie znam się na finansach. Czy Kęty to zdrowa firma? Wytłumacz F-score.",
+      "assertions": [
+        "scripts/gpw_quality_screener.py ticker KETY was executed",
+        "Each of the 9 F-score criteria is explained in plain Polish with pass, fail or unknown",
+        "Unknown criteria are called unknown, not counted as failed or passed",
+        "Answer names the data period (e.g. I-III kw. 2026) and that ratios are annualised from year-to-date data",
+        "Answer ends with or includes the educational disclaimer"
+      ]
+    },
+    {
+      "id": "en-filters",
+      "prompt": "Show me mWIG40 companies with P/E under 15 and ROE above 15%.",
+      "assertions": [
+        "scripts/gpw_quality_screener.py screen --index mWIG40 --max-pe 15 --min-roe 15 was executed",
+        "Answer in English lists only companies that passed the filters and says how many were excluded",
+        "Answer does not claim EV/EBITDA or net debt values unless an ESEF file was supplied"
+      ]
+    },
+    {
+      "id": "data-limits",
+      "prompt": "Dlaczego nie ma długu netto i EV/EBITDA w raporcie?",
+      "assertions": [
+        "Answer explains that the gpw.pl Notoria tab has no cash and debt lines",
+        "Answer suggests passing the company's ESEF annual report with --esef",
+        "Answer does not invent a net debt figure"
+      ]
+    }
+  ]
+}

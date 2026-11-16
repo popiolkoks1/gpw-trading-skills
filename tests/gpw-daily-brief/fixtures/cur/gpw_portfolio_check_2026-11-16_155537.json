@@ -1,0 +1,88 @@
+{
+ "skill": "gpw-portfolio-check",
+ "version": "1.0.0",
+ "lang": "pl",
+ "source": {
+  "type": "journal",
+  "path": "/fixture/db_state/journal"
+ },
+ "as_of": "2026-11-13",
+ "totals": {
+  "total_value": 19796.0,
+  "invested": 19796.0,
+  "cash": 0.0,
+  "cash_pct": 0.0,
+  "cost": 15680.0,
+  "pnl": 4116.0,
+  "pnl_pct": 26.25
+ },
+ "concentration": {
+  "hhi": 0.2558,
+  "hhi_10000": 2558,
+  "level": "high",
+  "effective_positions": 3.91,
+  "n_positions": 4,
+  "top_position": "TORPOL",
+  "top_weight_pct": 28.79,
+  "top3_weight_pct": 80.9,
+  "etfs_counted_as_one": false,
+  "stock_share_pct": 100.0
+ },
+ "risk": {
+  "var_pct": 2.404,
+  "var_pln": 475.96,
+  "beta": 1.258,
+  "volatility_pct": 25.56
+ },
+ "heat": {
+  "tracked": true,
+  "open_risk": 1646.0,
+  "heat_pct": 8.31,
+  "positions_without_stop": []
+ },
+ "flags": [
+  {
+   "code": "position_weight",
+   "tickers": [
+    "TORPOL",
+    "KGHM",
+    "PKOBP"
+   ],
+   "limit": 20.0
+  },
+  {
+   "code": "hhi_high",
+   "hhi": 0.2558,
+   "limit": 0.18
+  },
+  {
+   "code": "below_stop",
+   "tickers": [
+    "TORPOL"
+   ]
+  }
+ ],
+ "tax": {
+  "regular_unrealised_net": 4116.0,
+  "indicative_tax_if_sold": 782.04,
+  "rate": 0.19
+ },
+ "review_count": 3,
+ "data_provenance": {
+  "schema_version": "1.0",
+  "as_of": "2026-11-13",
+  "sources": [
+   "GPW — Archiwum notowań (akcje / shares): https://www.gpw.pl/archiwum-notowan",
+   "GPW — Archiwum notowań (indeksy / indices, WIG): https://www.gpw.pl/archiwum-notowan",
+   "GPW Benchmark — portfele indeksów (sektory, WIG20/mWIG40/sWIG80): https://gpwbenchmark.pl"
+  ],
+  "freshness": {
+   "as_of": "2026-11-13",
+   "sessions_behind": 0,
+   "is_stale": false,
+   "reference_date": null,
+   "historical_run": false,
+   "sessions_behind_today": 0
+  }
+ }
+}

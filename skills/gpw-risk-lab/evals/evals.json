@@ -1,0 +1,79 @@
+{
+  "skill": "gpw-risk-lab",
+  "trigger_evals": {
+    "should_trigger": [
+      "Ile straciłbym w krachu jak w 2008? Mam PKOBP 100 szt., KGHM 30, CDPROJEKT 20 i 10 tys. zł gotówki",
+      "Zrób test warunków skrajnych mojego portfela z GPW",
+      "Co się stanie z moim portfelem, jak banki spadną o 25% przez podatek od nadzwyczajnych zysków?",
+      "Jak zabezpieczyć portfel akcji przed spadkiem WIG20? Ile kontraktów FW20 potrzebuję?",
+      "Czy mój portfel zmieści się w limicie straty 20% w kryzysie?",
+      "Co jeśli złoty osłabi się o 15% albo stopy wzrosną o 2 punkty procentowe?",
+      "Stress test my Warsaw stock portfolio against the 2020 COVID crash and the 2022 sell-off",
+      "How many WIG20 futures do I need to hedge my GPW portfolio, and what margin?",
+      "My portfolio is small – is there an inverse WIG20 ETF I could use instead of futures?"
+    ],
+    "should_not_trigger": [
+      "Sprawdź, czy mój portfel jest zdywersyfikowany i jaki ma VaR",
+      "Ile akcji PKO BP kupić przy koncie 20 tys. i stopie 112?",
+      "Które sektory na GPW są teraz najmocniejsze?",
+      "Czy rynek jest w korekcie według dni dystrybucji?",
+      "Stress test my S&P 500 portfolio",
+      "Which GPW ETF should I buy every month for my IKE?"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "pl-stress-sample",
+      "prompt": "Mam PKOBP 100, KGHM 30, CDPROJEKT 20, DINO 10, KETY 5 i 10 000 zł gotówki. Ile stracę w kryzysie? Mogę stracić najwyżej 20%.",
+      "command": "python3 scripts/gpw_risk_lab.py stress --positions PKOBP:100,KGHM:30,CDPROJEKT:20,DINO:10,KETY:5 --cash 10000 --max-loss-pct 20 --lang pl --no-files",
+      "assertions": [
+        "scripts/gpw_risk_lab.py stress was executed with --positions, --cash 10000 and --max-loss-pct 20",
+        "The answer leads with a plain sentence of the form 'W scenariuszu 2008 Twój portfel straciłby ~X zł (−Y%)' using the script's numbers",
+        "Names the worst scenario and the positions that lose most in it",
+        "States which scenarios exceed the 20% limit, as numbers, without telling the user to sell anything",
+        "Explains that positions not listed in older crises were estimated with an index × beta proxy (method column)",
+        "Mentions liquidity under stress (days to exit)",
+        "Quotes the data session date"
+      ]
+    },
+    {
+      "id": "en-hedge",
+      "prompt": "How would I hedge my holdings.csv with WIG20 futures?",
+      "command": "python3 scripts/gpw_risk_lab.py hedge --csv holdings.csv --lang en --no-files",
+      "assertions": [
+        "Uses hedge mode",
+        "Reports portfolio beta vs WIG20, contracts rounded down and the round-up alternative with hedge ratios",
+        "States the FW20 multiplier (20 PLN), the series used and its last trading day / roll date",
+        "Reports residual (non-WIG20) risk and explains futures cannot remove it",
+        "Presents the margin as an estimate and tells the user to check with their broker",
+        "Mentions PIT-38 treatment and that futures on IKE/IKZE are allowed only for risk reduction if the broker offers it",
+        "Answer is in English and contains no 'sell'/'short now' recommendation"
+      ]
+    },
+    {
+      "id": "small-portfolio",
+      "prompt": "Mam akcje za 25 tys. zł. Jak je zabezpieczyć?",
+      "assertions": [
+        "Runs hedge mode and reports that the portfolio is below one FW20 contract",
+        "Shows the inverse WIG20 ETF alternative with its daily-reset caveat and the more-cash option",
+        "Does not recommend buying the ETF, only presents it as an option"
+      ]
+    },
+    {
+      "id": "missing-history",
+      "prompt": "Pokaż scenariusz 2008 (w cache nie ma indeksów sprzed 2019)",
+      "assertions": [
+        "Relays that the 2008-2015 scenarios were skipped for lack of index history",
+        "Offers --fetch-history and says it takes about an hour the first time, instead of inventing numbers"
+      ]
+    },
+    {
+      "id": "custom-scenario",
+      "prompt": "Chcę własny scenariusz: WIG20 -35% i banki -40%",
+      "assertions": [
+        "Copies scripts/risk_lab_scenarios.json, adds the scenarios with kind market/sector and runs with --scenarios",
+        "Reports the results from the script, not computed by hand"
+      ]
+    }
+  ]
+}

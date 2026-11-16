@@ -1,9 +1,15 @@
 # GPW Trading Skills
 
-**13 Claude Skills for the Polish stock market (GPW, Warsaw Stock Exchange): from
-first steps for people who know nothing about investing (readiness, IKE/IKZE/OKI,
-an ETF contribution plan) to advanced tools (Minervini/VCP trend screener, market
-regime, exposure limits, a pre-trade gate, a journal and a PIT-38 helper).**
+**27 Claude Skills for the Polish stock market (GPW, Warsaw Stock Exchange),
+connected into one process.**
+
+- **For beginners:** readiness to invest, IKE/IKZE/OKI accounts, an ETF plan.
+- **For advanced users:**
+  - market context: market regime, sector rotation (RRG), NBP macro;
+  - finding and researching stocks: a Minervini/VCP screener, ownership and the KNF short register, the ESPI event calendar, earnings reactions, quality, valuation, dividends;
+  - risk: stress tests, FW20 hedging;
+  - checking yourself: an honest backtester, a signal post-mortem;
+  - daily use: a company dossier with a bull-vs-bear debate, and a daily brief.
 
 🇵🇱 [Wersja polska → README.pl.md](README.pl.md)
 
@@ -14,82 +20,143 @@ regime, exposure limits, a pre-trade gate, a journal and a PIT-38 helper).**
 ## Why
 
 Most AI trading toolkits target US markets and paid data APIs. Polish investors
-face different realities: thin liquidity outside WIG20/mWIG40, minimum broker
-fees in PLN, whole-share lots, the 19% "Belka" tax with FIFO on PIT-38,
-IKE/IKZE and (from 2027) OKI accounts. This set follows the patterns of the best
-open-source trading-skill repos ([tradermonty/claude-trading-skills](https://github.com/tradermonty/claude-trading-skills),
-Anthropic financial-services plugins, himself65/finance-skills, TradingAgents,
-FinRobot) and rebuilds them for those realities, using **only free, official data**
-(GPW quotes archive for shares, indices and ETFs, GPW Benchmark, statute texts)
-and **no API keys**.
+face different realities:
 
-## Where to start (if you are new to investing)
+- liquidity is thin outside WIG20/mWIG40;
+- broker fees have a PLN minimum, and shares are bought in whole lots;
+- gains carry the 19% "Belka" tax, reported FIFO on PIT-38;
+- there are IKE/IKZE accounts and, from 2027, OKI;
+- companies file through ESPI, and short positions are listed in a KNF register.
 
-1. **`gpw-start`** – are you ready (budget, emergency fund, expensive debt), what share of equities fits your loss tolerance, a step-by-step plan, a glossary.
-2. **`gpw-account-planner`** – IKE vs IKZE vs OKI vs a regular account over your horizon.
-3. **`gpw-etf-planner`** – GPW-listed ETFs with real data and a monthly whole-unit buying plan with commissions.
-4. **`gpw-portfolio-check`** – a yearly review: concentration, correlation, risk, in plain words.
-5. Want to learn stock picking? **`gpw-trade-journal --paper`** – paper trades, no real money.
+This set follows the best open-source trading-skill repos
+([tradermonty/claude-trading-skills](https://github.com/tradermonty/claude-trading-skills),
+Anthropic financial-services plugins, TradingAgents, FinRobot). For each skill
+we studied equivalents on other markets and the research evidence, including
+studies on the WSE, then rebuilt them for Polish realities.
+
+The data is **only free, official sources**, with **no API keys**: the GPW quotes
+archive, ESPI on gpw.pl, GPW Benchmark, the KNF short register, the NBP API,
+BondSpot, ECB, Bundesbank, Eurostat and statute texts.
+
+## Where to start
+
+**New to investing?** Run these in order:
+1. `gpw-start`
+2. `gpw-account-planner`
+3. `gpw-etf-planner`
+4. `gpw-portfolio-check` and `gpw-dividend-analyzer` once a year
+
+Or just ask: *"I know nothing about investing, where do I start?"*
+
+**Active investor?** Start with `gpw-daily-brief`. After the close it runs the
+whole daily pipeline and gives you one page: what changed, what needs attention
+in your positions and watchlist, new signals and the calendar.
+
+Before any decision: `gpw-research-dossier`, then the sizer and the gate.
+
+The full routine is in [docs/WORKFLOW.md](docs/WORKFLOW.md).
 
 ## Skills
 
 ### Beginners
 
-| Skill | What it does | Data |
-|---|---|---|
-| [`gpw-start`](skills/gpw-start/SKILL.md) | readiness check (surplus, 3–6-month reserve, debt > 8%), indicative equity share from horizon and loss tolerance, ordered plan, glossary, learning path, scam warnings | local |
-| [`gpw-account-planner`](skills/gpw-account-planner/SKILL.md) | IKE / IKZE / OKI / regular account compared over many years: 2026–2027 limits, IKZE refund and 10% withdrawal tax, OKI asset tax (art. 25–26 of the act), age conditions, fill order, real values | local (law in code) |
-| [`gpw-etf-planner`](skills/gpw-etf-planner/SKILL.md) | catalog of GPW-listed ETFs (category, currency, leveraged/short warnings, OKI hint) with archive stats; monthly whole-unit buy plan with commissions and cash-flow rebalancing; DCA vs lump-sum test | GPW archive (ETF) |
+| Skill | What it does |
+|---|---|
+| [`gpw-start`](skills/gpw-start/SKILL.md) | Checks readiness (surplus, 3–6-month reserve, debt above 8%). Gives an equity share from your horizon and loss tolerance, a plan, a glossary and scam warnings |
+| [`gpw-account-planner`](skills/gpw-account-planner/SKILL.md) | Compares IKE, IKZE, OKI and a regular account over many years: 2026–2027 limits, the IKZE refund, the OKI asset tax, which account to fill first |
+| [`gpw-etf-planner`](skills/gpw-etf-planner/SKILL.md) | GPW ETF catalogue with live stats, a whole-unit buying plan, rebalancing with new money, a DCA backtest |
 
-### Everyone
+### Market context
 
-| Skill | What it does | Data |
-|---|---|---|
-| [`gpw-portfolio-check`](skills/gpw-portfolio-check/SKILL.md) | portfolio review from a broker CSV or the journal: weights, sectors, HHI, correlation, volatility, beta, VaR/ES, drawdown, liquidity (days to exit), vs WIG, review flags | GPW archive, GPW Benchmark |
-| [`gpw-market-breadth`](skills/gpw-market-breadth/SKILL.md) | 0-100 health score of the whole GPW: % above SMA 20/50/200, advancers/decliners, McClellan, new highs/lows, WIG20 vs mWIG40 vs sWIG80, WIG-vs-breadth divergence | GPW archive, GPW Benchmark |
-| [`gpw-sector-trend`](skills/gpw-sector-trend/SKILL.md) | share of stocks in a confirmed uptrend overall and in 14 sector indices, cyclical vs defensive rotation | GPW archive, GPW Benchmark |
-| [`gpw-trade-journal`](skills/gpw-trade-journal/SKILL.md) | investment-thesis journal with kill criteria, lifecycle, FIFO lots, result vs WIG; **paper mode (`--paper`)** | local JSON |
-| [`gpw-trade-review`](skills/gpw-trade-review/SKILL.md) | monthly/annual review: win rate, expectancy, R, process-vs-outcome matrix, lessons; **PIT-38 estimate** | local JSON |
+| Skill | What it does |
+|---|---|
+| [`gpw-market-breadth`](skills/gpw-market-breadth/SKILL.md) | Market health 0–100: % of stocks above moving averages, McClellan, new highs/lows, divergences |
+| [`gpw-sector-trend`](skills/gpw-sector-trend/SKILL.md) | Uptrend ratio in the 14 sector indices and cyclical-vs-defensive rotation. **`--rrg` mode:** a Relative Rotation Graph with tails, quadrant transitions and an SVG chart |
+| [`gpw-market-regime`](skills/gpw-market-regime/SKILL.md) | IBD-style regime: distribution days, follow-through day, a top-risk score |
+| [`gpw-macro-regime`](skills/gpw-macro-regime/SKILL.md) | NBP rate cycle, real rate, PLN regime, PL–DE 10Y spread, 2s10s curve, inflation, and historical sector tilts |
+| [`gpw-exposure-coach`](skills/gpw-exposure-coach/SKILL.md) | One posture and its limits: exposure ceiling, risk per trade, new positions per week, a circuit breaker |
 
-### Advanced
+### Ideas and research
 
-| Skill | What it does | Data |
-|---|---|---|
-| [`gpw-trend-screener`](skills/gpw-trend-screener/SKILL.md) | whole-market screen: Minervini Trend Template (8 criteria), IBD-style RS 1–99, VCP detection, pivot, execution states, invalidation level and a ready position-sizer command; history mode (forward 20/60-session results vs WIG) | GPW archive |
-| [`gpw-market-regime`](skills/gpw-market-regime/SKILL.md) | regime of WIG, WIG20, mWIG40, sWIG80: IBD distribution days, O'Neil follow-through day, trend, drawdown, large-vs-small divergence, 0-100 top-risk score | GPW archive (indices) |
-| [`gpw-exposure-coach`](skills/gpw-exposure-coach/SKILL.md) | combines breadth, sectors and regime into one posture with an exposure ceiling, risk per trade and a losing-streak circuit breaker (from the journal) | other skills' JSON + journal |
-| [`gpw-position-sizer`](skills/gpw-position-sizer/SKILL.md) | how many shares to buy for a given risk: fixed-fractional, ATR, half-Kelly; round-trip commissions with minimum fees, liquidity cap, gap risk, after-tax profit for regular / IKE / IKZE / OKI | local + optional GPW archive |
-| [`gpw-pre-trade-gate`](skills/gpw-pre-trade-gate/SKILL.md) | fail-closed checklist before a buy: stop, risk incl. fees, size, liquidity, portfolio heat, sector concentration, written thesis with kill criteria, R:R, circuit breaker, regime → GO / GO WITH CONDITIONS / NO-GO | GPW archive + journal + JSON |
+| Skill | What it does |
+|---|---|
+| [`gpw-trend-screener`](skills/gpw-trend-screener/SKILL.md) | Minervini Trend Template, RS 1–99, VCP, pivot and invalidation level |
+| [`gpw-quality-screener`](skills/gpw-quality-screener/SKILL.md) | Piotroski F-score with each of the 9 criteria shown (unknowns stated honestly), ROE/ROIC, accruals, red flags, a separate model for banks |
+| [`gpw-valuation`](skills/gpw-valuation/SKILL.md) | Reverse DCF first, then a PLN WACC with Damodaran country risk, a sensitivity grid, comps and a bank P/BV–ROE model |
+| [`gpw-dividend-analyzer`](skills/gpw-dividend-analyzer/SKILL.md) | Dividend history rebuilt from quotes and ESPI, stability, net yield after Belka vs IKE, trap flags, why dividend capture fails |
+| [`gpw-ownership`](skills/gpw-ownership/SKILL.md) | KNF net short positions (history since 2012), MAR art. 19 insider notices from ESPI, OFE pension-fund holdings |
+| [`gpw-earnings-reaction`](skills/gpw-earnings-reaction/SKILL.md) | Reaction to each periodic report: gap, abnormal return, abnormal turnover, post-earnings drift, a season overview |
+| [`gpw-event-calendar`](skills/gpw-event-calendar/SKILL.md) | Results dates, AGMs, dividends (T+2), index revisions, MSCI, MPC, CPI, FW20 expiry, a holding-window check and `.ics` export |
+| [`gpw-pair-trading`](skills/gpw-pair-trading/SKILL.md) | Engle-Granger cointegration (matches statsmodels), spread z-score, half-life, multiple-testing correction, "switch A for B" checks |
+| [`gpw-research-dossier`](skills/gpw-research-dossier/SKILL.md) | One sourced file per company (100+ fact ids), then a bull-vs-bear debate where every claim must cite a fact, and a draft journal thesis |
 
-### How the skills fit together
+### Decision and risk
+
+| Skill | What it does |
+|---|---|
+| [`gpw-watchlist`](skills/gpw-watchlist/SKILL.md) | A staged watchlist (candidate → watch → ready → entered) fed by the other skills, with pivot, stop, breakout and event alerts |
+| [`gpw-position-sizer`](skills/gpw-position-sizer/SKILL.md) | Shares to buy for a planned risk, with fees, liquidity and after-tax results per account type |
+| [`gpw-pre-trade-gate`](skills/gpw-pre-trade-gate/SKILL.md) | 13 fail-closed checks plus context checks: earnings in the holding window, crowded short, insider selling, earnings reaction, quality flags, macro, stress test |
+| [`gpw-portfolio-check`](skills/gpw-portfolio-check/SKILL.md) | Concentration, correlations, beta, VaR/ES, liquidity, comparison with WIG |
+| [`gpw-risk-lab`](skills/gpw-risk-lab/SKILL.md) | Your portfolio through real GPW crises (2008, 2011, 2015, 2020, 2022) and factor shocks. Hedging with FW20 futures, or a short ETF for small portfolios |
+
+### Learning and discipline
+
+| Skill | What it does |
+|---|---|
+| [`gpw-trade-journal`](skills/gpw-trade-journal/SKILL.md) | Thesis journal with kill criteria, FIFO lots, results vs WIG, a paper mode |
+| [`gpw-trade-review`](skills/gpw-trade-review/SKILL.md) | Statistics, a process-vs-outcome matrix, a PIT-38 estimate |
+| [`gpw-signal-postmortem`](skills/gpw-signal-postmortem/SKILL.md) | Did the skills' signals work? Forward returns over 5/20/60 sessions vs WIG with confidence intervals; feedback only when the evidence is strong |
+| [`gpw-backtester`](skills/gpw-backtester/SKILL.md) | Honest backtest with real fees, slippage, liquidity caps and Belka tax. Walk-forward, Deflated Sharpe and PBO, with a verdict from REJECT to ROBUST |
+| [`gpw-daily-brief`](skills/gpw-daily-brief/SKILL.md) | Runs the daily or weekly pipeline and assembles one page after the close |
+
+## How the skills connect
 
 ```
-gpw-start → gpw-account-planner → gpw-etf-planner → gpw-portfolio-check      (long-term investor)
+AFTER THE CLOSE (gpw-daily-brief run)
+  breadth ┐
+  sector  ├→ exposure-coach ─────────────────────────────┐
+  regime  ┘                                              │
+  trend-screener, quality, ownership, earnings ─→ watchlist ─→ daily-brief
+  event-calendar ────────────────────────────────────────┘
 
-gpw-market-breadth ┐
-gpw-sector-trend   ├→ gpw-exposure-coach ┐
-gpw-market-regime  ┘                      ├→ gpw-pre-trade-gate → gpw-trade-journal → gpw-trade-review
-gpw-trend-screener → gpw-position-sizer ──┘                                         (active trader)
+BEFORE A DECISION
+  research-dossier (every report on the company + debate)
+    → position-sizer → pre-trade-gate → trade-journal
+
+WEEKLY / MONTHLY / QUARTERLY
+  macro-regime, portfolio-check, risk-lab, dividend-analyzer
+  trade-review, signal-postmortem → feedback
+  backtester → before you change any rule
 ```
 
-Every skill is bilingual (Polish / English): Claude answers in your language and
-the scripts write reports with `--lang pl` or `--lang en`.
+Skills talk through JSON files with fixed contracts ([docs/ROADMAP_v1.2.md](docs/ROADMAP_v1.2.md)),
+so each one works alone and together they form a process. Every skill emits
+signals in one shared format, so `gpw-signal-postmortem` can measure which of
+them actually work.
 
 ## Quick start
 
-### Claude Code (CLI / desktop)
+### Claude Code
 
 ```bash
 git clone https://github.com/popiolkoks1/gpw-trading-skills.git
 cp -R gpw-trading-skills/skills/* ~/.claude/skills/
 ```
 
-Then just ask: *"I'm new to investing, where do I start?"*, *"IKE or IKZE?"*,
-*"How healthy is the Polish market?"* or *"Jak wygląda rynek na GPW?"*.
+Then ask, for example:
+- *"Where do I start investing?"*
+- *"Make the GPW daily brief"*
+- *"Who is shorting MODIVO?"*
+- *"What growth does KETY's price imply?"*
+- *"Backtest the Minervini template on GPW since 2019"*
 
-Requirements: Python 3.9+ (standard library only). The first breadth/sector
-run downloads ~2 years of sessions from gpw.pl (one polite request per session,
-20-40 min, one-off). Later runs take seconds.
+Requirements: Python 3.9+, standard library only.
+
+The first run downloads about 2 years of GPW quotes, one request per session:
+about 20–40 minutes, once. The backtester and the stress test can fetch a longer
+history (shares from 2019, indices from 2007). Everything is stored in a local
+cache.
 
 ### Claude web app (claude.ai)
 
@@ -97,62 +164,48 @@ run downloads ~2 years of sessions from gpw.pl (one polite request per session,
 python3 scripts/package_skills.py   # builds dist/*.skill + SHA256SUMS
 ```
 
-Upload a `.skill` file under **Customize → Skills** (code execution must be
-enabled). Note: skills that download GPW data need network access from the
-code-execution sandbox; `gpw-start`, `gpw-account-planner`, the sizer, journal
-and review work offline.
+Upload a `.skill` file in **Customize → Skills** with code execution enabled.
+Data skills need network access from the sandbox.
 
-## Design principles
+## Principles
 
-Borrowed from the best open-source finance skills (Anthropic financial-services
-plugins, TradingAgents, FinRobot, tradermonty) and Anthropic's skill-authoring
-guidance:
-
-1. **Scripts compute, Claude interprets.** Every number comes from deterministic,
-   tested Python; Claude explains it and never invents prices or tax figures.
-2. **Freshness is a gate.** Each JSON report has a `data_provenance` block (as-of
-   date, sessions behind, sources); stale data is flagged first.
-3. **Source and date on every figure.** Reports end with a *Sources* section.
-4. **Survivorship-free breadth.** The universe is rebuilt from each day's archive,
-   so delisted companies count while they traded. Prices are adjusted for
-   dividends and splits using GPW's own reference-price changes.
-5. **Polish realities built in**, not bolted on.
-6. **Human decision gates.** No orders, no "buy" calls; risk and plan first.
-7. **Law from statutes, not memory.** IKE/IKZE limits and OKI rules live in one
-   module (`gpwlib/tax.py`) with article numbers; OKI was checked against the
-   text of Dz.U. 2026 poz. 1098. The commission table is dated and warns when old.
-8. **Skills talk through JSON files** with a fixed contract, so each works alone
-   and together they form a process.
+1. **Scripts compute, Claude interprets.** Every number comes from tested code (1,600+ tests).
+2. **Freshness is a gate.** Every report has its date and its sources.
+3. **Honesty over effect.** Missing data is marked unknown, never guessed. The backtester rejects strategies that only look good on paper. The post-mortem gives feedback only when the evidence is strong.
+4. **Survivorship-free.** The stock universe is rebuilt from every session. Prices are adjusted for dividends and splits, and renamed tickers are stitched together (e.g. CCC → MODIVO).
+5. **Polish realities first:** PLN, whole shares, minimum fees, Belka tax, IKE/IKZE/OKI, ESPI, KNF, T+2 settlement.
+6. **Law from statutes, not memory**, with article numbers (e.g. the reporting regulation Dz.U. 2025 poz. 755, the OKI act Dz.U. 2026 poz. 1098, MAR art. 19).
+7. **Human decision gates.** No orders, no "buy" calls.
+8. **Polite data access:** an identifying client, rate limits and caching. We never circumvent site protections.
 
 Details: [docs/CONVENTIONS.md](docs/CONVENTIONS.md) ·
-[docs/DATA_SOURCES.md](docs/DATA_SOURCES.md).
+[docs/DATA_SOURCES.md](docs/DATA_SOURCES.md) · [docs/WORKFLOW.md](docs/WORKFLOW.md).
 
 ## Development
 
 ```bash
 python3 -m pip install pytest
 python3 scripts/sync_shared.py          # vendor shared/gpwlib into skills
-python3 -m pytest tests                 # unit tests, no network
+python3 -m pytest tests                 # tests, no network
 python3 scripts/package_skills.py       # validate + build .skill archives
 ```
 
-`shared/gpwlib` is the canonical shared library; each skill ships a vendored
-copy so it can be installed on its own. CI fails if a copy drifts.
+`shared/gpwlib` is the canonical shared library. Each skill ships a vendored
+copy so it can be installed on its own, and CI fails if a copy drifts.
 
-Each skill has `evals/evals.json` with should-trigger / should-not-trigger
-prompts (PL + EN) and output assertions, following Anthropic's skill-creator
-evaluation approach.
+Each skill has `evals/evals.json` with should-trigger and should-not-trigger
+prompts (PL and EN) and output assertions.
 
 ## Data & licences
 
-Code: MIT (see [LICENSE](LICENSE)); derived from tradermonty/claude-trading-skills
-(MIT). Market data is **not** included: it is downloaded on your machine from
-GPW for personal analysis. Redistributing GPW data may require a GPW licence.
+Code: MIT (see [LICENSE](LICENSE)), derived from tradermonty/claude-trading-skills
+(MIT). Market data is **not** included. It is downloaded on your machine for
+personal analysis. Redistributing GPW or Notoria data may require a licence.
 
 ## Disclaimer
 
 This project is for education and research only. It is not investment, tax or
 legal advice, nor an investment recommendation within the meaning of MAR
-(Regulation (EU) 596/2014). Tax calculations are estimates — your broker's
+(Regulation (EU) 596/2014). Tax calculations are estimates: your broker's
 PIT-8C and a tax advisor are authoritative. Investing involves the risk of losing
 capital. Software is provided "as is", without warranty.

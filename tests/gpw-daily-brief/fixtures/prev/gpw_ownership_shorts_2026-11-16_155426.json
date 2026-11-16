@@ -1,0 +1,298 @@
+{
+ "skill": "gpw-ownership",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "shorts",
+ "shorts": {
+  "by_issuer": [
+   {
+    "ticker": "CCC",
+    "isin": "PLCCC0000016",
+    "issuer": "MODIVO",
+    "total_pct": 4.12,
+    "holders": 3,
+    "change_20s_pp": -0.72,
+    "crowded": true
+   },
+   {
+    "ticker": "KRUK",
+    "isin": "PLKRK0000010",
+    "issuer": "KRUK",
+    "total_pct": 2.75,
+    "holders": 4,
+    "change_20s_pp": 0.31,
+    "crowded": true
+   },
+   {
+    "ticker": "GRUPAAZOTY",
+    "isin": "PLZATRM00012",
+    "issuer": "GRUPAAZOTY",
+    "total_pct": 1.99,
+    "holders": 3,
+    "change_20s_pp": -0.25,
+    "crowded": true
+   },
+   {
+    "ticker": "DINOPL",
+    "isin": "PLDINPL00011",
+    "issuer": "DINOPL",
+    "total_pct": 1.88,
+    "holders": 2,
+    "change_20s_pp": -0.02,
+    "crowded": false
+   },
+   {
+    "ticker": "JSW",
+    "isin": "PLJSW0000015",
+    "issuer": "JSW",
+    "total_pct": 1.8,
+    "holders": 2,
+    "change_20s_pp": 0.64,
+    "crowded": false
+   },
+   {
+    "ticker": "CRQUANTUM",
+    "isin": "PLCTHQM00018",
+    "issuer": "CRQUANTUM",
+    "total_pct": 1.79,
+    "holders": 2,
+    "change_20s_pp": -0.1,
+    "crowded": false
+   },
+   {
+    "ticker": "SCANWAY",
+    "isin": "PLSCWAY00018",
+    "issuer": "SCANWAY",
+    "total_pct": 1.61,
+    "holders": 2,
+    "change_20s_pp": 0.31,
+    "crowded": false
+   },
+   {
+    "ticker": "KETY",
+    "isin": "PLKETY000011",
+    "issuer": "KETY",
+    "total_pct": 1.5,
+    "holders": 2,
+    "change_20s_pp": -0.07,
+    "crowded": false
+   },
+   {
+    "ticker": "BUDIMEX",
+    "isin": "PLBUDMX00013",
+    "issuer": "BUDIMEX",
+    "total_pct": 1.3,
+    "holders": 2,
+    "change_20s_pp": 0.0,
+    "crowded": false
+   },
+   {
+    "ticker": "CREOTECH",
+    "isin": "PLCRTCH00017",
+    "issuer": "CREOTECH",
+    "total_pct": 0.72,
+    "holders": 1,
+    "change_20s_pp": 0.11,
+    "crowded": false
+   },
+   {
+    "ticker": "ALLEGRO",
+    "isin": "LU2237380790",
+    "issuer": "ALLEGRO",
+    "total_pct": 0.66,
+    "holders": 1,
+    "change_20s_pp": -0.62,
+    "crowded": false
+   },
+   {
+    "ticker": "TSGAMES",
+    "isin": "PLTSQGM00016",
+    "issuer": "TSGAMES",
+    "total_pct": 0.57,
+    "holders": 1,
+    "change_20s_pp": 0.0,
+    "crowded": false
+   },
+   {
+    "ticker": "CYFRPLSAT",
+    "isin": "PLCFRPT00013",
+    "issuer": "CYFRPLSAT",
+    "total_pct": 0.51,
+    "holders": 1,
+    "change_20s_pp": 0.01,
+    "crowded": false
+   }
+  ],
+  "events": [
+   {
+    "type": "closed_position",
+    "date": null,
+    "last_disclosed": "2026-11-10",
+    "last_pct": 0.5,
+    "holder": "MILLENNIUM INTERNATIONAL MANAGEMENT LP",
+    "isin": "PLCCC0000016",
+    "ticker": "CCC",
+    "issuer": "MODIVO",
+    "exact_date": false,
+    "note": "fell below 0.5% (or was withdrawn) after the last disclosure; exact date not published"
+   },
+   {
+    "type": "new_position",
+    "date": "2026-11-09",
+    "holder": "NUMERIC INVESTORS LLC",
+    "isin": "PLKRK0000010",
+    "ticker": "KRUK",
+    "issuer": "KRUK",
+    "pct": 0.51,
+    "exact_date": true
+   },
+   {
+    "type": "new_position",
+    "date": "2026-11-02",
+    "holder": "TWO SIGMA INVESTMENTS, LP",
+    "isin": "PLCTHQM00018",
+    "ticker": "CRQUANTUM",
+    "issuer": "CRQUANTUM",
+    "pct": 0.6,
+    "exact_date": true
+   },
+   {
+    "type": "new_position",
+    "date": "2026-10-30",
+    "holder": "ARROWSTREET CAPITAL, LIMITED PARTNERSHIP",
+    "isin": "PLKETY000011",
+    "ticker": "KETY",
+    "issuer": "KETY",
+    "pct": 0.61,
+    "exact_date": true
+   },
+   {
+    "type": "new_position",
+    "date": "2026-10-30",
+    "holder": "TWO SIGMA INVESTMENTS, LP",
+    "isin": "PLJSW0000015",
+    "ticker": "JSW",
+    "issuer": "JSW",
+    "pct": 0.71,
+    "exact_date": true
+   },
+   {
+    "type": "closed_position",
+    "date": null,
+    "last_disclosed": "2026-10-23",
+    "last_pct": 0.5,
+    "holder": "GSA CAPITAL PARTNERS LLP",
+    "isin": "PLSCWAY00018",
+    "ticker": "SCANWAY",
+    "issuer": "SCANWAY",
+    "exact_date": false,
+    "note": "fell below 0.5% (or was withdrawn) after the last disclosure; exact date not published"
+   },
+   {
+    "type": "closed_position",
+    "date": null,
+    "last_disclosed": "2026-10-23",
+    "last_pct": 0.57,
+    "holder": "WORLDQUANT, LLC",
+    "isin": "PLCTHQM00018",
+    "ticker": "CRQUANTUM",
+    "issuer": "CRQUANTUM",
+    "exact_date": false,
+    "note": "fell below 0.5% (or was withdrawn) after the last disclosure; exact date not published"
+   },
+   {
+    "type": "closed_position",
+    "date": null,
+    "last_disclosed": "2026-10-22",
+    "last_pct": 0.5,
+    "holder": "TWO SIGMA INVESTMENTS, LP",
+    "isin": "LU2237380790",
+    "ticker": "ALLEGRO",
+    "issuer": "ALLEGRO",
+    "exact_date": false,
+    "note": "fell below 0.5% (or was withdrawn) after the last disclosure; exact date not published"
+   }
+  ],
+  "window_start": "2026-10-14"
+ },
+ "as_of": "2026-11-12",
+ "signals": [
+  {
+   "ticker": "CCC",
+   "date": "2026-11-12",
+   "kind": "short_crowded",
+   "direction": "avoid",
+   "score": 100.0,
+   "source": "gpw-ownership"
+  },
+  {
+   "ticker": "KRUK",
+   "date": "2026-11-12",
+   "kind": "short_crowded",
+   "direction": "avoid",
+   "score": 68.8,
+   "source": "gpw-ownership"
+  },
+  {
+   "ticker": "GRUPAAZOTY",
+   "date": "2026-11-12",
+   "kind": "short_crowded",
+   "direction": "avoid",
+   "score": 49.8,
+   "source": "gpw-ownership"
+  },
+  {
+   "ticker": "KRUK",
+   "date": "2026-11-09",
+   "kind": "short_new",
+   "direction": "avoid",
+   "score": 12.8,
+   "source": "gpw-ownership"
+  },
+  {
+   "ticker": "CRQUANTUM",
+   "date": "2026-11-02",
+   "kind": "short_new",
+   "direction": "avoid",
+   "score": 15.0,
+   "source": "gpw-ownership"
+  },
+  {
+   "ticker": "KETY",
+   "date": "2026-10-30",
+   "kind": "short_new",
+   "direction": "avoid",
+   "score": 15.2,
+   "source": "gpw-ownership"
+  },
+  {
+   "ticker": "JSW",
+   "date": "2026-10-30",
+   "kind": "short_new",
+   "direction": "avoid",
+   "score": 17.8,
+   "source": "gpw-ownership"
+  }
+ ],
+ "warnings": [
+  "historical run: register reconstructed from KNF history (closed positions without a later disclosure are not counted)"
+ ],
+ "data_provenance": {
+  "schema_version": "1.0",
+  "as_of": "2026-11-12",
+  "sources": [
+   "KNF — rejestr pozycji krótkich netto: https://rss.knf.gov.pl/rss_pub/rss.html (JSON https://rss.knf.gov.pl/rss_pub/JSON)",
+   "KNF — historia: https://rss.knf.gov.pl/rss_pub/rssH.html",
+   "GPW — Archiwum notowań: https://www.gpw.pl/archiwum-notowan",
+   "GPW — karta spółki (liczba akcji): https://www.gpw.pl/spolka?isin=<ISIN>"
+  ],
+  "freshness": {
+   "as_of": "2026-11-12",
+   "sessions_behind": 0,
+   "is_stale": false,
+   "reference_date": "2026-11-12",
+   "historical_run": true,
+   "sessions_behind_today": 1
+  }
+ }
+}

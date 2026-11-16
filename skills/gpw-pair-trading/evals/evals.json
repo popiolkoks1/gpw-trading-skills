@@ -1,0 +1,68 @@
+{
+  "skill": "gpw-pair-trading",
+  "trigger_evals": {
+    "should_trigger": [
+      "Mam akcje PKO BP — czy Pekao jest teraz relatywnie tańsze?",
+      "PKO czy Pekao, którą spółkę lepiej trzymać patrząc na relację cen?",
+      "Znajdź skointegrowane pary wśród banków na GPW.",
+      "Czy spread między Orlenem a PGE jest teraz nietypowo duży?",
+      "Pair trading na GPW — które pary spółek mają stabilną relację?",
+      "Czy zamienić mBank na ING, skoro mBank mocno urósł względem ING?",
+      "Find cointegrated pairs among Polish energy and fuel stocks.",
+      "Relative value PKOBP vs PEKAO — what is the z-score of the spread?",
+      "How much PEKAO would hedge a 20k PLN PKO position, and are there stock futures?"
+    ],
+    "should_not_trigger": [
+      "Find pair trading opportunities in US tech stocks.",
+      "Jaka jest wartość godziwa akcji PKO BP?",
+      "Które sektory na GPW są teraz najmocniejsze?",
+      "Ile akcji Pekao kupić przy ryzyku 1% kapitału?",
+      "Ile kontraktów FW20 potrzebuję, żeby zabezpieczyć portfel?",
+      "Czy mój portfel jest za bardzo skoncentrowany w bankach?",
+      "IKE czy IKZE?"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "pl-switch-pko-pekao",
+      "prompt": "Mam akcje PKO BP. Czy Pekao jest teraz relatywnie tańsze i czy warto się przesiąść?",
+      "assertions": [
+        "scripts/gpw_pair_trading.py switch PKOBP PEKAO was executed",
+        "Answer in Polish leads with the switch.verdict and today's z-score",
+        "Answer states whether the pair is cointegrated (p-value) and does not treat a non-cointegrated z-score as a reason to expect reversion",
+        "Answer mentions the switch cost and the 19% Belka tax on a gain in a regular account (none in IKE/IKZE)",
+        "No phrase like 'kup Pekao' or 'sprzedaj PKO'"
+      ]
+    },
+    {
+      "id": "en-scan-banks",
+      "prompt": "Which Polish bank pairs are cointegrated right now?",
+      "assertions": [
+        "scripts/gpw_pair_trading.py scan --sector banks --lang en was executed",
+        "Answer reports the number of pairs tested and how many pass after the Benjamini-Hochberg correction",
+        "If no pair passes, the answer says so plainly instead of listing raw p-values below 0.05 as discoveries",
+        "Answer explains why a multiple-testing correction is needed",
+        "Answer states the data date"
+      ]
+    },
+    {
+      "id": "pl-pair-full",
+      "prompt": "Przeanalizuj parę PKOBP i PEKAO — kointegracja, półokres, stabilność, test historyczny.",
+      "assertions": [
+        "scripts/gpw_pair_trading.py pair PKOBP PEKAO was executed",
+        "Answer quotes hedge_ratio, p_value, half_life_days, stability and hedge-ratio drift from the JSON",
+        "Backtest results are labelled illustrative, with the short-leg availability and borrow cost described as assumptions",
+        "Answer explains that single-stock short selling is hard on GPW and mentions the stock futures availability reported by the script"
+      ]
+    },
+    {
+      "id": "signals",
+      "prompt": "Czy są jakieś sygnały dyslokacji par w paliwach i energetyce?",
+      "assertions": [
+        "scripts/gpw_pair_trading.py scan --sector fuels,energy was executed",
+        "Answer lists every item of signals[] (cheap leg, pair, date, z) or says there are none",
+        "Signals are described as long the cheap leg relative to its pair, never as a short recommendation"
+      ]
+    }
+  ]
+}

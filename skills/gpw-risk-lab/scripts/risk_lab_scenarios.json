@@ -1,0 +1,37 @@
+{
+  "_comment": "gpw-risk-lab default scenarios. Copy this file, edit it and pass --scenarios FILE. Historical windows: kind fixed (start close -> end close), peak_to_trough (WIG high in [from,to] then the lowest close after it), worst_days (largest WIG fall over N sessions in all loaded data). Factor shocks: market {index, shock_pct}, sector {index, shock_pct, spillover none|beta}, fx {shock_pct = EURPLN % change, + = weaker zloty}, rates {shock_bp = change of the Polish 10-year yield}. Optional overrides {TICKER: return_pct}. Sources and reasons for each window: references/methodology.md.",
+  "historical": [
+    {"id": "gfc_2008", "kind": "peak_to_trough", "from": "2007-10-01", "to": "2009-02-28",
+     "label": {"pl": "Kryzys finansowy 2007-2009", "en": "Global financial crisis 2007-2009"}},
+    {"id": "euro_2011", "kind": "peak_to_trough", "from": "2011-01-01", "to": "2011-12-31",
+     "label": {"pl": "Kryzys strefy euro 2011", "en": "Euro-area debt crisis 2011"}},
+    {"id": "ofe_2013", "kind": "fixed", "start": "2013-09-03", "end": "2013-09-05",
+     "label": {"pl": "Reforma OFE (zapowiedź 4.09.2013)", "en": "OFE pension reform (announced 4 Sep 2013)"}},
+    {"id": "chf_2015", "kind": "fixed", "start": "2015-01-14", "end": "2015-01-16",
+     "label": {"pl": "Szok frankowy (SNB, 15.01.2015)", "en": "Swiss franc shock (SNB, 15 Jan 2015)"}},
+    {"id": "covid_2020", "kind": "peak_to_trough", "from": "2020-02-01", "to": "2020-03-31",
+     "label": {"pl": "Krach COVID-19 2020", "en": "COVID-19 crash 2020"}},
+    {"id": "war_inflation_2022", "kind": "peak_to_trough", "from": "2021-11-01", "to": "2022-10-31",
+     "label": {"pl": "Wojna i inflacja 2021-2022", "en": "War and inflation 2021-2022"}},
+    {"id": "worst_1d", "kind": "worst_days", "days": 1,
+     "label": {"pl": "Najgorsza sesja WIG w danych", "en": "Worst WIG session in the data"}},
+    {"id": "worst_5d", "kind": "worst_days", "days": 5,
+     "label": {"pl": "Najgorsze 5 sesji WIG w danych", "en": "Worst 5 WIG sessions in the data"}}
+  ],
+  "factor": [
+    {"id": "wig_-10", "kind": "market", "index": "WIG", "shock_pct": -10,
+     "label": {"pl": "WIG -10%", "en": "WIG -10%"}},
+    {"id": "wig_-20", "kind": "market", "index": "WIG", "shock_pct": -20,
+     "label": {"pl": "WIG -20%", "en": "WIG -20%"}},
+    {"id": "wig_-30", "kind": "market", "index": "WIG", "shock_pct": -30,
+     "label": {"pl": "WIG -30%", "en": "WIG -30%"}},
+    {"id": "wig_-40", "kind": "market", "index": "WIG", "shock_pct": -40,
+     "label": {"pl": "WIG -40%", "en": "WIG -40%"}},
+    {"id": "banks_-25", "kind": "sector", "index": "WIG-BANKI", "shock_pct": -25, "spillover": "none",
+     "label": {"pl": "Banki -25% (np. podatek, wyrok TSUE ws. kredytów CHF)", "en": "Banks -25% (e.g. windfall tax, CJEU ruling on CHF loans)"}},
+    {"id": "pln_-15", "kind": "fx", "shock_pct": 15,
+     "label": {"pl": "Złoty słabszy o 15% (EURPLN +15%)", "en": "Zloty 15% weaker (EURPLN +15%)"}},
+    {"id": "rates_+200bp", "kind": "rates", "shock_bp": 200,
+     "label": {"pl": "Stopy +200 pb (rentowność 10-letnich obligacji)", "en": "Rates +200 bp (10-year bond yield)"}}
+  ]
+}

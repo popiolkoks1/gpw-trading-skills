@@ -1,0 +1,65 @@
+{
+  "skill": "gpw-earnings-reaction",
+  "trigger_evals": {
+    "should_trigger": [
+      "Jak rynek przyjął wyniki PKO BP za trzeci kwartał?",
+      "Które spółki z GPW najbardziej rozczarowały w tym sezonie wyników?",
+      "Czy po słabym raporcie kwartalnym kurs zwykle dalej spada?",
+      "Mam w portfelu KGHM — jak zareagował na ostatni raport?",
+      "Kiedy CD Projekt opublikuje następny raport i jak zwykle reaguje na wyniki?",
+      "Pokaż reakcje na raporty okresowe w bieżącym sezonie na warszawskiej giełdzie.",
+      "How did the market react to Orlen's quarterly results?",
+      "Which Polish stocks had the worst earnings reactions this season?",
+      "Is there post-earnings announcement drift on the Warsaw Stock Exchange?"
+    ],
+    "should_not_trigger": [
+      "Jaki zysk netto będzie miał PKO BP w przyszłym roku?",
+      "How did Apple stock react to its earnings?",
+      "Jaka jest wartość godziwa akcji LPP?",
+      "Ile akcji Dino kupić przy ryzyku 1%?",
+      "Kiedy jest najbliższe posiedzenie RPP?",
+      "Czy WIG jest w korekcie?"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "pl-season-scan",
+      "prompt": "Jak rynek przyjmuje wyniki w tym sezonie na GPW? Kto rozczarował najbardziej?",
+      "assertions": [
+        "scripts/gpw_earnings_reaction.py scan was executed",
+        "Answer in Polish starts with season.events, season.share_positive_car and the mean CAR",
+        "Answer lists the weakest liquid reactions with CAR, z and turnover multiple",
+        "Answer states that drift averages with small n are not conclusive and that many current-season drift windows are pending",
+        "Answer names the data date and mentions staleness if flagged",
+        "No buy or sell recommendation"
+      ]
+    },
+    {
+      "id": "en-ticker-history",
+      "prompt": "How does CD Projekt usually react to its reports and when is the next one?",
+      "assertions": [
+        "Script run in ticker mode for CDPROJEKT (with --history after warning about the number of requests, or with the default lookback)",
+        "Answer in English quotes the profile (events, mean absolute CAR, share positive)",
+        "Next report date is presented as estimated or as a statutory deadline, never as confirmed",
+        "Answer explains that there is no analyst consensus and the surprise is price-based"
+      ]
+    },
+    {
+      "id": "pl-portfolio-warning",
+      "prompt": "Sprawdź, jak moje spółki z dziennika zareagowały na ostatnie raporty.",
+      "assertions": [
+        "Script run in portfolio mode (journal positions or --tickers)",
+        "Any strong_negative reaction of a held stock is mentioned first as a reason to review the thesis and stop, not as a sell instruction",
+        "Intraday-published reports and provisional windows are flagged when present"
+      ]
+    },
+    {
+      "id": "fundamental-surprise-missing",
+      "prompt": "Czy zysk PKN Orlen był lepszy od oczekiwań?",
+      "assertions": [
+        "Answer does not invent an analyst consensus or expected profit",
+        "Answer reports fundamental_surprise as unavailable with its reason when null, and uses the price reaction instead"
+      ]
+    }
+  ]
+}

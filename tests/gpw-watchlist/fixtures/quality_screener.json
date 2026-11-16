@@ -1,0 +1,664 @@
+{
+ "skill": "gpw-quality-screener",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "screen",
+ "as_of": "2026-11-13",
+ "companies": [
+  {
+   "ticker": "TEXT",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 93.2,
+   "red_flags": []
+  },
+  {
+   "ticker": "GRUPRACUJ",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 84.3,
+   "red_flags": []
+  },
+  {
+   "ticker": "XTB",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 80.9,
+   "red_flags": []
+  },
+  {
+   "ticker": "VOXEL",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 79.8,
+   "red_flags": []
+  },
+  {
+   "ticker": "VERCOM",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 73.2,
+   "red_flags": []
+  },
+  {
+   "ticker": "TSGAMES",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 71.4,
+   "red_flags": []
+  },
+  {
+   "ticker": "GPW",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 70.7,
+   "red_flags": []
+  },
+  {
+   "ticker": "SYNEKTIK",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 67.7,
+   "red_flags": [
+    {
+     "code": "high_accruals",
+     "severity": "medium",
+     "value": 0.57752,
+     "threshold": 0.1
+    }
+   ]
+  },
+  {
+   "ticker": "AUTOPARTN",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 67.3,
+   "red_flags": []
+  },
+  {
+   "ticker": "KETY",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 67.3,
+   "red_flags": []
+  },
+  {
+   "ticker": "MOBRUK",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 66.8,
+   "red_flags": []
+  },
+  {
+   "ticker": "DIAG",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 64.4,
+   "red_flags": []
+  },
+  {
+   "ticker": "KGHM",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 63.9,
+   "red_flags": []
+  },
+  {
+   "ticker": "BENEFIT",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 63.1,
+   "red_flags": []
+  },
+  {
+   "ticker": "DEVELIA",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 62.7,
+   "red_flags": []
+  },
+  {
+   "ticker": "CDPROJEKT",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 61.0,
+   "red_flags": []
+  },
+  {
+   "ticker": "NEWAG",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 60.4,
+   "red_flags": [
+    {
+     "code": "cfo_negative_with_profit",
+     "severity": "high",
+     "value": -216335000.0,
+     "threshold": 0
+    },
+    {
+     "code": "high_accruals",
+     "severity": "medium",
+     "value": 0.398973,
+     "threshold": 0.1
+    }
+   ]
+  },
+  {
+   "ticker": "ASSECOSEE",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 59.7,
+   "red_flags": []
+  },
+  {
+   "ticker": "LPP",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 58.9,
+   "red_flags": []
+  },
+  {
+   "ticker": "PKNORLEN",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 58.9,
+   "red_flags": []
+  },
+  {
+   "ticker": "RAINBOW",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 58.6,
+   "red_flags": []
+  },
+  {
+   "ticker": "ALLEGRO",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 56.7,
+   "red_flags": []
+  },
+  {
+   "ticker": "DINOPL",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 56.1,
+   "red_flags": []
+  },
+  {
+   "ticker": "ZABKA",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 55.1,
+   "red_flags": []
+  },
+  {
+   "ticker": "PGE",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 50.9,
+   "red_flags": []
+  },
+  {
+   "ticker": "TAURONPE",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 49.9,
+   "red_flags": []
+  },
+  {
+   "ticker": "ASBIS",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 48.9,
+   "red_flags": []
+  },
+  {
+   "ticker": "ENEA",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 47.9,
+   "red_flags": []
+  },
+  {
+   "ticker": "CYBERFLKS",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 47.8,
+   "red_flags": []
+  },
+  {
+   "ticker": "BUDIMEX",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 47.6,
+   "red_flags": []
+  },
+  {
+   "ticker": "INTERCARS",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 46.4,
+   "red_flags": []
+  },
+  {
+   "ticker": "LUBAWA",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 44.2,
+   "red_flags": [
+    {
+     "code": "cfo_negative_with_profit",
+     "severity": "high",
+     "value": -33543000.0,
+     "threshold": 0
+    },
+    {
+     "code": "high_accruals",
+     "severity": "medium",
+     "value": 0.198408,
+     "threshold": 0.1
+    }
+   ]
+  },
+  {
+   "ticker": "GRUPAAZOTY",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 43.2,
+   "red_flags": [
+    {
+     "code": "negative_equity",
+     "severity": "high",
+     "value": -4111000.0,
+     "threshold": 0
+    },
+    {
+     "code": "loss_making",
+     "severity": "medium",
+     "value": -496295000.0,
+     "threshold": 0
+    }
+   ]
+  },
+  {
+   "ticker": "ASSECOPOL",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 43.1,
+   "red_flags": []
+  },
+  {
+   "ticker": "DOMDEV",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 41.9,
+   "red_flags": [
+    {
+     "code": "cfo_negative_with_profit",
+     "severity": "high",
+     "value": -164412000.0,
+     "threshold": 0
+    },
+    {
+     "code": "high_accruals",
+     "severity": "medium",
+     "value": 0.131082,
+     "threshold": 0.1
+    }
+   ]
+  },
+  {
+   "ticker": "ORANGEPL",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 41.2,
+   "red_flags": []
+  },
+  {
+   "ticker": "KRUK",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 38.8,
+   "red_flags": []
+  },
+  {
+   "ticker": "NEUCA",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 38.3,
+   "red_flags": []
+  },
+  {
+   "ticker": "PEPCO",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 36.8,
+   "red_flags": []
+  },
+  {
+   "ticker": "WIRTUALNA",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 36.1,
+   "red_flags": []
+  },
+  {
+   "ticker": "ABPL",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 34.9,
+   "red_flags": [
+    {
+     "code": "cfo_negative_with_profit",
+     "severity": "high",
+     "value": -332721000.0,
+     "threshold": 0
+    },
+    {
+     "code": "high_accruals",
+     "severity": "medium",
+     "value": 0.14652,
+     "threshold": 0.1
+    }
+   ]
+  },
+  {
+   "ticker": "CYFRPLSAT",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 34.6,
+   "red_flags": []
+  },
+  {
+   "ticker": "POLIMEXMS",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 33.0,
+   "red_flags": [
+    {
+     "code": "cfo_negative_with_profit",
+     "severity": "high",
+     "value": -52379000.0,
+     "threshold": 0
+    }
+   ]
+  },
+  {
+   "ticker": "MODIVO",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 31.6,
+   "red_flags": []
+  },
+  {
+   "ticker": "PEP",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 30.8,
+   "red_flags": []
+  },
+  {
+   "ticker": "MURAPOL",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 30.5,
+   "red_flags": [
+    {
+     "code": "cfo_negative_with_profit",
+     "severity": "high",
+     "value": -22513000.0,
+     "threshold": 0
+    }
+   ]
+  },
+  {
+   "ticker": "AMREST",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 30.1,
+   "red_flags": [
+    {
+     "code": "loss_making",
+     "severity": "medium",
+     "value": -15800000.0,
+     "threshold": 0
+    }
+   ]
+  },
+  {
+   "ticker": "CREOTECH",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 21.5,
+   "red_flags": [
+    {
+     "code": "cfo_negative_with_profit",
+     "severity": "high",
+     "value": -78376000.0,
+     "threshold": 0
+    },
+    {
+     "code": "high_accruals",
+     "severity": "medium",
+     "value": 4.842228,
+     "threshold": 0.1
+    }
+   ]
+  },
+  {
+   "ticker": "JSW",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 18.0,
+   "red_flags": [
+    {
+     "code": "loss_making",
+     "severity": "medium",
+     "value": -1038600000.0,
+     "threshold": 0
+    }
+   ]
+  },
+  {
+   "ticker": "MIRBUD",
+   "sector_type": "industrial",
+   "f_score": null,
+   "quality_score": 17.0,
+   "red_flags": [
+    {
+     "code": "cfo_negative_with_profit",
+     "severity": "high",
+     "value": -231105000.0,
+     "threshold": 0
+    },
+    {
+     "code": "high_accruals",
+     "severity": "medium",
+     "value": 0.169258,
+     "threshold": 0.1
+    }
+   ]
+  },
+  {
+   "ticker": "PKOBP",
+   "sector_type": "bank",
+   "f_score": null,
+   "quality_score": 71.6,
+   "red_flags": []
+  },
+  {
+   "ticker": "HANDLOWY",
+   "sector_type": "bank",
+   "f_score": null,
+   "quality_score": 69.4,
+   "red_flags": []
+  },
+  {
+   "ticker": "PEKAO",
+   "sector_type": "bank",
+   "f_score": null,
+   "quality_score": 58.3,
+   "red_flags": []
+  },
+  {
+   "ticker": "ERSTEPL",
+   "sector_type": "bank",
+   "f_score": null,
+   "quality_score": 57.8,
+   "red_flags": []
+  },
+  {
+   "ticker": "ALIOR",
+   "sector_type": "bank",
+   "f_score": null,
+   "quality_score": 56.1,
+   "red_flags": []
+  },
+  {
+   "ticker": "INGBSK",
+   "sector_type": "bank",
+   "f_score": null,
+   "quality_score": 50.0,
+   "red_flags": []
+  },
+  {
+   "ticker": "MBANK",
+   "sector_type": "bank",
+   "f_score": null,
+   "quality_score": 45.0,
+   "red_flags": []
+  },
+  {
+   "ticker": "BNPPPL",
+   "sector_type": "bank",
+   "f_score": null,
+   "quality_score": 27.2,
+   "red_flags": []
+  },
+  {
+   "ticker": "MILLENNIUM",
+   "sector_type": "bank",
+   "f_score": null,
+   "quality_score": 14.5,
+   "red_flags": []
+  },
+  {
+   "ticker": "PZU",
+   "sector_type": "insurer",
+   "f_score": null,
+   "quality_score": 54.7,
+   "red_flags": []
+  }
+ ],
+ "signals": [
+  {
+   "ticker": "XTB",
+   "date": "2026-11-13",
+   "price": 139.1,
+   "kind": "quality_high",
+   "direction": "long",
+   "score": 80.9,
+   "tags": {
+    "sector_type": "industrial",
+    "period": "I-II kw. 2026",
+    "f": "3/3"
+   }
+  },
+  {
+   "ticker": "DOMDEV",
+   "date": "2026-11-13",
+   "price": 250.0,
+   "kind": "quality_red_flags",
+   "direction": "avoid",
+   "score": 45,
+   "tags": {
+    "sector_type": "industrial",
+    "period": "I-II kw. 2026",
+    "flags": "cfo_negative_with_profit,high_accruals"
+   }
+  },
+  {
+   "ticker": "NEWAG",
+   "date": "2026-11-13",
+   "price": 92.4,
+   "kind": "quality_red_flags",
+   "direction": "avoid",
+   "score": 45,
+   "tags": {
+    "sector_type": "industrial",
+    "period": "I-II kw. 2026",
+    "flags": "cfo_negative_with_profit,high_accruals"
+   }
+  },
+  {
+   "ticker": "GRUPRACUJ",
+   "date": "2026-11-13",
+   "price": 56.1,
+   "kind": "quality_high",
+   "direction": "long",
+   "score": 84.3,
+   "tags": {
+    "sector_type": "industrial",
+    "period": "I-II kw. 2026",
+    "f": "3/3"
+   }
+  },
+  {
+   "ticker": "MURAPOL",
+   "date": "2026-11-13",
+   "price": 38.85,
+   "kind": "quality_red_flags",
+   "direction": "avoid",
+   "score": 30,
+   "tags": {
+    "sector_type": "industrial",
+    "period": "I-II kw. 2026",
+    "flags": "cfo_negative_with_profit"
+   }
+  },
+  {
+   "ticker": "MIRBUD",
+   "date": "2026-11-13",
+   "price": 11.35,
+   "kind": "quality_red_flags",
+   "direction": "avoid",
+   "score": 45,
+   "tags": {
+    "sector_type": "industrial",
+    "period": "I-II kw. 2026",
+    "flags": "cfo_negative_with_profit,high_accruals"
+   }
+  },
+  {
+   "ticker": "LUBAWA",
+   "date": "2026-11-13",
+   "price": 10.2,
+   "kind": "quality_red_flags",
+   "direction": "avoid",
+   "score": 45,
+   "tags": {
+    "sector_type": "industrial",
+    "period": "I-II kw. 2026",
+    "flags": "cfo_negative_with_profit,high_accruals"
+   }
+  },
+  {
+   "ticker": "POLIMEXMS",
+   "date": "2026-11-13",
+   "price": 7.06,
+   "kind": "quality_red_flags",
+   "direction": "avoid",
+   "score": 30,
+   "tags": {
+    "sector_type": "industrial",
+    "period": "I-II kw. 2026",
+    "flags": "cfo_negative_with_profit"
+   }
+  }
+ ],
+ "data_provenance": {
+  "as_of": "2026-11-13"
+ }
+}

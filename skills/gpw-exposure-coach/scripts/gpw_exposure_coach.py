@@ -22,7 +22,7 @@ from typing import Dict, List, Optional
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from gpwlib import gpw_archive, journal_io, plcal, provenance  # noqa: E402
+from gpwlib import gpw_archive, journal_io, plcal, provenance, reports  # noqa: E402
 from gpwlib.fmt import DISCLAIMER, T, num, pct, pln  # noqa: E402
 
 import exposure_engine as ee  # noqa: E402
@@ -210,12 +210,22 @@ def load_inputs(args, eval_date: Optional[dt.date]) -> (Dict, Dict):
         else:
             d = Path(args.input_dir).expanduser()
             files = sorted(d.glob(PATTERNS[name])) if d.is_dir() else []
-            path = files[-1] if files else None
+            path = None
+            for f in reversed(files):  # newest first; never a variant report type (RRG)
+                try:
+                    if reports.is_variant(json.loads(f.read_text(encoding="utf-8")), SKILL_OF[name]):
+                        continue
+                except (OSError, ValueError):
+                    pass  # unreadable: reported below
+                path = f
+                break
         if path is None:
             inputs[name], info[name] = None, {"used": False, "reason": "missing"}
             continue
         try:
             data = json.loads(path.read_text(encoding="utf-8"))
+            if reports.is_variant(data, SKILL_OF[name]):
+                raise ValueError("this is a gpw-sector-trend RRG report (mode rrg), not the sector-trend report")
             norm = ee.PARSERS[name](data)
         except (OSError, ValueError) as exc:
             if explicit:
@@ -281,7 +291,8 @@ def run(args) -> Dict:
     if journal.get("assessed"):
         sources.append("gpw-trade-journal: {}".format(journal["state_dir"]))
     prov = provenance.build(as_of=dt.date.fromisoformat(as_of), sources=sources,
-                            sessions_used=sum(1 for v in inputs.values() if v), notes=notes)
+                            sessions_used=sum(1 for v in inputs.values() if v), notes=notes,
+                            reference_date=eval_date)
     if eval_date:
         prov["freshness"]["is_stale"] = any(v and v["stale"] for v in inputs.values())
         prov["notes"].append("Evaluated as of {} (--as-of).".format(eval_date.isoformat()))

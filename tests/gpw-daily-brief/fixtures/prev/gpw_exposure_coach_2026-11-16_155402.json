@@ -1,0 +1,152 @@
+{
+ "skill": "gpw-exposure-coach",
+ "version": "1.0.0",
+ "lang": "pl",
+ "as_of": "2026-11-12",
+ "posture": "normal",
+ "limits": {
+  "exposure_ceiling_pct": 60.0,
+  "max_risk_per_trade_pct": 0.75,
+  "max_new_positions_per_week": 3,
+  "circuit_breaker": "ok"
+ },
+ "score": 51.9,
+ "effective_weights": {
+  "regime": 0.4,
+  "breadth": 0.35,
+  "sector": 0.25
+ },
+ "confidence": {
+  "score": 1.0,
+  "level": "high"
+ },
+ "heat_cap_pct": 6.0,
+ "caps_applied": [],
+ "inputs": {
+  "regime": {
+   "score": 75.2,
+   "as_of": "2026-11-12",
+   "state": "confirmed_uptrend",
+   "top_risk_score": 39.6,
+   "distribution_days": 5,
+   "index": "WIG",
+   "sessions_behind": 0,
+   "stale": false,
+   "used": true,
+   "file": "/fixture/db_smoke/gpw_market_regime_2026-11-16_155402.json"
+  },
+  "breadth": {
+   "score": 35.1,
+   "zone": "weakening",
+   "exposure_hint": "40–60%",
+   "as_of": "2026-11-12",
+   "weakest": "index_divergence",
+   "strongest": "size_participation",
+   "sessions_behind": 0,
+   "stale": false,
+   "used": true,
+   "file": "/fixture/db_smoke/gpw_breadth_2026-11-16_155356.json"
+  },
+  "sector": {
+   "score": 38.0,
+   "zone": "cautious",
+   "exposure_hint": "30–60%",
+   "as_of": "2026-11-12",
+   "warnings": [
+    "high_spread",
+    "divergence"
+   ],
+   "rotation": "s3_risk_on",
+   "sessions_behind": 0,
+   "stale": false,
+   "used": true,
+   "file": "/fixture/db_smoke/gpw_sector_trend_2026-11-16_155402.json"
+  }
+ },
+ "journal": {
+  "assessed": true,
+  "state_dir": "/fixture/db_state/journal",
+  "theses": 4,
+  "closed_trades": 0,
+  "open_positions": 4
+ },
+ "circuit_breaker": {
+  "status": "ok",
+  "losing_streak": 0,
+  "closed_trades": 0,
+  "drawdown_r": 0.0,
+  "cum_r": 0.0,
+  "drawdown_pln": 0.0,
+  "cum_pnl_pln": 0.0,
+  "drawdown_pct": null,
+  "pause_until": null,
+  "pause_days": 10,
+  "reasons": [],
+  "last_results": []
+ },
+ "heat": {
+  "positions": [
+   {
+    "ticker": "KGHM",
+    "shares": 20,
+    "price": 284.3,
+    "price_source": "last_close",
+    "stop": 250.0,
+    "value_pln": 5686.0,
+    "risk_pln": 686.0
+   },
+   {
+    "ticker": "PKOBP",
+    "shares": 40,
+    "price": 117.9,
+    "price_source": "last_close",
+    "stop": 117.5,
+    "value_pln": 4716.0,
+    "risk_pln": 16.0
+   },
+   {
+    "ticker": "PZU",
+    "shares": 50,
+    "price": 75.22,
+    "price_source": "last_close",
+    "stop": 55.0,
+    "value_pln": 3761.0,
+    "risk_pln": 1011.0
+   },
+   {
+    "ticker": "TORPOL",
+    "shares": 100,
+    "price": 61.2,
+    "price_source": "last_close",
+    "stop": 58.0,
+    "value_pln": 6120.0,
+    "risk_pln": 320.0
+   }
+  ],
+  "open_risk_pln": 2033.0,
+  "value_pln": 20283.0,
+  "no_stop": [],
+  "heat_pct": null,
+  "exposure_pct": null
+ },
+ "account_size": null,
+ "base_risk_pct": 1.0,
+ "data_provenance": {
+  "schema_version": "1.0",
+  "as_of": "2026-11-12",
+  "sources": [
+   "gpw-market-regime: /fixture/db_smoke/gpw_market_regime_2026-11-16_155402.json",
+   "gpw-market-breadth: /fixture/db_smoke/gpw_breadth_2026-11-16_155356.json",
+   "gpw-sector-trend: /fixture/db_smoke/gpw_sector_trend_2026-11-16_155402.json",
+   "gpw-trade-journal: /fixture/db_state/journal"
+  ],
+  "freshness": {
+   "as_of": "2026-11-12",
+   "sessions_behind": 0,
+   "is_stale": false,
+   "reference_date": "2026-11-12",
+   "historical_run": true,
+   "sessions_behind_today": 1
+  }
+ }
+}

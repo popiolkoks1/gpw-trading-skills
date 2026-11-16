@@ -1,0 +1,1139 @@
+{
+ "skill": "gpw-watchlist",
+ "version": "1.0.0",
+ "lang": "pl",
+ "command": "refresh",
+ "as_of": "2026-11-13",
+ "generated_at": "2026-11-16T14:55:14+00:00",
+ "state_file": "/fixture/db_state/watchlist.json",
+ "schema_version": "1.0",
+ "answer": "1 spółka przebiła stop - do usunięcia?, 1 spółka nad pivotem dziś (wybicie), 1 spółka blisko pivotu (do 5% poniżej), 1 w strefie zakupu (do 5% nad pivotem), 1 za daleko od pivotu (>5%, nie gonić), 5 z wydarzeniem w ciągu 10 sesji.",
+ "summary": {
+  "by_stage": {
+   "candidate": 22,
+   "watch": 4,
+   "ready": 1,
+   "entered": 1,
+   "dropped": 0
+  },
+  "total": 28,
+  "active": 28,
+  "alerts_by_severity": {
+   "high": 1,
+   "medium": 3,
+   "low": 25
+  },
+  "stop_breached": 1,
+  "near_stop": 0,
+  "pivot_breakout": 1,
+  "near_pivot": 1,
+  "in_buy_range": 1,
+  "extended": 1,
+  "events_soon": 5
+ },
+ "items": [
+  {
+   "ticker": "BNPPPL",
+   "stage": "candidate",
+   "added": "2026-11-16",
+   "source": "user",
+   "pivot": 168.4,
+   "stop": 160.0,
+   "notes": [],
+   "alerts": [
+    {
+     "code": "extended",
+     "severity": "low",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "close": 189.0,
+      "pivot": 168.4,
+      "dist_pct": 12.23
+     }
+    },
+    {
+     "code": "new_52w_high",
+     "severity": "low",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "close": 189.0,
+      "high_52w": 193.0
+     }
+    }
+   ],
+   "market": {
+    "date": "2026-11-13",
+    "close": 189.0,
+    "change_pct": 1.39,
+    "atr14": 6.4697,
+    "turnover_k": 1024.7,
+    "turnover_ratio": 0.36,
+    "high_52w": 193.0,
+    "new_52w_high": true,
+    "pivot": 168.4,
+    "stop": 160.0,
+    "dist_to_pivot_pct": 12.23,
+    "dist_to_stop_pct": 18.12,
+    "pivot_state": "extended",
+    "crossed_pivot_today": false,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "PGE",
+   "stage": "candidate",
+   "added": "2026-11-12",
+   "source": "gpw-trend-screener",
+   "pivot": null,
+   "stop": null,
+   "notes": [],
+   "alerts": [
+    {
+     "code": "event_soon",
+     "severity": "low",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "event_type": "periodic_report",
+      "event_date": "2026-11-24",
+      "date_kind": "confirmed",
+      "title": "Raport za III kw. 2026",
+      "source": "ESPI 1/2026 2026-01-09"
+     }
+    }
+   ],
+   "market": {
+    "date": "2026-11-13",
+    "close": 16.045,
+    "change_pct": -1.56,
+    "atr14": 0.6086,
+    "turnover_k": 52501.3,
+    "turnover_ratio": 0.94,
+    "high_52w": 17.55,
+    "new_52w_high": false,
+    "pivot": null,
+    "stop": null,
+    "dist_to_pivot_pct": null,
+    "dist_to_stop_pct": null,
+    "pivot_state": null,
+    "crossed_pivot_today": false,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "LPP",
+   "stage": "candidate",
+   "added": "2026-11-12",
+   "source": "gpw-trend-screener",
+   "pivot": null,
+   "stop": null,
+   "notes": [],
+   "alerts": [
+    {
+     "code": "new_52w_high",
+     "severity": "low",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "close": 28700.0,
+      "high_52w": 28980.0
+     }
+    }
+   ],
+   "market": {
+    "date": "2026-11-13",
+    "close": 28700.0,
+    "change_pct": -0.14,
+    "atr14": 684.5775,
+    "turnover_k": 118663.7,
+    "turnover_ratio": 1.16,
+    "high_52w": 28980.0,
+    "new_52w_high": true,
+    "pivot": null,
+    "stop": null,
+    "dist_to_pivot_pct": null,
+    "dist_to_stop_pct": null,
+    "pivot_state": null,
+    "crossed_pivot_today": false,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "ALLEGRO",
+   "stage": "candidate",
+   "added": "2026-11-12",
+   "source": "gpw-trend-screener",
+   "pivot": null,
+   "stop": null,
+   "notes": [],
+   "alerts": [
+    {
+     "code": "new_52w_high",
+     "severity": "low",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "close": 66.62,
+      "high_52w": 66.9
+     }
+    },
+    {
+     "code": "turnover_surge",
+     "severity": "low",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "turnover_ratio": 1.62,
+      "change_pct": 4.09
+     }
+    }
+   ],
+   "market": {
+    "date": "2026-11-13",
+    "close": 66.62,
+    "change_pct": 4.09,
+    "atr14": 1.8287,
+    "turnover_k": 385532.0,
+    "turnover_ratio": 1.62,
+    "high_52w": 66.9,
+    "new_52w_high": true,
+    "pivot": null,
+    "stop": null,
+    "dist_to_pivot_pct": null,
+    "dist_to_stop_pct": null,
+    "pivot_state": null,
+    "crossed_pivot_today": false,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "AGORA",
+   "stage": "candidate",
+   "added": "2026-11-12",
+   "source": "gpw-trend-screener",
+   "pivot": null,
+   "stop": null,
+   "notes": [],
+   "alerts": [],
+   "market": {
+    "date": "2026-11-13",
+    "close": 13.0,
+    "change_pct": -0.76,
+    "atr14": 0.4762,
+    "turnover_k": 348.8,
+    "turnover_ratio": 0.61,
+    "high_52w": 13.25,
+    "new_52w_high": false,
+    "pivot": null,
+    "stop": null,
+    "dist_to_pivot_pct": null,
+    "dist_to_stop_pct": null,
+    "pivot_state": null,
+    "crossed_pivot_today": false,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "ASBIS",
+   "stage": "candidate",
+   "added": "2026-11-12",
+   "source": "gpw-trend-screener",
+   "pivot": null,
+   "stop": null,
+   "notes": [],
+   "alerts": [
+    {
+     "code": "event_soon",
+     "severity": "low",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "event_type": "dividend_record",
+      "event_date": "2026-11-16",
+      "date_kind": "confirmed",
+      "title": "Dzień dywidendy (ustalenia prawa)",
+      "source": "ESPI 25/2026 2026-11-04"
+     }
+    },
+    {
+     "code": "event_soon",
+     "severity": "low",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "event_type": "dividend_payment",
+      "event_date": "2026-11-26",
+      "date_kind": "confirmed",
+      "title": "Wypłata dywidendy",
+      "source": "ESPI 25/2026 2026-11-04"
+     }
+    }
+   ],
+   "market": {
+    "date": "2026-11-13",
+    "close": 164.0,
+    "change_pct": -1.32,
+    "atr14": 10.3029,
+    "turnover_k": 40238.5,
+    "turnover_ratio": 0.96,
+    "high_52w": 196.9337,
+    "new_52w_high": false,
+    "pivot": null,
+    "stop": null,
+    "dist_to_pivot_pct": null,
+    "dist_to_stop_pct": null,
+    "pivot_state": null,
+    "crossed_pivot_today": false,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "BENEFIT",
+   "stage": "candidate",
+   "added": "2026-11-12",
+   "source": "gpw-trend-screener",
+   "pivot": null,
+   "stop": null,
+   "notes": [],
+   "alerts": [
+    {
+     "code": "turnover_surge",
+     "severity": "low",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "turnover_ratio": 1.63,
+      "change_pct": -0.96
+     }
+    }
+   ],
+   "market": {
+    "date": "2026-11-13",
+    "close": 6160.0,
+    "change_pct": -0.96,
+    "atr14": 205.972,
+    "turnover_k": 49704.7,
+    "turnover_ratio": 1.63,
+    "high_52w": 6285.0,
+    "new_52w_high": false,
+    "pivot": null,
+    "stop": null,
+    "dist_to_pivot_pct": null,
+    "dist_to_stop_pct": null,
+    "pivot_state": null,
+    "crossed_pivot_today": false,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "INTERCARS",
+   "stage": "candidate",
+   "added": "2026-11-12",
+   "source": "gpw-trend-screener",
+   "pivot": null,
+   "stop": null,
+   "notes": [],
+   "alerts": [],
+   "market": {
+    "date": "2026-11-13",
+    "close": 1074.0,
+    "change_pct": -0.37,
+    "atr14": 32.8832,
+    "turnover_k": 2287.2,
+    "turnover_ratio": 0.39,
+    "high_52w": 1094.0,
+    "new_52w_high": false,
+    "pivot": null,
+    "stop": null,
+    "dist_to_pivot_pct": null,
+    "dist_to_stop_pct": null,
+    "pivot_state": null,
+    "crossed_pivot_today": false,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "PEPCO",
+   "stage": "candidate",
+   "added": "2026-11-12",
+   "source": "gpw-trend-screener",
+   "pivot": null,
+   "stop": null,
+   "notes": [],
+   "alerts": [
+    {
+     "code": "turnover_surge",
+     "severity": "low",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "turnover_ratio": 1.69,
+      "change_pct": 2.45
+     }
+    }
+   ],
+   "market": {
+    "date": "2026-11-13",
+    "close": 50.92,
+    "change_pct": 2.45,
+    "atr14": 1.5493,
+    "turnover_k": 96849.9,
+    "turnover_ratio": 1.69,
+    "high_52w": 51.1,
+    "new_52w_high": false,
+    "pivot": null,
+    "stop": null,
+    "dist_to_pivot_pct": null,
+    "dist_to_stop_pct": null,
+    "pivot_state": null,
+    "crossed_pivot_today": false,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "ORANGEPL",
+   "stage": "candidate",
+   "added": "2026-11-12",
+   "source": "gpw-trend-screener",
+   "pivot": null,
+   "stop": null,
+   "notes": [],
+   "alerts": [
+    {
+     "code": "turnover_surge",
+     "severity": "low",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "turnover_ratio": 2.26,
+      "change_pct": 0.9
+     }
+    }
+   ],
+   "market": {
+    "date": "2026-11-13",
+    "close": 16.85,
+    "change_pct": 0.9,
+    "atr14": 0.5445,
+    "turnover_k": 44080.0,
+    "turnover_ratio": 2.26,
+    "high_52w": 17.015,
+    "new_52w_high": false,
+    "pivot": null,
+    "stop": null,
+    "dist_to_pivot_pct": null,
+    "dist_to_stop_pct": null,
+    "pivot_state": null,
+    "crossed_pivot_today": false,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "MBANK",
+   "stage": "candidate",
+   "added": "2026-11-12",
+   "source": "gpw-trend-screener",
+   "pivot": null,
+   "stop": null,
+   "notes": [],
+   "alerts": [
+    {
+     "code": "turnover_surge",
+     "severity": "low",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "turnover_ratio": 1.74,
+      "change_pct": -0.83
+     }
+    }
+   ],
+   "market": {
+    "date": "2026-11-13",
+    "close": 1730.5,
+    "change_pct": -0.83,
+    "atr14": 54.9732,
+    "turnover_k": 51804.3,
+    "turnover_ratio": 1.74,
+    "high_52w": 1758.0,
+    "new_52w_high": false,
+    "pivot": null,
+    "stop": null,
+    "dist_to_pivot_pct": null,
+    "dist_to_stop_pct": null,
+    "pivot_state": null,
+    "crossed_pivot_today": false,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "ACTION",
+   "stage": "candidate",
+   "added": "2026-11-12",
+   "source": "gpw-trend-screener",
+   "pivot": null,
+   "stop": null,
+   "notes": [],
+   "alerts": [
+    {
+     "code": "new_52w_high",
+     "severity": "low",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "close": 55.4,
+      "high_52w": 56.2
+     }
+    },
+    {
+     "code": "turnover_surge",
+     "severity": "low",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "turnover_ratio": 2.94,
+      "change_pct": 2.59
+     }
+    }
+   ],
+   "market": {
+    "date": "2026-11-13",
+    "close": 55.4,
+    "change_pct": 2.59,
+    "atr14": 2.0596,
+    "turnover_k": 1346.7,
+    "turnover_ratio": 2.94,
+    "high_52w": 56.2,
+    "new_52w_high": true,
+    "pivot": null,
+    "stop": null,
+    "dist_to_pivot_pct": null,
+    "dist_to_stop_pct": null,
+    "pivot_state": null,
+    "crossed_pivot_today": false,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "ERSTEPL",
+   "stage": "candidate",
+   "added": "2026-11-12",
+   "source": "gpw-trend-screener",
+   "pivot": null,
+   "stop": null,
+   "notes": [],
+   "alerts": [],
+   "market": {
+    "date": "2026-11-13",
+    "close": 800.0,
+    "change_pct": -0.52,
+    "atr14": 23.69,
+    "turnover_k": 62035.1,
+    "turnover_ratio": 1.04,
+    "high_52w": 817.6,
+    "new_52w_high": false,
+    "pivot": null,
+    "stop": null,
+    "dist_to_pivot_pct": null,
+    "dist_to_stop_pct": null,
+    "pivot_state": null,
+    "crossed_pivot_today": false,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "COMP",
+   "stage": "candidate",
+   "added": "2026-11-12",
+   "source": "gpw-trend-screener",
+   "pivot": null,
+   "stop": null,
+   "notes": [],
+   "alerts": [],
+   "market": {
+    "date": "2026-11-13",
+    "close": 99.4,
+    "change_pct": -0.6,
+    "atr14": 3.7596,
+    "turnover_k": 391.8,
+    "turnover_ratio": 0.59,
+    "high_52w": 110.0,
+    "new_52w_high": false,
+    "pivot": null,
+    "stop": null,
+    "dist_to_pivot_pct": null,
+    "dist_to_stop_pct": null,
+    "pivot_state": null,
+    "crossed_pivot_today": false,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "ALIOR",
+   "stage": "candidate",
+   "added": "2026-11-12",
+   "source": "gpw-trend-screener",
+   "pivot": null,
+   "stop": null,
+   "notes": [],
+   "alerts": [
+    {
+     "code": "new_52w_high",
+     "severity": "low",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "close": 147.55,
+      "high_52w": 148.0
+     }
+    },
+    {
+     "code": "event_soon",
+     "severity": "low",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "event_type": "agm",
+      "event_date": "2026-11-24",
+      "date_kind": "confirmed",
+      "title": "Zwołanie Nadzwyczajnego Walnego Zgromadzenia Alior Banku S.A. na wniosek Akcjonariusza Banku",
+      "source": "ESPI 28/2026 2026-10-27"
+     }
+    }
+   ],
+   "market": {
+    "date": "2026-11-13",
+    "close": 147.55,
+    "change_pct": 0.03,
+    "atr14": 4.1476,
+    "turnover_k": 27895.9,
+    "turnover_ratio": 0.77,
+    "high_52w": 148.0,
+    "new_52w_high": true,
+    "pivot": null,
+    "stop": null,
+    "dist_to_pivot_pct": null,
+    "dist_to_stop_pct": null,
+    "pivot_state": null,
+    "crossed_pivot_today": false,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "MOBRUK",
+   "stage": "candidate",
+   "added": "2026-11-12",
+   "source": "gpw-trend-screener",
+   "pivot": null,
+   "stop": null,
+   "notes": [],
+   "alerts": [],
+   "market": {
+    "date": "2026-11-13",
+    "close": 430.0,
+    "change_pct": 0.47,
+    "atr14": 10.9636,
+    "turnover_k": 1076.0,
+    "turnover_ratio": 0.75,
+    "high_52w": 440.0,
+    "new_52w_high": false,
+    "pivot": null,
+    "stop": null,
+    "dist_to_pivot_pct": null,
+    "dist_to_stop_pct": null,
+    "pivot_state": null,
+    "crossed_pivot_today": false,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "NTTSYSTEM",
+   "stage": "candidate",
+   "added": "2026-11-12",
+   "source": "gpw-trend-screener",
+   "pivot": null,
+   "stop": null,
+   "notes": [],
+   "alerts": [
+    {
+     "code": "turnover_surge",
+     "severity": "low",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "turnover_ratio": 2.21,
+      "change_pct": -5.76
+     }
+    }
+   ],
+   "market": {
+    "date": "2026-11-13",
+    "close": 32.7,
+    "change_pct": -5.76,
+    "atr14": 3.6364,
+    "turnover_k": 3413.3,
+    "turnover_ratio": 2.21,
+    "high_52w": 43.5,
+    "new_52w_high": false,
+    "pivot": null,
+    "stop": null,
+    "dist_to_pivot_pct": null,
+    "dist_to_stop_pct": null,
+    "pivot_state": null,
+    "crossed_pivot_today": false,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "INGBSK",
+   "stage": "candidate",
+   "added": "2026-11-12",
+   "source": "gpw-trend-screener",
+   "pivot": null,
+   "stop": null,
+   "notes": [],
+   "alerts": [],
+   "market": {
+    "date": "2026-11-13",
+    "close": 480.8,
+    "change_pct": -2.24,
+    "atr14": 15.7014,
+    "turnover_k": 3345.2,
+    "turnover_ratio": 0.46,
+    "high_52w": 491.8,
+    "new_52w_high": false,
+    "pivot": null,
+    "stop": null,
+    "dist_to_pivot_pct": null,
+    "dist_to_stop_pct": null,
+    "pivot_state": null,
+    "crossed_pivot_today": false,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "TOYA",
+   "stage": "candidate",
+   "added": "2026-11-12",
+   "source": "gpw-trend-screener",
+   "pivot": null,
+   "stop": null,
+   "notes": [],
+   "alerts": [
+    {
+     "code": "turnover_surge",
+     "severity": "low",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "turnover_ratio": 1.6,
+      "change_pct": -0.6
+     }
+    }
+   ],
+   "market": {
+    "date": "2026-11-13",
+    "close": 13.24,
+    "change_pct": -0.6,
+    "atr14": 0.5049,
+    "turnover_k": 835.5,
+    "turnover_ratio": 1.6,
+    "high_52w": 14.22,
+    "new_52w_high": false,
+    "pivot": null,
+    "stop": null,
+    "dist_to_pivot_pct": null,
+    "dist_to_stop_pct": null,
+    "pivot_state": null,
+    "crossed_pivot_today": false,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "GPW",
+   "stage": "candidate",
+   "added": "2026-11-12",
+   "source": "gpw-trend-screener",
+   "pivot": null,
+   "stop": null,
+   "notes": [],
+   "alerts": [
+    {
+     "code": "event_soon",
+     "severity": "low",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "event_type": "periodic_report",
+      "event_date": "2026-11-16",
+      "date_kind": "confirmed",
+      "title": "Raport za III kw. 2026 - opublikowany",
+      "source": "ESPI Q 2026-11-16"
+     }
+    }
+   ],
+   "market": {
+    "date": "2026-11-13",
+    "close": 99.0,
+    "change_pct": -0.6,
+    "atr14": 3.2984,
+    "turnover_k": 8650.9,
+    "turnover_ratio": 1.05,
+    "high_52w": 110.4,
+    "new_52w_high": false,
+    "pivot": null,
+    "stop": null,
+    "dist_to_pivot_pct": null,
+    "dist_to_stop_pct": null,
+    "pivot_state": null,
+    "crossed_pivot_today": false,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "KOGENERA",
+   "stage": "candidate",
+   "added": "2026-11-12",
+   "source": "gpw-trend-screener",
+   "pivot": null,
+   "stop": null,
+   "notes": [],
+   "alerts": [
+    {
+     "code": "new_52w_high",
+     "severity": "low",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "close": 88.6,
+      "high_52w": 90.0
+     }
+    }
+   ],
+   "market": {
+    "date": "2026-11-13",
+    "close": 88.6,
+    "change_pct": 0.23,
+    "atr14": 2.7369,
+    "turnover_k": 510.4,
+    "turnover_ratio": 0.98,
+    "high_52w": 90.0,
+    "new_52w_high": true,
+    "pivot": null,
+    "stop": null,
+    "dist_to_pivot_pct": null,
+    "dist_to_stop_pct": null,
+    "pivot_state": null,
+    "crossed_pivot_today": false,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "MILLENNIUM",
+   "stage": "candidate",
+   "added": "2026-11-12",
+   "source": "gpw-trend-screener",
+   "pivot": null,
+   "stop": null,
+   "notes": [],
+   "alerts": [],
+   "market": {
+    "date": "2026-11-13",
+    "close": 24.01,
+    "change_pct": -0.58,
+    "atr14": 0.7653,
+    "turnover_k": 21383.2,
+    "turnover_ratio": 1.32,
+    "high_52w": 24.32,
+    "new_52w_high": false,
+    "pivot": null,
+    "stop": null,
+    "dist_to_pivot_pct": null,
+    "dist_to_stop_pct": null,
+    "pivot_state": null,
+    "crossed_pivot_today": false,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "AUTOPARTN",
+   "stage": "watch",
+   "added": "2026-11-16",
+   "source": "user",
+   "pivot": 28.9,
+   "stop": 27.5,
+   "notes": [],
+   "alerts": [
+    {
+     "code": "pivot_breakout",
+     "severity": "medium",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "close": 29.6,
+      "pivot": 28.9,
+      "dist_pct": 2.42,
+      "turnover_ratio": 1.84,
+      "volume_confirmed": true
+     }
+    }
+   ],
+   "market": {
+    "date": "2026-11-13",
+    "close": 29.6,
+    "change_pct": 2.96,
+    "atr14": 1.0239,
+    "turnover_k": 8358.0,
+    "turnover_ratio": 1.84,
+    "high_52w": 32.0,
+    "new_52w_high": false,
+    "pivot": 28.9,
+    "stop": 27.5,
+    "dist_to_pivot_pct": 2.42,
+    "dist_to_stop_pct": 7.64,
+    "pivot_state": "buy_range",
+    "crossed_pivot_today": true,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "PEKAO",
+   "stage": "watch",
+   "added": "2026-11-12",
+   "source": "gpw-trend-screener",
+   "pivot": 271.1,
+   "stop": 249.15,
+   "notes": [],
+   "alerts": [
+    {
+     "code": "near_pivot",
+     "severity": "low",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "close": 267.1,
+      "pivot": 271.1,
+      "dist_pct": -1.48
+     }
+    },
+    {
+     "code": "event_soon",
+     "severity": "low",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "event_type": "agm",
+      "event_date": "2026-11-19",
+      "date_kind": "confirmed",
+      "title": "Ogłoszenie o zwołaniu Nadzwyczajnego Walnego Zgromadzenia Banku Polska Kasa Opieki Spółka Akcyjna",
+      "source": "ESPI 30/2026 2026-10-23"
+     }
+    }
+   ],
+   "market": {
+    "date": "2026-11-13",
+    "close": 267.1,
+    "change_pct": -0.52,
+    "atr14": 7.2523,
+    "turnover_k": 153673.0,
+    "turnover_ratio": 1.01,
+    "high_52w": 285.9,
+    "new_52w_high": false,
+    "pivot": 271.1,
+    "stop": 249.15,
+    "dist_to_pivot_pct": -1.48,
+    "dist_to_stop_pct": 7.2,
+    "pivot_state": "near",
+    "crossed_pivot_today": false,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "CCC",
+   "stage": "watch",
+   "added": "2026-11-16",
+   "source": "user",
+   "pivot": null,
+   "stop": null,
+   "notes": [],
+   "alerts": [
+    {
+     "code": "no_price_data",
+     "severity": "medium",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {}
+    }
+   ],
+   "market": null
+  },
+  {
+   "ticker": "DINOPL",
+   "stage": "watch",
+   "added": "2026-11-16",
+   "source": "user",
+   "pivot": 40.5,
+   "stop": 39.5,
+   "notes": [],
+   "alerts": [
+    {
+     "code": "stop_breached",
+     "severity": "high",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "close": 38.77,
+      "stop": 39.5,
+      "dist_pct": -1.85
+     }
+    }
+   ],
+   "market": {
+    "date": "2026-11-13",
+    "close": 38.77,
+    "change_pct": 2.51,
+    "atr14": 1.1836,
+    "turnover_k": 123636.0,
+    "turnover_ratio": 0.95,
+    "high_52w": 42.67,
+    "new_52w_high": false,
+    "pivot": 40.5,
+    "stop": 39.5,
+    "dist_to_pivot_pct": -4.27,
+    "dist_to_stop_pct": -1.85,
+    "pivot_state": "near",
+    "crossed_pivot_today": false,
+    "below_stop": true
+   }
+  },
+  {
+   "ticker": "KETY",
+   "stage": "ready",
+   "added": "2026-11-16",
+   "source": "user",
+   "pivot": 1281.0,
+   "stop": 1229.0,
+   "notes": [
+    {
+     "date": "2026-11-16",
+     "text": "VCP 3T"
+    }
+   ],
+   "alerts": [
+    {
+     "code": "short_new",
+     "severity": "low",
+     "date": "2026-10-30",
+     "origin": "ingest",
+     "skill": "gpw-ownership",
+     "kind": "short_new",
+     "score": 15.2
+    },
+    {
+     "code": "in_buy_range",
+     "severity": "medium",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "close": 1337.0,
+      "pivot": 1281.0,
+      "dist_pct": 4.37
+     }
+    },
+    {
+     "code": "new_52w_high",
+     "severity": "low",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "close": 1337.0,
+      "high_52w": 1345.0
+     }
+    },
+    {
+     "code": "turnover_surge",
+     "severity": "low",
+     "date": "2026-11-13",
+     "origin": "refresh",
+     "params": {
+      "turnover_ratio": 1.57,
+      "change_pct": 1.52
+     }
+    }
+   ],
+   "market": {
+    "date": "2026-11-13",
+    "close": 1337.0,
+    "change_pct": 1.52,
+    "atr14": 33.7692,
+    "turnover_k": 36926.2,
+    "turnover_ratio": 1.57,
+    "high_52w": 1345.0,
+    "new_52w_high": true,
+    "pivot": 1281.0,
+    "stop": 1229.0,
+    "dist_to_pivot_pct": 4.37,
+    "dist_to_stop_pct": 8.79,
+    "pivot_state": "buy_range",
+    "crossed_pivot_today": false,
+    "below_stop": false
+   }
+  },
+  {
+   "ticker": "PKOBP",
+   "stage": "entered",
+   "added": "2026-11-12",
+   "source": "gpw-trend-screener",
+   "pivot": 118.62,
+   "stop": 113.41,
+   "notes": [],
+   "alerts": [],
+   "market": {
+    "date": "2026-11-13",
+    "close": 119.9,
+    "change_pct": 1.7,
+    "atr14": 2.97,
+    "turnover_k": 425164.5,
+    "turnover_ratio": 1.2,
+    "high_52w": 125.58,
+    "new_52w_high": false,
+    "pivot": 118.62,
+    "stop": 113.41,
+    "dist_to_pivot_pct": 1.08,
+    "dist_to_stop_pct": 5.72,
+    "pivot_state": "buy_range",
+    "crossed_pivot_today": true,
+    "below_stop": false
+   }
+  }
+ ],
+ "warnings": [
+  "Brak notowań dla: CCC."
+ ],
+ "missing": [
+  "CCC"
+ ],
+ "dry_run": false,
+ "saved": true,
+ "data_provenance": {
+  "schema_version": "1.0",
+  "as_of": "2026-11-13",
+  "sources": [
+   "https://www.gpw.pl/archiwum-notowan",
+   "gpw-event-calendar gpw_event_calendar_2026-11-16_155413.json",
+   "gpw-event-calendar gpw_event_calendar_2026-11-16_155419.json",
+   "gpw-event-calendar gpw_event_calendar_2026-11-16_155506.json",
+   "gpw-event-calendar gpw_event_calendar_2026-11-16_155512.json"
+  ],
+  "freshness": {
+   "as_of": "2026-11-13",
+   "sessions_behind": 0,
+   "is_stale": false,
+   "reference_date": null,
+   "historical_run": false,
+   "sessions_behind_today": 0
+  }
+ }
+}

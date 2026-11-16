@@ -401,3 +401,20 @@ def test_cli_argument_errors(argv):
     with pytest.raises(SystemExit) as e:
         cli.parse_args(argv)
     assert e.value.code == 2
+
+
+def test_cli_never_reads_rrg_report_as_sector_trend(tmp_path, capsys):
+    # integration fix 1.2: gpw-sector-trend's RRG report has the same "skill";
+    # even under a classic-looking file name it must be skipped
+    d = _inputs_dir(tmp_path)
+    rrg = {"skill": "gpw-sector-trend", "mode": "rrg", "as_of": "2026-11-13", "rrg": {"items": []}}
+    _write(d, "gpw_sector_trend_2026-11-13_235959.json", rrg)   # sorts after the classic one
+    _write(d, "gpw_sector_rrg_2026-11-13_235959.json", rrg)
+    rc = cli.main(_args(tmp_path, "--input-dir", str(d), "--no-journal"))
+    assert rc == 0
+    r = json.loads(sorted((tmp_path / "out").glob("*.json"))[-1].read_text(encoding="utf-8"))
+    assert r["inputs"]["sector"]["used"] is True
+    assert r["inputs"]["sector"]["file"].endswith("gpw_sector_trend_2026-11-13_100000.json")
+    rc = cli.main(_args(tmp_path, "--input-dir", str(d), "--no-journal",
+                        "--sector-json", str(d / "gpw_sector_rrg_2026-11-13_235959.json")))
+    assert rc == 1 and "RRG" in capsys.readouterr().err

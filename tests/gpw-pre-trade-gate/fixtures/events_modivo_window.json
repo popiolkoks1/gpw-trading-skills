@@ -1,0 +1,230 @@
+{
+ "skill": "gpw-event-calendar",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "window",
+ "as_of": "2026-11-16",
+ "reference_date": "2026-11-16",
+ "horizon": {
+  "start": "2026-11-16",
+  "end": "2026-12-11",
+  "sessions": 20,
+  "company_end": "2026-12-11"
+ },
+ "tickers": [
+  "MODIVO"
+ ],
+ "by_ticker": {
+  "MODIVO": {
+   "isin": "PLCCC0000016",
+   "index": "WIG20",
+   "sources": [
+    "cli"
+   ],
+   "next_earnings": {
+    "date": "2026-11-30",
+    "date_kind": "statutory_deadline",
+    "title": "Raport za III kw. 2026 - termin ustawowy"
+   },
+   "next_ex_dividend": null,
+   "next_agm": null,
+   "exdiv_history": [],
+   "next_exdate_estimate": null,
+   "espi_reports_in_lookback": 0,
+   "dividend_reports_without_dates": []
+  }
+ },
+ "holding_window_check": {
+  "ticker": "MODIVO",
+  "start": "2026-11-16",
+  "end": "2026-12-11",
+  "sessions": 20,
+  "contains": {
+   "has_earnings": true,
+   "has_ex_dividend": false,
+   "has_agm": false,
+   "has_mpc": true,
+   "has_expiry": false,
+   "has_index_revision": true,
+   "has_macro": true
+  },
+  "first": {
+   "macro": {
+    "date": "2026-11-30",
+    "date_kind": "estimated",
+    "title": "GUS: szybki szacunek CPI za 2026-11",
+    "sessions_from_start": 11
+   },
+   "index_revision": {
+    "date": "2026-11-30",
+    "date_kind": "confirmed",
+    "title": "MSCI: zmiany w indeksach na zamknięciu (przegląd 2026-11)",
+    "sessions_from_start": 11
+   },
+   "earnings": {
+    "date": "2026-11-30",
+    "date_kind": "statutory_deadline",
+    "title": "Raport za III kw. 2026 - termin ustawowy",
+    "sessions_from_start": 11
+   },
+   "mpc": {
+    "date": "2026-12-02",
+    "date_kind": "confirmed",
+    "title": "Posiedzenie RPP - decyzja o stopach",
+    "sessions_from_start": 13
+   }
+  },
+  "verdict": "event_risk",
+  "event_ids": [
+   "0cb091e3d4a6",
+   "fbf997c75b06",
+   "ac3239c506dd",
+   "a90e21842578",
+   "5faf18d84a09",
+   "c4ac58349c95",
+   "f30446239f66"
+  ],
+  "n_events": 7,
+  "market_min_importance": "medium"
+ },
+ "events": [
+  {
+   "id": "0cb091e3d4a6",
+   "ticker": null,
+   "isin": null,
+   "type": "index_revision",
+   "subtype": "ranking",
+   "date": "2026-11-20",
+   "time": null,
+   "date_kind": "confirmed",
+   "importance": "medium",
+   "title": "ranking indeksów WIG20, WIG20TR, mWIG40, mWIG40TR, sWIG80, sWIG80TR, WIG30, WIG30TR",
+   "source": "GPW Benchmark, kalendarium indeksów",
+   "details": {
+    "category": "ranking",
+    "family": "size"
+   }
+  },
+  {
+   "id": "fbf997c75b06",
+   "ticker": null,
+   "isin": null,
+   "type": "macro_release",
+   "subtype": "cpi_flash",
+   "date": "2026-11-30",
+   "time": "10:00",
+   "date_kind": "estimated",
+   "importance": "medium",
+   "title": "GUS: szybki szacunek CPI za 2026-11",
+   "source": "GUS (rule: last working day of the month)",
+   "details": {
+    "ref_month": "2026-11"
+   }
+  },
+  {
+   "id": "ac3239c506dd",
+   "ticker": null,
+   "isin": null,
+   "type": "msci_review",
+   "subtype": "effective",
+   "date": "2026-11-30",
+   "time": null,
+   "date_kind": "confirmed",
+   "importance": "high",
+   "title": "MSCI: zmiany w indeksach na zamknięciu (przegląd 2026-11)",
+   "source": "https://www.msci.com/downloads/documents/press-releases/media-room/MSCI_Nov_2026_IR_Pre-Ann_PR_Doc.pdf",
+   "details": {
+    "review": "2026-11",
+    "announcement": "2026-11-11",
+    "note": "rebalancing flows in the closing auction"
+   }
+  },
+  {
+   "id": "a90e21842578",
+   "ticker": "MODIVO",
+   "isin": "PLCCC0000016",
+   "type": "periodic_report",
+   "subtype": "deadline",
+   "date": "2026-11-30",
+   "time": null,
+   "date_kind": "statutory_deadline",
+   "importance": "high",
+   "title": "Raport za III kw. 2026 - termin ustawowy",
+   "source": "Rozporządzenie MF z 6.06.2025 (Dz.U. 2025 poz. 755) § 83 ust. 1 (+ ust. 11)",
+   "details": {
+    "period": "Q3",
+    "fiscal_year": 2026,
+    "period_end": "2026-09-30",
+    "nominal_deadline": "2026-11-29"
+   }
+  },
+  {
+   "id": "5faf18d84a09",
+   "ticker": null,
+   "isin": null,
+   "type": "mpc_meeting",
+   "subtype": "decision",
+   "date": "2026-12-02",
+   "time": null,
+   "date_kind": "confirmed",
+   "importance": "high",
+   "title": "Posiedzenie RPP - decyzja o stopach",
+   "source": "NBP, harmonogram posiedzeń RPP 2026 (as of 2026-11-16)",
+   "details": {
+    "meeting_days": [
+     "2026-12-01",
+     "2026-12-02"
+    ],
+    "minutes_publication": "2026-12-04"
+   }
+  },
+  {
+   "id": "c4ac58349c95",
+   "ticker": null,
+   "isin": null,
+   "type": "index_revision",
+   "subtype": "announcement",
+   "date": "2026-12-03",
+   "time": null,
+   "date_kind": "confirmed",
+   "importance": "high",
+   "title": "ogłoszenie zmian w portfelach indeksów WIG20, WIG20TR, mWIG40, mWIG40TR, sWIG80, sWIG80TR, WIG30, WIG30TR",
+   "source": "GPW Benchmark, kalendarium indeksów",
+   "details": {
+    "category": "announcement",
+    "family": "size"
+   }
+  },
+  {
+   "id": "f30446239f66",
+   "ticker": null,
+   "isin": null,
+   "type": "index_revision",
+   "subtype": "announcement",
+   "date": "2026-12-11",
+   "time": null,
+   "date_kind": "confirmed",
+   "importance": "medium",
+   "title": "ogłoszenie zmian w portfelach indeksów WIG, WIG140, WIG-Poland, WIG-Ukraine, WIG-CEE, WIG.MS-BAS, WIG.MS-ECM, WIG.MS-FIN, WIG.GAMES5, WIGind, WIGmed, WIGtechTR,",
+   "source": "GPW Benchmark, kalendarium indeksów",
+   "details": {
+    "category": "announcement",
+    "family": "wig"
+   }
+  }
+ ],
+ "past_events": [],
+ "warnings": [],
+ "data_provenance": {
+  "as_of": "2026-11-16",
+  "freshness": {
+   "as_of": "2026-11-16",
+   "sessions_behind": 0,
+   "is_stale": false,
+   "reference_date": null,
+   "historical_run": false,
+   "sessions_behind_today": 0
+  },
+  "note": "trimmed fixture from a real offline run on 2026-11-16"
+ }
+}

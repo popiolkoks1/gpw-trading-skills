@@ -1,0 +1,495 @@
+{
+ "skill": "gpw-trend-screener",
+ "version": "1.0.0",
+ "lang": "pl",
+ "mode": "screen",
+ "summary": {
+  "date": "2026-11-13",
+  "universe": 116,
+  "traded": 402,
+  "template_passed": 23,
+  "valid_vcp": 4,
+  "actionable": 2,
+  "states": {
+   "breakout": 2,
+   "breakout_unconfirmed": 1,
+   "extended": 2,
+   "invalid": 18
+  }
+ },
+ "watchlist": [
+  {
+   "name": "KETY",
+   "date": "2026-11-13",
+   "close": 1337.0,
+   "prefilter": {
+    "ok": true,
+    "reasons": [],
+    "history": 500,
+    "short_history": false,
+    "med_turnover20_k": 25250.13
+   },
+   "rs": {
+    "rating": 71,
+    "raw": 50.82,
+    "quarters": 4,
+    "vs_wig_pp": {
+     "63": 1.95,
+     "126": -1.21,
+     "252": 5.38
+    }
+   },
+   "template": {
+    "passed": 8,
+    "total": 8
+   },
+   "template_pass": true,
+   "vcp": {
+    "valid": true,
+    "reasons": [],
+    "pivot": 1281.0,
+    "last_low": 1235.0,
+    "base_high": 1317.0,
+    "base_start": "2026-09-22",
+    "base_len": 38,
+    "dryup_ratio": 0.987,
+    "higher_lows": true,
+    "quality": 88.3,
+    "all_contractions": 3,
+    "pivot_date": "2026-10-29",
+    "last_low_date": "2026-11-02"
+   },
+   "execution": {
+    "state": "breakout",
+    "pct_vs_pivot": 4.37,
+    "pct_above_sma50": 6.29,
+    "volume_ratio": 1.54
+   },
+   "score": 72.2,
+   "components": {
+    "trend": 99.5,
+    "rs": 42.5,
+    "contraction": 88.3,
+    "dryup": 32.2,
+    "pivot": 58.4,
+    "liquidity": 100
+   },
+   "band": "good",
+   "band_raw": "good",
+   "band_capped": false,
+   "risk": {
+    "atr14": 33.77,
+    "entry_pivot": 1281.0,
+    "stop_structure": 1228.83,
+    "stop_atr": 1213.46,
+    "risk_pct_structure": 4.07,
+    "risk_pct_atr": 5.27,
+    "wide_structure": false
+   },
+   "labels": [
+    "WIG20"
+   ],
+   "sizer_command": "python3 scripts/position_sizer.py --ticker KETY --entry 1281 --stop 1229 --account-size ACCOUNT_PLN --risk-pct 1 --lang pl"
+  },
+  {
+   "name": "PKOBP",
+   "date": "2026-11-13",
+   "close": 119.9,
+   "prefilter": {
+    "ok": true,
+    "reasons": [],
+    "history": 500,
+    "short_history": false,
+    "med_turnover20_k": 417686.3
+   },
+   "rs": {
+    "rating": 79,
+    "raw": 61.43,
+    "quarters": 4,
+    "vs_wig_pp": {
+     "63": 0.86,
+     "126": 8.11,
+     "252": 21.2
+    }
+   },
+   "template": {
+    "passed": 8,
+    "total": 8
+   },
+   "template_pass": true,
+   "vcp": {
+    "valid": true,
+    "reasons": [],
+    "pivot": 118.62,
+    "last_low": 113.98,
+    "base_high": 125.58,
+    "base_start": "2026-09-30",
+    "base_len": 32,
+    "dryup_ratio": 1.159,
+    "higher_lows": false,
+    "quality": 79.4,
+    "all_contractions": 3,
+    "pivot_date": "2026-11-05",
+    "last_low_date": "2026-11-06"
+   },
+   "execution": {
+    "state": "breakout_unconfirmed",
+    "pct_vs_pivot": 1.08,
+    "pct_above_sma50": 1.68,
+    "volume_ratio": 1.16
+   },
+   "score": 76.5,
+   "components": {
+    "trend": 96.4,
+    "rs": 62.5,
+    "contraction": 79.4,
+    "dryup": 14.1,
+    "pivot": 94.6,
+    "liquidity": 100
+   },
+   "band": "watchlist",
+   "band_raw": "good",
+   "band_capped": true,
+   "risk": {
+    "atr14": 2.97,
+    "entry_pivot": 118.62,
+    "stop_structure": 113.41,
+    "stop_atr": 112.68,
+    "risk_pct_structure": 4.39,
+    "risk_pct_atr": 5.01,
+    "wide_structure": false
+   },
+   "labels": [
+    "WIG20",
+    "Banki"
+   ],
+   "sizer_command": "python3 scripts/position_sizer.py --ticker PKOBP --entry 118.62 --stop 113.41 --account-size ACCOUNT_PLN --risk-pct 1 --lang pl"
+  }
+ ],
+ "others": [
+  {
+   "name": "PGE",
+   "state": "invalid",
+   "rs": 94,
+   "score": 62.7,
+   "vcp_reasons": [
+    "too_few_contractions",
+    "last_too_loose"
+   ]
+  },
+  {
+   "name": "LPP",
+   "state": "invalid",
+   "rs": 93,
+   "score": 59.9,
+   "vcp_reasons": [
+    "too_few_contractions"
+   ]
+  }
+ ],
+ "candidates": [
+  {
+   "name": "KETY",
+   "date": "2026-11-13",
+   "close": 1337.0,
+   "prefilter": {
+    "ok": true,
+    "reasons": [],
+    "history": 500,
+    "short_history": false,
+    "med_turnover20_k": 25250.13
+   },
+   "rs": {
+    "rating": 71,
+    "raw": 50.82,
+    "quarters": 4,
+    "vs_wig_pp": {
+     "63": 1.95,
+     "126": -1.21,
+     "252": 5.38
+    }
+   },
+   "template": {
+    "passed": 8,
+    "total": 8
+   },
+   "template_pass": true,
+   "vcp": {
+    "valid": true,
+    "reasons": [],
+    "pivot": 1281.0,
+    "last_low": 1235.0,
+    "base_high": 1317.0,
+    "base_start": "2026-09-22",
+    "base_len": 38,
+    "dryup_ratio": 0.987,
+    "higher_lows": true,
+    "quality": 88.3,
+    "all_contractions": 3,
+    "pivot_date": "2026-10-29",
+    "last_low_date": "2026-11-02"
+   },
+   "execution": {
+    "state": "breakout",
+    "pct_vs_pivot": 4.37,
+    "pct_above_sma50": 6.29,
+    "volume_ratio": 1.54
+   },
+   "score": 72.2,
+   "components": {
+    "trend": 99.5,
+    "rs": 42.5,
+    "contraction": 88.3,
+    "dryup": 32.2,
+    "pivot": 58.4,
+    "liquidity": 100
+   },
+   "band": "good",
+   "band_raw": "good",
+   "band_capped": false,
+   "risk": {
+    "atr14": 33.77,
+    "entry_pivot": 1281.0,
+    "stop_structure": 1228.83,
+    "stop_atr": 1213.46,
+    "risk_pct_structure": 4.07,
+    "risk_pct_atr": 5.27,
+    "wide_structure": false
+   },
+   "labels": [
+    "WIG20"
+   ],
+   "sizer_command": "python3 scripts/position_sizer.py --ticker KETY --entry 1281 --stop 1229 --account-size ACCOUNT_PLN --risk-pct 1 --lang pl"
+  },
+  {
+   "name": "PKOBP",
+   "date": "2026-11-13",
+   "close": 119.9,
+   "prefilter": {
+    "ok": true,
+    "reasons": [],
+    "history": 500,
+    "short_history": false,
+    "med_turnover20_k": 417686.3
+   },
+   "rs": {
+    "rating": 79,
+    "raw": 61.43,
+    "quarters": 4,
+    "vs_wig_pp": {
+     "63": 0.86,
+     "126": 8.11,
+     "252": 21.2
+    }
+   },
+   "template": {
+    "passed": 8,
+    "total": 8
+   },
+   "template_pass": true,
+   "vcp": {
+    "valid": true,
+    "reasons": [],
+    "pivot": 118.62,
+    "last_low": 113.98,
+    "base_high": 125.58,
+    "base_start": "2026-09-30",
+    "base_len": 32,
+    "dryup_ratio": 1.159,
+    "higher_lows": false,
+    "quality": 79.4,
+    "all_contractions": 3,
+    "pivot_date": "2026-11-05",
+    "last_low_date": "2026-11-06"
+   },
+   "execution": {
+    "state": "breakout_unconfirmed",
+    "pct_vs_pivot": 1.08,
+    "pct_above_sma50": 1.68,
+    "volume_ratio": 1.16
+   },
+   "score": 76.5,
+   "components": {
+    "trend": 96.4,
+    "rs": 62.5,
+    "contraction": 79.4,
+    "dryup": 14.1,
+    "pivot": 94.6,
+    "liquidity": 100
+   },
+   "band": "watchlist",
+   "band_raw": "good",
+   "band_capped": true,
+   "risk": {
+    "atr14": 2.97,
+    "entry_pivot": 118.62,
+    "stop_structure": 113.41,
+    "stop_atr": 112.68,
+    "risk_pct_structure": 4.39,
+    "risk_pct_atr": 5.01,
+    "wide_structure": false
+   },
+   "labels": [
+    "WIG20",
+    "Banki"
+   ],
+   "sizer_command": "python3 scripts/position_sizer.py --ticker PKOBP --entry 118.62 --stop 113.41 --account-size ACCOUNT_PLN --risk-pct 1 --lang pl"
+  },
+  {
+   "name": "PGE",
+   "date": "2026-11-13",
+   "close": 16.05,
+   "prefilter": {
+    "ok": true,
+    "reasons": [],
+    "history": 500,
+    "short_history": false,
+    "med_turnover20_k": 43692.5
+   },
+   "rs": {
+    "rating": 94,
+    "raw": 100.41,
+    "quarters": 4,
+    "vs_wig_pp": {
+     "63": 47.97,
+     "126": 33.23,
+     "252": -3.07
+    }
+   },
+   "template": {
+    "passed": 8,
+    "total": 8
+   },
+   "template_pass": true,
+   "vcp": {
+    "valid": false,
+    "reasons": [
+     "too_few_contractions",
+     "last_too_loose"
+    ],
+    "pivot": 17.55,
+    "last_low": 15.27,
+    "base_high": 17.55,
+    "base_start": "2026-10-16",
+    "base_len": 20,
+    "dryup_ratio": 0.787,
+    "higher_lows": true,
+    "quality": 0.0,
+    "all_contractions": 1,
+    "pivot_date": "2026-10-16",
+    "last_low_date": "2026-11-10"
+   },
+   "execution": {
+    "state": "invalid",
+    "pct_vs_pivot": -8.58,
+    "pct_above_sma50": 5.03,
+    "volume_ratio": 0.97
+   },
+   "score": 62.7,
+   "components": {
+    "trend": 90.3,
+    "rs": 94.4,
+    "contraction": 0.0,
+    "dryup": 65.5,
+    "pivot": 0.0,
+    "liquidity": 100
+   },
+   "band": "skip",
+   "band_raw": "watchlist",
+   "band_capped": true,
+   "risk": {
+    "atr14": 0.61,
+    "entry_pivot": 17.55,
+    "stop_structure": 15.19,
+    "stop_atr": 16.33,
+    "risk_pct_structure": 13.43,
+    "risk_pct_atr": 6.94,
+    "wide_structure": true
+   },
+   "labels": [
+    "WIG20",
+    "Energetyka"
+   ],
+   "sizer_command": "python3 scripts/position_sizer.py --ticker PGE --entry 17.55 --stop 15.19 --account-size ACCOUNT_PLN --risk-pct 1 --lang pl"
+  },
+  {
+   "name": "LPP",
+   "date": "2026-11-13",
+   "close": 28700.0,
+   "prefilter": {
+    "ok": true,
+    "reasons": [],
+    "history": 500,
+    "short_history": false,
+    "med_turnover20_k": 115994.03
+   },
+   "rs": {
+    "rating": 93,
+    "raw": 99.85,
+    "quarters": 4,
+    "vs_wig_pp": {
+     "63": 30.63,
+     "126": 16.23,
+     "252": 29.36
+    }
+   },
+   "template": {
+    "passed": 8,
+    "total": 8
+   },
+   "template_pass": true,
+   "vcp": {
+    "valid": false,
+    "reasons": [
+     "too_few_contractions"
+    ],
+    "pivot": 27240.0,
+    "last_low": 25740.0,
+    "base_high": 27240.0,
+    "base_start": "2026-10-22",
+    "base_len": 16,
+    "dryup_ratio": 1.12,
+    "higher_lows": true,
+    "quality": 0.0,
+    "all_contractions": 1,
+    "pivot_date": "2026-10-22",
+    "last_low_date": "2026-11-04"
+   },
+   "execution": {
+    "state": "invalid",
+    "pct_vs_pivot": 5.36,
+    "pct_above_sma50": 14.97,
+    "volume_ratio": 1.15
+   },
+   "score": 59.9,
+   "components": {
+    "trend": 99.2,
+    "rs": 93.3,
+    "contraction": 0.0,
+    "dryup": 18.0,
+    "pivot": 0.0,
+    "liquidity": 100
+   },
+   "band": "skip",
+   "band_raw": "skip",
+   "band_capped": false,
+   "risk": {
+    "atr14": 684.58,
+    "entry_pivot": 27240.0,
+    "stop_structure": 25611.3,
+    "stop_atr": 25870.85,
+    "risk_pct_structure": 5.98,
+    "risk_pct_atr": 5.03,
+    "wide_structure": false
+   },
+   "labels": [
+    "WIG20",
+    "Odzież"
+   ],
+   "sizer_command": "python3 scripts/position_sizer.py --ticker LPP --entry 27240 --stop 25611 --account-size ACCOUNT_PLN --risk-pct 1 --lang pl"
+  }
+ ],
+ "data_provenance": {
+  "as_of": "2026-11-13"
+ }
+}

@@ -1,0 +1,22 @@
+Powiadomienie o transakcji, o której mowa w art. 19 ust. 1 rozporządzenia MAR
+
+1 Dane osoby pełniącej obowiązki zarządcze / osoby blisko związanej
+a) Imię i nazwisko: Jan Kowalski
+2 Powód powiadomienia
+a) Stanowisko/status: Prezes Zarządu
+b) Pierwotne powiadomienie/zmiana: Pierwotne powiadomienie
+3 Dane dotyczące emitenta, uczestnika rynku uprawnień do emisji, platformy aukcyjnej, prowadzącego aukcję lub monitorującego aukcję
+a) Nazwa: Przykładowa Spółka S.A.
+b) LEI: 259400ABCDEF12345678
+4 Szczegółowe informacje dotyczące transakcji
+a) Opis instrumentu finansowego, rodzaj instrumentu: akcje zwykłe na okaziciela
+Kod identyfikacyjny: PLPRZYK00010
+b) Rodzaj transakcji: Nabycie akcji w transakcji sesyjnej
+c) Cena i wolumen
+Cena: 45,20 PLN Wolumen: 1 000
+Cena: 45,50 PLN Wolumen: 2 500
+d) Informacje zbiorcze
+Łączny wolumen: 3 500
+Cena: 45,41 PLN
+e) Data transakcji: 2026-11-05
+f) Miejsce transakcji: Giełda Papierów Wartościowych w Warszawie S.A. (XWAR)

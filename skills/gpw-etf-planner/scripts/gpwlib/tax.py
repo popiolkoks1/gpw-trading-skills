@@ -31,6 +31,20 @@ Sources
   by CPI from 2030 (art. 26 ust. 5, art. 44).
 * PIT scale 2026: 12% up to 120 000 zł, 32% above, tax-free amount 30 000 zł
   (art. 27 ust. 1); linear tax 19% (art. 30c).
+* Derivatives (e.g. FW20 futures): income from realising rights from
+  derivative financial instruments is capital income (art. 17 ust. 1 pkt 10
+  ustawy o PIT), taxed 19% (art. 30b ust. 1) and reported on PIT-38 together
+  with shares, so a futures loss offsets share gains of the same year and
+  vice versa; an unused loss is deductible over the next 5 tax years
+  (art. 9 ust. 3).
+* Derivatives on IKE/IKZE: ustawa o IKE i IKZE (t.j. Dz.U. 2022 poz. 1792,
+  amended Dz.U. 2026 poz. 91), art. 27 ust. 2 - a brokerage IKE/IKZE
+  agreement *may* allow orders in financial instruments that are not
+  securities only "wyłącznie w celu ograniczenia ryzyka inwestycyjnego",
+  for instruments whose price depends on securities held on that account and
+  that trade on a regulated market. Not banned outright, but for hedging only
+  and only if the broker's agreement provides for it (most brokers do not).
+  Wording as verified for gpw-risk-lab (skills/gpw-risk-lab/references/methodology.md).
 """
 
 from __future__ import annotations
@@ -40,6 +54,41 @@ from typing import Dict, Optional
 
 BELKA_RATE = 0.19
 IKZE_WITHDRAWAL_RATE = 0.10
+
+# Derivatives (legal text in the module docstring)
+DERIVATIVES_RATE = BELKA_RATE                 # art. 30b ust. 1 ustawy o PIT
+DERIVATIVES_PIT_FORM = "PIT-38"               # same return and same income pool as shares
+DERIVATIVES_LEGAL_BASIS = "art. 17 ust. 1 pkt 10 i art. 30b ust. 1 ustawy o PIT"
+LOSS_CARRY_FORWARD_YEARS = 5                  # art. 9 ust. 3 ustawy o PIT
+IKE_IKZE_NON_SECURITIES_RULE = {
+    "legal_basis": "art. 27 ust. 2 ustawy o IKE i IKZE (t.j. Dz.U. 2022 poz. 1792, zm. Dz.U. 2026 poz. 91)",
+    "allowed": "only_to_limit_risk",          # "wyłącznie w celu ograniczenia ryzyka inwestycyjnego"
+    "requires_broker_agreement": True,
+    "underlying_must_be_on_account": True,
+    "regulated_market_only": True,
+}
+# Bilingual report notes (same wording as gpw-risk-lab's tax section)
+NOTES = {
+    "derivatives_pit": {
+        "pl": "Wynik na kontraktach terminowych to przychód z kapitałów pieniężnych (realizacja praw z pochodnych "
+              "instrumentów finansowych, art. 17 ust. 1 pkt 10 i art. 30b ust. 1 ustawy o PIT): 19% podatku, "
+              "rozliczany w PIT-38 razem z akcjami, więc strata na kontraktach pomniejsza zysk z akcji w tym samym "
+              "roku (i odwrotnie); nierozliczoną stratę można odliczać przez 5 kolejnych lat (art. 9 ust. 3).",
+        "en": "Futures P&L is capital income (rights from derivative financial instruments, art. 17(1)(10) and "
+              "art. 30b(1) of the PIT Act): 19% tax, reported on PIT-38 together with shares, so a futures loss "
+              "offsets share gains in the same year (and vice versa); an unused loss can be carried forward for "
+              "5 years (art. 9(3)).",
+    },
+    "ike_derivatives": {
+        "pl": "IKE/IKZE: ustawa o IKE i IKZE (art. 27 ust. 2) dopuszcza na IKE/IKZE instrumenty niebędące papierami "
+              "wartościowymi wyłącznie w celu ograniczenia ryzyka papierów z tego konta i tylko jeśli umowa z "
+              "brokerem to przewiduje; w praktyce brokerzy zwykle nie oferują kontraktów na IKE/IKZE – sprawdź u "
+              "swojego.",
+        "en": "IKE/IKZE: the IKE/IKZE Act (art. 27(2)) allows non-security instruments on IKE/IKZE only to limit "
+              "the risk of securities held on that account and only if the broker's agreement provides for it; "
+              "in practice brokers usually do not offer futures on IKE/IKZE – check with yours.",
+    },
+}
 
 # year -> limits in PLN
 IKE_LIMITS = {2026: 28_260.00, 2027: 30_099.00}

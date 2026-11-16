@@ -1,0 +1,322 @@
+{
+ "skill": "gpw-trend-screener",
+ "version": "1.0.0",
+ "lang": "pl",
+ "regime": {
+  "state": "confirmed_uptrend",
+  "as_of": "2026-11-13",
+  "top_risk_score": 36.3,
+  "distribution_days": 4,
+  "warning_level": "none",
+  "file": "/fixture/db_smoke/gpw_market_regime_2026-11-16_155456.json",
+  "sessions_older": 0,
+  "stale": false
+ },
+ "account_size": null,
+ "risk_pct": 1.0,
+ "mode": "screen",
+ "summary": {
+  "date": "2026-11-13",
+  "universe": 120,
+  "traded": 402,
+  "template_passed": 24,
+  "valid_vcp": 4,
+  "actionable": 2,
+  "states": {
+   "breakout": 2,
+   "extended": 2,
+   "breakout_unconfirmed": 1,
+   "invalid": 19
+  }
+ },
+ "watchlist": [
+  {
+   "name": "KETY",
+   "date": "2026-11-13",
+   "close": 1337.0,
+   "score": 71.6,
+   "band": "good",
+   "execution": {
+    "state": "breakout",
+    "pct_vs_pivot": 4.37,
+    "pct_above_sma50": 6.29,
+    "volume_ratio": 1.54
+   },
+   "vcp": {
+    "valid": true,
+    "pivot": 1281.0
+   },
+   "rs": {
+    "rating": 70
+   }
+  },
+  {
+   "name": "AUTOPARTN",
+   "date": "2026-11-13",
+   "close": 29.6,
+   "score": 71.5,
+   "band": "good",
+   "execution": {
+    "state": "breakout",
+    "pct_vs_pivot": 2.42,
+    "pct_above_sma50": 0.99,
+    "volume_ratio": 1.84
+   },
+   "vcp": {
+    "valid": true,
+    "pivot": 28.9
+   },
+   "rs": {
+    "rating": 76
+   }
+  },
+  {
+   "name": "BNPPPL",
+   "date": "2026-11-13",
+   "close": 189.0,
+   "score": 75.9,
+   "band": "watchlist",
+   "execution": {
+    "state": "extended",
+    "pct_vs_pivot": 12.23,
+    "pct_above_sma50": 14.48,
+    "volume_ratio": 0.36
+   },
+   "vcp": {
+    "valid": true,
+    "pivot": 168.4
+   },
+   "rs": {
+    "rating": 88
+   }
+  },
+  {
+   "name": "PKOBP",
+   "date": "2026-11-13",
+   "close": 119.9,
+   "score": 75.8,
+   "band": "watchlist",
+   "execution": {
+    "state": "breakout_unconfirmed",
+    "pct_vs_pivot": 1.08,
+    "pct_above_sma50": 1.68,
+    "volume_ratio": 1.16
+   },
+   "vcp": {
+    "valid": true,
+    "pivot": 118.62
+   },
+   "rs": {
+    "rating": 78
+   }
+  }
+ ],
+ "others": [
+  {
+   "name": "PGE",
+   "state": "invalid",
+   "rs": 93,
+   "score": 62.5,
+   "vcp_reasons": [
+    "too_few_contractions",
+    "last_too_loose"
+   ]
+  },
+  {
+   "name": "LPP",
+   "state": "invalid",
+   "rs": 92,
+   "score": 59.7,
+   "vcp_reasons": [
+    "too_few_contractions"
+   ]
+  },
+  {
+   "name": "ALLEGRO",
+   "state": "invalid",
+   "rs": 95,
+   "score": 59.3,
+   "vcp_reasons": [
+    "too_few_contractions"
+   ]
+  }
+ ],
+ "candidates": [
+  {
+   "name": "KETY",
+   "date": "2026-11-13",
+   "close": 1337.0,
+   "score": 71.6,
+   "band": "good",
+   "execution": {
+    "state": "breakout",
+    "pct_vs_pivot": 4.37,
+    "pct_above_sma50": 6.29,
+    "volume_ratio": 1.54
+   },
+   "vcp": {
+    "valid": true,
+    "pivot": 1281.0
+   },
+   "rs": {
+    "rating": 70
+   }
+  },
+  {
+   "name": "AUTOPARTN",
+   "date": "2026-11-13",
+   "close": 29.6,
+   "score": 71.5,
+   "band": "good",
+   "execution": {
+    "state": "breakout",
+    "pct_vs_pivot": 2.42,
+    "pct_above_sma50": 0.99,
+    "volume_ratio": 1.84
+   },
+   "vcp": {
+    "valid": true,
+    "pivot": 28.9
+   },
+   "rs": {
+    "rating": 76
+   }
+  },
+  {
+   "name": "BNPPPL",
+   "date": "2026-11-13",
+   "close": 189.0,
+   "score": 75.9,
+   "band": "watchlist",
+   "execution": {
+    "state": "extended",
+    "pct_vs_pivot": 12.23,
+    "pct_above_sma50": 14.48,
+    "volume_ratio": 0.36
+   },
+   "vcp": {
+    "valid": true,
+    "pivot": 168.4
+   },
+   "rs": {
+    "rating": 88
+   }
+  },
+  {
+   "name": "PKOBP",
+   "date": "2026-11-13",
+   "close": 119.9,
+   "score": 75.8,
+   "band": "watchlist",
+   "execution": {
+    "state": "breakout_unconfirmed",
+    "pct_vs_pivot": 1.08,
+    "pct_above_sma50": 1.68,
+    "volume_ratio": 1.16
+   },
+   "vcp": {
+    "valid": true,
+    "pivot": 118.62
+   },
+   "rs": {
+    "rating": 78
+   }
+  },
+  {
+   "name": "PGE",
+   "date": "2026-11-13",
+   "close": 16.05,
+   "score": 62.5,
+   "band": "skip",
+   "execution": {
+    "state": "invalid",
+    "pct_vs_pivot": -8.58,
+    "pct_above_sma50": 5.03,
+    "volume_ratio": 0.97
+   },
+   "vcp": {
+    "valid": false,
+    "pivot": 17.55
+   },
+   "rs": {
+    "rating": 93
+   }
+  },
+  {
+   "name": "LPP",
+   "date": "2026-11-13",
+   "close": 28700.0,
+   "score": 59.7,
+   "band": "skip",
+   "execution": {
+    "state": "invalid",
+    "pct_vs_pivot": 5.36,
+    "pct_above_sma50": 14.97,
+    "volume_ratio": 1.15
+   },
+   "vcp": {
+    "valid": false,
+    "pivot": 27240.0
+   },
+   "rs": {
+    "rating": 92
+   }
+  },
+  {
+   "name": "ALLEGRO",
+   "date": "2026-11-13",
+   "close": 66.62,
+   "score": 59.3,
+   "band": "skip",
+   "execution": {
+    "state": "invalid",
+    "pct_vs_pivot": 12.04,
+    "pct_above_sma50": 24.89,
+    "volume_ratio": 1.58
+   },
+   "vcp": {
+    "valid": false,
+    "pivot": 59.46
+   },
+   "rs": {
+    "rating": 95
+   }
+  },
+  {
+   "name": "AGORA",
+   "date": "2026-11-13",
+   "close": 13.0,
+   "score": 58.0,
+   "band": "skip",
+   "execution": {
+    "state": "invalid",
+    "pct_vs_pivot": -1.89,
+    "pct_above_sma50": 13.34,
+    "volume_ratio": 0.66
+   },
+   "vcp": {
+    "valid": false,
+    "pivot": 13.25
+   },
+   "rs": {
+    "rating": 91
+   }
+  }
+ ],
+ "data_provenance": {
+  "schema_version": "1.0",
+  "as_of": "2026-11-13",
+  "sources": [
+   "GPW — Archiwum notowań (akcje, indeksy): https://www.gpw.pl/archiwum-notowan",
+   "GPW Benchmark — portfele indeksów (etykiety WIG20/mWIG40/sWIG80 i sektorów): https://gpwbenchmark.pl"
+  ],
+  "freshness": {
+   "as_of": "2026-11-13",
+   "sessions_behind": 0,
+   "is_stale": false,
+   "reference_date": null,
+   "historical_run": false,
+   "sessions_behind_today": 0
+  }
+ }
+}

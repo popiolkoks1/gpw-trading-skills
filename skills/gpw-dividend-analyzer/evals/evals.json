@@ -1,0 +1,71 @@
+{
+  "skill": "gpw-dividend-analyzer",
+  "trigger_evals": {
+    "should_trigger": [
+      "Jaka jest stopa dywidendy netto PZU po podatku Belki?",
+      "Czy PKO BP płaci stabilną dywidendę? Były jakieś obniżki?",
+      "Które spółki z WIG20 i mWIG40 są najlepszymi płatnikami dywidend?",
+      "Ile dywidend dostanę w ciągu roku z moich akcji?",
+      "Czy opłaca się kupić akcje przed dniem odcięcia dywidendy i sprzedać po?",
+      "Ile zyskam trzymając akcje dywidendowe w IKE zamiast na zwykłym koncie przez 10 lat?",
+      "Czy wysoka dywidenda tej spółki to pułapka?",
+      "Which Polish dividend stocks have the most reliable payouts?",
+      "What is the net dividend yield of PKO BP after Polish tax?",
+      "Is dividend capture worth it on the Warsaw Stock Exchange?"
+    ],
+    "should_not_trigger": [
+      "Kiedy PKO BP publikuje wyniki kwartalne?",
+      "Ile akcji KGHM mogę kupić przy ryzyku 1% kapitału?",
+      "IKE czy IKZE - gdzie odkładać 1000 zł miesięcznie?",
+      "Czy rynek jest w korekcie?",
+      "What is the dividend yield of Apple and Microsoft?",
+      "Wycena DCF CD Projektu"
+    ]
+  },
+  "output_evals": [
+    {
+      "id": "pl-ticker-pzu",
+      "prompt": "Czy PZU to stabilna spółka dywidendowa? Mam 200 akcji - ile dostanę netto?",
+      "assertions": [
+        "scripts/gpw_dividend_analyzer.py ticker PZU --shares 200 was executed",
+        "Answer in Polish starts with the one-sentence summary (gross yield, net yield on a regular account, years paid of observed, stability score)",
+        "Shows the dividend history table by year and mentions the 2020 suspension context (KNF COVID recommendation) if it appears",
+        "Gives gross, Belka tax and net amount for 200 shares from the report, tax rounded to whole złoty",
+        "Labels the next dividend as confirmed, proposed or estimated exactly as in upcoming[].date_kind",
+        "Mentions the state-control flag as context, not as a verdict",
+        "No buy/sell recommendation"
+      ]
+    },
+    {
+      "id": "pl-screen",
+      "prompt": "Pokaż najstabilniejszych płatników dywidend z WIG20 i mWIG40.",
+      "assertions": [
+        "scripts/gpw_dividend_analyzer.py screen --universe WIG20,MWIG40 was executed",
+        "Presents the ranking table with stability score, years paid/observed, cuts, gross and net yield, payout and flags",
+        "States how many full years of history the archive covered and that dividends below 0.5% of the price can be missing without ESPI",
+        "Explains that trap flags are things to check, not conclusions"
+      ]
+    },
+    {
+      "id": "en-capture",
+      "prompt": "Can I make money buying PKO BP the day before the ex-dividend date and selling right after?",
+      "assertions": [
+        "scripts/gpw_dividend_analyzer.py ticker PKOBP --lang en was executed",
+        "Uses ticker_detail.capture_example numbers: dividend, Belka tax, fees, price loss and result",
+        "Explains that the share-sale loss does not reduce the dividend tax (different income source)",
+        "Reports the median ex-date drop ratio from exdate_drop",
+        "Mentions the KNF bank dividend stance with its year"
+      ]
+    },
+    {
+      "id": "pl-portfolio",
+      "prompt": "Ile dywidend dostanę w najbliższym roku? Mam 200 PZU i 100 PKO BP.",
+      "assertions": [
+        "scripts/gpw_dividend_analyzer.py portfolio --tickers PZU,PKOBP --shares 200,100 was executed",
+        "Gives the 12-month total gross and net on a regular account and the month-by-month table",
+        "Says how many payments are only estimated from last year's ex-date",
+        "Notes that in IKE/IKZE nothing is withheld"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+ "skill": "gpw-signal-postmortem",
+ "version": "1.0.0",
+ "lang": "pl",
+ "as_of": "2026-11-13",
+ "mode": "ledger",
+ "demo": false,
+ "signals_total": 147,
+ "signals_evaluated": 61,
+ "pending": 86,
+ "next_maturity": "2026-11-20",
+ "outcomes": {
+  "true_positive": 28,
+  "missed_opportunity": 27,
+  "false_positive": 6,
+  "pending": 86
+ },
+ "regime_mix": {
+  "confirmed_uptrend": 29,
+  "uptrend_under_pressure": 30,
+  "correction": 1,
+  "rally_attempt": 1
+ },
+ "headline": [
+  {
+   "source": "gpw-market-regime",
+   "kind": "regime_confirmed_uptrend",
+   "basis": "absolute",
+   "signals": 21,
+   "first_date": "2025-12-12",
+   "last_date": "2026-11-13",
+   "pending": 3,
+   "n": 18,
+   "hits": 14,
+   "hit_rate": 0.7778,
+   "hit_rate_ci95": [
+    0.5478,
+    0.91
+   ],
+   "mean_excess_pct": 2.16,
+   "median_excess_pct": 1.99,
+   "mean_edge_pp": 2.16,
+   "median_edge_pp": 1.99,
+   "t_stat": 2.94,
+   "n_dates": 14,
+   "t_stat_by_date": 3.13,
+   "mean_excess_ew_pp": 0.14,
+   "mean_return_pct": 2.16,
+   "mean_mfe_pct": 4.13,
+   "mean_mae_pct": -2.16,
+   "status": "insufficient"
+  },
+  {
+   "source": "gpw-market-regime",
+   "kind": "ftd",
+   "basis": "absolute",
+   "signals": 8,
+   "first_date": "2025-12-30",
+   "last_date": "2026-10-06",
+   "pending": 0,
+   "n": 8,
+   "hits": 6,
+   "hit_rate": 0.75,
+   "hit_rate_ci95": [
+    0.4093,
+    0.9285
+   ],
+   "mean_excess_pct": 4.53,
+   "median_excess_pct": 6.05,
+   "mean_edge_pp": 4.53,
+   "median_edge_pp": 6.05,
+   "t_stat": 3.26,
+   "n_dates": 7,
+   "t_stat_by_date": 2.7,
+   "mean_excess_ew_pp": 1.48,
+   "mean_return_pct": 4.53,
+   "mean_mfe_pct": 6.45,
+   "mean_mae_pct": -2.38,
+   "status": "insufficient"
+  },
+  {
+   "source": "gpw-sector-trend",
+   "kind": "sector_uptrend",
+   "basis": "excess",
+   "signals": 9,
+   "first_date": "2026-11-12",
+   "last_date": "2026-11-13",
+   "pending": 9,
+   "n": 0
+  },
+  {
+   "source": "gpw-trend-screener",
+   "kind": "vcp_setup",
+   "basis": "excess",
+   "signals": 7,
+   "first_date": "2026-11-12",
+   "last_date": "2026-11-13",
+   "pending": 7,
+   "n": 0
+  }
+ ],
+ "feedback": {
+  "summary": {
+   "pl": "Żadna sugestia nie przeszła progu dowodowego (n >= 20, |t| >= 3.0). Nie zmieniaj ustawień innych skilli.",
+   "en": "No suggestion passed the evidence gate (n >= 20, |t| >= 3.0). Do not change other skills' settings."
+  },
+  "auto_apply": false
+ },
+ "data_provenance": {
+  "schema_version": "1.0",
+  "as_of": "2026-11-13",
+  "sources": [
+   "GPW — Archiwum notowań (akcje i indeksy): https://www.gpw.pl/archiwum-notowan",
+   "GPW Benchmark — portfele indeksów (sektor, segment): https://gpwbenchmark.pl"
+  ],
+  "freshness": {
+   "as_of": "2026-11-13",
+   "sessions_behind": 0,
+   "is_stale": false,
+   "reference_date": null,
+   "historical_run": false,
+   "sessions_behind_today": 0
+  }
+ }
+}

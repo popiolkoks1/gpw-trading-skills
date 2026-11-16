@@ -330,11 +330,8 @@ def run(args) -> Dict:
     rep["data_provenance"] = provenance.build(
         as_of=as_of, sources=["GPW — Archiwum notowań (indeksy): https://www.gpw.pl/archiwum-notowan"],
         sessions_used=len(sessions), universe_size=len(rep["indices"]), notes=notes,
-        corporate_actions_adjusted=False, survivorship_free=True, point_in_time_membership=False)
-    if args.as_of:
-        # A deliberate historical run is not "stale".
-        rep["data_provenance"]["freshness"]["is_stale"] = False
-        rep["data_provenance"]["notes"].append("Historical run (--as-of {}).".format(args.as_of))
+        corporate_actions_adjusted=False, survivorship_free=True, point_in_time_membership=False,
+        reference_date=end)  # a deliberate --as-of run is judged against that date, not today
     return rep
 
 
