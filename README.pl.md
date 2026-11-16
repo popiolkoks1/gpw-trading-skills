@@ -1,195 +1,147 @@
 # GPW Trading Skills
 
-**27 skilli dla Claude'a do polskiej giełdy (GPW), połączonych w jeden proces.
-Dla początkujących: gotowość do inwestowania, IKE/IKZE/OKI, plan wpłat w ETF-y.
-Dla zaawansowanych: reżim rynku, skaner Minerviniego/VCP, akcjonariat i krótkie
-pozycje z rejestru KNF, kalendarz ESPI, reakcje na wyniki, jakość, wycena,
-dywidendy, makro NBP, stress test, hedging FW20, uczciwy backtester,
-post-mortem sygnałów, dossier spółki z debatą byk–niedźwiedź i dzienny brief.**
+[![CI](https://github.com/popiolkoks1/gpw-trading-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/popiolkoks1/gpw-trading-skills/actions/workflows/ci.yml)
+![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-blue)
+![skille](https://img.shields.io/badge/skille-27-green)
+![testy](https://img.shields.io/badge/testy-1671-green)
+![licencja](https://img.shields.io/badge/licencja-MIT-lightgrey)
 
-🇬🇧 [English version → README.md](README.md)
+**27 skilli dla Claude'a do polskiej giełdy (GPW).** Prowadzą od pierwszych
+kroków (czy w ogóle inwestować, IKE/IKZE/OKI, ETF-y) po proces zawodowca
+(reżim rynku → skaner → dossier spółki → wielkość pozycji → bramka → dziennik
+→ ocena wyników). Darmowe, oficjalne dane, bez kluczy API. Działa po polsku
+i po angielsku.
 
-> Narzędzia edukacyjne, nie porada inwestycyjna. Skille nie składają zleceń
-> i nie mówią, co kupić. Dają dane, policzone ryzyko i uporządkowany proces,
-> żeby to **Ty** podejmował lepsze decyzje. Zobacz [Zastrzeżenia](#zastrzeżenia).
+🇬🇧 [English → README.md](README.md) · 📖 [Jak używać na co dzień → WORKFLOW](docs/WORKFLOW.md)
 
-## Po co to jest
+> ⚠️ Edukacja, nie porada inwestycyjna. Skille nie składają zleceń i nigdy nie mówią „kup X”.
 
-Większość narzędzi AI do inwestowania jest robiona pod rynek amerykański i płatne
-źródła danych. U nas jest inaczej:
-- poza WIG20 i mWIG40 płynność jest niska;
-- prowizje mają minimum w złotówkach, a akcje kupuje się w całych sztukach;
-- obowiązuje podatek Belki (19%), a PIT-38 rozlicza się metodą FIFO;
-- są konta IKE i IKZE, a od 2027 roku dojdzie OKI;
-- spółki publikują raporty przez ESPI, krótkie pozycje są w rejestrze KNF.
-
-Zestaw powstał na wzór najlepszych otwartych repozytoriów skilli giełdowych
-([tradermonty/claude-trading-skills](https://github.com/tradermonty/claude-trading-skills),
-Anthropic financial-services, TradingAgents, FinRobot). Do każdego skilla
-sprawdziliśmy odpowiedniki z innych giełd i badania naukowe (także o GPW),
-a potem przenieśliśmy sprawdzone metody na polskie realia. Zestaw korzysta
-**wyłącznie z darmowych, oficjalnych danych**, **bez kluczy API**:
-archiwum notowań GPW, ESPI na gpw.pl, GPW Benchmark, rejestr krótkich pozycji
-KNF, API NBP, BondSpot, EBC, Bundesbank, Eurostat i teksty ustaw.
-
-## Od czego zacząć?
-
-**Nie znasz się na inwestowaniu?**
-1. **`gpw-start`** – czy jesteś gotowy, ile akcji pasuje do Twojej tolerancji spadków, plan krok po kroku.
-2. **`gpw-account-planner`** – IKE, IKZE, OKI czy zwykłe konto, policzone na Twoim horyzoncie.
-3. **`gpw-etf-planner`** – ETF-y z GPW i plan miesięcznych zakupów z prowizjami.
-4. **`gpw-portfolio-check`** i **`gpw-dividend-analyzer`** – raz w roku przegląd portfela i dywidend.
-
-Zapytaj po prostu: *„Nie znam się na inwestowaniu, od czego zacząć?”*
-
-**Inwestujesz aktywnie?** Zacznij od **`gpw-daily-brief`**. Po sesji uruchamia
-cały dzienny proces i daje jedną stronę: co się zmieniło, co wymaga uwagi
-w Twoich pozycjach i na watchliście, nowe sygnały i kalendarz. Przed każdą
-decyzją: **`gpw-research-dossier`**, potem kalkulator pozycji i bramka.
-Pełny opis procesu: [docs/WORKFLOW.md](docs/WORKFLOW.md).
-
-## Skille
-
-### Dla początkujących
-
-| Skill | Co robi |
-|---|---|
-| [`gpw-start`](skills/gpw-start/SKILL.md) | Gotowość do inwestowania (nadwyżka, poduszka 3–6 mies., długi > 8%), udział akcji z horyzontu i tolerancji spadku, plan, słowniczek, ostrzeżenia przed oszustwami |
-| [`gpw-account-planner`](skills/gpw-account-planner/SKILL.md) | IKE / IKZE / OKI / zwykłe konto na wiele lat: limity 2026–2027, zwrot z IKZE, podatek od aktywów OKI, kolejność wypełniania kont |
-| [`gpw-etf-planner`](skills/gpw-etf-planner/SKILL.md) | Katalog ETF-ów z GPW ze statystykami, plan zakupów w całych jednostkach, rebalancing nowymi wpłatami, test DCA |
-
-### Rynek: kontekst
-
-| Skill | Co robi |
-|---|---|
-| [`gpw-market-breadth`](skills/gpw-market-breadth/SKILL.md) | Kondycja całej GPW 0–100: % spółek nad średnimi, McClellan, nowe maksima/minima, dywergencje |
-| [`gpw-sector-trend`](skills/gpw-sector-trend/SKILL.md) | Trend w 14 indeksach sektorowych, rotacja cykliczne/defensywne; **tryb `--rrg`**: Relative Rotation Graph (liderzy, słabnący, maruderzy, poprawiający się) z ogonami i SVG |
-| [`gpw-market-regime`](skills/gpw-market-regime/SKILL.md) | Reżim rynku (IBD): dni dystrybucji, follow-through day, ryzyko szczytu 0–100 |
-| [`gpw-macro-regime`](skills/gpw-macro-regime/SKILL.md) | Makro dla polskich akcji: cykl stóp NBP, realna stopa, siła złotego, spread PL–DE 10Y, krzywa 2s10s, inflacja; tendencje sektorowe |
-| [`gpw-exposure-coach`](skills/gpw-exposure-coach/SKILL.md) | Jedna postawa i limity: ekspozycja, ryzyko na transakcję, nowe pozycje na tydzień, bezpiecznik po stratach |
-
-### Spółki: pomysły i badanie
-
-| Skill | Co robi |
-|---|---|
-| [`gpw-trend-screener`](skills/gpw-trend-screener/SKILL.md) | Trend Template Minerviniego, RS 1–99, VCP, pivot, poziom unieważnienia |
-| [`gpw-quality-screener`](skills/gpw-quality-screener/SKILL.md) | F-score Piotroskiego z każdym kryterium osobno (nieznane zaznaczone uczciwie), ROE/ROIC, akruale, czerwone flagi, osobna ocena banków |
-| [`gpw-valuation`](skills/gpw-valuation/SKILL.md) | Odwrócony DCF (jaki wzrost zakłada cena), WACC w PLN z premią za ryzyko kraju (Damodaran), siatka wrażliwości, porównania, model banków P/BV–ROE |
-| [`gpw-dividend-analyzer`](skills/gpw-dividend-analyzer/SKILL.md) | Historia dywidend odtworzona z notowań i ESPI, stabilność, stopa netto po Belce vs IKE, pułapki dywidendowe, dlaczego „gra pod dywidendę” nie działa |
-| [`gpw-ownership`](skills/gpw-ownership/SKILL.md) | Krótkie pozycje z rejestru KNF (od 2012), transakcje insiderów (MAR art. 19) z ESPI, zmiany w portfelach OFE |
-| [`gpw-earnings-reaction`](skills/gpw-earnings-reaction/SKILL.md) | Reakcja kursu na raport okresowy: luka, nadzwyczajna stopa zwrotu, obroty, dryf po wynikach; przegląd sezonu |
-| [`gpw-event-calendar`](skills/gpw-event-calendar/SKILL.md) | Wyniki, WZA, dywidendy (T+2), rewizje indeksów, MSCI, RPP, CPI, wygasanie FW20; kontrola okna trzymania; eksport .ics |
-| [`gpw-pair-trading`](skills/gpw-pair-trading/SKILL.md) | Kointegracja Engle'a–Grangera (zgodna ze statsmodels), z-score spreadu, okres półtrwania, korekta wielokrotnych testów; decyzje „zamiana A na B” |
-| [`gpw-research-dossier`](skills/gpw-research-dossier/SKILL.md) | Jeden plik o spółce z wyników wszystkich skilli (100+ faktów ze źródłami), potem debata byk–niedźwiedź, w której każdy argument musi cytować fakt; gotowa teza do dziennika |
-
-### Decyzja i ryzyko
-
-| Skill | Co robi |
-|---|---|
-| [`gpw-watchlist`](skills/gpw-watchlist/SKILL.md) | Watchlista z etapami (kandydat → obserwowana → gotowa → kupiona), zasilana przez inne skille; alerty: pivot, stop, wybicie, zdarzenia |
-| [`gpw-position-sizer`](skills/gpw-position-sizer/SKILL.md) | Ile akcji kupić przy założonym ryzyku, z prowizjami, płynnością i podatkiem dla każdego typu konta |
-| [`gpw-pre-trade-gate`](skills/gpw-pre-trade-gate/SKILL.md) | Bramka przed kupnem: 13 twardych kontroli + kontekst (wyniki w oknie trzymania, krótkie pozycje, sprzedaż insiderów, reakcja na wyniki, flagi jakości, makro, stress test) → GO / GO Z WARUNKAMI / NO-GO |
-| [`gpw-portfolio-check`](skills/gpw-portfolio-check/SKILL.md) | Przegląd portfela: koncentracja, korelacje, beta, VaR/ES, płynność, porównanie z WIG |
-| [`gpw-risk-lab`](skills/gpw-risk-lab/SKILL.md) | Twój portfel w kryzysach GPW (2008, 2011, 2015, 2020, 2022) i w szokach (WIG, złoty, stopy); zabezpieczenie kontraktami FW20 albo ETF-em short dla małych portfeli |
-
-### Nauka i dyscyplina
-
-| Skill | Co robi |
-|---|---|
-| [`gpw-trade-journal`](skills/gpw-trade-journal/SKILL.md) | Dziennik tez z warunkami unieważnienia, FIFO, wynik na tle WIG; tryb na niby (`--paper`) |
-| [`gpw-trade-review`](skills/gpw-trade-review/SKILL.md) | Statystyki, macierz „proces vs wynik”, szacunek PIT-38 |
-| [`gpw-signal-postmortem`](skills/gpw-signal-postmortem/SKILL.md) | Czy sygnały skilli naprawdę działały: zwroty po 5/20/60 sesjach vs WIG, przedziały ufności, wnioski tylko przy mocnych dowodach |
-| [`gpw-backtester`](skills/gpw-backtester/SKILL.md) | Uczciwy backtest z prawdziwymi prowizjami, poślizgiem, płynnością i podatkiem Belki; walk-forward, Deflated Sharpe, PBO; werdykt od ODRZUĆ do SOLIDNA |
-| [`gpw-daily-brief`](skills/gpw-daily-brief/SKILL.md) | Uruchamia cały dzienny/tygodniowy proces i składa jedną stronę po sesji |
-
-## Jak skille współpracują
-
-```
-PO SESJI (gpw-daily-brief run)
-  breadth ┐
-  sector  ├→ exposure-coach ─────────────────────────────┐
-  regime  ┘                                              │
-  trend-screener, quality, ownership, earnings ─→ watchlist ─→ daily-brief
-  event-calendar ────────────────────────────────────────┘
-
-PRZED DECYZJĄ
-  research-dossier (wszystkie raporty o spółce + debata)
-    → position-sizer → pre-trade-gate → trade-journal
-
-CO TYDZIEŃ / MIESIĄC / KWARTAŁ
-  macro-regime, portfolio-check, risk-lab, dividend-analyzer
-  trade-review, signal-postmortem → wnioski
-  backtester → zanim zmienisz jakąkolwiek regułę
-```
-
-Skille rozmawiają przez pliki JSON o ustalonych kontraktach
-([docs/ROADMAP_v1.2.md](docs/ROADMAP_v1.2.md)), więc każdy działa samodzielnie,
-a razem tworzą proces. Sygnały wszystkich skilli mają wspólny format, więc
-`gpw-signal-postmortem` sprawdza, które z nich naprawdę działają.
-
-## Szybki start
-
-### Claude Code (terminal / aplikacja desktop)
+## Instalacja (Claude Code)
 
 ```bash
 git clone https://github.com/popiolkoks1/gpw-trading-skills.git
 cp -R gpw-trading-skills/skills/* ~/.claude/skills/
 ```
 
-Potem zapytaj: *„Od czego zacząć inwestowanie?”*, *„Zrób dzienny brief GPW”*,
-*„Kto gra na spadek MODIVO?”*, *„Co zakłada cena KĘTY?”*,
-*„Przetestuj strategię Minerviniego na GPW od 2019”*.
+Wymagany Python 3.9+, bez dodatkowych bibliotek. Pierwsze uruchomienie pobiera
+około 2 lat notowań z gpw.pl (jednorazowo 20–40 min), potem wszystko działa
+w kilka sekund z lokalnego cache.
 
-Wymagania: Python 3.9+ (tylko biblioteka standardowa). Przy pierwszym
-uruchomieniu skrypty pobierają około 2 lat notowań z gpw.pl. Wysyłają jedno
-zapytanie na sesję, bez obciążania serwera, więc trwa to 20–40 minut, ale tylko
-raz. Backtester i stress test mogą pobrać dłuższą historię (od 2019 r. dla akcji,
-od 2007 r. dla indeksów). Wszystko trafia do lokalnego cache.
+W claude.ai uruchom `python3 scripts/package_skills.py`, a potem wgraj
+`dist/*.skill` w **Customize → Skills**.
 
-### Aplikacja webowa Claude (claude.ai)
+## Po prostu zapytaj
 
-```bash
-python3 scripts/package_skills.py   # tworzy dist/*.skill + SHA256SUMS
+| Pytanie | Skill |
+|---|---|
+| „Nie znam się na inwestowaniu, od czego zacząć?” | `gpw-start` |
+| „IKE czy IKZE? Czy warto OKI?” | `gpw-account-planner` |
+| „Jakie ETF-y z GPW i ile jednostek kupić za 1000 zł?” | `gpw-etf-planner` |
+| „Co dziś na GPW? Co wymaga mojej uwagi?” | `gpw-daily-brief` |
+| „Czy rynek jest w korekcie? Ile mieć teraz w akcjach?” | `gpw-market-regime`, `gpw-exposure-coach` |
+| „Które spółki są liderami / blisko wybicia?” | `gpw-trend-screener` |
+| „Zbierz wszystko o KĘTY: argumenty za i przeciw” | `gpw-research-dossier` |
+| „Co zakłada cena PKO? Czy CD Projekt jest drogi?” | `gpw-valuation` |
+| „Kto gra na spadek MODIVO? Czy zarząd kupuje akcje?” | `gpw-ownership` |
+| „Ile akcji kupić przy ryzyku 1%? Czy mogę wejść?” | `gpw-position-sizer`, `gpw-pre-trade-gate` |
+| „Ile stracę, jeśli powtórzy się 2008?” | `gpw-risk-lab` |
+| „Czy ta strategia naprawdę działała na GPW?” | `gpw-backtester` |
+
+## 27 skilli w 6 grupach
+
+| | Skill | Co daje | Dane |
+|---|---|---|---|
+| 🌱 **Start** | [`gpw-start`](skills/gpw-start/SKILL.md) | Gotowość do inwestowania (poduszka, długi), udział akcji, plan krok po kroku, słowniczek | lokalnie |
+| | [`gpw-account-planner`](skills/gpw-account-planner/SKILL.md) | IKE / IKZE / OKI / zwykłe konto na Twoim horyzoncie, limity 2026–27, kolejność wpłat | ustawy |
+| | [`gpw-etf-planner`](skills/gpw-etf-planner/SKILL.md) | Katalog ETF-ów z GPW, plan zakupów w całych jednostkach z prowizjami, rebalancing | GPW |
+| 🧭 **Rynek** | [`gpw-market-breadth`](skills/gpw-market-breadth/SKILL.md) | Kondycja rynku 0–100: ile spółek rośnie, nad średnimi, nowe szczyty | GPW |
+| | [`gpw-sector-trend`](skills/gpw-sector-trend/SKILL.md) | Mocne i słabe sektory; `--rrg`: wykres rotacji (liderzy → słabnący → maruderzy) | GPW |
+| | [`gpw-market-regime`](skills/gpw-market-regime/SKILL.md) | Hossa / presja / korekta / bessa, dni dystrybucji, ryzyko szczytu | GPW |
+| | [`gpw-macro-regime`](skills/gpw-macro-regime/SKILL.md) | Stopy NBP, inflacja, złoty, spread PL–DE: kiedy makro pomaga, a kiedy szkodzi | NBP, EBC, Eurostat |
+| | [`gpw-exposure-coach`](skills/gpw-exposure-coach/SKILL.md) | Jedna postawa: ile w akcjach, ryzyko na transakcję, bezpiecznik po stratach | raporty |
+| 🔍 **Spółki** | [`gpw-trend-screener`](skills/gpw-trend-screener/SKILL.md) | Liderzy według Minerviniego, siła relatywna, formacje VCP, pivot i stop | GPW |
+| | [`gpw-quality-screener`](skills/gpw-quality-screener/SKILL.md) | F-score Piotroskiego, ROE, czerwone flagi w finansach; osobno banki | gpw.pl |
+| | [`gpw-valuation`](skills/gpw-valuation/SKILL.md) | Jaki wzrost zakłada cena (odwrócony DCF), przedział wartości, porównania z sektorem | gpw.pl, BondSpot |
+| | [`gpw-dividend-analyzer`](skills/gpw-dividend-analyzer/SKILL.md) | Historia i stabilność dywidend, stopa netto po Belce vs IKE, pułapki | GPW, ESPI |
+| | [`gpw-ownership`](skills/gpw-ownership/SKILL.md) | Krótkie pozycje (rejestr KNF od 2012), transakcje insiderów, portfele OFE | KNF, ESPI |
+| | [`gpw-earnings-reaction`](skills/gpw-earnings-reaction/SKILL.md) | Jak rynek przyjął wyniki: luka, nadzwyczajna stopa zwrotu, dryf po raporcie | ESPI, GPW |
+| | [`gpw-event-calendar`](skills/gpw-event-calendar/SKILL.md) | Wyniki, WZA, dywidendy, rewizje indeksów, RPP, CPI; czy coś wypada w okresie trzymania | ESPI, NBP |
+| | [`gpw-pair-trading`](skills/gpw-pair-trading/SKILL.md) | Czy dwie spółki chodzą razem (kointegracja); „PKO czy Pekao?” | GPW |
+| | [`gpw-research-dossier`](skills/gpw-research-dossier/SKILL.md) | Wszystko o spółce w jednym pliku + debata byk vs niedźwiedź oparta na faktach | raporty |
+| 🎯 **Decyzja** | [`gpw-watchlist`](skills/gpw-watchlist/SKILL.md) | Obserwowane spółki z etapami i alertami (pivot, stop, wybicie, zdarzenia) | raporty |
+| | [`gpw-position-sizer`](skills/gpw-position-sizer/SKILL.md) | Ile akcji kupić przy założonym ryzyku, z prowizjami i podatkiem | lokalnie |
+| | [`gpw-pre-trade-gate`](skills/gpw-pre-trade-gate/SKILL.md) | 20 kontroli przed zakupem → GO / GO Z WARUNKAMI / NO-GO | raporty |
+| 🛡️ **Ryzyko** | [`gpw-portfolio-check`](skills/gpw-portfolio-check/SKILL.md) | Koncentracja, korelacje, beta, VaR, płynność portfela | GPW |
+| | [`gpw-risk-lab`](skills/gpw-risk-lab/SKILL.md) | Twój portfel w kryzysach 2008–2022 i szokach; zabezpieczenie kontraktem FW20 | GPW, NBP |
+| 📈 **Nauka** | [`gpw-trade-journal`](skills/gpw-trade-journal/SKILL.md) | Dziennik tez z warunkami unieważnienia; tryb „na niby” bez pieniędzy | lokalnie |
+| | [`gpw-trade-review`](skills/gpw-trade-review/SKILL.md) | Wyniki, „proces vs szczęście”, szacunek PIT-38 | lokalnie |
+| | [`gpw-signal-postmortem`](skills/gpw-signal-postmortem/SKILL.md) | Czy sygnały skilli naprawdę biły WIG (po 5/20/60 sesjach) | GPW |
+| | [`gpw-backtester`](skills/gpw-backtester/SKILL.md) | Uczciwy test strategii: prowizje, poślizg, podatek, test przeuczenia | GPW |
+| | [`gpw-daily-brief`](skills/gpw-daily-brief/SKILL.md) | Uruchamia cały proces po sesji i daje jedną stronę | raporty |
+
+„Raporty” oznaczają, że skill korzysta z wyników innych skilli (pliki JSON).
+
+## Jak to się łączy
+
+```
+PO SESJI     breadth + sector + regime → exposure-coach
+             screener + quality + ownership + earnings → watchlist ┐
+             event-calendar ───────────────────────────────────────┴→ daily-brief (1 strona)
+
+DECYZJA      research-dossier → position-sizer → pre-trade-gate → trade-journal
+
+CO JAKIŚ CZAS  tydzień: macro, portfolio-check, risk-lab · miesiąc: trade-review, signal-postmortem
+               zanim zmienisz regułę: backtester
 ```
 
-Wgraj plik `.skill` w **Customize → Skills**, z włączonym wykonywaniem kodu.
-Skille pobierające dane potrzebują dostępu do internetu z sandboxa.
+## Co wyróżnia ten zestaw
 
-## Zasady projektu
+- **Polskie realia:** PLN, całe akcje, minimalne prowizje, Belka i FIFO, IKE/IKZE/OKI, ESPI, KNF, rozliczenie T+2.
+- **Liczby z kodu, nie z pamięci modelu.** Skrypty liczą, Claude tłumaczy. 1671 testów na Linuksie, macOS i Windowsie.
+- **Uczciwość:** brak danych = „nieznane”, nigdy zgadywanie. Backtester odrzucił strategię Minerviniego (−63% po drodze). Skaner par nie znalazł na GPW ani jednej skointegrowanej pary i tak to raportuje.
+- **Bez błędu przeżycia:** spółki wycofane z giełdy zostają w danych, ceny są korygowane o dywidendy i splity, a zmiany nazw są sklejane (CCC → MODIVO).
+- **Przepisy z ustaw** z numerami artykułów: OKI (Dz.U. 2026 poz. 1098), raporty okresowe (Dz.U. 2025 poz. 755), MAR art. 19.
+- **Każdy raport ma datę danych i źródła**, a nieaktualne dane są oznaczone na samej górze.
 
-1. **Skrypty liczą, Claude tłumaczy.** Każda liczba pochodzi z przetestowanego kodu (ponad 1600 testów).
-2. **Świeżość danych jest sprawdzana**, a każdy raport ma datę i źródła.
-3. **Uczciwość ponad efekt.** Brakujące dane są oznaczone jako nieznane, nigdy nie są zgadywane. Backtester odrzuca strategie, które wyglądają dobrze tylko na papierze. Post-mortem daje wnioski tylko przy mocnych dowodach.
-4. **Brak błędu przeżycia.** Uniwersum spółek jest odtwarzane z każdej sesji. Ceny są korygowane o dywidendy i splity, a zmiany nazw spółek (np. CCC → MODIVO) są sklejane.
-5. **Polskie realia od początku:** PLN, całe akcje, minimalne prowizje, Belka, IKE/IKZE/OKI, ESPI, KNF, T+2.
-6. **Przepisy z ustaw, nie z pamięci,** z numerami artykułów (np. rozporządzenie o raportach Dz.U. 2025 poz. 755, ustawa o OKI Dz.U. 2026 poz. 1098, MAR art. 19).
-7. **Decyzja zawsze należy do człowieka.** Skille nie składają zleceń i nie mówią „kup”.
-8. **Grzeczne pobieranie danych:** identyfikujący się klient, limit zapytań i cache; nie obchodzimy zabezpieczeń stron.
+## Źródła danych (darmowe, oficjalne)
+
+Archiwum notowań GPW (akcje, indeksy, ETF-y, kontrakty) · ESPI na gpw.pl ·
+GPW Benchmark · rejestr krótkich pozycji KNF · API NBP · BondSpot · EBC ·
+Bundesbank · Eurostat · Damodaran (premia za ryzyko kraju).
+Pobieranie jest grzeczne: klient się przedstawia, obowiązuje limit zapytań
+i cache, a zabezpieczenia stron nie są obchodzone. Szczegóły:
+[DATA_SOURCES](docs/DATA_SOURCES.md).
+
+## Ograniczenia (mówimy je wprost)
+
+| Obszar | Ograniczenie |
+|---|---|
+| Insiderzy | Wolumeny i ceny są w PDF-ach blokowanych dla skryptów, więc ich treść trzeba wkleić samemu |
+| Fundamenty | gpw.pl pokazuje tylko ostatni okres; porównania rok do roku dochodzą z czasem albo z raportu ESEF |
+| Krótkie pozycje | Widać tylko pozycje ≥ 0,5% kapitału |
+| Wycena | Dług netto jest szacowany; można podać własny |
+| Indeksy | Skład według dzisiejszych portfeli, nie historycznych |
 
 ## Rozwój
 
 ```bash
 python3 -m pip install pytest
-python3 scripts/sync_shared.py      # kopiuje shared/gpwlib do skilli
+python3 scripts/sync_shared.py      # kopiuje shared/gpwlib do każdego skilla
 python3 -m pytest tests             # testy, bez sieci
-python3 scripts/package_skills.py   # walidacja i budowa paczek .skill
+python3 scripts/package_skills.py   # walidacja i paczki .skill
 ```
 
-Zasady dla współtwórców: [docs/CONVENTIONS.md](docs/CONVENTIONS.md),
-źródła danych: [docs/DATA_SOURCES.md](docs/DATA_SOURCES.md).
+Zasady: [CONVENTIONS](docs/CONVENTIONS.md) · kontrakty JSON i decyzje:
+[ROADMAP v1.2](docs/ROADMAP_v1.2.md) · zmiany: [CHANGELOG](CHANGELOG.md).
 
-## Dane i licencje
+## Licencja i zastrzeżenia
 
-Kod jest na licencji MIT, na bazie tradermonty/claude-trading-skills (MIT).
-Repozytorium **nie zawiera** danych rynkowych. Pobierasz je na własnym
-komputerze do osobistej analizy. Dane GPW i Notorii mogą wymagać licencji
-przy dalszym rozpowszechnianiu.
+Kod jest na licencji MIT, na bazie
+[tradermonty/claude-trading-skills](https://github.com/tradermonty/claude-trading-skills).
+Repozytorium nie zawiera danych rynkowych: pobierasz je u siebie do osobistej
+analizy, a ich rozpowszechnianie może wymagać licencji GPW.
 
-## Zastrzeżenia
-
-Projekt służy wyłącznie celom edukacyjnym i badawczym. Nie stanowi doradztwa
-inwestycyjnego, podatkowego ani prawnego, ani rekomendacji inwestycyjnej
-w rozumieniu rozporządzenia MAR (UE 596/2014). Obliczenia podatkowe są
-szacunkowe: wiążące są PIT-8C od brokera i opinia doradcy podatkowego.
-Inwestowanie wiąże się z ryzykiem utraty kapitału. Oprogramowanie jest
-udostępniane „tak jak jest”, bez gwarancji.
+Projekt jest edukacyjny i badawczy. Nie jest doradztwem inwestycyjnym,
+podatkowym ani prawnym, ani rekomendacją w rozumieniu MAR (UE 596/2014).
+Obliczenia podatkowe są szacunkowe: wiążące są PIT-8C i opinia doradcy
+podatkowego. Inwestowanie wiąże się z ryzykiem utraty kapitału.
